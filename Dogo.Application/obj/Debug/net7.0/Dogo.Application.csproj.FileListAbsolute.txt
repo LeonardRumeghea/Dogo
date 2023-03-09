@@ -1,0 +1,15 @@
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\bin\Debug\net7.0\Dogo.Application.deps.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\bin\Debug\net7.0\Dogo.Application.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.AssemblyReference.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.AssemblyInfoInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.AssemblyInfo.cs
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.CoreCompileInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.CopyComplete
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\refint\Dogo.Application.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Application\obj\Debug\net7.0\ref\Dogo.Application.dll
