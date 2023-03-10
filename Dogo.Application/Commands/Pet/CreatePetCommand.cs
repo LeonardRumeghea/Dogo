@@ -1,6 +1,4 @@
 ﻿using Dogo.Application.Response;
-using Dogo.Core.Enums.Species;
-using Dogo.Core.Enums;
 using MediatR;
 
 namespace Dogo.Application.Commands.Pet

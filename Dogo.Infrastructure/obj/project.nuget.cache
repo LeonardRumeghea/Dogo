@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dlhScm7cVpbxUqDZeK272yt80fzKe3DCg5Igzvqg+wNG8Z9kIbG80DdWFEVGRqlQW7mZvzeUPZt7YrGh3TAhZg==",
+  "dgSpecHash": "hhG9+VVnUT8R9kKF3ne3kM1nogXXeI1rzJ0Fn3epj3Eru3C8PhjhTBiZCIZbWG4h+iLrtqOLRLXofAnZIwcAEw==",
   "success": true,
-  "projectFilePath": "D:\\Documents\\Faculty Staff\\Licenta\\Dogo\\Dogo.Infrastructure\\Dogo.Infrastructure.csproj",
+  "projectFilePath": "D:\\Documents\\GitHub\\Dogo\\Dogo.Infrastructure\\Dogo.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Leonard\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

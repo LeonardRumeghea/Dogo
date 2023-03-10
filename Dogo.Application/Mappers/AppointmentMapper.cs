@@ -3,7 +3,7 @@
 #nullable disable
 namespace Dogo.Application.Mappers
 {
-    public static class AdressMapper
+    public static class AppointmentMapper
     {
         private static readonly Lazy<IMapper> Lazy =
             new(() =>
@@ -11,7 +11,7 @@ namespace Dogo.Application.Mappers
                 var config = new MapperConfiguration(cfg =>
                 {
                     cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
-                    cfg.AddProfile<AdressMapperProfile>();
+                    cfg.AddProfile<AppointmentMapperProfile>();
                 });
                 var mapper = config.CreateMapper();
                 return mapper;

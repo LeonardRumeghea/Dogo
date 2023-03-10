@@ -12,7 +12,7 @@ namespace Dogo.Infrastructure.Data
 
         public UnitOfWork(DatabaseContext context) => this.context = context;
 
-        public IRepository<Pet> petRepository;
+        private IRepository<Pet> petRepository;
         public IRepository<Pet> PetRepository
         {
             get
@@ -22,7 +22,7 @@ namespace Dogo.Infrastructure.Data
             }
         }
 
-        public IRepository<PetOwner> petOwnerRepository;
+        private IRepository<PetOwner> petOwnerRepository;
         public IRepository<PetOwner> PetOwnerRepository
         {
             get
@@ -32,7 +32,7 @@ namespace Dogo.Infrastructure.Data
             }
         }
 
-        public IRepository<Appointment> appointmentRepository;
+        private IRepository<Appointment> appointmentRepository;
         public IRepository<Appointment> AppointmentRepository
         {
             get
@@ -42,7 +42,7 @@ namespace Dogo.Infrastructure.Data
             }
         }
 
-        public IRepository<Walker> walkerRepository;
+        private IRepository<Walker> walkerRepository;
         public IRepository<Walker> WalkerRepository
         {
             get
@@ -52,13 +52,23 @@ namespace Dogo.Infrastructure.Data
             }
         }
 
-        public IRepository<Review> reviewRepository;
+        private IRepository<Review> reviewRepository;
         public IRepository<Review> ReviewRepository
         {
             get
             {
                 reviewRepository ??= new ReviewRepository(context);
                 return reviewRepository;
+            }
+        }
+
+        private IRepository<Address> addressRepository;
+        public IRepository<Address> AddressRepository
+        {
+            get
+            {
+                addressRepository ??= new AddressRepository(context);
+                return addressRepository;
             }
         }
 

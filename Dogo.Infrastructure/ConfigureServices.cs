@@ -1,4 +1,5 @@
-﻿using Dogo.Core.Repositories;
+﻿using Dogo.Application;
+using Dogo.Core.Repositories;
 using Dogo.Core.Repositories.Base;
 using Dogo.Infrastructure.Data;
 using Dogo.Infrastructure.Repositories;
@@ -14,7 +15,13 @@ namespace Dogo.Infrastructure
         public static IServiceCollection AddInfrastrutureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped<IPetOwnerRepository, PetOwnerRepository>();
+            services.AddScoped<IWalkerRepository, WalkerRepository>();
+            services.AddScoped<IPetRepository, PetRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
             services.AddDbContext<DatabaseContext>(
                 m => m.UseSqlServer(
                     configuration.GetConnectionString("DogoDB")

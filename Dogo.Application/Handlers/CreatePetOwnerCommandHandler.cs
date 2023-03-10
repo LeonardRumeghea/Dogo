@@ -2,27 +2,29 @@
 using Dogo.Application.Mappers;
 using Dogo.Application.Response;
 using Dogo.Core.Enitities;
-using Dogo.Core.Repositories.Base;
 using MediatR;
 
+#nullable disable
 namespace Dogo.Application.Handlers
 {
     public class CreatePetOwnerCommandHandler : IRequestHandler<CreatePetOwnerCommand, PetOwnerResponse>
     {
+        private readonly IUnitOfWork unitOfWork;
 
-        private readonly IRepository<PetOwner> repository;
-
-        public CreatePetOwnerCommandHandler(IRepository<PetOwner> repository) => this.repository = repository;
+        public CreatePetOwnerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<PetOwnerResponse> Handle(CreatePetOwnerCommand request, CancellationToken cancellationToken)
         {
             var petOwnerEntity = PetOwnerMapper.Mapper.Map<PetOwner>(request);
             if (petOwnerEntity == null)
             {
-                throw new ApplicationException("Issue with the mapper");
+                return null;
             }
+            
+            //petOwnerEntity.Address = await unitOfWork.AddressRepository.AddAsync(petOwnerEntity.Address);
 
-            var newPetOwner = await repository.AddAsync(petOwnerEntity);
+            var newPetOwner = await unitOfWork.PetOwnerRepository.AddAsync(petOwnerEntity);
+
             return PetOwnerMapper.Mapper.Map<PetOwnerResponse>(newPetOwner);
         }
     }

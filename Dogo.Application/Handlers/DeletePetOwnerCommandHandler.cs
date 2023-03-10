@@ -1,5 +1,4 @@
 ﻿using Dogo.Application.Commands.PetOwner;
-using Dogo.Core.Enitities;
 using Dogo.Core.Repositories;
 using MediatR;
 

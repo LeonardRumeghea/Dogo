@@ -12,7 +12,7 @@ namespace Dogo.Application.Mappers
                 {
                     cfg.ShouldMapProperty = p => p.GetMethod.IsPublic || p.GetMethod.IsAssembly;
                     cfg.AddProfile<PetOwnerMapperProfile>();
-                    cfg.AddProfile<AdressMapperProfile>();
+                    cfg.AddProfile<AddressMapperProfile>();
                 });
                 var mapper = config.CreateMapper();
                 return mapper;

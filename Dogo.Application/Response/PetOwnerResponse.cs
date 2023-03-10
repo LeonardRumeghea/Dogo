@@ -1,6 +1,4 @@
-﻿using Dogo.Core.Enitities;
-
-namespace Dogo.Application.Response
+﻿namespace Dogo.Application.Response
 {
     public class PetOwnerResponse
     {
@@ -9,6 +7,6 @@ namespace Dogo.Application.Response
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public Address? Address { get; set; }
+        public AddressResponse? Address { get; set; }
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace Dogo.Application.Response
 {
-    public class AdressResponse
+    public class AddressResponse
     {
+        public Guid Id { get; set; }
         public string? Street { get; set; }
         public int Number { get; set; }
         public string? City { get; set; }

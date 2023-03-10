@@ -15,20 +15,24 @@ namespace Dogo.API.Controllers
 
         public PetOwnersController(IMediator mediator) => _mediator = mediator;
 
-        [HttpPost(Name = "CreatePetOwner")]
+        [HttpPost]
         public async Task<IActionResult> CreatePetOwner([FromBody] CreatePetOwnerCommand command)
         {
-            var response = await _mediator.Send(command);
-            //return CreatedAtRoute("GetPetOwner", new { id = response.Id }, response);
-            return Created("GetPetOwners", response);
+            return Created("GetPetOwners", await _mediator.Send(command));
         }
 
-        //[HttpGet("{id}", Name = "GetPetOwner")]
-        //public async Task<IActionResult> GetPetOwner(int id)
-        //{
-        //    var response = await _mediator.Send(new GetPetOwnerByIdQuery { Id = id });
-        //    return Ok(response);
-        //}
+        [HttpGet("{id:Guid}")]
+        public async Task<IActionResult> GetPetOwner(Guid id)
+        {
+            var response = await _mediator.Send(new GetPetOwnerByIdQuery { Id = id });
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(response);
+        }
 
         [HttpGet(Name = "GetPetOwners")]
         public async Task<List<PetOwnerResponse>> GetPetOwners() => await _mediator.Send(new GetAllPetOwnersQuery());

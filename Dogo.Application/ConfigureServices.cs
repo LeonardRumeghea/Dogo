@@ -14,6 +14,7 @@ namespace Dogo.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            
             return services;
         }
     }

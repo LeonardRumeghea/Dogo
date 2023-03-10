@@ -7,34 +7,34 @@ namespace Dogo.Infrastructure.Repositories.Base
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DatabaseContext petOwnerContext;
+        protected readonly DatabaseContext context;
 
-        public Repository(DatabaseContext petOwnerContext) => this.petOwnerContext = petOwnerContext;
+        public Repository(DatabaseContext petOwnerContext) => this.context = petOwnerContext;
         
         public async Task<T> AddAsync(T entity)
         {
-            await petOwnerContext.Set<T>().AddAsync(entity);
-            await petOwnerContext.SaveChangesAsync();
+            await context.Set<T>().AddAsync(entity);
+            await context.SaveChangesAsync();
 
             return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            petOwnerContext.Set<T>().Remove(entity);
-            await petOwnerContext.SaveChangesAsync();
+            context.Set<T>().Remove(entity);
+            await context.SaveChangesAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid id) => await petOwnerContext.Set<T>().FindAsync(id);
+        public async Task<T> GetByIdAsync(Guid id) => await context.Set<T>().FindAsync(id);
 
-        public async Task<IReadOnlyList<T>> GetAllAsync() => await petOwnerContext.Set<T>().ToListAsync();
+        public async Task<IReadOnlyList<T>> GetAllAsync() => await context.Set<T>().ToListAsync();
 
         public async Task UpdateAsync(T entity)
         {
-            petOwnerContext.Update(entity);
-            await petOwnerContext.SaveChangesAsync();
+            context.Update(entity);
+            await context.SaveChangesAsync();
         }
 
-        public async Task SaveChanges() => await petOwnerContext.SaveChangesAsync();
+        public async Task SaveChanges() => await context.SaveChangesAsync();
     }
 }

@@ -1,6 +1,4 @@
-﻿using Dogo.Core.Enums.Tags;
-
-namespace Dogo.Core.Enitities
+﻿namespace Dogo.Core.Enitities
 {
     public class Walker : Person
     {

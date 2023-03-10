@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\Faculty Staff\\Licenta\\Dogo\\Dogo.Core\\Dogo.Core.csproj",
+      "projectUniqueName": "D:\\Documents\\GitHub\\Dogo\\Dogo.Core\\Dogo.Core.csproj",
       "projectName": "Dogo.Core",
-      "projectPath": "D:\\Documents\\Faculty Staff\\Licenta\\Dogo\\Dogo.Core\\Dogo.Core.csproj",
+      "projectPath": "D:\\Documents\\GitHub\\Dogo\\Dogo.Core\\Dogo.Core.csproj",
       "packagesPath": "C:\\Users\\Leonard\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\Faculty Staff\\Licenta\\Dogo\\Dogo.Core\\obj\\",
+      "outputPath": "D:\\Documents\\GitHub\\Dogo\\Dogo.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

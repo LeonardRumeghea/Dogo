@@ -2,7 +2,7 @@
 
 namespace Dogo.Application.Commands.PetOwner
 {
-    internal class CreatePetOwnerCommandValidator : AbstractValidator<CreatePetOwnerCommand>
+    public class CreatePetOwnerCommandValidator : AbstractValidator<CreatePetOwnerCommand>
     {
         public CreatePetOwnerCommandValidator()
         {

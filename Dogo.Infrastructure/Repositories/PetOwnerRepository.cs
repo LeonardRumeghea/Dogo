@@ -12,7 +12,7 @@ namespace Dogo.Infrastructure.Repositories
 
         public async Task<IReadOnlyCollection<PetOwner>> GetPetOwnersByLastName(string lastName)
         {
-            return await petOwnerContext.PetOwners.Where(x => x.LastName == lastName).ToListAsync();
+            return await context.PetOwners.Where(x => x.LastName == lastName).ToListAsync();
         }
     }
 }

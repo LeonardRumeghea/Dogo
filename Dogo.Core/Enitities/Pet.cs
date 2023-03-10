@@ -1,6 +1,5 @@
 ﻿using Dogo.Core.Enums;
 using Dogo.Core.Enums.Species;
-using Dogo.Core.Enums.Tags;
 
 namespace Dogo.Core.Enitities
 {

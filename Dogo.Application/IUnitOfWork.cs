@@ -10,6 +10,7 @@ namespace Dogo.Application
         IRepository<Appointment> AppointmentRepository { get; }
         IRepository<Walker> WalkerRepository { get; }
         IRepository<Review> ReviewRepository { get; }
+        IRepository<Address> AddressRepository { get; }
 
         Task SaveChanges();
     }
