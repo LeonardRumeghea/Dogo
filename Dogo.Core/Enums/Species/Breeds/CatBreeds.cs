@@ -12,6 +12,7 @@
         Bengal = 7,
         Bombay = 8,
         Persian = 9,
+        Unknown = 98,
         Other = 99
     }
 }

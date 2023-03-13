@@ -25,6 +25,7 @@
         SilverFox = 20,
         Tan = 21,
         Thrianta = 22,
+        Unknown = 98,
         Other = 99,
     }
 }

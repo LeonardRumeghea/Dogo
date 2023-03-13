@@ -15,6 +15,10 @@ namespace Dogo.API.Controllers
 
         public WalkersController(IMediator mediator) => _mediator = mediator;
 
+        // Work with walker account
+        // Done - GetAll, GetByID, Create, Delete
+        // Work in progress - Update
+
         [HttpPost]
         public async Task<IActionResult> CreateWalker([FromBody] CreateWalkerCommand command)
         {

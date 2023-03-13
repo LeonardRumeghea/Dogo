@@ -10,6 +10,7 @@
         TeddyGuineaPig = 5,
         TexelGuineaPig = 6,
         SkinnyPigs = 7,
+        Unknown = 98,
         Other = 99,
     }
 }

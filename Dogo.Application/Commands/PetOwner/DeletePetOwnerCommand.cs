@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using Dogo.Core.Helpers;
+using MediatR;
 
 namespace Dogo.Application.Commands.PetOwner
 {
-    public class DeletePetOwnerCommand : IRequest<bool>
+    public class DeletePetOwnerCommand : IRequest<HttpStatusCodeResponse>
     {
         public Guid Id { get; set; }
 

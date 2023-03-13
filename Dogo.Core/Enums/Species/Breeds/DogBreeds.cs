@@ -24,6 +24,7 @@
         BelgianSheepdog = 19,
         BelgianTervuren = 20,
         BerneseMountainDog = 21,
+        Unknown = 98,
         Other = 99,
     }
 }

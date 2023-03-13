@@ -1,30 +1,30 @@
 ﻿using Dogo.Application.Commands.PetOwner;
-using Dogo.Core.Repositories;
+using Dogo.Core.Helpers;
 using MediatR;
 
+#nullable disable
 namespace Dogo.Application.Handlers
 {
-    public class DeletePetOwnerCommandHandler : IRequestHandler<DeletePetOwnerCommand, bool>
+    public class DeletePetOwnerCommandHandler : IRequestHandler<DeletePetOwnerCommand, HttpStatusCodeResponse>
     {
-        private readonly IPetOwnerRepository _petOwnerRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public DeletePetOwnerCommandHandler(IPetOwnerRepository petOwnerRepository)
-        {
-            _petOwnerRepository = petOwnerRepository;
-        }
+        public DeletePetOwnerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
-        public async Task<bool> Handle(DeletePetOwnerCommand request, CancellationToken cancellationToken)
+        public async Task<HttpStatusCodeResponse> Handle(DeletePetOwnerCommand request, CancellationToken cancellationToken)
         {
-            var petOwner = await _petOwnerRepository.GetByIdAsync(request.Id);
+            var petOwner = await unitOfWork.PetOwnerRepository.GetByIdAsync(request.Id);
 
             if (petOwner == null)
             {
-                return false;
+                return HttpStatusCodeResponse.NotFound;
             }
 
-            await _petOwnerRepository.DeleteAsync(petOwner);
+            petOwner.Pets.ForEach(pet => unitOfWork.PetRepository.DeleteAsync(pet));
 
-            return true;
+            await unitOfWork.PetOwnerRepository.DeleteAsync(petOwner);
+
+            return HttpStatusCodeResponse.NoContent;
         }
     }
 }

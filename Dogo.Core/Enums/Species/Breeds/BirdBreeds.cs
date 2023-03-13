@@ -12,6 +12,7 @@
         Canaries = 7,
         Lovebirds = 8,
         Parakeets = 9,
+        Unknown = 98,
         Other = 99,
     }
 }

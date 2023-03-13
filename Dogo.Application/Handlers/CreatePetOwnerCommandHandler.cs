@@ -21,7 +21,7 @@ namespace Dogo.Application.Handlers
                 return null;
             }
             
-            //petOwnerEntity.Address = await unitOfWork.AddressRepository.AddAsync(petOwnerEntity.Address);
+            petOwnerEntity.Address = await unitOfWork.AddressRepository.AddAsync(petOwnerEntity.Address);
 
             var newPetOwner = await unitOfWork.PetOwnerRepository.AddAsync(petOwnerEntity);
 

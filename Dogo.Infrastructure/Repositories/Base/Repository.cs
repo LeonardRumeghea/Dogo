@@ -25,9 +25,9 @@ namespace Dogo.Infrastructure.Repositories.Base
             await context.SaveChangesAsync();
         }
 
-        public async Task<T> GetByIdAsync(Guid id) => await context.Set<T>().FindAsync(id);
+        public virtual async Task<T> GetByIdAsync(Guid id) => await context.Set<T>().FindAsync(id);
 
-        public async Task<IReadOnlyList<T>> GetAllAsync() => await context.Set<T>().ToListAsync();
+        public virtual async Task<IReadOnlyList<T>> GetAllAsync() => await context.Set<T>().ToListAsync();
 
         public async Task UpdateAsync(T entity)
         {

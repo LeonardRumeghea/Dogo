@@ -1,5 +1,6 @@
 ﻿using Dogo.Core.Enums;
 using Dogo.Core.Enums.Species;
+using Dogo.Core.Helpers;
 
 namespace Dogo.Core.Enitities
 {
@@ -16,7 +17,20 @@ namespace Dogo.Core.Enitities
         public PetGender Gender { get; set; }
         public List<Review>? Reviews { get; set; }
         public string? Tags { get; set; }
-        
+
         public double Rating() => Reviews == null || Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
+
+        public ResultOfEntity<Pet> RegisterToOwner(Guid petOwnerid)
+        {
+            try
+            {
+                OwnerId = petOwnerid;
+                return ResultOfEntity<Pet>.Success(this);
+            }
+            catch (Exception ex)
+            {
+                return ResultOfEntity<Pet>.Failure(ex.Message);
+            }
+        }
     }
 }

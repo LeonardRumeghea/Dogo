@@ -1,4 +1,4 @@
-﻿namespace Dogo.Application.Response
+﻿namespace Dogo.Core.Helpers
 {
     public enum HttpStatusCodeResponse
     {

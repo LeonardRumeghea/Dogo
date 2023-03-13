@@ -4,6 +4,7 @@
     {
         AmericanFerret = 0,
         EuropeanFerret = 1,
+        Unknown = 98,
         Other = 99,
     }
 }

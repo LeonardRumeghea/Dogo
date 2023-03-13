@@ -1,31 +1,47 @@
-﻿using AutoMapper;
+﻿using Dogo.Application.Mappers;
 using Dogo.Application.Response;
-using Dogo.Core.Repositories;
+using Dogo.Core.Enitities;
+using Dogo.Core.Helpers;
 using MediatR;
 
 namespace Dogo.Application.Queries.PetOwner
 {
-    public class AddPetToPetOwnerQueryHandler : IRequestHandler<AddPetToPetOwnerQuery, HttpStatusCodeResponse>
+    public class AddPetToPetOwnerQueryHandler : IRequestHandler<AddPetToPetOwnerQuery, ResultOfEntity<PetResponse>>
     {
-        private readonly IMapper _mapper;
-        private readonly IPetOwnerRepository _petOwnerRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public AddPetToPetOwnerQueryHandler(IMapper mapper, IPetOwnerRepository petOwnerRepository)
-        {
-            _mapper = mapper;
-            _petOwnerRepository = petOwnerRepository;
-        }
+        public AddPetToPetOwnerQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
-        public async Task<HttpStatusCodeResponse> Handle(AddPetToPetOwnerQuery request, CancellationToken cancellationToken)
+        public async Task<ResultOfEntity<PetResponse>> Handle(AddPetToPetOwnerQuery request, CancellationToken cancellationToken)
         {
-            var petOwner = await _petOwnerRepository.GetByIdAsync(request.PetOwnerId);
+            var petOwner = await unitOfWork.PetOwnerRepository.GetByIdAsync(request.PetOwnerId);
 
             if (petOwner == null)
             {
-                return HttpStatusCodeResponse.NotFound;
+                return ResultOfEntity<PetResponse>.Failure(HttpStatusCodeResponse.NotFound, "Pet Owner not found");
             }
 
-            return HttpStatusCodeResponse.OK;
+            var pet = PetMapper.Mapper.Map<Pet>(request.Pet);
+
+            if (pet == null)
+            {
+                return ResultOfEntity<PetResponse>.Failure(HttpStatusCodeResponse.BadRequest, "Pet is null");
+            }
+
+            var result = petOwner.RegisterPet(pet);
+
+            if (result.IsFailure || result.Entity == null)
+            {
+                return ResultOfEntity<PetResponse>.Failure(HttpStatusCodeResponse.BadRequest, result.Message);
+            }
+
+            pet = result.Entity;
+
+            
+            await unitOfWork.PetOwnerRepository.UpdateAsync(petOwner);
+            await unitOfWork.PetRepository.UpdateAsync(pet);
+
+            return ResultOfEntity<PetResponse>.Success(HttpStatusCodeResponse.Created, PetMapper.Mapper.Map<PetResponse>(pet));
         }
     }
 }

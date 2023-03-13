@@ -8,6 +8,7 @@
         angelfish = 3,
         cichlid = 4,
         tetra = 5,
+        Unknown = 98,
         Other = 99,
     }
 }
