@@ -1,6 +1,7 @@
 ﻿using Dogo.Core.Enums;
 using Dogo.Core.Enums.Species;
 using Dogo.Core.Enums.Species.Breeds;
+using System.Text.RegularExpressions;
 
 namespace Dogo.Application.Commands
 {
@@ -8,11 +9,13 @@ namespace Dogo.Application.Commands
     {
         public static bool BeValidDate(string value) => DateTime.TryParse(value, out var date) && date < DateTime.Now;
 
+        public static bool BeValidDateAppointment(string value) => DateTime.TryParse(value, out var date) && date > DateTime.Now;
+
         public static bool BeInPetGenderEnum(string value) => Enum.TryParse<PetGender>(value, out _);
 
         public static bool BeInSpeciesEnum(string value) => Enum.TryParse<Specie>(value, out _);
 
-        public static bool BeRightBreed(String specie, string breed)
+        public static bool BeRightBreed(string specie, string breed)
         {
             if (specie == "Dog")
             {
@@ -46,6 +49,11 @@ namespace Dogo.Application.Commands
             {
                 return false;
             }
+        }
+
+        public static bool BeValidGuid(Guid value) {
+            Regex re = new(@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
+            return re.IsMatch(value.ToString());
         }
     }
 }

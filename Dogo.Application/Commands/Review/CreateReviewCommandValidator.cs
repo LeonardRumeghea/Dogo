@@ -18,7 +18,15 @@ namespace Dogo.Application.Commands.Review
             
             RuleFor(x => x.AppointmentId)
                 .NotEmpty()
+                .Must(x => x != Guid.Empty)
+                .Must(Validations.BeValidGuid)
                 .WithMessage("AppointmentId is required");
+
+            RuleFor(x => x.WrittenBy)
+                .NotEmpty()
+                .Must(x => x != Guid.Empty)
+                .Must(Validations.BeValidGuid)
+                .WithMessage("WrittenBy Id is required");
         }
     }
 }

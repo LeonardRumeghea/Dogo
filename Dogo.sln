@@ -11,13 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{8B9C4E5B-A729-4FCC-8CB7-82F204DD4136}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dogo.Core", "Dogo.Core\Dogo.Core.csproj", "{A34E5A7A-AF8A-40AB-865D-5A0F909EFE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dogo.Core", "Dogo.Core\Dogo.Core.csproj", "{A34E5A7A-AF8A-40AB-865D-5A0F909EFE36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dogo.Infrastructure", "Dogo.Infrastructure\Dogo.Infrastructure.csproj", "{2A633E28-59CA-47D5-A267-7CAF9057470C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dogo.Infrastructure", "Dogo.Infrastructure\Dogo.Infrastructure.csproj", "{2A633E28-59CA-47D5-A267-7CAF9057470C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dogo.Application", "Dogo.Application\Dogo.Application.csproj", "{4BA9F318-C559-413F-B62F-9E0D04AF5CE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dogo.Application", "Dogo.Application\Dogo.Application.csproj", "{4BA9F318-C559-413F-B62F-9E0D04AF5CE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dogo.API", "Dogo.API\Dogo.API.csproj", "{BD176769-33EC-43FD-AFB6-1BFD8B56E5B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dogo.API", "Dogo.API\Dogo.API.csproj", "{BD176769-33EC-43FD-AFB6-1BFD8B56E5B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BDFB307-6E6C-4319-A19C-67514A9719C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

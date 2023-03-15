@@ -3,7 +3,7 @@ using Dogo.Application.Response;
 using Dogo.Core.Helpers;
 using MediatR;
 
-namespace Dogo.Application.Queries.PetOwner
+namespace Dogo.Application.Queries.PetOwner.Pets
 {
     public class GetPetByIdQueryHandler : IRequestHandler<GetPetByIdQuery, ResultOfEntity<PetResponse>>
     {
@@ -17,17 +17,17 @@ namespace Dogo.Application.Queries.PetOwner
 
             if (petOwner == null)
             {
-                return ResultOfEntity<PetResponse>.Failure(HttpStatusCodeResponse.NotFound, "Pet Owner not found");
+                return ResultOfEntity<PetResponse>.Failure(HttpStatusCode.NotFound, "Pet Owner not found");
             }
 
             var pet = petOwner.Pets.FirstOrDefault(p => p.Id == request.PetId);
 
             if (pet == null)
             {
-                return ResultOfEntity<PetResponse>.Failure(HttpStatusCodeResponse.NotFound, "Pet not found");
+                return ResultOfEntity<PetResponse>.Failure(HttpStatusCode.NotFound, "Pet not found");
             }
 
-            return ResultOfEntity<PetResponse>.Success(HttpStatusCodeResponse.OK, PetMapper.Mapper.Map<PetResponse>(pet));
+            return ResultOfEntity<PetResponse>.Success(HttpStatusCode.OK, PetMapper.Mapper.Map<PetResponse>(pet));
         }
     }
 }

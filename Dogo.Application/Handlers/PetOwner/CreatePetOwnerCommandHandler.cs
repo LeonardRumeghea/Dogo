@@ -1,11 +1,10 @@
 ﻿using Dogo.Application.Commands.PetOwner;
 using Dogo.Application.Mappers;
 using Dogo.Application.Response;
-using Dogo.Core.Enitities;
 using MediatR;
 
 #nullable disable
-namespace Dogo.Application.Handlers
+namespace Dogo.Application.Handlers.PetOwner
 {
     public class CreatePetOwnerCommandHandler : IRequestHandler<CreatePetOwnerCommand, PetOwnerResponse>
     {
@@ -15,12 +14,12 @@ namespace Dogo.Application.Handlers
 
         public async Task<PetOwnerResponse> Handle(CreatePetOwnerCommand request, CancellationToken cancellationToken)
         {
-            var petOwnerEntity = PetOwnerMapper.Mapper.Map<PetOwner>(request);
+            var petOwnerEntity = PetOwnerMapper.Mapper.Map<Core.Enitities.PetOwner>(request);
             if (petOwnerEntity == null)
             {
                 return null;
             }
-            
+
             petOwnerEntity.Address = await unitOfWork.AddressRepository.AddAsync(petOwnerEntity.Address);
 
             var newPetOwner = await unitOfWork.PetOwnerRepository.AddAsync(petOwnerEntity);

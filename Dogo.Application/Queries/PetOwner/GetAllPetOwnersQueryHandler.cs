@@ -1,25 +1,16 @@
-﻿using AutoMapper;
+﻿using Dogo.Application.Mappers;
 using Dogo.Application.Response;
-using Dogo.Core.Repositories;
 using MediatR;
 
 namespace Dogo.Application.Queries.PetOwner
 {
     public class GetAllPetOwnersQueryHandler : IRequestHandler<GetAllPetOwnersQuery, List<PetOwnerResponse>>
     {
-        private readonly IMapper _mapper;
-        private readonly IPetOwnerRepository _petOwnerRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public GetAllPetOwnersQueryHandler(IMapper mapper, IPetOwnerRepository petOwnerRepository)
-        {
-            _mapper = mapper;
-            _petOwnerRepository = petOwnerRepository;
-        }
+        public GetAllPetOwnersQueryHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
-        public async Task<List<PetOwnerResponse>> Handle(GetAllPetOwnersQuery request, CancellationToken cancellationToken)
-        {
-            var petOwners = await _petOwnerRepository.GetAllAsync();
-            return _mapper.Map<List<PetOwnerResponse>>(petOwners);
-        }
+        public async Task<List<PetOwnerResponse>> Handle(GetAllPetOwnersQuery request, CancellationToken cancellationToken) 
+            => PetOwnerMapper.Mapper.Map<List<PetOwnerResponse>>(await unitOfWork.PetOwnerRepository.GetAllAsync());
     }
 }

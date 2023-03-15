@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Dogo.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230310173626_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230315201917_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -166,6 +166,9 @@ namespace Dogo.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<Guid?>("WalkerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WrittenBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");

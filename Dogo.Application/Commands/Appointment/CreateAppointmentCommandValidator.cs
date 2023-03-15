@@ -9,7 +9,7 @@ namespace Dogo.Application.Commands.Appointment
         {
             RuleFor(x => x.Date)
                 .NotEmpty()
-                .Must(Validations.BeValidDate)
+                .Must(Validations.BeValidDateAppointment)
                 .WithMessage("Date must be a valid date");
 
             RuleFor(x => x.Notes)
@@ -19,10 +19,12 @@ namespace Dogo.Application.Commands.Appointment
 
             RuleFor(x => x.PetId)
                 .NotEmpty()
+                .Must(Validations.BeValidGuid)
                 .WithMessage("PetId must be a valid Guid");
 
             RuleFor(x => x.WalkerId)
                 .NotEmpty()
+                .Must(Validations.BeValidGuid)
                 .WithMessage("WalkerId must be a valid Guid");
         }
     }

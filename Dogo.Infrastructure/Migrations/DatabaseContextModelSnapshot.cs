@@ -165,6 +165,9 @@ namespace Dogo.Infrastructure.Migrations
                     b.Property<Guid?>("WalkerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("WrittenBy")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PetId");

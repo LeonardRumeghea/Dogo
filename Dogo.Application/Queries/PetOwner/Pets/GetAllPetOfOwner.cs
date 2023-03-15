@@ -1,7 +1,7 @@
 ﻿using Dogo.Application.Response;
 using MediatR;
 
-namespace Dogo.Application.Queries.PetOwner
+namespace Dogo.Application.Queries.PetOwner.Pets
 {
     public class GetAllPetOfOwner : IRequest<List<PetResponse>>
     {

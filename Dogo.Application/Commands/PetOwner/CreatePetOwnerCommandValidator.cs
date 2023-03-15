@@ -8,13 +8,13 @@ namespace Dogo.Application.Commands.PetOwner
         {
             RuleFor(x => x.FirstName)
                 .NotEmpty()
-                .Length(4, 25)
-                .WithMessage("First name must be between 4 and 25 characters");
+                .Length(1, 25)
+                .WithMessage("First name must be between 1 and 25 characters");
             
             RuleFor(x => x.LastName)
                 .NotEmpty()
-                .Length(4, 25)
-                .WithMessage("Last name must be between 4 and 25 characters");
+                .Length(1, 25)
+                .WithMessage("Last name must be between 1 and 25 characters");
             
             RuleFor(x => x.Email)
                 .NotEmpty()

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Dogo.Application.Commands.PetOwner
 {
-    public class DeletePetOwnerCommand : IRequest<HttpStatusCodeResponse>
+    public class DeletePetOwnerCommand : IRequest<HttpStatusCode>
     {
         public Guid Id { get; set; }
 

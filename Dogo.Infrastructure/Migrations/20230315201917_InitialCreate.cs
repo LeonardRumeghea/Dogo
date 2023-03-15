@@ -5,7 +5,7 @@
 namespace Dogo.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -121,6 +121,7 @@ namespace Dogo.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WrittenBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     AppointmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),

@@ -90,16 +90,6 @@ D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\refint\Dogo.AP
 D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
 D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.genruntimeconfig.cache
 D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\ref\Dogo.API.dll
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.AssemblyReference.cache
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.GeneratedMSBuildEditorConfig.editorconfig
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfoInputs.cache
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfo.cs
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CoreCompileInputs.cache
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cs
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cache
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.dll
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\refint\Dogo.API.dll
-D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.Development.json
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.json
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.exe
@@ -171,6 +161,13 @@ D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.dll
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Application.pdb
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.pdb
 D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cache
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.Dogo.API.Microsoft.AspNetCore.StaticWebAssets.props
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.build.Dogo.API.props
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Dogo.API.props
@@ -180,5 +177,8 @@ D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.build.json
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.development.json
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\scopedcss\bundle\Dogo.API.styles.css
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CopyComplete
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\refint\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.genruntimeconfig.cache
 D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\ref\Dogo.API.dll

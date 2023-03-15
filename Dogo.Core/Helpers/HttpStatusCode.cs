@@ -1,6 +1,6 @@
 ﻿namespace Dogo.Core.Helpers
 {
-    public enum HttpStatusCodeResponse
+    public enum HttpStatusCode
     {
         OK = 200,
         Created = 201,
