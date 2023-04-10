@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'authentication/sign_in_or_up.dart';
+import 'authentication/auth.dart';
 
 void main() {
   runApp(const MyApp());

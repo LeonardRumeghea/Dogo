@@ -1,0 +1,36 @@
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.deps.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.AssemblyReference.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfoInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfo.cs
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.CoreCompileInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\refint\Dogo.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.Core\obj\Debug\net7.0\ref\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.deps.json
+D:\Documents\GitHub\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.Core\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\refint\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\Dogo.Core\obj\Debug\net7.0\ref\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\bin\Debug\net7.0\Dogo.Core.deps.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\refint\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Core\obj\Debug\net7.0\ref\Dogo.Core.dll

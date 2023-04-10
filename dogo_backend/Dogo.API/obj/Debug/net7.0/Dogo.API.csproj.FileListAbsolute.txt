@@ -1,0 +1,276 @@
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.Development.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.exe
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.deps.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.runtimeconfig.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\AutoMapper.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Azure.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Azure.Identity.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Humanizer.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.Contracts.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.CodeDom.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Drawing.Common.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Memory.Data.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Runtime.Caching.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Security.Permissions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\System.Windows.Extensions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Application.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.AssemblyReference.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfoInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfo.cs
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CoreCompileInputs.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.Dogo.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.build.Dogo.API.props
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Dogo.API.props
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Dogo.API.props
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.pack.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.build.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.development.json
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\scopedcss\bundle\Dogo.API.styles.css
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CopyComplete
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\refint\Dogo.API.dll
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.genruntimeconfig.cache
+D:\Documents\Faculty Staff\Licenta\Dogo\Dogo.API\obj\Debug\net7.0\ref\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.Development.json
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\appsettings.json
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.exe
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.deps.json
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.runtimeconfig.json
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.API.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\AutoMapper.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Azure.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Azure.Identity.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Humanizer.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.Contracts.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.CodeDom.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Memory.Data.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Runtime.Caching.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Security.Permissions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\System.Windows.Extensions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Application.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.Dogo.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.build.Dogo.API.props
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Dogo.API.props
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Dogo.API.props
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.pack.json
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.build.json
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\staticwebassets.development.json
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\scopedcss\bundle\Dogo.API.styles.css
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CopyComplete
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\refint\Dogo.API.dll
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\Dogo.API.genruntimeconfig.cache
+D:\Documents\GitHub\Dogo\Dogo.API\obj\Debug\net7.0\ref\Dogo.API.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\appsettings.Development.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\appsettings.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.API.exe
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.API.deps.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.API.runtimeconfig.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.API.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.API.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\AutoMapper.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Azure.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Azure.Identity.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\FluentValidation.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Humanizer.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\MediatR.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\MediatR.Contracts.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.CodeDom.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Memory.Data.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Runtime.Caching.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Security.Permissions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\System.Windows.Extensions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Application.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Infrastructure.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.MvcApplicationPartsAssemblyInfo.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.Dogo.API.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.build.Dogo.API.props
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.Dogo.API.props
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.Dogo.API.props
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets.pack.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets.build.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\staticwebassets.development.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\scopedcss\bundle\Dogo.API.styles.css
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.csproj.CopyComplete
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\refint\Dogo.API.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\Dogo.API.genruntimeconfig.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.API\obj\Debug\net7.0\ref\Dogo.API.dll
