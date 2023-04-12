@@ -67,6 +67,22 @@ class Colors {
     },
   );
 
+  static const MaterialColor dustGreen = MaterialColor(
+    0xff76A973,
+    <int, Color>{
+      50: Color(0xff76A973),
+      100: Color(0xff76A973),
+      200: Color(0xff76A973),
+      300: Color(0xff76A973),
+      400: Color(0xff76A973),
+      500: Color(0xff76A973),
+      600: Color(0xff76A973),
+      700: Color(0xff76A973),
+      800: Color(0xff76A973),
+      900: Color(0xff76A973),
+    },
+  );
+
   static const MaterialColor blackBlue = MaterialColor(
     0xff293241,
     <int, Color>{

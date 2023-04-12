@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
-import '../Helpers/constants.dart' as app_colors;
+import '../Helpers/constants.dart' as constants;
 import '../settings/profile_view.dart' as profile_view;
+
+// services page for the owner implementation
+import 'services/Owner/walk/walk.dart';
+import './services/Owner/sitting.dart';
+import './services/Owner/shopping.dart';
+import './services/Owner/salon.dart';
+import './services/Owner/vet.dart';
+import 'services/Owner/pets/pets.dart';
+
+// services page for the walker implementation
+import './services/Walker/agenda.dart';
+import './services/Walker/search.dart';
+import './services/Walker/preferences.dart';
+// import './services/Walker/requests.dart';
 
 String profileName = "Leonard";
 String accountType = "Owner";
@@ -26,7 +40,7 @@ class Page extends StatelessWidget {
                     height: size.height,
                     width: size.width,
                   ),
-                  gradientContainer(size),
+                  banner(size),
                   Positioned(
                     top: size.height * .15,
                     left: size.width * .05,
@@ -55,14 +69,15 @@ class Page extends StatelessWidget {
                     top: size.height * .025,
                     width: size.width * 1.85,
                     child: IconButton(
-                      icon: const Icon(Icons.person_2_outlined),
-                      color: app_colors.Colors.darkBlue,
+                      icon: const Icon(Icons.person),
+                      color: constants.Colors.darkBlue,
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const profile_view.ProfilePage()),
+                            builder: (context) =>
+                                const profile_view.ProfilePage(),
+                          ),
                         );
                       },
                       iconSize: 32,
@@ -86,28 +101,35 @@ class Page extends StatelessWidget {
     );
   }
 
-  Container gradientContainer(Size size) {
+  Container banner(Size size) {
     return Container(
       height: size.height * .25,
       width: size.width,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(app_colors.borderRadius),
-              bottomRight: Radius.circular(app_colors.borderRadius)),
+              bottomLeft: Radius.circular(constants.borderRadius),
+              bottomRight: Radius.circular(constants.borderRadius)),
           image: DecorationImage(
               image: AssetImage('assets/images/main_menu_bg.png'),
               fit: BoxFit.cover)),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(app_colors.borderRadius),
-              bottomRight: Radius.circular(app_colors.borderRadius)),
+              bottomLeft: Radius.circular(constants.borderRadius),
+              bottomRight: Radius.circular(constants.borderRadius)),
           gradient: LinearGradient(
             colors: [
               const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
               const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
             ],
           ),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
       ),
     );
@@ -115,9 +137,7 @@ class Page extends StatelessWidget {
 }
 
 class ProfileTypes extends StatelessWidget {
-  const ProfileTypes({
-    Key? key,
-  }) : super(key: key);
+  const ProfileTypes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +149,8 @@ class ProfileTypes extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(app_colors.borderRadius),
-          topRight: Radius.circular(app_colors.borderRadius),
+          topLeft: Radius.circular(constants.borderRadius),
+          topRight: Radius.circular(constants.borderRadius),
         ),
         color: Colors.white.withOpacity(0.025),
       ),
@@ -140,32 +160,32 @@ class ProfileTypes extends StatelessWidget {
           const Text(
             "Profile Types",
             style: TextStyle(
-              color: app_colors.Colors.grey,
+              color: constants.Colors.grey,
               fontWeight: FontWeight.bold,
               fontSize: 17,
             ),
           ),
           const Divider(
-            color: app_colors.Colors.grey,
+            color: constants.Colors.grey,
             thickness: 1,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CardWidget(
+              CardButton(
                   icon: Icon(
                     Icons.pets,
                     color: accountType == ownerType
-                        ? app_colors.Colors.dustBlue
-                        : app_colors.Colors.darkBlue,
+                        ? constants.Colors.dustBlue
+                        : constants.Colors.darkBlue,
                   ),
                   title: ownerType),
-              CardWidget(
+              CardButton(
                   icon: Icon(
                     Icons.directions_walk,
                     color: accountType == walkerType
-                        ? app_colors.Colors.dustBlue
-                        : app_colors.Colors.darkBlue,
+                        ? constants.Colors.dustBlue
+                        : constants.Colors.darkBlue,
                   ),
                   title: walkerType),
             ],
@@ -176,11 +196,12 @@ class ProfileTypes extends StatelessWidget {
   }
 }
 
-class CardWidget extends StatelessWidget {
+class CardButton extends StatelessWidget {
+  const CardButton({Key? key, required this.icon, required this.title})
+      : super(key: key);
+
   final Icon icon;
   final String title;
-  const CardWidget({Key? key, required this.icon, required this.title})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -198,23 +219,20 @@ class CardWidget extends StatelessWidget {
               title: Text(
                 title,
                 style: const TextStyle(
-                  color: app_colors.Colors.grey,
+                  color: constants.Colors.grey,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
               ),
               onTap: () {
-                if (title == accountType) {
+                if (accountType == title) {
                   return;
                 }
-
                 accountType = title;
-                // refresh page to show new services
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const Page(),
-                  ),
+                      builder: (BuildContext context) => const Page()),
                 );
               },
             ),
@@ -254,7 +272,7 @@ class SericesGridDashboard extends StatelessWidget {
             child: Text(
               "Available Services",
               style: TextStyle(
-                color: app_colors.Colors.grey,
+                color: constants.Colors.grey,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -268,7 +286,18 @@ class SericesGridDashboard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  cardText(
+                  serviceCard(
+                    size,
+                    Colors.brown,
+                    const Icon(
+                      Icons.pets,
+                      color: Colors.white,
+                    ),
+                    'Manage Your Pets',
+                    'Set up the pet profiles. Add your pets and their details.',
+                    context,
+                  ),
+                  serviceCard(
                     size,
                     Colors.blue,
                     const Icon(
@@ -277,8 +306,9 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Walk',
                     'Find someone to walk your pet or make a later appointment.',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.purple,
                     const Icon(
@@ -288,8 +318,9 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Salon Visit',
                     'Reserve a walker for a future visit to the salon of your pet',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.green,
                     const Icon(
@@ -299,8 +330,9 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Pet Sitting',
                     'While you are away, a walker will care for your pet at home.',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.red,
                     const Icon(
@@ -310,8 +342,9 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Pet Shopping',
                     'One walker will manage all of the pet\'s shopping needs.',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.amber,
                     const Icon(
@@ -321,6 +354,7 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Vet Care',
                     'Plan a visit or find someone for a brief emergency',
+                    context,
                   ),
                 ],
               ),
@@ -345,7 +379,7 @@ class SericesGridDashboard extends StatelessWidget {
             child: Text(
               "Available Services",
               style: TextStyle(
-                color: app_colors.Colors.grey,
+                color: constants.Colors.grey,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -359,7 +393,7 @@ class SericesGridDashboard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.blue,
                     const Icon(
@@ -368,8 +402,9 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Your Agenda',
                     'Your schedule for the day with all the tasks you need to do.',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.purple,
                     const Icon(
@@ -378,16 +413,18 @@ class SericesGridDashboard extends StatelessWidget {
                     ),
                     'Search for Appointments',
                     'View the services offered for the upcoming term and select your favorites.',
+                    context,
                   ),
-                  cardText(
+                  serviceCard(
                     size,
                     Colors.green,
                     const Icon(
                       Icons.room_preferences,
                       color: Colors.white,
                     ),
-                    'Yout Preferences',
+                    'Your Preferences',
                     'For better compatibility, configure your settings for the following schedules.',
+                    context,
                   ),
                 ],
               ),
@@ -397,44 +434,72 @@ class SericesGridDashboard extends StatelessWidget {
       ),
     );
   }
-}
 
-cardText(
-  Size size,
-  Color color,
-  Icon icon,
-  String title,
-  String subtitle,
-) {
-  return Padding(
-    padding: EdgeInsets.symmetric(vertical: size.height * .0025),
-    child: Card(
-      child: SizedBox(
-        height: size.height * .1,
-        width: size.width * .9,
-        child: Center(
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: color,
-              child: icon,
-            ),
-            title: Text(
-              title,
-              style: const TextStyle(
-                  color: app_colors.Colors.grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-            subtitle: Text(
-              subtitle,
-              style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13),
+  serviceCard(Size size, Color color, Icon icon, String title, String subtitle,
+      BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .0025),
+      child: Card(
+        child: SizedBox(
+          height: size.height * .1,
+          width: size.width * .9,
+          child: Center(
+            child: ListTile(
+              onTap: () {
+                choseServicePage(context, title);
+              },
+              leading: CircleAvatar(
+                backgroundColor: color,
+                child: icon,
+              ),
+              title: Text(
+                title,
+                style: const TextStyle(
+                    color: constants.Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
+              subtitle: Text(
+                subtitle,
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13),
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
+
+  choseServicePage(BuildContext context, String serviceName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        switch (serviceName) {
+          case 'Manage Your Pets':
+            return const ManageYourPetsPage();
+          case 'Walk':
+            return const WalkPage();
+          case 'Salon Visit':
+            return const SalonVisitPage();
+          case 'Pet Sitting':
+            return const PetSittingPage();
+          case 'Pet Shopping':
+            return const PetShoppingPage();
+          case 'Vet Care':
+            return const VetCarePage();
+          case 'Your Agenda':
+            return const AgendaPage();
+          case 'Search for Appointments':
+            return const SearchForAppointmentsPage();
+          case 'Your Preferences':
+            return const PreferencesPage();
+          default:
+            return const Page();
+        }
+      }),
+    );
+  }
 }

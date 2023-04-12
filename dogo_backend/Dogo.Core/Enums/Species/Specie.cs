@@ -9,8 +9,7 @@
         Ferret = 4,
         Fish = 5,
         GuineaPig = 6,
-        Hamster = 7,
-        Unknown = 98,
+        //Hamster = 7,
         Other = 99,
     }
 }

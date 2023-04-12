@@ -120,38 +120,37 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget displayInfo(
-      Icon icon, Color color, String info, double top, double left) {
-    return Positioned(
-      top: top,
-      left: left,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon.icon,
-            color: color,
-            size: 24,
-          ),
-          const SizedBox(width: 10),
-          SizedBox(
-            width: 250,
-            height: 175,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Text(
-                info,
-                style: const TextStyle(
-                  color: constants.Colors.grey,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+          Icon icon, Color color, String info, double top, double left) =>
+      Positioned(
+        top: top,
+        left: left,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              icon.icon,
+              color: color,
+              size: 24,
+            ),
+            const SizedBox(width: 10),
+            SizedBox(
+              width: 250,
+              height: 175,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Text(
+                  info,
+                  style: const TextStyle(
+                    color: constants.Colors.grey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+      );
 
   Widget panel(Size size) => Positioned(
         top: size.height * .2,
