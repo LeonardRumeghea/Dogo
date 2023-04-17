@@ -17,9 +17,19 @@ namespace Dogo.Core.Enitities
         public DateTime DateOfBirth { get; set; }
         public PetGender Gender { get; set; }
         public List<Review> Reviews { get; set; }
-        public string Tags { get; set; }
+        //public string Tags { get; set; }
+
+        // Pet atributes
+
+        public int totalNumberOfReviews { get; set; }
+        public double Friendly { get; set; }
+        public double Active { get; set; }
+        public double Playful { get; set; }
+        
 
         public double Rating() => Reviews == null || Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);
+
+        public double Age() => DateTime.Now.Subtract(DateOfBirth).TotalDays / 365;
 
         public ResultOfEntity<Pet> RegisterToOwner(Guid petOwnerid)
         {

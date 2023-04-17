@@ -43,3 +43,18 @@ D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.App
 D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Application\obj\Debug\net7.0\refint\Dogo.Application.dll
 D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.pdb
 D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Application\obj\Debug\net7.0\ref\Dogo.Application.dll
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.AssemblyReference.cache
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.AssemblyInfoInputs.cache
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.AssemblyInfo.cs
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.CoreCompileInputs.cache
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.dll
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\refint\Dogo.Application.dll
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.pdb
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\bin\Debug\net7.0\Dogo.Application.deps.json
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\bin\Debug\net7.0\Dogo.Application.dll
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\bin\Debug\net7.0\Dogo.Core.dll
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\Dogo.Application.csproj.CopyComplete
+D:\Dogo - 12.04.2023\dogo_backend\Dogo.Application\obj\Debug\net7.0\ref\Dogo.Application.dll

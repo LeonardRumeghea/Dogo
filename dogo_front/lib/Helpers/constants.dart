@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String googleMapsApiKey = 'AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk';
+
 const double borderRadius = 15;
 
 class Colors {

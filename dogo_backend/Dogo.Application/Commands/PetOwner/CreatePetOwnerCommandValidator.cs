@@ -20,7 +20,13 @@ namespace Dogo.Application.Commands.PetOwner
                 .NotEmpty()
                 .EmailAddress()
                 .WithMessage("Email must be a valid email address");
-            
+
+            RuleFor(x => x.Password)
+                .NotEmpty()
+                .Length(8, 25)
+                .WithMessage("Password must be between 8 and 25 characters");
+
+
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
                 .Length(12)

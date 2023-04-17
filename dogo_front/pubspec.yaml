@@ -37,6 +37,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   intl: ^0.18.0
+  google_maps_flutter: ^2.2.5
+  geolocator: ^9.0.2
+  lottie: ^1.4.2
+  geocoding: ^2.1.0
+  place_picker: ^0.10.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +69,7 @@ flutter:
   assets:
     - assets/images/dogo_icon.png 
     - assets/images/main_menu_bg.png
+    - assets/icons/marker.json
     
     # - images/a_dot_ham.jpeg
 

@@ -8,19 +8,35 @@ namespace Dogo.Application.Handlers.Walker
 {
     public class CreateWalkerCommandHandler : IRequestHandler<CreateWalkerCommand, WalkerResponse>
     {
-        private readonly IRepository<Core.Enitities.Walker> repository;
-        public CreateWalkerCommandHandler(IRepository<Core.Enitities.Walker> repository) => this.repository = repository;
+        private readonly IUnitOfWork unitOfWork;
+
+        public CreateWalkerCommandHandler(IUnitOfWork unitOfWork) => this.unitOfWork = unitOfWork;
 
         public async Task<WalkerResponse> Handle(CreateWalkerCommand request, CancellationToken cancellationToken)
         {
-            var walkerEntity = WalkerMapper.Mapper.Map<Core.Enitities.Walker>(request);
-            if (walkerEntity == null)
+            var petOwner = unitOfWork.PetOwnerRepository.GetByIdAsync(Guid.Parse(request.Id)).Result;
+            if (petOwner == null)
             {
-                throw new ApplicationException("Issue with the mapper");
+                throw new ApplicationException("PetOwner not found");
             }
 
-            var newWalker = await repository.AddAsync(walkerEntity);
-            return WalkerMapper.Mapper.Map<WalkerResponse>(newWalker);
+            var walker = new Core.Enitities.Walker
+            {
+                FirstName = petOwner.FirstName,
+                LastName = petOwner.LastName,
+                Email = petOwner.Email,
+                Password = petOwner.Password,
+                PhoneNumber = petOwner.PhoneNumber,
+                Address = petOwner.Address,
+            };
+
+            var response = await unitOfWork.WalkerRepository.AddAsync(walker);
+
+            response.Id = walker.Id;
+
+            await unitOfWork.WalkerRepository.UpdateAsync(response);
+
+            return WalkerMapper.Mapper.Map<WalkerResponse>(response);
         }
     }
 }

@@ -6,7 +6,7 @@ import '../settings/profile_view.dart' as profile_view;
 import 'services/Owner/walk/walk.dart';
 import './services/Owner/sitting.dart';
 import './services/Owner/shopping.dart';
-import './services/Owner/salon.dart';
+import 'services/Owner/salon/salon.dart';
 import './services/Owner/vet.dart';
 import 'services/Owner/pets/pets.dart';
 
@@ -32,70 +32,69 @@ class Page extends StatelessWidget {
     return Builder(
       builder: (context) {
         return Scaffold(
-          body: Column(
-            children: [
+          body: //Column(
+              // children: [
               Stack(
-                children: [
-                  SizedBox(
-                    height: size.height,
-                    width: size.width,
-                  ),
-                  banner(size),
-                  Positioned(
-                    top: size.height * .15,
-                    left: size.width * .05,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Home",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 32),
-                        ),
-                        Text(
-                          "Welcome back, $profileName",
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * .025,
-                    width: size.width * 1.85,
-                    child: IconButton(
-                      icon: const Icon(Icons.person),
-                      color: constants.Colors.darkBlue,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const profile_view.ProfilePage(),
-                          ),
-                        );
-                      },
-                      iconSize: 32,
-                    ),
-                  ),
-                  Positioned(
-                    top: size.height * .25,
-                    child: SericesGridDashboard(size: size),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    width: size.width,
-                    child: const ProfileTypes(),
-                  )
-                ],
+            children: [
+              SizedBox(
+                height: size.height,
+                width: size.width,
               ),
+              banner(size),
+              Positioned(
+                top: size.height * .15,
+                left: size.width * .05,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Home",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32),
+                    ),
+                    Text(
+                      "Welcome back, $profileName",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: size.height * .025,
+                width: size.width * 1.85,
+                child: IconButton(
+                  icon: const Icon(Icons.person),
+                  color: constants.Colors.darkBlue,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const profile_view.ProfilePage(),
+                      ),
+                    );
+                  },
+                  iconSize: 32,
+                ),
+              ),
+              Positioned(
+                top: size.height * .25,
+                child: SericesGridDashboard(size: size),
+              ),
+              Positioned(
+                bottom: 0,
+                width: size.width,
+                child: const ProfileTypes(),
+              )
             ],
           ),
+          // ],
+          // ),
         );
       },
     );
@@ -244,10 +243,7 @@ class CardButton extends StatelessWidget {
 }
 
 class SericesGridDashboard extends StatelessWidget {
-  const SericesGridDashboard({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
+  const SericesGridDashboard({Key? key, required this.size}) : super(key: key);
 
   final Size size;
 
@@ -256,6 +252,67 @@ class SericesGridDashboard extends StatelessWidget {
     return accountType == ownerType
         ? ownerServices(context)
         : walkerServices(context);
+  }
+
+  Widget displayOwnerServices(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 10, bottom: 5),
+          child: Text(
+            "My Pets",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 26),
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                customCard(size, context),
+                customCard(size, context),
+                customCard(size, context),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Padding customCard(Size size, context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 15),
+      child: GestureDetector(
+        onTap: () => {},
+        child: Container(
+          height: size.height * .15,
+          width: size.width * .5,
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.black.withOpacity(0.3),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(left: 15, top: size.height * .12),
+              child: const Text(
+                'Room',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget ownerServices(BuildContext context) {
