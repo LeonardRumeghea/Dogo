@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as app_colors;
-import 'login.dart' as sign_in;
-import 'register/page_one.dart' as sign_up;
+import 'login_screen.dart' as sign_in;
+import 'register_screen.dart' as sign_up;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

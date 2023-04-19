@@ -91,7 +91,7 @@ class _Page extends State<ManageYourPetsPage> {
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: size.height * .725,
+          maxHeight: size.height * .7,
         ),
         child: SingleChildScrollView(child: cardsColumn(size)),
       ),
@@ -157,30 +157,41 @@ class _Page extends State<ManageYourPetsPage> {
     );
   }
 
-  Widget panel(Size size) => Positioned(
-        top: size.height * .1,
-        left: size.width * .05,
-        child: Container(
-          height: size.height * .825,
-          width: size.width * .9,
-          decoration: const BoxDecoration(
-            borderRadius:
-                BorderRadius.all(Radius.circular(constants.borderRadius)),
-            color: Color.fromARGB(255, 66, 66, 66),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                spreadRadius: 10,
-              ),
-            ],
-          ),
+  Widget panel(Size size) {
+    return Positioned(
+      top: size.height * .1,
+      left: size.width * .05,
+      child: Container(
+        height: size.height * .785,
+        width: size.width * .9,
+        decoration: const BoxDecoration(
+          borderRadius:
+              BorderRadius.all(Radius.circular(constants.borderRadius)),
+          color: Color.fromARGB(255, 66, 66, 66),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  Container banner(Size size) => Container(
-        height: size.height * .225,
-        width: size.width,
+  banner(Size size) {
+    return Container(
+      height: size.height * .25,
+      width: size.width,
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(constants.borderRadius),
+              bottomRight: Radius.circular(constants.borderRadius)),
+          image: DecorationImage(
+              image: AssetImage('assets/images/main_menu_bg.png'),
+              fit: BoxFit.cover)),
+      child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(constants.borderRadius),
@@ -191,6 +202,15 @@ class _Page extends State<ManageYourPetsPage> {
               const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
             ],
           ),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black38,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

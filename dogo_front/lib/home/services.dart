@@ -18,8 +18,8 @@ String accountType = "Owner";
 const String ownerType = "Owner";
 const String walkerType = "Walker";
 
-class Page extends StatelessWidget {
-  const Page({Key? key}) : super(key: key);
+class ServicesPage extends StatelessWidget {
+  const ServicesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +227,7 @@ class CardButton extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => const Page()),
+                      builder: (BuildContext context) => const ServicesPage()),
                 );
               },
             ),
@@ -314,15 +314,18 @@ class SericesGridDashboard extends StatelessWidget {
   Widget ownerServices(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: size.width * .05,
+        // horizontal: size.width * .05,
         vertical: size.height * .025,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 15),
-            child: Text(
+          Padding(
+            padding: EdgeInsets.only(
+              bottom: size.height * .025,
+              left: size.width * .05,
+            ),
+            child: const Text(
               "Available Services",
               style: TextStyle(
                 color: constants.MyColors.grey,
@@ -339,28 +342,31 @@ class SericesGridDashboard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  serviceCard(
-                    size,
-                    Colors.brown,
-                    const Icon(
-                      Icons.pets,
-                      color: Colors.white,
-                    ),
-                    'Manage Your Pets',
-                    'Set up the pet profiles. Add your pets and their details.',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.teal,
-                    const Icon(
-                      Icons.schedule,
-                      color: Colors.white,
-                    ),
-                    'Appointments',
-                    'Visually see your appointments and manage them.',
-                    context,
-                  ),
+                  petsManagementCard(context, size),
+                  appointmentsCard(context, size),
+                  historyCard(context, size),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.brown,
+                  //   const Icon(
+                  //     Icons.pets,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Manage Your Pets',
+                  //   'Set up the pet profiles. Add your pets and their details.',
+                  //   context,
+                  // ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.teal,
+                  //   const Icon(
+                  //     Icons.schedule,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Appointments',
+                  //   'Visually see your appointments and manage them.',
+                  //   context,
+                  // ),
                   // serviceCard(
                   //   size,
                   //   Colors.blue,
@@ -425,6 +431,210 @@ class SericesGridDashboard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget petsManagementCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        left: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'Manage Your Pets'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 5,
+                spreadRadius: 5,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.pets,
+                    color: Colors.brown,
+                    size: size.height * .08,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Manage Your Pets',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Set up the pet profiles. Add your pets and their details.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget appointmentsCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        right: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'Appointments'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 5,
+                spreadRadius: 5,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Appointments',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Manage your appointments and schedule new ones.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.schedule,
+                    color: Colors.green[800],
+                    size: size.height * .08,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget historyCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        left: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'History'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 5,
+                spreadRadius: 5,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.history,
+                    color: Colors.amber,
+                    size: size.height * .08,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'History and Reports',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'View your pet\'s history and reports.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -553,7 +763,7 @@ class SericesGridDashboard extends StatelessWidget {
           case 'Appointments':
             return const AppointmentsPage();
           default:
-            return const Page();
+            return const ServicesPage();
         }
       }),
     );

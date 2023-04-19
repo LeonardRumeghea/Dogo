@@ -27,7 +27,7 @@ class _Page extends State<AppointmentsPage>
     );
 
     final curvedAnimation = CurvedAnimation(
-      curve: Curves.easeOutQuad,
+      curve: Curves.easeInOut,
       parent: _animationController,
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
