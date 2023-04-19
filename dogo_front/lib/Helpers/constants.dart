@@ -4,7 +4,19 @@ const String googleMapsApiKey = 'AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk';
 
 const double borderRadius = 15;
 
-class Colors {
+const String walk = 'Walk';
+const String salon = 'Salon';
+const String sitting = 'Sitting';
+const String vet = 'Vet';
+const String shopping = 'Shopping';
+
+const Color walkColor = Colors.blue;
+const Color salonColor = Colors.purple;
+const Color sittingColor = Colors.green;
+const Color vetColor = Colors.amber;
+const Color shoppingColor = Colors.red;
+
+class MyColors {
   static const MaterialColor darkBlue = MaterialColor(
     0xff3d5a80,
     <int, Color>{

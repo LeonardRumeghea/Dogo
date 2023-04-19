@@ -58,7 +58,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context, _selectedAddress),
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(Icons.done, color: Colors.white),
       ),
       body: buildBody(size),
@@ -115,7 +115,8 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
           child: Column(
             children: <Widget>[
               IconButton(
-                  icon: const Icon(Icons.add, color: constants.Colors.darkBlue),
+                  icon:
+                      const Icon(Icons.add, color: constants.MyColors.darkBlue),
                   onPressed: () async {
                     _zoomLevel += _zoomLevel > _maxZoomLevel ? 0 : 0.5;
                     refreshMap();
@@ -123,7 +124,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
               const SizedBox(height: 2),
               IconButton(
                   icon: const Icon(Icons.remove,
-                      color: constants.Colors.darkBlue),
+                      color: constants.MyColors.darkBlue),
                   onPressed: () async {
                     _zoomLevel -= _zoomLevel < _minZoomLevel ? 0 : 0.5;
                     refreshMap();
@@ -166,7 +167,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
           width: size.width * .9,
           height: size.height * .09,
           decoration: const BoxDecoration(
-            color: constants.Colors.blackBlue,
+            color: constants.MyColors.blackBlue,
             borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
@@ -181,7 +182,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
             child: Text(
               _selectedAddressStr,
               style: const TextStyle(
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),

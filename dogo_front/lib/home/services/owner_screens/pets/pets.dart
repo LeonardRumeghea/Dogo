@@ -30,10 +30,10 @@ class _Page extends State<ManageYourPetsPage> {
             ),
           );
         },
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.add,
-          color: constants.Colors.grey,
+          color: constants.MyColors.grey,
         ),
       ),
       body: SingleChildScrollView(
@@ -139,7 +139,7 @@ class _Page extends State<ManageYourPetsPage> {
               title: Text(
                 title,
                 style: const TextStyle(
-                    color: constants.Colors.grey,
+                    color: constants.MyColors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),

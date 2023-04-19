@@ -55,7 +55,7 @@ class _Page extends State<Page> {
                     icon: Icon(
                       // Based on passwordVisible state choose the icon
                       showPassword ? Icons.visibility : Icons.visibility_off,
-                      color: app_colors.Colors.darkBlue,
+                      color: app_colors.MyColors.darkBlue,
                     ),
                     onPressed: () {
                       // Update the state i.e. toogle the state of passwordVisible variable
@@ -80,7 +80,7 @@ class _Page extends State<Page> {
                   ),
                 ),
                 backgroundColor: MaterialStateProperty.all<Color>(
-                  app_colors.Colors.darkBlue,
+                  app_colors.MyColors.darkBlue,
                 ),
               ),
               onPressed: () {

@@ -7,29 +7,30 @@ import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/location_picker.dart';
 import '../../../../entities/address.dart';
 
-class ScheduleSittingPage extends StatefulWidget {
-  const ScheduleSittingPage({super.key});
+class ScheduleSalonPage extends StatefulWidget {
+  const ScheduleSalonPage({super.key});
 
   @override
-  State<ScheduleSittingPage> createState() => _Page();
+  State<ScheduleSalonPage> createState() => _Page();
 }
 
-class _Page extends State<ScheduleSittingPage> {
-  final TextEditingController _fromController = TextEditingController();
-  final TextEditingController _toController = TextEditingController();
+class _Page extends State<ScheduleSalonPage> {
+  final TextEditingController _dateController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
+  var _selectedAddress = Address();
+
   String _petName = 'Rex';
+  String _duration = '10';
+  var durations = ['10', '20', '30', '40', '50', '60', '90', '120'];
+
   var pets = ['Rex', 'Kitty', 'Buddy', 'Fido', 'Spot', 'Max', 'Bella'];
 
   @override
   void initState() {
     super.initState();
-    init();
   }
-
-  void init() {}
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +38,19 @@ class _Page extends State<ScheduleSittingPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          print('--> ScheduleWalkPage: floatingActionButton onPressed');
           print('petName: $_petName');
-          print('date: ${_fromController.text}');
-          print('time: ${_toController.text}');
+          print('date: ${_dateController.text}');
+          print('location: ${_selectedAddress.toJson()}');
           print('note: ${_noteController.text}');
 
           if (_petName == '' ||
-              _fromController.text == '' ||
-              _toController.text == '') {
+              _dateController.text == '' ||
+              _locationController.text == '') {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Please fill all require fields'),
-                backgroundColor: constants.Colors.dustRed,
+                backgroundColor: constants.MyColors.dustRed,
               ),
             );
             return;
@@ -56,7 +58,7 @@ class _Page extends State<ScheduleSittingPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Your appointment has been published!'),
-                backgroundColor: constants.Colors.dustGreen,
+                backgroundColor: constants.MyColors.dustGreen,
               ),
             );
             Future.delayed(const Duration(seconds: 1), () {
@@ -64,10 +66,10 @@ class _Page extends State<ScheduleSittingPage> {
             });
           }
         },
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
-          color: constants.Colors.grey,
+          color: constants.MyColors.grey,
         ),
       ),
       body: SingleChildScrollView(
@@ -100,7 +102,9 @@ class _Page extends State<ScheduleSittingPage> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-                left: size.width * .09, bottom: size.height * .01),
+              left: size.width * .09,
+              bottom: size.height * .01,
+            ),
             child: const Text(
               'Appointment Planner',
               style: TextStyle(
@@ -114,8 +118,9 @@ class _Page extends State<ScheduleSittingPage> {
             child: Column(
               children: <Widget>[
                 selectPet(size),
-                selectFromDateTime(size),
-                selectToDateTime(size),
+                selectDate(size),
+                setDuration(size),
+                getLocation(size),
                 writeNote(size),
               ],
             ),
@@ -127,8 +132,7 @@ class _Page extends State<ScheduleSittingPage> {
 
   Widget selectPet(Size size) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: size.width * .1, vertical: size.height * .005),
+      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
       child: SizedBox(
         width: size.width * .8,
         child: Row(
@@ -154,7 +158,7 @@ class _Page extends State<ScheduleSittingPage> {
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
               ),
               onChanged: (String? newValue) {
                 setState(() {
@@ -174,10 +178,9 @@ class _Page extends State<ScheduleSittingPage> {
     );
   }
 
-  Widget selectFromDateTime(Size size) {
+  Widget selectDate(Size size) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: size.width * .1, vertical: size.height * .005),
+      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
       child: SizedBox(
         width: size.width * .8,
         child: Row(
@@ -185,12 +188,21 @@ class _Page extends State<ScheduleSittingPage> {
           children: [
             Row(
               children: const [
-                Icon(Icons.calendar_today, size: 20, color: Colors.blue),
-                Text(' From', style: TextStyle(fontSize: 20)),
+                Icon(
+                  Icons.calendar_today,
+                  size: 20,
+                  color: Colors.blue,
+                ),
+                Text(
+                  ' Date',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
               ],
             ),
             SizedBox(
-              width: _fromController.text == ''
+              width: _dateController.text == ''
                   ? size.width * .35
                   : size.width * .31,
               child: TextField(
@@ -200,45 +212,8 @@ class _Page extends State<ScheduleSittingPage> {
                 ),
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
-                controller: _fromController,
-                onTap: () => showDateTimePicker(_fromController),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget selectToDateTime(Size size) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: size.width * .1, vertical: size.height * .005),
-      child: SizedBox(
-        width: size.width * .8,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: const [
-                Icon(Icons.calendar_today,
-                    size: 20, color: Colors.indigoAccent),
-                Text(' To', style: TextStyle(fontSize: 20)),
-              ],
-            ),
-            SizedBox(
-              width: _toController.text == ''
-                  ? size.width * .35
-                  : size.width * .31,
-              child: TextField(
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'tap to select...',
-                ),
-                style: const TextStyle(fontSize: 20),
-                readOnly: true,
-                controller: _toController,
-                onTap: () => showDateTimePicker(_toController),
+                controller: _dateController,
+                onTap: () => showDateTimePicker(_dateController),
               ),
             )
           ],
@@ -255,8 +230,9 @@ class _Page extends State<ScheduleSittingPage> {
       minTime: DateTime.now(),
       maxTime: DateTime.now().add(const Duration(days: 90)),
       theme: const DatePickerTheme(
-        cancelStyle: TextStyle(color: constants.Colors.darkBlue, fontSize: 16),
-        doneStyle: TextStyle(color: constants.Colors.dustBlue, fontSize: 16),
+        cancelStyle:
+            TextStyle(color: constants.MyColors.darkBlue, fontSize: 16),
+        doneStyle: TextStyle(color: constants.MyColors.dustBlue, fontSize: 16),
         itemStyle:
             TextStyle(color: Color.fromARGB(255, 228, 228, 228), fontSize: 18),
         backgroundColor: Color.fromARGB(255, 46, 46, 46),
@@ -266,6 +242,61 @@ class _Page extends State<ScheduleSittingPage> {
           controller.text = DateFormat('d MMM').add_Hm().format(date);
         });
       },
+    );
+  }
+
+  Widget setDuration(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      child: SizedBox(
+        width: size.width * .8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.timer,
+                  size: 20,
+                  color: Colors.green,
+                ),
+                Text(
+                  ' Duration',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  ' (min)',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 163, 163, 163),
+                  ),
+                )
+              ],
+            ),
+            DropdownButton<String>(
+              value: _duration,
+              style: const TextStyle(fontSize: 18),
+              underline: Container(
+                height: 2,
+                color: constants.MyColors.grey,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _duration = newValue!;
+                });
+              },
+              items: durations.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -305,7 +336,22 @@ class _Page extends State<ScheduleSittingPage> {
                 style: const TextStyle(fontSize: 20, color: Colors.green),
                 readOnly: true,
                 controller: _locationController,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PageLocationPicker(),
+                    ),
+                  ).then(
+                    (value) => {
+                      if (value != null)
+                        {
+                          _selectedAddress = value,
+                          _locationController.text = 'Selected!'
+                        }
+                    },
+                  );
+                },
               ),
             ),
           ],
@@ -318,7 +364,7 @@ class _Page extends State<ScheduleSittingPage> {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: size.width * .1,
-        vertical: size.height * .02,
+        vertical: size.height * .01,
       ),
       child: SizedBox(
         width: size.width * .8,
@@ -347,7 +393,7 @@ class _Page extends State<ScheduleSittingPage> {
               ],
             ),
             SizedBox(
-              height: size.height * .45,
+              height: size.height * .4,
               width: size.width * .8,
               child: Padding(
                 padding: EdgeInsets.only(top: size.height * .025),

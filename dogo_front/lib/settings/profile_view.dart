@@ -141,7 +141,7 @@ class ProfilePage extends StatelessWidget {
                 child: Text(
                   info,
                   style: const TextStyle(
-                    color: constants.Colors.grey,
+                    color: constants.MyColors.grey,
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),

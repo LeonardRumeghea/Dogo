@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dogo',
       theme: ThemeData(
-        primarySwatch: app_colors.Colors.darkBlue,
+        primarySwatch: app_colors.MyColors.darkBlue,
         brightness: Brightness.dark,
       ),
       home: const Page(title: 'Dogo'),
@@ -60,7 +60,7 @@ class _Page extends State<Page> {
                       ),
                     ),
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      app_colors.Colors.darkBlue,
+                      app_colors.MyColors.darkBlue,
                     ),
                   ),
                   onPressed: () {
@@ -97,7 +97,7 @@ class _Page extends State<Page> {
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(
-                          color: app_colors.Colors.dustBlue,
+                          color: app_colors.MyColors.dustBlue,
                         ),
                       ),
                     ),

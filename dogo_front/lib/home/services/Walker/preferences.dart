@@ -16,7 +16,7 @@ class _Page extends State<PreferencesPage> {
         child: Text(
           'Preferences Page',
           style: TextStyle(
-            color: constants.Colors.grey,
+            color: constants.MyColors.grey,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),

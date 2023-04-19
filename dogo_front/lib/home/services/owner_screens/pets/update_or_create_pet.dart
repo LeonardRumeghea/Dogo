@@ -21,13 +21,13 @@ class ManagePetPage extends StatefulWidget {
 }
 
 class _Page extends State<ManagePetPage> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
-  String speciesSelected = '';
-  String breedSelected = '';
-  String genderSelected = 'Male';
+  String _speciesSelected = '';
+  String _breedSelected = '';
+  String _genderSelected = 'Male';
 
   List<String> species = [];
   List<String> breeds = [];
@@ -43,21 +43,21 @@ class _Page extends State<ManagePetPage> {
       setState(() {
         species =
             json.decode(fetchedData).map<String>((e) => e.toString()).toList();
-        speciesSelected = species.first;
+        _speciesSelected = species.first;
 
         print('Species: $species');
-        print('Species selected: $speciesSelected');
+        print('Species selected: $_speciesSelected');
 
-        fetchBreeds(speciesSelected).then((fetchedData) {
+        fetchBreeds(_speciesSelected).then((fetchedData) {
           setState(() {
             breeds = json
                 .decode(fetchedData)
                 .map<String>((e) => e.toString())
                 .toList();
-            breedSelected = breeds.first;
+            _breedSelected = breeds.first;
 
             print('Breeds: $breeds');
-            print('Breed selected: $breedSelected');
+            print('Breed selected: $_breedSelected');
           });
         }).catchError((error) {
           print('Error fetching data: $error');
@@ -110,6 +110,7 @@ class _Page extends State<ManagePetPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      floatingActionButton: floatingActionButton(context),
       body: SingleChildScrollView(
         child: Center(
           child: Stack(
@@ -127,6 +128,45 @@ class _Page extends State<ManagePetPage> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () async {
+        print('--> ScheduleWalkPage: floatingActionButton onPressed');
+        print('petName: ${_nameController.text}');
+        print('petType: $_speciesSelected');
+        print('petBreed: $_breedSelected');
+        print('petGender: $_genderSelected');
+        print('petBirthDate: ${_dateController.text}');
+        print('petDescription: ${_descriptionController.text}');
+
+        if (_nameController.text.isEmpty || _dateController.text.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please fill all require fields'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+          return;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Your appointment has been published!'),
+              backgroundColor: constants.MyColors.dustGreen,
+            ),
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
+          });
+        }
+      },
+      backgroundColor: constants.MyColors.darkBlue,
+      child: const Icon(
+        Icons.done,
+        color: constants.MyColors.grey,
       ),
     );
   }
@@ -153,269 +193,292 @@ class _Page extends State<ManagePetPage> {
   }
 
   Widget nameInput(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.emoji_emotions,
-              size: 20,
-              color: Colors.indigoAccent,
-            ),
-            Text(
-              'Name',
-              style: TextStyle(
-                fontSize: 20,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.emoji_emotions,
+                size: 20,
+                color: Colors.amber[900],
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: size.width * .5,
-          child: TextField(
-            controller: nameController,
-            style: const TextStyle(
-              fontSize: 20,
-            ),
-            decoration: const InputDecoration(
-              hintText: 'Enter your pet\'s name',
-              hintStyle: TextStyle(
-                fontSize: 18,
-              ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: constants.Colors.grey,
+              const Text(
+                ' Name',
+                style: TextStyle(
+                  fontSize: 20,
                 ),
               ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(
-                  width: 2.0,
-                  color: constants.Colors.grey,
+            ],
+          ),
+          SizedBox(
+            width: size.width * .5,
+            child: TextField(
+              controller: _nameController,
+              style: const TextStyle(
+                fontSize: 20,
+              ),
+              decoration: const InputDecoration(
+                hintText: 'Pet\'s name',
+                hintStyle: TextStyle(
+                  fontSize: 18,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: constants.MyColors.grey,
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2.0,
+                    color: constants.MyColors.grey,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget specieInput(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.pets,
-              size: 20,
-              color: Colors.brown,
-            ),
-            Text(
-              'Specie',
-              style: TextStyle(
-                fontSize: 20,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: const [
+              Icon(
+                Icons.pets,
+                size: 20,
+                color: Colors.brown,
               ),
+              Text(
+                ' Specie',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+          DropdownButton<String>(
+            value: _speciesSelected,
+            style: const TextStyle(fontSize: 20),
+            underline: Container(
+              height: 2,
+              color: constants.MyColors.grey,
             ),
-          ],
-        ),
-        DropdownButton<String>(
-          value: speciesSelected,
+            menuMaxHeight: 300,
+            onChanged: (String? newValue) {
+              fetchBreeds(newValue!).then((fetchedData) {
+                setState(() {
+                  breeds = json
+                      .decode(fetchedData)
+                      .map<String>((e) => e.toString())
+                      .toList();
+                  _breedSelected = breeds.first;
+                  _speciesSelected = newValue;
+                });
+              }).catchError((error) {
+                print('Error fetching data: $error');
+              });
+            },
+            items: species.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(addSpaces(value)),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget breedInput(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Center(
+        child: DropdownButton<String>(
+          value: _breedSelected,
           style: const TextStyle(fontSize: 20),
           underline: Container(
             height: 2,
-            color: constants.Colors.grey,
+            color: constants.MyColors.grey,
           ),
           menuMaxHeight: 300,
           onChanged: (String? newValue) {
-            fetchBreeds(newValue!).then((fetchedData) {
-              setState(() {
-                breeds = json
-                    .decode(fetchedData)
-                    .map<String>((e) => e.toString())
-                    .toList();
-                breedSelected = breeds.first;
-                speciesSelected = newValue;
-              });
-            }).catchError((error) {
-              print('Error fetching data: $error');
+            setState(() {
+              _breedSelected = newValue!;
             });
           },
-          items: species.map<DropdownMenuItem<String>>((String value) {
+          items: breeds.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(addSpaces(value)),
             );
           }).toList(),
         ),
-      ],
-    );
-  }
-
-  Widget breedInput(Size size) {
-    return Center(
-      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      // crossAxisAlignment: CrossAxisAlignment.start,
-      child: DropdownButton<String>(
-        value: breedSelected,
-        style: const TextStyle(fontSize: 20),
-        underline: Container(
-          height: 2,
-          color: constants.Colors.grey,
-        ),
-        menuMaxHeight: 300,
-        onChanged: (String? newValue) {
-          setState(() {
-            breedSelected = newValue!;
-          });
-        },
-        items: breeds.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(addSpaces(value)),
-          );
-        }).toList(),
+        // ],
       ),
-      // ],
     );
   }
 
   Widget genderInput(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Icon(
-              genderSelected == 'Male' ? Icons.male : Icons.female,
-              size: 20,
-              color: Colors.pinkAccent,
-            ),
-            const Text(
-              'Gender',
-              style: TextStyle(
-                fontSize: 20,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                _genderSelected == 'Male' ? Icons.male : Icons.female,
+                size: 20,
+                color: Colors.pinkAccent,
               ),
-            ),
-          ],
-        ),
-        DropdownButton<String>(
-          value: genderSelected,
-          style: const TextStyle(fontSize: 18),
-          underline: Container(
-            height: 2,
-            color: constants.Colors.grey,
+              const Text(
+                ' Gender',
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ],
           ),
-          onChanged: (String? newValue) {
-            setState(() {
-              genderSelected = newValue!;
-            });
-          },
-          items:
-              ['Male', 'Female'].map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-        ),
-      ],
+          DropdownButton<String>(
+            value: _genderSelected,
+            style: const TextStyle(fontSize: 18),
+            underline: Container(
+              height: 2,
+              color: constants.MyColors.grey,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                _genderSelected = newValue!;
+              });
+            },
+            items: ['Male', 'Female']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 
   Widget birthdayInput(Size size) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.calendar_today,
-              color: Colors.amberAccent,
-              size: 20,
-            ),
-            Text(
-              'Birthday',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-        SizedBox(
-          width: size.width * .3,
-          child: TextField(
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: 'dd-mm-yyyy',
-            ),
-            style: const TextStyle(fontSize: 20),
-            readOnly: true,
-            controller: dateController,
-            onTap: () async {
-              DateTime? pickedDate = await showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
-              );
-
-              if (pickedDate != null) {
-                setState(() {
-                  dateController.text =
-                      DateFormat('dd-MM-yyyy').format(pickedDate);
-                });
-              }
-            },
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: const [
+              Icon(
+                Icons.calendar_today,
+                color: Colors.blue,
+                size: 20,
+              ),
+              Text(
+                ' Birthday',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
           ),
-        )
-      ],
+          SizedBox(
+            width: size.width * .3,
+            child: TextField(
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: 'dd-mm-yyyy',
+              ),
+              style: const TextStyle(fontSize: 20),
+              readOnly: true,
+              controller: _dateController,
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                );
+
+                if (pickedDate != null) {
+                  setState(() {
+                    _dateController.text =
+                        DateFormat('dd-MM-yyyy').format(pickedDate);
+                  });
+                }
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 
   Widget descriptionInput(Size size) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: const [
-            Icon(
-              Icons.description,
-              color: Colors.green,
-              size: 20,
-            ),
-            Text(
-              'Description',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: size.height * .35,
-          width: size.width * .8,
-          child: Padding(
-            padding: EdgeInsets.only(top: size.height * .025),
-            child: TextField(
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.black38,
-                    width: 2,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .01),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(
+                Icons.description,
+                color: Colors.amber,
+                size: 20,
+              ),
+              Text(
+                ' Description',
+                style: TextStyle(fontSize: 20),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: size.height * .35,
+            width: size.width * .8,
+            child: Padding(
+              padding: EdgeInsets.only(top: size.height * .025),
+              child: TextField(
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black38,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.black38,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                   ),
+                  hintText: 'A short description of your pet',
                 ),
-                hintText: 'A short description of your pet',
+                style: const TextStyle(fontSize: 18),
+                maxLines: 13,
+                controller: _descriptionController,
               ),
-              style: const TextStyle(
-                fontSize: 18,
-              ),
-              maxLines: 13,
-              controller: descriptionController,
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

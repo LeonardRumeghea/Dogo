@@ -47,7 +47,7 @@ class _Page extends State<ScheduleShoppingPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Please write your products list'),
-                backgroundColor: constants.Colors.dustRed,
+                backgroundColor: constants.MyColors.dustRed,
               ),
             );
             return;
@@ -55,7 +55,7 @@ class _Page extends State<ScheduleShoppingPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Your appointment has been published!'),
-                backgroundColor: constants.Colors.dustGreen,
+                backgroundColor: constants.MyColors.dustGreen,
               ),
             );
             Future.delayed(const Duration(seconds: 1), () {
@@ -63,10 +63,10 @@ class _Page extends State<ScheduleShoppingPage> {
             });
           }
         },
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
-          color: constants.Colors.grey,
+          color: constants.MyColors.grey,
         ),
       ),
       body: SingleChildScrollView(

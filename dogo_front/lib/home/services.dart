@@ -3,12 +3,8 @@ import '../Helpers/constants.dart' as constants;
 import '../settings/profile_view.dart' as profile_view;
 
 // services page for the owner implementation
-import 'services/owner_screens/walk/walk.dart';
-import 'services/owner_screens/sitting/sitting.dart';
-import 'services/owner_screens/shopping/shopping.dart';
-import 'services/owner_screens/salon/salon.dart';
-import 'services/owner_screens/vet/vet.dart';
 import 'services/owner_screens/pets/pets.dart';
+import 'services/owner_screens/appointments.dart';
 
 // services page for the walker implementation
 import './services/Walker/agenda.dart';
@@ -70,7 +66,7 @@ class Page extends StatelessWidget {
                 width: size.width * 1.85,
                 child: IconButton(
                   icon: const Icon(Icons.person),
-                  color: constants.Colors.darkBlue,
+                  color: constants.MyColors.darkBlue,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -159,13 +155,13 @@ class ProfileTypes extends StatelessWidget {
           const Text(
             "Profile Types",
             style: TextStyle(
-              color: constants.Colors.grey,
+              color: constants.MyColors.grey,
               fontWeight: FontWeight.bold,
               fontSize: 17,
             ),
           ),
           const Divider(
-            color: constants.Colors.grey,
+            color: constants.MyColors.grey,
             thickness: 1,
           ),
           Row(
@@ -175,16 +171,16 @@ class ProfileTypes extends StatelessWidget {
                   icon: Icon(
                     Icons.pets,
                     color: accountType == ownerType
-                        ? constants.Colors.dustBlue
-                        : constants.Colors.darkBlue,
+                        ? constants.MyColors.dustBlue
+                        : constants.MyColors.darkBlue,
                   ),
                   title: ownerType),
               CardButton(
                   icon: Icon(
                     Icons.directions_walk,
                     color: accountType == walkerType
-                        ? constants.Colors.dustBlue
-                        : constants.Colors.darkBlue,
+                        ? constants.MyColors.dustBlue
+                        : constants.MyColors.darkBlue,
                   ),
                   title: walkerType),
             ],
@@ -218,7 +214,7 @@ class CardButton extends StatelessWidget {
               title: Text(
                 title,
                 style: const TextStyle(
-                  color: constants.Colors.grey,
+                  color: constants.MyColors.grey,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
@@ -329,7 +325,7 @@ class SericesGridDashboard extends StatelessWidget {
             child: Text(
               "Available Services",
               style: TextStyle(
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -356,63 +352,74 @@ class SericesGridDashboard extends StatelessWidget {
                   ),
                   serviceCard(
                     size,
-                    Colors.blue,
+                    Colors.teal,
                     const Icon(
-                      Icons.directions_walk_rounded,
+                      Icons.schedule,
                       color: Colors.white,
                     ),
-                    'Walk',
-                    'Find someone to walk your pet or make a later appointment.',
+                    'Appointments',
+                    'Visually see your appointments and manage them.',
                     context,
                   ),
-                  serviceCard(
-                    size,
-                    Colors.purple,
-                    const Icon(
-                      // icon for pet salon,
-                      Icons.cut,
-                      color: Colors.white,
-                    ),
-                    'Salon Visit',
-                    'Reserve a walker for a future visit to the salon of your pet',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.green,
-                    const Icon(
-                      // icon for pet salon,
-                      Icons.house,
-                      color: Colors.white,
-                    ),
-                    'Pet Sitting',
-                    'While you are away, a walker will care for your pet at home.',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.red,
-                    const Icon(
-                      // icon for pet salon,
-                      Icons.shopping_bag,
-                      color: Colors.white,
-                    ),
-                    'Pet Shopping',
-                    'One walker will manage all of the pet\'s shopping needs.',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.amber,
-                    const Icon(
-                      // icon for pet salon,
-                      Icons.local_hospital,
-                      color: Colors.white,
-                    ),
-                    'Vet Care',
-                    'Plan a visit or find someone for a brief emergency',
-                    context,
-                  ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.blue,
+                  //   const Icon(
+                  //     Icons.directions_walk_rounded,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Walk',
+                  //   'Find someone to walk your pet or make a later appointment.',
+                  //   context,
+                  // ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.purple,
+                  //   const Icon(
+                  //     // icon for pet salon,
+                  //     Icons.cut,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Salon Visit',
+                  //   'Reserve a walker for a future visit to the salon of your pet',
+                  //   context,
+                  // ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.green,
+                  //   const Icon(
+                  //     // icon for pet salon,
+                  //     Icons.house,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Pet Sitting',
+                  //   'While you are away, a walker will care for your pet at home.',
+                  //   context,
+                  // ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.red,
+                  //   const Icon(
+                  //     // icon for pet salon,
+                  //     Icons.shopping_bag,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Pet Shopping',
+                  //   'One walker will manage all of the pet\'s shopping needs.',
+                  //   context,
+                  // ),
+                  // serviceCard(
+                  //   size,
+                  //   Colors.amber,
+                  //   const Icon(
+                  //     // icon for pet salon,
+                  //     Icons.local_hospital,
+                  //     color: Colors.white,
+                  //   ),
+                  //   'Vet Care',
+                  //   'Plan a visit or find someone for a brief emergency',
+                  //   context,
+                  // ),
                 ],
               ),
             ),
@@ -436,7 +443,7 @@ class SericesGridDashboard extends StatelessWidget {
             child: Text(
               "Available Services",
               style: TextStyle(
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -512,7 +519,7 @@ class SericesGridDashboard extends StatelessWidget {
               title: Text(
                 title,
                 style: const TextStyle(
-                    color: constants.Colors.grey,
+                    color: constants.MyColors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
@@ -537,22 +544,14 @@ class SericesGridDashboard extends StatelessWidget {
         switch (serviceName) {
           case 'Manage Your Pets':
             return const ManageYourPetsPage();
-          case 'Walk':
-            return const WalkPage();
-          case 'Salon Visit':
-            return const SalonVisitPage();
-          case 'Pet Sitting':
-            return const PetSittingPage();
-          case 'Pet Shopping':
-            return const PetShoppingPage();
-          case 'Vet Care':
-            return const VetCarePage();
           case 'Your Agenda':
             return const AgendaPage();
           case 'Search for Appointments':
             return const SearchForAppointmentsPage();
           case 'Your Preferences':
             return const PreferencesPage();
+          case 'Appointments':
+            return const AppointmentsPage();
           default:
             return const Page();
         }

@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
+// ignore: implementation_imports
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../Helpers/location_picker.dart';
+import '../../../../entities/address.dart';
 
-class ScheduleWalkPage extends StatefulWidget {
-  const ScheduleWalkPage({super.key});
+class ScheduleSittingPage extends StatefulWidget {
+  const ScheduleSittingPage({super.key});
 
   @override
-  State<ScheduleWalkPage> createState() => _Page();
+  State<ScheduleSittingPage> createState() => _Page();
 }
 
-class _Page extends State<ScheduleWalkPage> {
-  TextEditingController dateController = TextEditingController();
-  TextEditingController timeController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
+class _Page extends State<ScheduleSittingPage> {
+  final TextEditingController _fromController = TextEditingController();
+  final TextEditingController _toController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
 
-  String petName = 'Rex';
-
+  String _petName = 'Rex';
   var pets = ['Rex', 'Kitty', 'Buddy', 'Fido', 'Spot', 'Max', 'Bella'];
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() {}
 
   @override
   Widget build(BuildContext context) {
@@ -24,19 +37,18 @@ class _Page extends State<ScheduleWalkPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          print('--> ScheduleWalkPage: floatingActionButton onPressed');
-          print('petName: $petName');
-          print('date: ${dateController.text}');
-          print('time: ${timeController.text}');
-          print('note: ${noteController.text}');
+          print('petName: $_petName');
+          print('date: ${_fromController.text}');
+          print('time: ${_toController.text}');
+          print('note: ${_noteController.text}');
 
-          if (petName == '' ||
-              dateController.text == '' ||
-              timeController.text == '') {
+          if (_petName == '' ||
+              _fromController.text == '' ||
+              _toController.text == '') {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Please fill all require fields'),
-                backgroundColor: constants.Colors.dustRed,
+                backgroundColor: constants.MyColors.dustRed,
               ),
             );
             return;
@@ -44,7 +56,7 @@ class _Page extends State<ScheduleWalkPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Your appointment has been published!'),
-                backgroundColor: constants.Colors.dustGreen,
+                backgroundColor: constants.MyColors.dustGreen,
               ),
             );
             Future.delayed(const Duration(seconds: 1), () {
@@ -52,10 +64,10 @@ class _Page extends State<ScheduleWalkPage> {
             });
           }
         },
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
-          color: constants.Colors.grey,
+          color: constants.MyColors.grey,
         ),
       ),
       body: SingleChildScrollView(
@@ -88,11 +100,9 @@ class _Page extends State<ScheduleWalkPage> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
-              left: size.width * .09,
-              bottom: size.height * .01,
-            ),
+                left: size.width * .09, bottom: size.height * .01),
             child: const Text(
-              'Schedule a walk',
+              'Appointment Planner',
               style: TextStyle(
                 color: Color.fromARGB(255, 228, 228, 228),
                 fontSize: 24,
@@ -100,10 +110,16 @@ class _Page extends State<ScheduleWalkPage> {
               ),
             ),
           ),
-          selectPet(size),
-          selectDate(size),
-          selectHour(size),
-          writeNote(size),
+          SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                selectPet(size),
+                selectFromDateTime(size),
+                selectToDateTime(size),
+                writeNote(size),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -111,7 +127,8 @@ class _Page extends State<ScheduleWalkPage> {
 
   Widget selectPet(Size size) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      padding: EdgeInsets.symmetric(
+          horizontal: size.width * .1, vertical: size.height * .005),
       child: SizedBox(
         width: size.width * .8,
         child: Row(
@@ -133,15 +150,15 @@ class _Page extends State<ScheduleWalkPage> {
               ],
             ),
             DropdownButton<String>(
-              value: petName,
+              value: _petName,
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
               ),
               onChanged: (String? newValue) {
                 setState(() {
-                  petName = newValue!;
+                  _petName = newValue!;
                 });
               },
               items: pets.map<DropdownMenuItem<String>>((String value) {
@@ -157,9 +174,10 @@ class _Page extends State<ScheduleWalkPage> {
     );
   }
 
-  Widget selectDate(Size size) {
+  Widget selectFromDateTime(Size size) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      padding: EdgeInsets.symmetric(
+          horizontal: size.width * .1, vertical: size.height * .005),
       child: SizedBox(
         width: size.width * .8,
         child: Row(
@@ -167,44 +185,23 @@ class _Page extends State<ScheduleWalkPage> {
           children: [
             Row(
               children: const [
-                Icon(
-                  Icons.calendar_today,
-                  size: 20,
-                  color: Colors.blue,
-                ),
-                Text(
-                  ' Date',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
+                Icon(Icons.calendar_today, size: 20, color: Colors.blue),
+                Text(' From', style: TextStyle(fontSize: 20)),
               ],
             ),
             SizedBox(
-              width: size.width * .3,
+              width: _fromController.text == ''
+                  ? size.width * .35
+                  : size.width * .31,
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'dd-mm-yyyy',
+                  hintText: 'tap to select...',
                 ),
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
-                controller: dateController,
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime.now().add(const Duration(days: 30)),
-                  );
-
-                  if (pickedDate != null) {
-                    setState(() {
-                      dateController.text =
-                          DateFormat('dd-MM-yyyy').format(pickedDate);
-                    });
-                  }
-                },
+                controller: _fromController,
+                onTap: () => showDateTimePicker(_fromController),
               ),
             )
           ],
@@ -213,7 +210,68 @@ class _Page extends State<ScheduleWalkPage> {
     );
   }
 
-  Widget selectHour(Size size) {
+  Widget selectToDateTime(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: size.width * .1, vertical: size.height * .005),
+      child: SizedBox(
+        width: size.width * .8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(Icons.calendar_today,
+                    size: 20, color: Colors.indigoAccent),
+                Text(' To', style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            SizedBox(
+              width: _toController.text == ''
+                  ? size.width * .35
+                  : size.width * .31,
+              child: TextField(
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'tap to select...',
+                ),
+                style: const TextStyle(fontSize: 20),
+                readOnly: true,
+                controller: _toController,
+                onTap: () => showDateTimePicker(_toController),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> showDateTimePicker(TextEditingController controller) async {
+    await picker.DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      minTime: DateTime.now(),
+      maxTime: DateTime.now().add(const Duration(days: 90)),
+      theme: const DatePickerTheme(
+        cancelStyle:
+            TextStyle(color: constants.MyColors.darkBlue, fontSize: 16),
+        doneStyle: TextStyle(color: constants.MyColors.dustBlue, fontSize: 16),
+        itemStyle:
+            TextStyle(color: Color.fromARGB(255, 228, 228, 228), fontSize: 18),
+        backgroundColor: Color.fromARGB(255, 46, 46, 46),
+      ),
+      onConfirm: (date) {
+        setState(() {
+          controller.text = DateFormat('d MMM').add_Hm().format(date);
+        });
+      },
+    );
+  }
+
+  Widget getLocation(Size size) {
+    String hitMessage = 'Not selected';
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .1),
       child: SizedBox(
@@ -222,44 +280,35 @@ class _Page extends State<ScheduleWalkPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: ,
               children: const [
                 Icon(
-                  Icons.timer,
+                  Icons.location_on,
                   size: 20,
-                  color: Colors.green,
+                  color: Colors.red,
                 ),
                 Text(
-                  ' Hour',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                  ' Location',
+                  style: TextStyle(fontSize: 20),
                 ),
               ],
             ),
             SizedBox(
-              width: size.width * .3,
+              width: _locationController.text == ''
+                  ? size.width * .32
+                  : size.width * .23,
               child: TextField(
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: 'dd-mm-yyyy',
+                  hintText: hitMessage,
                 ),
-                style: const TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20, color: Colors.green),
                 readOnly: true,
-                controller: timeController,
-                onTap: () async {
-                  TimeOfDay? pickedTime = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.now(),
-                  );
-
-                  if (pickedTime != null) {
-                    setState(() {
-                      timeController.text = pickedTime.format(context);
-                    });
-                  }
-                },
+                controller: _locationController,
+                onTap: () {},
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -268,27 +317,38 @@ class _Page extends State<ScheduleWalkPage> {
 
   Widget writeNote(Size size) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      padding: EdgeInsets.symmetric(
+        horizontal: size.width * .1,
+        vertical: size.height * .02,
+      ),
       child: SizedBox(
         width: size.width * .8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              children: const [
-                Icon(
+              children: [
+                const Icon(
                   Icons.note,
                   color: Colors.amber,
                   size: 20,
                 ),
-                Text(
-                  ' Short note',
-                  style: TextStyle(fontSize: 20),
+                Row(
+                  children: const [
+                    Text(' Notes', style: TextStyle(fontSize: 20)),
+                    Text(
+                      ' (optional)',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 163, 163, 163),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
             SizedBox(
-              height: size.height * .525,
+              height: size.height * .45,
               width: size.width * .8,
               child: Padding(
                 padding: EdgeInsets.only(top: size.height * .025),
@@ -318,7 +378,7 @@ class _Page extends State<ScheduleWalkPage> {
                     fontSize: 18,
                   ),
                   maxLines: 13,
-                  controller: noteController,
+                  controller: _noteController,
                 ),
               ),
             ),

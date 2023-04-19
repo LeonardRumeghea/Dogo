@@ -7,14 +7,14 @@ import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/location_picker.dart';
 import '../../../../entities/address.dart';
 
-class ScheduleSalonPage extends StatefulWidget {
-  const ScheduleSalonPage({super.key});
+class ScheduleVetPage extends StatefulWidget {
+  const ScheduleVetPage({super.key});
 
   @override
-  State<ScheduleSalonPage> createState() => _Page();
+  State<ScheduleVetPage> createState() => _Page();
 }
 
-class _Page extends State<ScheduleSalonPage> {
+class _Page extends State<ScheduleVetPage> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
@@ -50,7 +50,7 @@ class _Page extends State<ScheduleSalonPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Please fill all require fields'),
-                backgroundColor: constants.Colors.dustRed,
+                backgroundColor: constants.MyColors.dustRed,
               ),
             );
             return;
@@ -58,7 +58,7 @@ class _Page extends State<ScheduleSalonPage> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Your appointment has been published!'),
-                backgroundColor: constants.Colors.dustGreen,
+                backgroundColor: constants.MyColors.dustGreen,
               ),
             );
             Future.delayed(const Duration(seconds: 1), () {
@@ -66,10 +66,10 @@ class _Page extends State<ScheduleSalonPage> {
             });
           }
         },
-        backgroundColor: constants.Colors.darkBlue,
+        backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
-          color: constants.Colors.grey,
+          color: constants.MyColors.grey,
         ),
       ),
       body: SingleChildScrollView(
@@ -158,7 +158,7 @@ class _Page extends State<ScheduleSalonPage> {
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
               ),
               onChanged: (String? newValue) {
                 setState(() {
@@ -230,8 +230,9 @@ class _Page extends State<ScheduleSalonPage> {
       minTime: DateTime.now(),
       maxTime: DateTime.now().add(const Duration(days: 90)),
       theme: const DatePickerTheme(
-        cancelStyle: TextStyle(color: constants.Colors.darkBlue, fontSize: 16),
-        doneStyle: TextStyle(color: constants.Colors.dustBlue, fontSize: 16),
+        cancelStyle:
+            TextStyle(color: constants.MyColors.darkBlue, fontSize: 16),
+        doneStyle: TextStyle(color: constants.MyColors.dustBlue, fontSize: 16),
         itemStyle:
             TextStyle(color: Color.fromARGB(255, 228, 228, 228), fontSize: 18),
         backgroundColor: Color.fromARGB(255, 46, 46, 46),
@@ -279,7 +280,7 @@ class _Page extends State<ScheduleSalonPage> {
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
-                color: constants.Colors.grey,
+                color: constants.MyColors.grey,
               ),
               onChanged: (String? newValue) {
                 setState(() {
