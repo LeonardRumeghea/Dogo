@@ -1,26 +1,25 @@
+import 'package:dogo_front/home/services/owner_screens/shopping/schedule_shopping.dart';
 import 'package:flutter/material.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import './schedule_salon.dart';
 
-class SalonVisitPage extends StatefulWidget {
-  const SalonVisitPage({super.key});
+class PetShoppingPage extends StatefulWidget {
+  const PetShoppingPage({super.key});
 
   @override
-  State<SalonVisitPage> createState() => _Page();
+  State<PetShoppingPage> createState() => _Page();
 }
 
-class _Page extends State<SalonVisitPage> {
+class _Page extends State<PetShoppingPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('--> WalkPage: floatingActionButton onPressed');
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ScheduleSalonPage(),
+              builder: (context) => const ScheduleShoppingPage(),
             ),
           );
         },
@@ -64,7 +63,7 @@ class _Page extends State<SalonVisitPage> {
               bottom: size.height * .01,
             ),
             child: const Text(
-              'Scheduled Walks',
+              'Scheduled Shoppings',
               style: TextStyle(
                 color: Color.fromARGB(255, 228, 228, 228),
                 fontSize: 24,
@@ -98,8 +97,8 @@ class _Page extends State<SalonVisitPage> {
     for (var i = 0; i < 10; i++) {
       cards.add(petCard(
         size,
-        Colors.purple,
-        const Icon(Icons.cut, color: Colors.white),
+        Colors.red,
+        const Icon(Icons.shopping_cart, color: Colors.white),
         'Doggo',
         '20/04/2023 12:30 PM',
         'Pending',

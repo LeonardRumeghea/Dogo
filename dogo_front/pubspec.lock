@@ -86,6 +86,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_datetime_picker:
+    dependency: "direct main"
+    description:
+      name: flutter_datetime_picker
+      sha256: "8e695c63c769350e541951227c2775190ec73ceda774a315b1dc9a99d5facfe5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -304,14 +312,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
-  place_picker:
-    dependency: "direct main"
-    description:
-      name: place_picker
-      sha256: "95a861eaffe015d5b3ae45c991e5d667009f7d1eb136b1438075e2470880509d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0"
   plugin_platform_interface:
     dependency: transitive
     description:

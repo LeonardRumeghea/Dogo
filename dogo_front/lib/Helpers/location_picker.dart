@@ -6,28 +6,36 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../Helpers/constants.dart' as constants;
+import '../../Helpers/constants.dart' as constants;
+import '../entities/address.dart';
 
 class PageLocationPicker extends StatefulWidget {
   const PageLocationPicker({Key? key}) : super(key: key);
 
   @override
-  _PageLocationPickerState createState() => _PageLocationPickerState();
+  State<PageLocationPicker> createState() => _PageLocationPickerState();
 }
 
 class _PageLocationPickerState extends State<PageLocationPicker> {
+  // map variables and controllers
   final Completer<GoogleMapController> _googleMapController = Completer();
   CameraPosition? _cameraPosition;
   late LatLng _initialLatLng;
   late LatLng _currentLatLng;
 
-  String _selectedAddress = '';
+  String _selectedAddressStr = '';
   double _zoomLevel = 17;
+
+  double _maxZoomLevel = 20;
+  double _minZoomLevel = 3;
+
+  // final result - selected address from map
+  Address _selectedAddress = Address();
 
   @override
   void initState() {
-    init();
     super.initState();
+    init();
   }
 
   init() {
@@ -49,15 +57,9 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // moveToUserCurrentLocation();
-          Navigator.pop(context, _selectedAddress);
-        },
+        onPressed: () => Navigator.pop(context, _selectedAddress),
         backgroundColor: constants.Colors.darkBlue,
-        child: const Icon(
-          Icons.done,
-          color: Colors.white,
-        ),
+        child: const Icon(Icons.done, color: Colors.white),
       ),
       body: buildBody(size),
     );
@@ -66,15 +68,15 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
   Widget buildBody(Size size) {
     return Stack(
       children: [
-        getMap(),
-        mapZoomControlls(size),
-        getMarker(size),
+        showMap(),
+        showMapZoomControlls(size),
+        showMarker(size),
         showAddress(size),
       ],
     );
   }
 
-  Widget getMap() {
+  Widget showMap() {
     return GoogleMap(
         initialCameraPosition: _cameraPosition!,
         mapType: MapType.normal,
@@ -90,51 +92,41 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
         });
   }
 
-  Widget mapZoomControlls(Size size) {
+  Widget showMapZoomControlls(Size size) {
     return Positioned(
-      top: size.height * .125,
+      top: size.height * .15,
       left: size.width * .025,
-      child: Card(
-        elevation: 2,
-        child: Container(
-          color: constants.Colors.grey,
-          width: size.width * .1,
-          height: size.height * .131,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset: const Offset(0, 1), // changes position of shadow
+            ),
+          ],
+        ),
+        width: size.width * .11,
+        height: size.height * .131,
+        child: Center(
           child: Column(
             children: <Widget>[
               IconButton(
-                  icon: const Icon(Icons.add),
-                  hoverColor: constants.Colors.dustBlue,
+                  icon: const Icon(Icons.add, color: constants.Colors.darkBlue),
                   onPressed: () async {
-                    _zoomLevel += _zoomLevel > 20 ? 0 : 1;
-
-                    _googleMapController.future.then((controller) {
-                      controller.animateCamera(
-                        CameraUpdate.newCameraPosition(
-                          CameraPosition(
-                            target: _currentLatLng,
-                            zoom: _zoomLevel,
-                          ),
-                        ),
-                      );
-                    });
+                    _zoomLevel += _zoomLevel > _maxZoomLevel ? 0 : 0.5;
+                    refreshMap();
                   }),
               const SizedBox(height: 2),
               IconButton(
-                  icon: const Icon(Icons.remove),
+                  icon: const Icon(Icons.remove,
+                      color: constants.Colors.darkBlue),
                   onPressed: () async {
-                    _zoomLevel -= _zoomLevel < 5 ? 0 : 1;
-
-                    _googleMapController.future.then((controller) {
-                      controller.animateCamera(
-                        CameraUpdate.newCameraPosition(
-                          CameraPosition(
-                            target: _currentLatLng,
-                            zoom: _zoomLevel,
-                          ),
-                        ),
-                      );
-                    });
+                    _zoomLevel -= _zoomLevel < _minZoomLevel ? 0 : 0.5;
+                    refreshMap();
                   }),
             ],
           ),
@@ -143,7 +135,20 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
     );
   }
 
-  Widget getMarker(Size size) {
+  void refreshMap() {
+    _googleMapController.future.then((controller) {
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            target: _currentLatLng,
+            zoom: _zoomLevel,
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget showMarker(Size size) {
     return Center(
       child: SizedBox(
         width: min(size.width, size.height) * .75,
@@ -155,18 +160,32 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
 
   Widget showAddress(Size size) {
     return SafeArea(
-      child: Container(
-        width: size.width,
-        height: size.height * .075,
-        decoration: const BoxDecoration(
-          color: constants.Colors.blackBlue,
-        ),
-        child: Center(
-          child: Text(
-            _selectedAddress,
-            style: const TextStyle(
-              color: constants.Colors.grey,
-              fontSize: 20,
+      child: Center(
+        heightFactor: 1.25,
+        child: Container(
+          width: size.width * .9,
+          height: size.height * .09,
+          decoration: const BoxDecoration(
+            color: constants.Colors.blackBlue,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: Offset(0, 1), // changes position of shadow
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(
+              _selectedAddressStr,
+              style: const TextStyle(
+                color: constants.Colors.grey,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
@@ -176,13 +195,23 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
 
   Future getAddress(LatLng position) async {
     // list all addresses around the position
-    List<Placemark> placemarks =
+    var placemarks =
         await placemarkFromCoordinates(position.latitude, position.longitude);
-    Placemark address = placemarks[0];
-    String addressStr = '${address.street}, ${address.locality}';
+    var address = placemarks[0];
+
+    var addressStr =
+        '${address.thoroughfare} ${address.subThoroughfare}, ${address.postalCode}';
+
+    var addressEntity = Address(
+        street: address.thoroughfare!,
+        number: int.parse(address.subThoroughfare!),
+        city: address.locality!,
+        state: address.administrativeArea!,
+        zip: address.postalCode!);
 
     setState(() {
-      _selectedAddress = addressStr;
+      _selectedAddressStr = addressStr;
+      _selectedAddress = addressEntity;
     });
   }
 
@@ -196,7 +225,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
     controller.animateCamera(CameraUpdate.newCameraPosition(
       CameraPosition(
         target: position,
-        zoom: 17.5,
+        zoom: _zoomLevel,
       ),
     ));
 
@@ -228,12 +257,5 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
         desiredAccuracy: LocationAccuracy.high);
 
     return position;
-
-    // LatLng location = LatLng(position.latitude, position.longitude);
-
-    // setState(() {
-    //   initialLatLng = location;
-    //   isLocationSet = true;
-    // });
   }
 }

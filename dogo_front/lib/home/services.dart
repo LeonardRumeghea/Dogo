@@ -3,12 +3,12 @@ import '../Helpers/constants.dart' as constants;
 import '../settings/profile_view.dart' as profile_view;
 
 // services page for the owner implementation
-import 'services/Owner/walk/walk.dart';
-import './services/Owner/sitting.dart';
-import './services/Owner/shopping.dart';
-import 'services/Owner/salon/salon.dart';
-import './services/Owner/vet.dart';
-import 'services/Owner/pets/pets.dart';
+import 'services/owner_screens/walk/walk.dart';
+import 'services/owner_screens/sitting/sitting.dart';
+import 'services/owner_screens/shopping/shopping.dart';
+import 'services/owner_screens/salon/salon.dart';
+import 'services/owner_screens/vet/vet.dart';
+import 'services/owner_screens/pets/pets.dart';
 
 // services page for the walker implementation
 import './services/Walker/agenda.dart';
