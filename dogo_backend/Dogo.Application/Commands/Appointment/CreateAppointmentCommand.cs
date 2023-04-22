@@ -13,7 +13,7 @@ namespace Dogo.Application.Commands.Appointment
         public string Notes { get; set; }
         public Guid PetId { get; set; }
         public string Location { get; set; }
-        public string Duration { get; set; }
+        public int Duration { get; set; }
         public string Type { get; set; }
     }
 }

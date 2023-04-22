@@ -30,6 +30,17 @@ class Pet {
     description = json['description'];
   }
 
+  Pet.clone(Pet petSource) {
+    id = petSource.id;
+    ownerId = petSource.ownerId;
+    name = petSource.name;
+    specie = petSource.specie;
+    breed = petSource.breed;
+    gender = petSource.gender;
+    dateOfBirth = petSource.dateOfBirth;
+    description = petSource.description;
+  }
+
   Map<String, dynamic> toJSON() {
     final Map<String, dynamic> json = <String, dynamic>{};
 

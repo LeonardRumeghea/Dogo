@@ -1,57 +1,54 @@
+import 'dart:developer';
+import 'dart:io';
+import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../Helpers/pots.dart';
+import '../../../../entities/person.dart';
+import '../../../../entities/pet.dart';
 
 class ScheduleWalkPage extends StatefulWidget {
-  const ScheduleWalkPage({super.key});
+  const ScheduleWalkPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<ScheduleWalkPage> createState() => _Page();
 }
 
 class _Page extends State<ScheduleWalkPage> {
-  TextEditingController dateController = TextEditingController();
-  TextEditingController timeController = TextEditingController();
-  TextEditingController noteController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _timeController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  Pet _selectedPet = Pet();
 
-  String petName = 'Rex';
+  Person get _user => widget.user;
+  List<Pet> _pets = <Pet>[];
 
-  var pets = ['Rex', 'Kitty', 'Buddy', 'Fido', 'Spot', 'Max', 'Bella'];
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() {
+    setState(() {
+      _pets = _user.pets;
+      _selectedPet = _pets[0];
+    });
+
+    log('User: $_user');
+    log('Pets: $_pets');
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          print('--> ScheduleWalkPage: floatingActionButton onPressed');
-          print('petName: $petName');
-          print('date: ${dateController.text}');
-          print('time: ${timeController.text}');
-          print('note: ${noteController.text}');
-
-          if (petName == '' ||
-              dateController.text == '' ||
-              timeController.text == '') {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please fill all require fields'),
-                backgroundColor: constants.MyColors.dustRed,
-              ),
-            );
-            return;
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Your appointment has been published!'),
-                backgroundColor: constants.MyColors.dustGreen,
-              ),
-            );
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.pop(context);
-            });
-          }
-        },
+        onPressed: () => createAppointment(context),
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
@@ -77,6 +74,72 @@ class _Page extends State<ScheduleWalkPage> {
         ),
       ),
     );
+  }
+
+  createAppointment(BuildContext context) {
+    log('--> ScheduleWalkPage: createAppointment');
+    log('petName: $_selectedPet');
+    log('date: ${_dateController.text}');
+    log('time: ${_timeController.text}');
+    log('note: ${_noteController.text}');
+
+    if (_selectedPet.name == '' ||
+        _dateController.text == '' ||
+        _timeController.text == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all require fields'),
+          backgroundColor: constants.MyColors.dustRed,
+        ),
+      );
+      return;
+    }
+
+    var date = DateFormat('dd-MM-yyyy').parse(_dateController.text);
+    var time = DateFormat('HH:mm').parse(_timeController.text);
+    var dateTime = DateTime(date.year, date.month, date.day, time.hour,
+        time.minute, time.second, time.millisecond, time.microsecond);
+
+    var appointment = Appointment(
+      petId: _selectedPet.id,
+      dateWhen: dateTime.toString(),
+      dateUntil: dateTime.toString(),
+      notes: _noteController.text,
+      type: 'Walk',
+    );
+
+    log('Appointment: $appointment');
+
+    postAppoitment(appointment).then((value) {
+      if (value == HttpStatus.created) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Your appointment has been published!'),
+            backgroundColor: constants.MyColors.dustGreen,
+          ),
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An error has occurred, please try again later'),
+            backgroundColor: constants.MyColors.dustRed,
+          ),
+        );
+      }
+    });
+
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text('Your appointment has been published!'),
+    //     backgroundColor: constants.MyColors.dustGreen,
+    //   ),
+    // );
+    // Future.delayed(const Duration(seconds: 1), () {
+    //   Navigator.pop(context);
+    // });
   }
 
   Widget panelContent(Size size) {
@@ -132,22 +195,20 @@ class _Page extends State<ScheduleWalkPage> {
                 ),
               ],
             ),
-            DropdownButton<String>(
-              value: petName,
+            DropdownButton<Pet>(
+              value: _selectedPet,
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
                 color: constants.MyColors.grey,
               ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  petName = newValue!;
-                });
+              onChanged: (Pet? newValue) {
+                setState(() => _selectedPet = newValue!);
               },
-              items: pets.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+              items: _pets.map((Pet pet) {
+                return DropdownMenuItem<Pet>(
+                  value: pet,
+                  child: Text(pet.name),
                 );
               }).toList(),
             ),
@@ -189,7 +250,7 @@ class _Page extends State<ScheduleWalkPage> {
                 ),
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
-                controller: dateController,
+                controller: _dateController,
                 onTap: () async {
                   DateTime? pickedDate = await showDatePicker(
                     context: context,
@@ -200,7 +261,7 @@ class _Page extends State<ScheduleWalkPage> {
 
                   if (pickedDate != null) {
                     setState(() {
-                      dateController.text =
+                      _dateController.text =
                           DateFormat('dd-MM-yyyy').format(pickedDate);
                     });
                   }
@@ -245,7 +306,7 @@ class _Page extends State<ScheduleWalkPage> {
                 ),
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
-                controller: timeController,
+                controller: _timeController,
                 onTap: () async {
                   TimeOfDay? pickedTime = await showTimePicker(
                     context: context,
@@ -254,7 +315,7 @@ class _Page extends State<ScheduleWalkPage> {
 
                   if (pickedTime != null) {
                     setState(() {
-                      timeController.text = pickedTime.format(context);
+                      _timeController.text = pickedTime.format(context);
                     });
                   }
                 },
@@ -318,7 +379,7 @@ class _Page extends State<ScheduleWalkPage> {
                     fontSize: 18,
                   ),
                   maxLines: 13,
-                  controller: noteController,
+                  controller: _noteController,
                 ),
               ),
             ),
@@ -328,40 +389,44 @@ class _Page extends State<ScheduleWalkPage> {
     );
   }
 
-  Widget panel(Size size) => Positioned(
-        top: size.height * .1,
-        left: size.width * .05,
-        child: Container(
-          height: size.height * .825,
-          width: size.width * .9,
-          decoration: const BoxDecoration(
-            borderRadius:
-                BorderRadius.all(Radius.circular(constants.borderRadius)),
-            color: Color.fromARGB(255, 66, 66, 66),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                spreadRadius: 10,
-              ),
-            ],
-          ),
+  Widget panel(Size size) {
+    return Positioned(
+      top: size.height * .1,
+      left: size.width * .05,
+      child: Container(
+        height: size.height * .825,
+        width: size.width * .9,
+        decoration: const BoxDecoration(
+          borderRadius:
+              BorderRadius.all(Radius.circular(constants.borderRadius)),
+          color: Color.fromARGB(255, 66, 66, 66),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  Container banner(Size size) => Container(
-        height: size.height * .225,
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(constants.borderRadius),
-              bottomRight: Radius.circular(constants.borderRadius)),
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
-              const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
-            ],
-          ),
+  Container banner(Size size) {
+    return Container(
+      height: size.height * .225,
+      width: size.width,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(constants.borderRadius),
+            bottomRight: Radius.circular(constants.borderRadius)),
+        gradient: LinearGradient(
+          colors: [
+            const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
+            const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

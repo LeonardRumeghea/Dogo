@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
@@ -38,11 +40,11 @@ class _Page extends State<ScheduleVetPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          print('--> ScheduleWalkPage: floatingActionButton onPressed');
-          print('petName: $_petName');
-          print('date: ${_dateController.text}');
-          print('location: ${_selectedAddress.toJson()}');
-          print('note: ${_noteController.text}');
+          log('--> ScheduleWalkPage: floatingActionButton onPressed');
+          log('petName: $_petName');
+          log('date: ${_dateController.text}');
+          log('location: ${_selectedAddress.toJson()}');
+          log('note: ${_noteController.text}');
 
           if (_petName == '' ||
               _dateController.text == '' ||

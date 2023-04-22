@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../../../Helpers/constants.dart' as constants;
 
@@ -35,7 +37,7 @@ class _Page extends State<ScheduleShoppingPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          print('note: ${_listController.text}');
+          log('note: ${_listController.text}');
 
           if (_listController.text.isEmpty) {
             ScaffoldMessenger.of(context).showSnackBar(

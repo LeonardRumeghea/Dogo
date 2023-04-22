@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../Helpers/pots.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 
@@ -36,44 +37,44 @@ class _Page extends State<ManagePetPage> {
   String _breedSelected = '';
   String _genderSelected = 'Male';
 
-  List<String> species = [];
-  List<String> breeds = [];
+  List<String> _species = [];
+  List<String> _breeds = [];
 
-  Person get user => widget.user;
+  Person get _user => widget.user;
 
   @override
   void initState() {
     super.initState();
 
-    species = [];
-    breeds = [];
+    _species = [];
+    _breeds = [];
 
     fetchSpecies().then((fetchedData) {
       setState(() {
-        species =
+        _species =
             json.decode(fetchedData).map<String>((e) => e.toString()).toList();
-        _speciesSelected = species.first;
+        _speciesSelected = _species.first;
 
-        print('Species: $species');
-        print('Species selected: $_speciesSelected');
+        log('Species: $_species');
+        log('Species selected: $_speciesSelected');
 
         fetchBreeds(_speciesSelected).then((fetchedData) {
           setState(() {
-            breeds = json
+            _breeds = json
                 .decode(fetchedData)
                 .map<String>((e) => e.toString())
                 .toList();
-            _breedSelected = breeds.first;
+            _breedSelected = _breeds.first;
 
-            print('Breeds: $breeds');
-            print('Breed selected: $_breedSelected');
+            log('Breeds: $_breeds');
+            log('Breed selected: $_breedSelected');
           });
         }).catchError((error) {
-          print('Error fetching data: $error');
+          log('Error fetching data: $error');
         });
       });
     }).catchError((error) {
-      print('Error fetching data: $error');
+      log('Error fetching data: $error');
     });
   }
 
@@ -112,30 +113,30 @@ class _Page extends State<ManagePetPage> {
     return await response.stream.bytesToString();
   }
 
-  Future<int> postPet(Pet pet) async {
-    var url = '${constants.serverUrl}/petOwners/${user.id}/pet?api-version=1';
-    var request = http.Request('POST', Uri.parse(url));
+  // Future<int> postPet(Pet pet) async {
+  //   var url = '${constants.serverUrl}/petOwners/${_user.id}/pet?api-version=1';
+  //   var request = http.Request('POST', Uri.parse(url));
 
-    log('Url: $url');
+  //   log('Url: $url');
 
-    request.body = json.encode(pet.toJSON());
-    request.headers.addAll(
-        <String, String>{'Content-Type': 'application/json; charset=UTF-8'});
+  //   request.body = json.encode(pet.toJSON());
+  //   request.headers.addAll(
+  //       <String, String>{'Content-Type': 'application/json; charset=UTF-8'});
 
-    var response = await request.send();
+  //   var response = await request.send();
 
-    log('Ok');
-    log(await response.stream.bytesToString());
-    log(response.statusCode.toString());
+  //   log('Ok');
+  //   log(await response.stream.bytesToString());
+  //   log(response.statusCode.toString());
 
-    return response.statusCode;
-  }
+  //   return response.statusCode;
+  // }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    log('User: ${user.toString()}');
+    log('User: ${_user.toString()}');
     return Scaffold(
       floatingActionButton: floatingActionButton(context),
       body: SingleChildScrollView(
@@ -181,7 +182,7 @@ class _Page extends State<ManagePetPage> {
 
     log(pet.toString());
 
-    postPet(pet).then((statusCode) {
+    postPet(pet, _user.id).then((statusCode) {
       if (statusCode == HttpStatus.created) {
         log('Pet added successfully');
         ScaffoldMessenger.of(context).showSnackBar(
@@ -190,6 +191,7 @@ class _Page extends State<ManagePetPage> {
             backgroundColor: constants.MyColors.dustGreen,
           ),
         );
+        _user.pets.add(pet);
         Future.delayed(const Duration(seconds: 1), () {
           Navigator.pop(context);
         });
@@ -307,18 +309,18 @@ class _Page extends State<ManagePetPage> {
             onChanged: (String? newValue) {
               fetchBreeds(newValue!).then((fetchedData) {
                 setState(() {
-                  breeds = json
+                  _breeds = json
                       .decode(fetchedData)
                       .map<String>((e) => e.toString())
                       .toList();
-                  _breedSelected = breeds.first;
+                  _breedSelected = _breeds.first;
                   _speciesSelected = newValue;
                 });
               }).catchError((error) {
-                print('Error fetching data: $error');
+                log('Error fetching data: $error');
               });
             },
-            items: species.map<DropdownMenuItem<String>>((String value) {
+            items: _species.map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(addSpaces(value)),
@@ -345,7 +347,7 @@ class _Page extends State<ManagePetPage> {
           onChanged: (String? newValue) {
             setState(() => _breedSelected = newValue!);
           },
-          items: breeds.map<DropdownMenuItem<String>>((String value) {
+          items: _breeds.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(addSpaces(value)),

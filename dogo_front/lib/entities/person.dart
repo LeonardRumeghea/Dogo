@@ -1,4 +1,5 @@
 import 'package:dogo_front/entities/address.dart';
+import 'package:dogo_front/entities/pet.dart';
 
 class Person {
   String id = '';
@@ -8,6 +9,8 @@ class Person {
   String password = '';
   String phoneNumber = '';
   Address? address = Address();
+
+  List<Pet> pets = <Pet>[];
 
   Person({
     this.id = '',

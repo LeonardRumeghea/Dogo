@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
@@ -26,12 +23,15 @@ class ManageYourPetsPage extends StatefulWidget {
 }
 
 class _Page extends State<ManageYourPetsPage> {
-  Person get user => widget.user;
-  var userPets = <Pet>[];
+  Person get _user => widget.user;
+  var _userPets = <Pet>[];
 
   @override
   void initState() {
     super.initState();
+    log('User: $_user');
+    log('Pets: ${_user.pets}');
+    _userPets = _user.pets;
   }
 
   @override
@@ -43,9 +43,9 @@ class _Page extends State<ManageYourPetsPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ManagePetPage(user: user),
+              builder: (context) => ManagePetPage(user: _user),
             ),
-          );
+          ).then((_) => setState(() => _userPets = _user.pets));
         },
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
@@ -116,9 +116,7 @@ class _Page extends State<ManageYourPetsPage> {
   }
 
   Widget cardsColumn(Size size) {
-    _getPets();
-
-    if (userPets.isEmpty) {
+    if (_userPets.isEmpty) {
       return petCard(
         size,
         constants.MyColors.dustRed,
@@ -130,7 +128,7 @@ class _Page extends State<ManageYourPetsPage> {
     }
 
     var cards = <Widget>[];
-    for (Pet pet in userPets) {
+    for (Pet pet in _userPets) {
       cards.add(petCard(
         size,
         Colors.brown,
@@ -145,28 +143,6 @@ class _Page extends State<ManageYourPetsPage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: cards,
     );
-  }
-
-  _getPets() {
-    fetchPets().then((value) {
-      log(value);
-      setState(() {
-        userPets = json.decode(value).map<Pet>((e) => Pet.fromJSON(e)).toList();
-      });
-      log('Pets: $userPets');
-    });
-  }
-
-  Future<String> fetchPets() async {
-    var url = '${constants.serverUrl}/petOwners/${user.id}/pets?api-version=1';
-    var request = http.Request('GET', Uri.parse(url));
-    var response = await request.send();
-
-    if (response.statusCode == HttpStatus.notFound) {
-      log('Invalid user id');
-    }
-
-    return response.stream.bytesToString();
   }
 
   petCard(Size size, Color color, Icon icon, String title, String subtitle,

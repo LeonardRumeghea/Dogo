@@ -1,10 +1,13 @@
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+import '../../../entities/person.dart';
 import './schedules/schedule.dart';
 import '../../../../Helpers/constants.dart' as constants;
 
 class AppointmentsPage extends StatefulWidget {
-  const AppointmentsPage({super.key});
+  const AppointmentsPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<AppointmentsPage> createState() => _Page();
@@ -14,6 +17,8 @@ class _Page extends State<AppointmentsPage>
     with SingleTickerProviderStateMixin {
   late Animation<double> _animation;
   late AnimationController _animationController;
+
+  Person get _user => widget.user;
 
   bool _isCollapsed = true;
 
@@ -256,7 +261,9 @@ class _Page extends State<AppointmentsPage>
         builder: (context) {
           switch (serviceName) {
             case constants.walk:
-              return const ScheduleWalkPage();
+              return ScheduleWalkPage(
+                user: _user,
+              );
             case constants.salon:
               return const ScheduleSalonPage();
             case constants.sitting:
@@ -266,7 +273,7 @@ class _Page extends State<AppointmentsPage>
             case constants.vet:
               return const ScheduleVetPage();
             default:
-              return const AppointmentsPage();
+              return AppointmentsPage(user: _user);
           }
         },
       ),

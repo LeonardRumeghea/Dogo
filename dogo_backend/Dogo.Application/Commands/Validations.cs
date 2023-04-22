@@ -14,19 +14,12 @@ namespace Dogo.Application.Commands
 
         public static bool BeValidUntilDateAppointment(string value)
         {
-            if (value == null) return true;
+            if (value == null || value == "") return true;
 
             return DateTime.TryParse(value, out var date) && date > DateTime.Now;
         }
 
-        public static bool BeValidAppointmentDuration(string value)
-        {
-            if (value == null) return true;
-        
-            if (int.TryParse(value, out var duration) && duration > 0 && duration < 1440) return true; 
-            
-            return false;
-        }
+        public static bool BeValidAppointmentDuration(int value) => value == 0 || (value >= 1 && value <= 1440);
 
         public static bool BeValidAppointmentType(string value) => Enum.TryParse(value, out AppointmentType _);
 

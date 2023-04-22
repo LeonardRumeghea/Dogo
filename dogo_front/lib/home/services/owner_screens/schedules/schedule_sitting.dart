@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
@@ -35,10 +37,10 @@ class _Page extends State<ScheduleSittingPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          print('petName: $_petName');
-          print('date: ${_fromController.text}');
-          print('time: ${_toController.text}');
-          print('note: ${_noteController.text}');
+          log('petName: $_petName');
+          log('date: ${_fromController.text}');
+          log('time: ${_toController.text}');
+          log('note: ${_noteController.text}');
 
           if (_petName == '' ||
               _fromController.text == '' ||

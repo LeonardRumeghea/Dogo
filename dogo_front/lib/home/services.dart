@@ -1,8 +1,10 @@
-import 'dart:developer';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
+import '../Helpers/fetches.dart';
 import '../entities/person.dart';
+import '../entities/pet.dart';
 import '../settings/profile_view.dart' as profile_view;
 
 // services page for the owner implementation
@@ -20,7 +22,7 @@ String accountType = "Owner";
 const String ownerType = "Owner";
 const String walkerType = "Walker";
 
-Person? loggedUser;
+Person _user = Person();
 
 class ServicesPage extends StatefulWidget {
   const ServicesPage({Key? key, required this.user}) : super(key: key);
@@ -35,8 +37,14 @@ class _ServicesPageState extends State<ServicesPage> {
   @override
   initState() {
     super.initState();
-    loggedUser =
-        (loggedUser == null) ? widget.user : Person.copyOf(widget.user);
+    init();
+  }
+
+  init() {
+    _user = widget.user;
+
+    fetchPets(_user.id).then((value) => _user.pets =
+        json.decode(value).map<Pet>((e) => Pet.fromJSON(e)).toList());
   }
 
   @override
@@ -69,7 +77,7 @@ class _ServicesPageState extends State<ServicesPage> {
                           fontSize: 32),
                     ),
                     Text(
-                      "Welcome back, ${loggedUser!.firstName}",
+                      "Welcome back, ${_user.firstName}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -253,7 +261,7 @@ class CardButton extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext context) =>
-                          ServicesPage(user: loggedUser!)),
+                          ServicesPage(user: _user)),
                 );
               },
             ),
@@ -779,7 +787,7 @@ class SericesGridDashboard extends StatelessWidget {
       MaterialPageRoute(builder: (context) {
         switch (serviceName) {
           case 'Manage Your Pets':
-            return ManageYourPetsPage(user: loggedUser!);
+            return ManageYourPetsPage(user: _user);
           case 'Your Agenda':
             return const AgendaPage();
           case 'Search for Appointments':
@@ -787,9 +795,11 @@ class SericesGridDashboard extends StatelessWidget {
           case 'Your Preferences':
             return const PreferencesPage();
           case 'Appointments':
-            return const AppointmentsPage();
+            return AppointmentsPage(
+              user: _user,
+            );
           default:
-            return ServicesPage(user: loggedUser!);
+            return ServicesPage(user: _user);
         }
       }),
     );
