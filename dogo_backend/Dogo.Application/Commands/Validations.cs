@@ -1,4 +1,5 @@
-﻿using Dogo.Core.Enums;
+﻿using Dogo.Core.Entities;
+using Dogo.Core.Enums;
 using Dogo.Core.Enums.Species;
 using Dogo.Core.Enums.Species.Breeds;
 using System.Text.RegularExpressions;
@@ -10,6 +11,24 @@ namespace Dogo.Application.Commands
         public static bool BeValidDate(string value) => DateTime.TryParse(value, out var date) && date < DateTime.Now;
 
         public static bool BeValidDateAppointment(string value) => DateTime.TryParse(value, out var date) && date > DateTime.Now;
+
+        public static bool BeValidUntilDateAppointment(string value)
+        {
+            if (value == null) return true;
+
+            return DateTime.TryParse(value, out var date) && date > DateTime.Now;
+        }
+
+        public static bool BeValidAppointmentDuration(string value)
+        {
+            if (value == null) return true;
+        
+            if (int.TryParse(value, out var duration) && duration > 0 && duration < 1440) return true; 
+            
+            return false;
+        }
+
+        public static bool BeValidAppointmentType(string value) => Enum.TryParse(value, out AppointmentType _);
 
         public static bool BeInPetGenderEnum(string value) => Enum.TryParse<PetGender>(value, out _);
 

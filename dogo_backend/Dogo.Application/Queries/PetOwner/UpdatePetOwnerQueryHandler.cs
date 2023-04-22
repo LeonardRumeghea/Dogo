@@ -1,6 +1,6 @@
 ﻿using Dogo.Application.Mappers;
 using Dogo.Application.Response;
-using Dogo.Core.Enitities;
+using Dogo.Core.Entities;
 using Dogo.Core.Helpers;
 using MediatR;
 

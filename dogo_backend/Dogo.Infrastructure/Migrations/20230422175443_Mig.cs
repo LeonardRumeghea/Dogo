@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Dogo.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Mig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,6 @@ namespace Dogo.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Number = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     State = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -86,7 +85,6 @@ namespace Dogo.Infrastructure.Migrations
                     Breed = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
-                    Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PetOwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -104,20 +102,26 @@ namespace Dogo.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateWhen = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUntil = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WalkerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    WalkerId = table.Column<Guid>(type: "nvarchar(max)", nullable: false),
+                    IsAssigned = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointments_Walkers_WalkerId",
-                        column: x => x.WalkerId,
-                        principalTable: "Walkers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    //table.ForeignKey(
+                    //    name: "FK_Appointments_Walkers_WalkerId",
+                    //    column: x => x.WalkerId,
+                    //    principalTable: "Walkers",
+                    //    principalColumn: "Id",
+                    //    onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

@@ -3,7 +3,7 @@ using Dogo.Core.Enums.Species;
 using Dogo.Core.Helpers;
 
 #nullable disable
-namespace Dogo.Core.Enitities
+namespace Dogo.Core.Entities
 {
     public class Pet
     {
@@ -21,10 +21,10 @@ namespace Dogo.Core.Enitities
 
         // Pet atributes
 
-        public int totalNumberOfReviews { get; set; }
-        public double Friendly { get; set; }
-        public double Active { get; set; }
-        public double Playful { get; set; }
+        //public int totalNumberOfReviews { get; set; }
+        //public double Friendly { get; set; }
+        //public double Active { get; set; }
+        //public double Playful { get; set; }
         
 
         public double Rating() => Reviews == null || Reviews.Count == 0 ? 0 : Reviews.Average(r => r.Rating);

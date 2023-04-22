@@ -1,22 +1,35 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
+import '../entities/person.dart';
 import '../home/services.dart';
+import 'package:http/http.dart' as http;
 
-class Page extends StatefulWidget {
-  const Page({super.key});
+class PageLogin extends StatefulWidget {
+  const PageLogin({super.key});
 
   @override
-  State<Page> createState() => _Page();
+  State<PageLogin> createState() => _Page();
 }
 
-class _Page extends State<Page> {
+class _Page extends State<PageLogin> {
   final _mailController = TextEditingController();
   final _passController = TextEditingController();
 
   bool showPassword = false;
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _mailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,12 +128,7 @@ class _Page extends State<Page> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ServicesPage(),
-                        ),
-                      );
+                      checkAccount(context);
                     }
                   },
                   child: const Text('Sign In'),
@@ -129,6 +137,61 @@ class _Page extends State<Page> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Future<void> checkAccount(BuildContext context) async {
+    var url = '${constants.serverUrl}/petOwners/checkLogin';
+    var fullUrl =
+        '$url?Email=${_mailController.text}&Password=${_passController.text}&api-version=1';
+
+    var request = http.Request('GET', Uri.parse(fullUrl));
+
+    var response = await request.send();
+
+    if (!mounted) return;
+
+    if (response.statusCode == HttpStatus.unauthorized) {
+      displayError(context, 'Password is incorrect');
+    }
+
+    if (response.statusCode == HttpStatus.notFound) {
+      displayError(context, 'This email is not associated with an account');
+    }
+
+    if (response.statusCode == HttpStatus.ok) {
+      try {
+        displaySuccess(context, 'Login successful');
+
+        var responseStr = await response.stream.bytesToString();
+        Person person = Person.fromJSON(jsonDecode(responseStr));
+
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ServicesPage(user: person)),
+        );
+      } catch (e) {
+        log('Error: $e');
+      }
+    }
+  }
+
+  void displayError(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(error),
+        backgroundColor: constants.MyColors.dustRed,
+      ),
+    );
+  }
+
+  void displaySuccess(BuildContext context, String success) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(success),
+        backgroundColor: constants.MyColors.dustGreen,
       ),
     );
   }

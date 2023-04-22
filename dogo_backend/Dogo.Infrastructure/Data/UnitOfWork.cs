@@ -1,5 +1,6 @@
 ﻿using Dogo.Application;
-using Dogo.Core.Enitities;
+using Dogo.Core.Entities;
+using Dogo.Core.Repositories;
 using Dogo.Core.Repositories.Base;
 using Dogo.Infrastructure.Repositories;
 
@@ -22,15 +23,15 @@ namespace Dogo.Infrastructure.Data
             }
         }
 
-        private IRepository<PetOwner> petOwnerRepository;
-        public IRepository<PetOwner> PetOwnerRepository
-        {
-            get
-            {
-                petOwnerRepository ??= new PetOwnerRepository(context);
-                return petOwnerRepository;
-            }
-        }
+        //private IRepository<PetOwner> petOwnerRepository;
+        //public IRepository<PetOwner> PetOwnerRepository
+        //{
+        //    get
+        //    {
+        //        petOwnerRepository ??= new PetOwnerRepository(context);
+        //        return petOwnerRepository;
+        //    }
+        //}
 
         private IRepository<Appointment> appointmentRepository;
         public IRepository<Appointment> AppointmentRepository
@@ -69,6 +70,16 @@ namespace Dogo.Infrastructure.Data
             {
                 addressRepository ??= new AddressRepository(context);
                 return addressRepository;
+            }
+        }
+
+        private IPetOwnerRepository petOwnerRepository;
+        public IPetOwnerRepository PetOwnerRepository
+        {
+            get
+            {
+                    petOwnerRepository ??= new PetOwnerRepository(context);
+                    return petOwnerRepository;
             }
         }
 

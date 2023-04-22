@@ -1,4 +1,4 @@
-﻿using Dogo.Core.Enitities;
+﻿using Dogo.Core.Entities;
 using Dogo.Core.Repositories;
 using Dogo.Infrastructure.Data;
 using Dogo.Infrastructure.Repositories.Base;
@@ -31,5 +31,11 @@ namespace Dogo.Infrastructure.Repositories
                 .Include(x => x.Address)
                 .ToListAsync();
         }
+
+        public async Task<PetOwner> GetByEmail(string email) 
+            => await context.PetOwners
+            .Include(x => x.Pets)
+            .Include(x => x.Address)
+            .SingleOrDefaultAsync(x => x.Email == email);
     }
 }

@@ -5,7 +5,8 @@ class Person {
   String firstName = '';
   String lastName = '';
   String email = '';
-  String phone = '';
+  String password = '';
+  String phoneNumber = '';
   Address? address = Address();
 
   Person({
@@ -13,28 +14,40 @@ class Person {
     this.firstName = '',
     this.lastName = '',
     this.email = '',
-    this.phone = '',
+    this.password = '',
+    this.phoneNumber = '',
     this.address,
   });
 
-  Person.fromJSOM(Map<String, dynamic> json) {
+  Person.fromJSON(Map<String, dynamic> json) {
     id = json['id'];
     firstName = json['firstName'];
     lastName = json['lastName'];
     email = json['email'];
-    phone = json['phone'];
-    address =
-        json['address'] != null ? Address.fromJson(json['address']) : null;
+    password = json['password'];
+    phoneNumber = json['phoneNumber'];
+    address = json['address'] != '' ? Address.fromJson(json['address']) : null;
   }
 
-  Map<String, dynamic> toJSON() {
+  Person.copyOf(Person person) {
+    id = person.id;
+    firstName = person.firstName;
+    lastName = person.lastName;
+    email = person.email;
+    password = person.password;
+    phoneNumber = person.phoneNumber;
+    address = person.address;
+  }
+
+  Map<String, dynamic> toJSON({bool withId = true}) {
     final Map<String, dynamic> json = <String, dynamic>{};
 
-    json['id'] = id;
+    if (withId) json['id'] = id;
     json['firstName'] = firstName;
     json['lastName'] = lastName;
     json['email'] = email;
-    json['phone'] = phone;
+    json['password'] = password;
+    json['phoneNumber'] = phoneNumber;
     if (address != null) {
       json['address'] = address!.toJson();
     }
@@ -44,6 +57,6 @@ class Person {
 
   @override
   String toString() {
-    return 'Person{id: $id, firstName: $firstName, lastName: $lastName, email: $email, phone: $phone, address: $address}';
+    return 'Person{id: $id, firstName: $firstName, lastName: $lastName, email: $email, password: $password, phoneNumber: $phoneNumber, address: $address}';
   }
 }

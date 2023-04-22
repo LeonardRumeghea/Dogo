@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../entities/person.dart';
+import '../../../../entities/pet.dart';
 import 'update_or_create_pet.dart';
 
 String petName = "Rex";
@@ -10,13 +17,23 @@ DateTime petBirthDate = DateTime(2018, 10, 10);
 double age = DateTime.now().difference(petBirthDate).inDays / 365;
 
 class ManageYourPetsPage extends StatefulWidget {
-  const ManageYourPetsPage({super.key});
+  const ManageYourPetsPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<ManageYourPetsPage> createState() => _Page();
 }
 
 class _Page extends State<ManageYourPetsPage> {
+  Person get user => widget.user;
+  var userPets = <Pet>[];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,7 +43,7 @@ class _Page extends State<ManageYourPetsPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ManagePetPage(),
+              builder: (context) => ManagePetPage(user: user),
             ),
           );
         },
@@ -99,15 +116,27 @@ class _Page extends State<ManageYourPetsPage> {
   }
 
   Widget cardsColumn(Size size) {
-    var cards = <Widget>[];
+    _getPets();
 
-    for (var i = 0; i < 10; i++) {
+    if (userPets.isEmpty) {
+      return petCard(
+        size,
+        constants.MyColors.dustRed,
+        const Icon(Icons.error_outline_rounded, color: Colors.white),
+        'No pets registered yet',
+        'Please add a pet to your account',
+        context,
+      );
+    }
+
+    var cards = <Widget>[];
+    for (Pet pet in userPets) {
       cards.add(petCard(
         size,
-        Colors.green,
+        Colors.brown,
         const Icon(Icons.pets, color: Colors.white),
-        petName,
-        '$petType, $petBreed',
+        pet.name,
+        '${pet.specie}, ${pet.breed}',
         context,
       ));
     }
@@ -116,6 +145,28 @@ class _Page extends State<ManageYourPetsPage> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: cards,
     );
+  }
+
+  _getPets() {
+    fetchPets().then((value) {
+      log(value);
+      setState(() {
+        userPets = json.decode(value).map<Pet>((e) => Pet.fromJSON(e)).toList();
+      });
+      log('Pets: $userPets');
+    });
+  }
+
+  Future<String> fetchPets() async {
+    var url = '${constants.serverUrl}/petOwners/${user.id}/pets?api-version=1';
+    var request = http.Request('GET', Uri.parse(url));
+    var response = await request.send();
+
+    if (response.statusCode == HttpStatus.notFound) {
+      log('Invalid user id');
+    }
+
+    return response.stream.bytesToString();
   }
 
   petCard(Size size, Color color, Icon icon, String title, String subtitle,

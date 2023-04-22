@@ -1,5 +1,5 @@
 ﻿using Dogo.Application;
-using Dogo.Core.Enitities;
+using Dogo.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 /*

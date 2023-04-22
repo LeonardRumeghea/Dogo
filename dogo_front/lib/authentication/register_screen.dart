@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:dogo_front/entities/person.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +10,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../Helpers/constants.dart' as constants;
 import '../entities/address.dart';
 import '../home/services.dart';
+import './login_screen.dart';
 
 class Page extends StatefulWidget {
   const Page({super.key});
@@ -54,31 +59,12 @@ class _Page extends State<Page> {
                 physics: const ClampingScrollPhysics(),
                 onStepContinue: () {
                   setState(() {
+                    if (_currentStep == 3 && validateStep(_currentStep)) {
+                      createUser(context);
+                    }
+
                     if (validateStep(_currentStep) && _currentStep < 3) {
                       _currentStep = _currentStep + 1;
-                    }
-                    if (_currentStep == 3 && validateStep(_currentStep)) {
-                      var person = Person(
-                        firstName: _firstNameController.text,
-                        lastName: _lastNameController.text,
-                        email: _emailController.text,
-                        phone: _phoneController.text,
-                        address: Address(
-                            state: _stateController.text,
-                            city: _cityController.text,
-                            street: _streetController.text,
-                            zip: _zipCodeController.text,
-                            additionalDetails: _otherDetailsController.text),
-                      );
-
-                      print(person.toString());
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ServicesPage(),
-                        ),
-                      );
                     }
                   });
                 },
@@ -156,6 +142,74 @@ class _Page extends State<Page> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  createUser(BuildContext context) async {
+    var person = Person(
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      phoneNumber: _phoneController.text,
+      address: Address(
+          state: _stateController.text,
+          city: _cityController.text,
+          street: _streetController.text,
+          zipCode: _zipCodeController.text,
+          additionalDetails: _otherDetailsController.text),
+    );
+
+    postUser(person).then((value) {
+      try {
+        if (int.tryParse(value) == HttpStatus.conflict) {
+          displayError(context, 'This email is already in use');
+        } else {
+          displaySuccess(context, 'Your account has been created successfully');
+          Map<String, dynamic> jsonFormat = json.decode(value);
+          person.id = jsonFormat['id'];
+          person.address!.id = jsonFormat['address']['id'];
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PageLogin()),
+          );
+        }
+      } catch (e) {
+        log('Error: $e');
+      }
+    });
+  }
+
+  Future<String> postUser(Person person) async {
+    var url = '${constants.serverUrl}/petOwners?api-version=1';
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request('POST', Uri.parse(url));
+
+    request.body = json.encode(person.toJSON(withId: false));
+    request.headers.addAll(headers);
+
+    var response = await request.send();
+
+    return response.statusCode == HttpStatus.created
+        ? await response.stream.bytesToString()
+        : response.statusCode.toString();
+  }
+
+  void displaySuccess(BuildContext context, String success) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(success),
+        backgroundColor: constants.MyColors.dustGreen,
+      ),
+    );
+  }
+
+  void displayError(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(error),
+        backgroundColor: constants.MyColors.dustRed,
       ),
     );
   }

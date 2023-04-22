@@ -20,7 +20,7 @@ namespace Dogo.Application.Handlers.Walker
                 throw new ApplicationException("PetOwner not found");
             }
 
-            var walker = new Core.Enitities.Walker
+            var walker = new Core.Entities.Walker
             {
                 FirstName = petOwner.FirstName,
                 LastName = petOwner.LastName,

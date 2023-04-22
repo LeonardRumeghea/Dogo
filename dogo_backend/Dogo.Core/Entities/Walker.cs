@@ -1,5 +1,5 @@
 ﻿#nullable disable
-namespace Dogo.Core.Enitities
+namespace Dogo.Core.Entities
 {
     public class Walker : Person
     {

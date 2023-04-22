@@ -1,42 +1,43 @@
 class Address {
+  String id = '';
   String street = '';
   int number = 0;
   String city = '';
   String state = '';
-  String zip = '';
+  String zipCode = '';
   String additionalDetails = '';
 
   Address({
+    this.id = '',
     this.street = '',
-    this.number = 0,
     this.city = '',
     this.state = '',
-    this.zip = '',
+    this.zipCode = '',
     this.additionalDetails = '',
   });
 
   Address.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     street = json['street'];
-    number = json['number'];
     city = json['city'];
     state = json['state'];
-    zip = json['zip'];
+    zipCode = json['zipCode'];
     additionalDetails = json['additionalDetails'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['street'] = street;
-    data['number'] = number;
     data['city'] = city;
     data['state'] = state;
-    data['zip'] = zip;
+    data['zipCode'] = zipCode;
     data['additionalDetails'] = additionalDetails;
     return data;
   }
 
   @override
   String toString() {
-    return 'Address{street: $street, number: $number, city: $city, state: $state, zip: $zip, additionalDetails: $additionalDetails}';
+    return 'Address{id: $id, street: $street, city: $city, state: $state, zipCode: $zipCode, additionalDetails: $additionalDetails}';
   }
 }

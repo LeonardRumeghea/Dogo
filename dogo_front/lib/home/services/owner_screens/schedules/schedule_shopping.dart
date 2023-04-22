@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
-// ignore: implementation_imports
-import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/location_picker.dart';
-import '../../../../entities/address.dart';
 
 class ScheduleShoppingPage extends StatefulWidget {
   const ScheduleShoppingPage({super.key});

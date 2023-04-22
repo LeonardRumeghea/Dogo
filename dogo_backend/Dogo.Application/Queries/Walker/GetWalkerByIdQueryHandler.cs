@@ -7,9 +7,9 @@ namespace Dogo.Application.Queries.Walker
 {
     public class GetWalkerByIdQueryHandler : IRequestHandler<GetWalkerByIdQuery, WalkerResponse?>
     {
-        private readonly IRepository<Core.Enitities.Walker> repository;
+        private readonly IRepository<Core.Entities.Walker> repository;
 
-        public GetWalkerByIdQueryHandler(IRepository<Core.Enitities.Walker> repository) => this.repository = repository;
+        public GetWalkerByIdQueryHandler(IRepository<Core.Entities.Walker> repository) => this.repository = repository;
 
         public async Task<WalkerResponse?> Handle(GetWalkerByIdQuery request, CancellationToken cancellationToken)
         {

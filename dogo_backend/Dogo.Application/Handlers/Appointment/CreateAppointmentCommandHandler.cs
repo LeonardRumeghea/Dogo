@@ -20,13 +20,8 @@ namespace Dogo.Application.Handlers.Appointment
                 return ResultOfEntity<AppointmentResponse>.Failure(HttpStatusCode.NotFound, "Pet not found");
             }
 
-            var walkerEntity = await unitOfWork.WalkerRepository.GetByIdAsync(request.WalkerId);
-            if (walkerEntity == null)
-            {
-                return ResultOfEntity<AppointmentResponse>.Failure(HttpStatusCode.NotFound, "Walker not found");
-            }
-
-            var appointmentEntity = AppointmentMapper.Mapper.Map<Core.Enitities.Appointment>(request);
+            var appointmentEntity = AppointmentMapper.Mapper.Map<Core.Entities.Appointment>(request);
+            appointmentEntity.WalkerId = Guid.Empty;
 
             await unitOfWork.AppointmentRepository.AddAsync(appointmentEntity);
 

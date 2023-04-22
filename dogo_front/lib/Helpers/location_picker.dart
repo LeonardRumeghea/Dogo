@@ -26,8 +26,8 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
   String _selectedAddressStr = '';
   double _zoomLevel = 17;
 
-  double _maxZoomLevel = 20;
-  double _minZoomLevel = 3;
+  final double _maxZoomLevel = 20;
+  final double _minZoomLevel = 3;
 
   // final result - selected address from map
   Address _selectedAddress = Address();
@@ -204,11 +204,10 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
         '${address.thoroughfare} ${address.subThoroughfare}, ${address.postalCode}';
 
     var addressEntity = Address(
-        street: address.thoroughfare!,
-        number: int.parse(address.subThoroughfare!),
+        street: '$address.thoroughfare! ${int.parse(address.subThoroughfare!)}',
         city: address.locality!,
         state: address.administrativeArea!,
-        zip: address.postalCode!);
+        zipCode: address.postalCode!);
 
     setState(() {
       _selectedAddressStr = addressStr;

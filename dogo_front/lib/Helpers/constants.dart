@@ -10,6 +10,8 @@ const String sitting = 'Sitting';
 const String vet = 'Vet';
 const String shopping = 'Shopping';
 
+const String serverUrl = 'https://10.0.2.2:7077/api/v1';
+
 const Color walkColor = Colors.blue;
 const Color salonColor = Colors.purple;
 const Color sittingColor = Colors.green;

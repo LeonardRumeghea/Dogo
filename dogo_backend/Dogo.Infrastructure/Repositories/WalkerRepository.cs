@@ -1,4 +1,4 @@
-﻿using Dogo.Core.Enitities;
+﻿using Dogo.Core.Entities;
 using Dogo.Core.Repositories;
 using Dogo.Infrastructure.Data;
 using Dogo.Infrastructure.Repositories.Base;

@@ -67,7 +67,7 @@ class _Page extends State<Page> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const sign_in.Page()));
+                            builder: (context) => const sign_in.PageLogin()));
                   },
                   child: const Text('Sign In'),
                 ),

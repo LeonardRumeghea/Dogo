@@ -1,4 +1,4 @@
-﻿using Dogo.Core.Enitities;
+﻿using Dogo.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dogo.Application

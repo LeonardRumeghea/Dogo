@@ -25,7 +25,15 @@ namespace Dogo.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePetOwner([FromBody] CreatePetOwnerCommand command)
         {
-            return Created("GetPetOwners", await _mediator.Send(command));
+            var result = _mediator.Send(command).Result;
+
+            return result.StatusCode switch
+            {
+                HttpStatusCode.Conflict => Conflict(result.Message),
+                HttpStatusCode.BadRequest => BadRequest(result.Message),
+                HttpStatusCode.Created => Created(nameof(GetPetOwner), result.Entity),
+                _ => BadRequest(result.Message)
+            };
         }
 
         [HttpGet("{id:Guid}")]
@@ -38,6 +46,20 @@ namespace Dogo.API.Controllers
 
         [HttpGet(Name = "GetPetOwners")]
         public async Task<List<PetOwnerResponse>> GetPetOwners() => await _mediator.Send(new GetAllPetOwnersQuery());
+
+        [HttpGet("checkLogin")]
+        public async Task<IActionResult> CheckLogin([FromQuery] CheckLoginQuery query)
+        {
+            var result = _mediator.Send(query).Result;
+
+            return result.StatusCode switch
+            {
+                HttpStatusCode.NotFound => NotFound(result.Message),
+                HttpStatusCode.Unauthorized => Unauthorized(result.Message),
+                HttpStatusCode.OK => Ok(result.Entity),
+                _ => Conflict()
+            };
+        }
 
         [HttpPut("{id:Guid}")]
         public async Task<IActionResult> UpdatePetOwner(Guid id, [FromBody] UpdatePetOwnerCommand command)

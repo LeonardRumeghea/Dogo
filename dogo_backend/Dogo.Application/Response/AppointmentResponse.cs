@@ -1,11 +1,21 @@
-﻿namespace Dogo.Application.Response
+﻿using Dogo.Core.Entities;
+
+#nullable disable
+namespace Dogo.Application.Response
 {
     public class AppointmentResponse
     {
         public Guid Id { get; set; }
-        public DateTime Date { get; set; }
-        public string? Notes { get; set; }
+        public DateTime DateWhen { get; set; }
+        public DateTime DateUntil { get; set; }
+        public string Notes { get; set; }
         public Guid PetId { get; set; }
-        public Guid WalkerId { get; set; }
+        public string Location { get; set; }
+        public int Duration { get; set; }
+        public AppointmentType Type { get; set; }
+
+        public Guid WalkerId { get; set; } // will be assigned by the system 
+        public bool IsAssigned { get; set; }
+        public AppointmentStatus Status { get; set; }
     }
 }

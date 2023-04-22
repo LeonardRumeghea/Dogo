@@ -1,7 +1,7 @@
 ﻿using Dogo.Core.Helpers;
 
 #nullable disable
-namespace Dogo.Core.Enitities
+namespace Dogo.Core.Entities
 {
     public class PetOwner : Person
     {

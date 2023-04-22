@@ -20,11 +20,6 @@ namespace Dogo.Application.Commands.Appointment
                 .NotEmpty()
                 .Must(Validations.BeValidGuid)
                 .WithMessage("PetId must be a valid Guid");
-
-            RuleFor(x => x.WalkerId)
-                .NotEmpty()
-                .Must(Validations.BeValidGuid)
-                .WithMessage("WalkerId must be a valid Guid");
         }
     }
 }

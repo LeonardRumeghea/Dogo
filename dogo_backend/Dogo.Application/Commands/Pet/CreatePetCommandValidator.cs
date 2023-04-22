@@ -9,13 +9,12 @@ namespace Dogo.Application.Commands.Pet
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .Length(4, 25)
-                .WithMessage("Name must be between 4 and 25 characters");
+                .Length(2, 25)
+                .WithMessage("Name must be between 2 and 25 characters");
 
             RuleFor(x => x.Description)
-                .NotEmpty()
-                .Length(4, 9999)
-                .WithMessage("Description must be between 4 and 9999 characters");
+                .Length(0, 9999)
+                .WithMessage("Description must be between 0 and 9999 characters");
 
             RuleFor(x => x.Specie)
                 .NotEmpty()

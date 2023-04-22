@@ -1,8 +1,13 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../entities/person.dart';
+import '../../../../entities/pet.dart';
 
 String petName = "Rex";
 String petType = "Dog";
@@ -14,7 +19,9 @@ double age = DateTime.now().difference(petBirthDate).inDays / 365;
 String result = '';
 
 class ManagePetPage extends StatefulWidget {
-  const ManagePetPage({Key? key}) : super(key: key);
+  const ManagePetPage({Key? key, required this.user}) : super(key: key);
+
+  final Person user;
 
   @override
   State<ManagePetPage> createState() => _Page();
@@ -31,6 +38,8 @@ class _Page extends State<ManagePetPage> {
 
   List<String> species = [];
   List<String> breeds = [];
+
+  Person get user => widget.user;
 
   @override
   void initState() {
@@ -77,10 +86,8 @@ class _Page extends State<ManagePetPage> {
   }
 
   Future<String> fetchSpecies() async {
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            'https://10.0.2.2:7077/api/v1/appointments/species?api-version=1'));
+    var request = http.Request('GET',
+        Uri.parse('${constants.serverUrl}/appointments/species?api-version=1'));
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode != 200) {
@@ -94,7 +101,7 @@ class _Page extends State<ManagePetPage> {
     var request = http.Request(
         'GET',
         Uri.parse(
-            'https://10.0.2.2:7077/api/v1/appointments/breeds?specie=$specie&api-version=1'));
+            '${constants.serverUrl}/appointments/breeds?specie=$specie&api-version=1'));
 
     http.StreamedResponse response = await request.send();
 
@@ -105,10 +112,30 @@ class _Page extends State<ManagePetPage> {
     return await response.stream.bytesToString();
   }
 
+  Future<int> postPet(Pet pet) async {
+    var url = '${constants.serverUrl}/petOwners/${user.id}/pet?api-version=1';
+    var request = http.Request('POST', Uri.parse(url));
+
+    log('Url: $url');
+
+    request.body = json.encode(pet.toJSON());
+    request.headers.addAll(
+        <String, String>{'Content-Type': 'application/json; charset=UTF-8'});
+
+    var response = await request.send();
+
+    log('Ok');
+    log(await response.stream.bytesToString());
+    log(response.statusCode.toString());
+
+    return response.statusCode;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    log('User: ${user.toString()}');
     return Scaffold(
       floatingActionButton: floatingActionButton(context),
       body: SingleChildScrollView(
@@ -132,37 +159,56 @@ class _Page extends State<ManagePetPage> {
     );
   }
 
+  addPet(BuildContext context) {
+    if (_nameController.text.isEmpty || _dateController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all require fields'),
+          backgroundColor: constants.MyColors.dustRed,
+        ),
+      );
+      return;
+    }
+
+    Pet pet = Pet(
+      name: _nameController.text,
+      specie: _speciesSelected,
+      breed: _breedSelected,
+      dateOfBirth: _dateController.text,
+      gender: _genderSelected,
+      description: _descriptionController.text,
+    );
+
+    log(pet.toString());
+
+    postPet(pet).then((statusCode) {
+      if (statusCode == HttpStatus.created) {
+        log('Pet added successfully');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Pet added successfully'),
+            backgroundColor: constants.MyColors.dustGreen,
+          ),
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.pop(context);
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('An error has occurred. Please try again later'),
+            backgroundColor: constants.MyColors.dustRed,
+          ),
+        );
+      }
+    }).catchError((error) {
+      log('Error adding pet: $error');
+    });
+  }
+
   floatingActionButton(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () async {
-        print('--> ScheduleWalkPage: floatingActionButton onPressed');
-        print('petName: ${_nameController.text}');
-        print('petType: $_speciesSelected');
-        print('petBreed: $_breedSelected');
-        print('petGender: $_genderSelected');
-        print('petBirthDate: ${_dateController.text}');
-        print('petDescription: ${_descriptionController.text}');
-
-        if (_nameController.text.isEmpty || _dateController.text.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Please fill all require fields'),
-              backgroundColor: constants.MyColors.dustRed,
-            ),
-          );
-          return;
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Your appointment has been published!'),
-              backgroundColor: constants.MyColors.dustGreen,
-            ),
-          );
-          Future.delayed(const Duration(seconds: 1), () {
-            Navigator.pop(context);
-          });
-        }
-      },
+      onPressed: () => addPet(context),
       backgroundColor: constants.MyColors.darkBlue,
       child: const Icon(
         Icons.done,
@@ -199,36 +245,21 @@ class _Page extends State<ManagePetPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            children: [
-              Icon(
-                Icons.emoji_emotions,
-                size: 20,
-                color: Colors.amber[900],
-              ),
-              const Text(
-                ' Name',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+            children: const [
+              Icon(Icons.emoji_emotions, size: 20, color: Colors.green),
+              Text(' Name', style: TextStyle(fontSize: 20)),
             ],
           ),
           SizedBox(
             width: size.width * .5,
             child: TextField(
               controller: _nameController,
-              style: const TextStyle(
-                fontSize: 20,
-              ),
+              style: const TextStyle(fontSize: 20),
               decoration: const InputDecoration(
                 hintText: 'Pet\'s name',
-                hintStyle: TextStyle(
-                  fontSize: 18,
-                ),
+                hintStyle: TextStyle(fontSize: 18),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: constants.MyColors.grey,
-                  ),
+                  borderSide: BorderSide(color: constants.MyColors.grey),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -305,16 +336,14 @@ class _Page extends State<ManagePetPage> {
       child: Center(
         child: DropdownButton<String>(
           value: _breedSelected,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 19),
           underline: Container(
             height: 2,
             color: constants.MyColors.grey,
           ),
           menuMaxHeight: 300,
           onChanged: (String? newValue) {
-            setState(() {
-              _breedSelected = newValue!;
-            });
+            setState(() => _breedSelected = newValue!);
           },
           items: breeds.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
@@ -445,7 +474,7 @@ class _Page extends State<ManagePetPage> {
             ],
           ),
           SizedBox(
-            height: size.height * .35,
+            height: size.height * .31,
             width: size.width * .8,
             child: Padding(
               padding: EdgeInsets.only(top: size.height * .025),

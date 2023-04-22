@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Pet {
   String id = '';
   String ownerId = '';
@@ -40,6 +38,7 @@ class Pet {
     json['name'] = name;
     json['specie'] = specie;
     json['breed'] = breed;
+    json['gender'] = gender;
     json['dateOfBirth'] = dateOfBirth;
     json['description'] = description;
 
@@ -48,6 +47,6 @@ class Pet {
 
   @override
   String toString() {
-    return 'Pet{id: $id, ownerId $ownerId, name: $name, specie: $specie, breed: $breed, dateOfBirth: $dateOfBirth, description: $description}';
+    return 'Pet{id: $id, ownerId $ownerId, name: $name, specie: $specie, breed: $breed, dateOfBirth: $dateOfBirth, gender: $gender, description: $description}';
   }
 }

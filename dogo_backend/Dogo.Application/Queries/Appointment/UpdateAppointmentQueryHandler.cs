@@ -17,10 +17,9 @@ namespace Dogo.Application.Queries.Appointment
                 return Result.Failure(HttpStatusCode.NotFound, "Appointment not found");
             }
 
-            appointmentEntity.Date = DateTime.Parse(request.Appointment.Date);
+            appointmentEntity.DateWhen = DateTime.Parse(request.Appointment.Date);
             appointmentEntity.Notes = request.Appointment.Notes;
             appointmentEntity.PetId = request.Appointment.PetId;
-            appointmentEntity.WalkerId = request.Appointment.WalkerId;
 
             await unitOfWork.AppointmentRepository.UpdateAsync(appointmentEntity);
 

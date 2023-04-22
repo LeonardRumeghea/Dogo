@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
+import '../entities/person.dart';
 import '../settings/profile_view.dart' as profile_view;
 
 // services page for the owner implementation
@@ -10,7 +13,6 @@ import 'services/owner_screens/appointments.dart';
 import './services/Walker/agenda.dart';
 import './services/Walker/search.dart';
 import './services/Walker/preferences.dart';
-// import './services/Walker/requests.dart';
 
 String profileName = "Leonard";
 String accountType = "Owner";
@@ -18,8 +20,24 @@ String accountType = "Owner";
 const String ownerType = "Owner";
 const String walkerType = "Walker";
 
-class ServicesPage extends StatelessWidget {
-  const ServicesPage({Key? key}) : super(key: key);
+Person? loggedUser;
+
+class ServicesPage extends StatefulWidget {
+  const ServicesPage({Key? key, required this.user}) : super(key: key);
+
+  final Person user;
+
+  @override
+  State<ServicesPage> createState() => _ServicesPageState();
+}
+
+class _ServicesPageState extends State<ServicesPage> {
+  @override
+  initState() {
+    super.initState();
+    loggedUser =
+        (loggedUser == null) ? widget.user : Person.copyOf(widget.user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +69,7 @@ class ServicesPage extends StatelessWidget {
                           fontSize: 32),
                     ),
                     Text(
-                      "Welcome back, $profileName",
+                      "Welcome back, ${loggedUser!.firstName}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -142,12 +160,19 @@ class ProfileTypes extends StatelessWidget {
         horizontal: size.width * .05,
         vertical: size.height * .0125,
       ),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
           topLeft: Radius.circular(constants.borderRadius),
           topRight: Radius.circular(constants.borderRadius),
         ),
-        color: Colors.white.withOpacity(0.025),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+        ],
+        color: Color.fromARGB(255, 53, 53, 53),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,7 +252,8 @@ class CardButton extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => const ServicesPage()),
+                      builder: (BuildContext context) =>
+                          ServicesPage(user: loggedUser!)),
                 );
               },
             ),
@@ -456,8 +482,8 @@ class SericesGridDashboard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black38,
-                blurRadius: 5,
-                spreadRadius: 5,
+                blurRadius: 10,
+                spreadRadius: 2,
               ),
             ],
           ),
@@ -524,8 +550,8 @@ class SericesGridDashboard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black38,
-                blurRadius: 5,
-                spreadRadius: 5,
+                blurRadius: 10,
+                spreadRadius: 2,
               ),
             ],
           ),
@@ -592,8 +618,8 @@ class SericesGridDashboard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black38,
-                blurRadius: 5,
-                spreadRadius: 5,
+                blurRadius: 10,
+                spreadRadius: 2,
               ),
             ],
           ),
@@ -753,7 +779,7 @@ class SericesGridDashboard extends StatelessWidget {
       MaterialPageRoute(builder: (context) {
         switch (serviceName) {
           case 'Manage Your Pets':
-            return const ManageYourPetsPage();
+            return ManageYourPetsPage(user: loggedUser!);
           case 'Your Agenda':
             return const AgendaPage();
           case 'Search for Appointments':
@@ -763,7 +789,7 @@ class SericesGridDashboard extends StatelessWidget {
           case 'Appointments':
             return const AppointmentsPage();
           default:
-            return const ServicesPage();
+            return ServicesPage(user: loggedUser!);
         }
       }),
     );

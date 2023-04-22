@@ -1,11 +1,12 @@
 ﻿using Dogo.Application.Commands.Address;
 using Dogo.Application.Response;
+using Dogo.Core.Helpers;
 using MediatR;
 
 #nullable disable
 namespace Dogo.Application.Commands.PetOwner
 {
-    public class CreatePetOwnerCommand : IRequest<PetOwnerResponse>
+    public class CreatePetOwnerCommand : IRequest<ResultOfEntity<PetOwnerResponse>>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
