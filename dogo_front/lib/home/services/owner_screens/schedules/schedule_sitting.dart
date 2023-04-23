@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -6,9 +7,15 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
 // ignore: implementation_imports
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../Helpers/pots.dart';
+import '../../../../entities/appointment.dart';
+import '../../../../entities/person.dart';
+import '../../../../entities/pet.dart';
 
 class ScheduleSittingPage extends StatefulWidget {
-  const ScheduleSittingPage({super.key});
+  const ScheduleSittingPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<ScheduleSittingPage> createState() => _Page();
@@ -20,8 +27,12 @@ class _Page extends State<ScheduleSittingPage> {
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
-  String _petName = 'Rex';
-  var pets = ['Rex', 'Kitty', 'Buddy', 'Fido', 'Spot', 'Max', 'Bella'];
+  DateTime _fromDateFull = DateTime.now();
+  DateTime _toDateFull = DateTime.now();
+
+  Person get _user => widget.user;
+  late Pet _selectedPet;
+  late List<Pet> _pets;
 
   @override
   void initState() {
@@ -29,41 +40,17 @@ class _Page extends State<ScheduleSittingPage> {
     init();
   }
 
-  void init() {}
+  void init() {
+    _pets = _user.pets;
+    _selectedPet = _pets.first;
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          log('petName: $_petName');
-          log('date: ${_fromController.text}');
-          log('time: ${_toController.text}');
-          log('note: ${_noteController.text}');
-
-          if (_petName == '' ||
-              _fromController.text == '' ||
-              _toController.text == '') {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please fill all require fields'),
-                backgroundColor: constants.MyColors.dustRed,
-              ),
-            );
-            return;
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Your appointment has been published!'),
-                backgroundColor: constants.MyColors.dustGreen,
-              ),
-            );
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.pop(context);
-            });
-          }
-        },
+        onPressed: () => createAppointment(context),
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
@@ -88,6 +75,64 @@ class _Page extends State<ScheduleSittingPage> {
           ),
         ),
       ),
+    );
+  }
+
+  createAppointment(BuildContext context) {
+    log('--> ScheduleSittingPage: createAppointment');
+    log('petName: $_selectedPet.name');
+    log('dateFrom: ${_fromController.text}');
+    log('dateTo: ${_toController.text}');
+    log('note: ${_noteController.text}');
+
+    if (_selectedPet.name == '' ||
+        _fromController.text == '' ||
+        _toController.text == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all require fields'),
+          backgroundColor: constants.MyColors.dustRed,
+        ),
+      );
+      return;
+    }
+
+    var dateWhen =
+        DateFormat('yyyy-MM-dd HH:mm').parse(_fromDateFull.toString());
+    var dateUntil =
+        DateFormat('yyyy-MM-dd HH:mm').parse(_toDateFull.toString());
+
+    var appointment = Appointment(
+      petId: _selectedPet.id,
+      dateWhen: dateWhen.toString(),
+      dateUntil: dateUntil.toString(),
+      notes: _noteController.text,
+      type: 'Sitting',
+    );
+
+    log('Appointment: $appointment');
+
+    postAppoitment(appointment).then(
+      (value) {
+        if (value == HttpStatus.created) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Your appointment has been published!'),
+              backgroundColor: constants.MyColors.dustGreen,
+            ),
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('An error has occurred, please try again later'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -149,22 +194,20 @@ class _Page extends State<ScheduleSittingPage> {
                 ),
               ],
             ),
-            DropdownButton<String>(
-              value: _petName,
+            DropdownButton<Pet>(
+              value: _selectedPet,
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
                 color: constants.MyColors.grey,
               ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _petName = newValue!;
-                });
+              onChanged: (Pet? newPet) {
+                setState(() => _selectedPet = newPet!);
               },
-              items: pets.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+              items: _pets.map<DropdownMenuItem<Pet>>((Pet pet) {
+                return DropdownMenuItem<Pet>(
+                  value: pet,
+                  child: Text(pet.name),
                 );
               }).toList(),
             ),
@@ -201,7 +244,7 @@ class _Page extends State<ScheduleSittingPage> {
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
                 controller: _fromController,
-                onTap: () => showDateTimePicker(_fromController),
+                onTap: () => showDateTimePicker(_fromController, 'from'),
               ),
             )
           ],
@@ -238,7 +281,7 @@ class _Page extends State<ScheduleSittingPage> {
                 style: const TextStyle(fontSize: 20),
                 readOnly: true,
                 controller: _toController,
-                onTap: () => showDateTimePicker(_toController),
+                onTap: () => showDateTimePicker(_toController, 'to'),
               ),
             )
           ],
@@ -247,7 +290,8 @@ class _Page extends State<ScheduleSittingPage> {
     );
   }
 
-  Future<void> showDateTimePicker(TextEditingController controller) async {
+  Future<void> showDateTimePicker(
+      TextEditingController controller, String dateType) async {
     await picker.DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,
@@ -265,6 +309,11 @@ class _Page extends State<ScheduleSittingPage> {
       onConfirm: (date) {
         setState(() {
           controller.text = DateFormat('d MMM').add_Hm().format(date);
+          if (dateType == 'from') {
+            _fromDateFull = date;
+          } else {
+            _toDateFull = date;
+          }
         });
       },
     );
@@ -388,40 +437,44 @@ class _Page extends State<ScheduleSittingPage> {
     );
   }
 
-  Widget panel(Size size) => Positioned(
-        top: size.height * .1,
-        left: size.width * .05,
-        child: Container(
-          height: size.height * .825,
-          width: size.width * .9,
-          decoration: const BoxDecoration(
-            borderRadius:
-                BorderRadius.all(Radius.circular(constants.borderRadius)),
-            color: Color.fromARGB(255, 66, 66, 66),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                spreadRadius: 10,
-              ),
-            ],
-          ),
+  Widget panel(Size size) {
+    return Positioned(
+      top: size.height * .1,
+      left: size.width * .05,
+      child: Container(
+        height: size.height * .825,
+        width: size.width * .9,
+        decoration: const BoxDecoration(
+          borderRadius:
+              BorderRadius.all(Radius.circular(constants.borderRadius)),
+          color: Color.fromARGB(255, 66, 66, 66),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  Container banner(Size size) => Container(
-        height: size.height * .225,
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(constants.borderRadius),
-              bottomRight: Radius.circular(constants.borderRadius)),
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
-              const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
-            ],
-          ),
+  Container banner(Size size) {
+    return Container(
+      height: size.height * .225,
+      width: size.width,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(constants.borderRadius),
+            bottomRight: Radius.circular(constants.borderRadius)),
+        gradient: LinearGradient(
+          colors: [
+            const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
+            const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

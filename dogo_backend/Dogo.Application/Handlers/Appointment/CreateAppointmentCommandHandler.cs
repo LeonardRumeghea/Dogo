@@ -22,6 +22,7 @@ namespace Dogo.Application.Handlers.Appointment
 
             var appointmentEntity = AppointmentMapper.Mapper.Map<Core.Entities.Appointment>(request);
             appointmentEntity.WalkerId = Guid.Empty;
+            appointmentEntity.Status = Core.Entities.AppointmentStatus.Pending;
 
             await unitOfWork.AppointmentRepository.AddAsync(appointmentEntity);
 

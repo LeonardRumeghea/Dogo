@@ -131,8 +131,8 @@ class _Page extends State<ManageYourPetsPage> {
     for (Pet pet in _userPets) {
       cards.add(petCard(
         size,
-        Colors.brown,
-        const Icon(Icons.pets, color: Colors.white),
+        constants.petColor,
+        const Icon(Icons.pets, color: constants.lightGrey),
         pet.name,
         '${pet.specie}, ${pet.breed}',
         context,

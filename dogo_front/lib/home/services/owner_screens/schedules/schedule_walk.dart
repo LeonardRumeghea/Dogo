@@ -97,8 +97,8 @@ class _Page extends State<ScheduleWalkPage> {
 
     var date = DateFormat('dd-MM-yyyy').parse(_dateController.text);
     var time = DateFormat('HH:mm').parse(_timeController.text);
-    var dateTime = DateTime(date.year, date.month, date.day, time.hour,
-        time.minute, time.second, time.millisecond, time.microsecond);
+    var dateTime =
+        DateTime(date.year, date.month, date.day, time.hour, time.minute);
 
     var appointment = Appointment(
       petId: _selectedPet.id,
@@ -110,36 +110,28 @@ class _Page extends State<ScheduleWalkPage> {
 
     log('Appointment: $appointment');
 
-    postAppoitment(appointment).then((value) {
-      if (value == HttpStatus.created) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Your appointment has been published!'),
-            backgroundColor: constants.MyColors.dustGreen,
-          ),
-        );
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pop(context);
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('An error has occurred, please try again later'),
-            backgroundColor: constants.MyColors.dustRed,
-          ),
-        );
-      }
-    });
-
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text('Your appointment has been published!'),
-    //     backgroundColor: constants.MyColors.dustGreen,
-    //   ),
-    // );
-    // Future.delayed(const Duration(seconds: 1), () {
-    //   Navigator.pop(context);
-    // });
+    postAppoitment(appointment).then(
+      (value) {
+        if (value == HttpStatus.created) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Your appointment has been published!'),
+              backgroundColor: constants.MyColors.dustGreen,
+            ),
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('An error has occurred, please try again later'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+        }
+      },
+    );
   }
 
   Widget panelContent(Size size) {

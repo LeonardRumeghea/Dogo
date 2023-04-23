@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dogo_front/entities/pet.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
@@ -7,67 +9,51 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/location_picker.dart';
+import '../../../../Helpers/pots.dart';
 import '../../../../entities/address.dart';
+import '../../../../entities/appointment.dart';
+import '../../../../entities/person.dart';
 
 class ScheduleSalonPage extends StatefulWidget {
-  const ScheduleSalonPage({super.key});
+  const ScheduleSalonPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<ScheduleSalonPage> createState() => _Page();
 }
 
 class _Page extends State<ScheduleSalonPage> {
-  final TextEditingController _dateController = TextEditingController();
-  final TextEditingController _noteController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
-
+  final _dateController = TextEditingController();
+  final _noteController = TextEditingController();
+  final _locationController = TextEditingController();
+  DateTime _fullDate = DateTime.now();
   var _selectedAddress = Address();
+  Pet _selectedPet = Pet();
+  String _selectedDuration = '';
 
-  String _petName = 'Rex';
-  String _duration = '10';
-  var durations = ['10', '20', '30', '40', '50', '60', '90', '120'];
+  final _durations = ['10', '20', '30', '40', '50', '60', '90', '120'];
+  var _pets = <Pet>[];
 
-  var pets = ['Rex', 'Kitty', 'Buddy', 'Fido', 'Spot', 'Max', 'Bella'];
+  Person get _user => widget.user;
 
   @override
   void initState() {
     super.initState();
+
+    _pets = _user.pets;
+    _selectedPet = _pets.first;
+    _selectedDuration = _durations.first;
   }
+
+  init() {}
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          log('--> ScheduleWalkPage: floatingActionButton onPressed');
-          log('petName: $_petName');
-          log('date: ${_dateController.text}');
-          log('location: ${_selectedAddress.toJson()}');
-          log('note: ${_noteController.text}');
-
-          if (_petName == '' ||
-              _dateController.text == '' ||
-              _locationController.text == '') {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please fill all require fields'),
-                backgroundColor: constants.MyColors.dustRed,
-              ),
-            );
-            return;
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Your appointment has been published!'),
-                backgroundColor: constants.MyColors.dustGreen,
-              ),
-            );
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.pop(context);
-            });
-          }
-        },
+        onPressed: () => createAppointment(context),
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
@@ -92,6 +78,68 @@ class _Page extends State<ScheduleSalonPage> {
           ),
         ),
       ),
+    );
+  }
+
+  createAppointment(BuildContext context) {
+    log('--> ScheduleWalkPage: createAppointment');
+    log('petName: $_selectedPet');
+    log('dateTime: ${_fullDate.toString()}');
+    log('duration: $_selectedDuration');
+    log('address: $_selectedAddress');
+    log('notes: ${_noteController.text}');
+
+    if (_selectedPet.name == '' ||
+        _dateController.text == '' ||
+        _selectedDuration == '' ||
+        _selectedAddress.street == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all require fields'),
+          backgroundColor: constants.MyColors.dustRed,
+        ),
+      );
+      return;
+    }
+    var addressStr =
+        '${_selectedAddress.city}, ${_selectedAddress.street}, ${_selectedAddress.zipCode}';
+
+    var dateTime = DateTime(_fullDate.year, _fullDate.month, _fullDate.day,
+        _fullDate.hour, _fullDate.minute);
+
+    var appointment = Appointment(
+      petId: _selectedPet.id,
+      dateWhen: dateTime.toString(),
+      dateUntil: dateTime.toString(),
+      duration: int.parse(_selectedDuration),
+      location: addressStr,
+      notes: _noteController.text,
+      type: 'Salon',
+    );
+
+    log('Appointment: $appointment');
+
+    postAppoitment(appointment).then(
+      (value) {
+        if (value == HttpStatus.created) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Your appointment has been published!'),
+              backgroundColor: constants.MyColors.dustGreen,
+            ),
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('An error has occurred, please try again later'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+        }
+      },
     );
   }
 
@@ -155,22 +203,19 @@ class _Page extends State<ScheduleSalonPage> {
                 ),
               ],
             ),
-            DropdownButton<String>(
-              value: _petName,
+            DropdownButton<Pet>(
+              value: _selectedPet,
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
                 color: constants.MyColors.grey,
               ),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _petName = newValue!;
-                });
-              },
-              items: pets.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
+              onChanged: (Pet? newPet) =>
+                  setState(() => _selectedPet = newPet!),
+              items: _pets.map<DropdownMenuItem<Pet>>((Pet pet) {
+                return DropdownMenuItem<Pet>(
+                  value: pet,
+                  child: Text(pet.name),
                 );
               }).toList(),
             ),
@@ -190,17 +235,8 @@ class _Page extends State<ScheduleSalonPage> {
           children: [
             Row(
               children: const [
-                Icon(
-                  Icons.calendar_today,
-                  size: 20,
-                  color: Colors.blue,
-                ),
-                Text(
-                  ' Date',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
+                Icon(Icons.calendar_today, size: 20, color: Colors.blue),
+                Text(' Date', style: TextStyle(fontSize: 20)),
               ],
             ),
             SizedBox(
@@ -242,6 +278,7 @@ class _Page extends State<ScheduleSalonPage> {
       onConfirm: (date) {
         setState(() {
           controller.text = DateFormat('d MMM').add_Hm().format(date);
+          _fullDate = date;
         });
       },
     );
@@ -278,7 +315,7 @@ class _Page extends State<ScheduleSalonPage> {
               ],
             ),
             DropdownButton<String>(
-              value: _duration,
+              value: _selectedDuration,
               style: const TextStyle(fontSize: 18),
               underline: Container(
                 height: 2,
@@ -286,10 +323,10 @@ class _Page extends State<ScheduleSalonPage> {
               ),
               onChanged: (String? newValue) {
                 setState(() {
-                  _duration = newValue!;
+                  _selectedDuration = newValue!;
                 });
               },
-              items: durations.map<DropdownMenuItem<String>>((String value) {
+              items: _durations.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -435,40 +472,44 @@ class _Page extends State<ScheduleSalonPage> {
     );
   }
 
-  Widget panel(Size size) => Positioned(
-        top: size.height * .1,
-        left: size.width * .05,
-        child: Container(
-          height: size.height * .825,
-          width: size.width * .9,
-          decoration: const BoxDecoration(
-            borderRadius:
-                BorderRadius.all(Radius.circular(constants.borderRadius)),
-            color: Color.fromARGB(255, 66, 66, 66),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10,
-                spreadRadius: 10,
-              ),
-            ],
-          ),
+  Widget panel(Size size) {
+    return Positioned(
+      top: size.height * .1,
+      left: size.width * .05,
+      child: Container(
+        height: size.height * .825,
+        width: size.width * .9,
+        decoration: const BoxDecoration(
+          borderRadius:
+              BorderRadius.all(Radius.circular(constants.borderRadius)),
+          color: Color.fromARGB(255, 66, 66, 66),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 10,
+              spreadRadius: 10,
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
-  Container banner(Size size) => Container(
-        height: size.height * .225,
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(constants.borderRadius),
-              bottomRight: Radius.circular(constants.borderRadius)),
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
-              const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
-            ],
-          ),
+  Container banner(Size size) {
+    return Container(
+      height: size.height * .225,
+      width: size.width,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(constants.borderRadius),
+            bottomRight: Radius.circular(constants.borderRadius)),
+        gradient: LinearGradient(
+          colors: [
+            const Color.fromARGB(255, 5, 78, 213).withOpacity(0.7),
+            const Color.fromARGB(255, 18, 227, 221).withOpacity(0.7)
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

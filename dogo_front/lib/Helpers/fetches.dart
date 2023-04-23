@@ -16,3 +16,18 @@ Future<String> fetchPets(String userId) async {
 
   return response.stream.bytesToString();
 }
+
+Future<String> fetchAppoitments(String userId) async {
+  var url = '${constants.serverUrl}/appointments/owner/$userId?api-version=1';
+  var request = http.Request('GET', Uri.parse(url));
+  var response = await request.send();
+
+  log('Response status code: ${response.statusCode}');
+
+  if (response.statusCode == HttpStatus.notFound) {
+    log('Invalid user id');
+    throw Exception('Invalid user id $userId in fetchAppoitments function!');
+  }
+
+  return response.stream.bytesToString();
+}

@@ -12,11 +12,16 @@ const String shopping = 'Shopping';
 
 const String serverUrl = 'https://10.0.2.2:7077/api/v1';
 
-const Color walkColor = Colors.blue;
-const Color salonColor = Colors.purple;
-const Color sittingColor = Colors.green;
-const Color vetColor = Colors.amber;
-const Color shoppingColor = Colors.red;
+const Color walkColor = Color.fromARGB(255, 84, 147, 139);
+const Color salonColor = Color.fromARGB(255, 255, 195, 170);
+const Color sittingColor = Color.fromARGB(255, 121, 182, 149);
+const Color vetColor = Color.fromARGB(255, 211, 167, 122);
+const Color shoppingColor = Color.fromARGB(255, 205, 180, 219);
+
+const Color petColor = Color.fromARGB(255, 204, 172, 144);
+
+const Color darkGrey = Color.fromARGB(255, 214, 212, 213);
+const Color lightGrey = Color.fromARGB(255, 245, 245, 245);
 
 class MyColors {
   static const MaterialColor darkBlue = MaterialColor(

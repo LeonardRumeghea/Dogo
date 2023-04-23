@@ -1,10 +1,16 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import '../../../../Helpers/pots.dart';
+import '../../../../entities/appointment.dart';
+import '../../../../entities/person.dart';
 
 class ScheduleShoppingPage extends StatefulWidget {
-  const ScheduleShoppingPage({super.key});
+  const ScheduleShoppingPage({super.key, required this.user});
+
+  final Person user;
 
   @override
   State<ScheduleShoppingPage> createState() => _Page();
@@ -15,19 +21,14 @@ class _Page extends State<ScheduleShoppingPage> {
 
   bool _displayInfo = true;
 
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
+  Person get _user => widget.user;
 
-  void init() {}
+  @override
+  void initState() => super.initState();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    // showInfoDialog(context);
 
     if (_displayInfo) {
       Future.delayed(Duration.zero, () => showInfoDialog(context));
@@ -36,29 +37,7 @@ class _Page extends State<ScheduleShoppingPage> {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          log('note: ${_listController.text}');
-
-          if (_listController.text.isEmpty) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Please write your products list'),
-                backgroundColor: constants.MyColors.dustRed,
-              ),
-            );
-            return;
-          } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Your appointment has been published!'),
-                backgroundColor: constants.MyColors.dustGreen,
-              ),
-            );
-            Future.delayed(const Duration(seconds: 1), () {
-              Navigator.pop(context);
-            });
-          }
-        },
+        onPressed: () => createAppointment(context),
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
@@ -83,6 +62,54 @@ class _Page extends State<ScheduleShoppingPage> {
           ),
         ),
       ),
+    );
+  }
+
+  createAppointment(BuildContext context) {
+    log('--> ScheduleShoppingPage: createAppointment');
+    log('list: $_listController.text');
+
+    if (_listController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please write your products list'),
+          backgroundColor: constants.MyColors.dustRed,
+        ),
+      );
+      return;
+    }
+
+    var appointment = Appointment(
+      petId: _user.pets.first.id,
+      dateWhen: DateTime.now().add(const Duration(minutes: 1)).toString(),
+      dateUntil: DateTime.now().add(const Duration(minutes: 1)).toString(),
+      notes: _listController.text,
+      type: 'Shopping',
+    );
+
+    log('Appointment: $appointment');
+
+    postAppoitment(appointment).then(
+      (value) {
+        if (value == HttpStatus.created) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Your appointment has been published!'),
+              backgroundColor: constants.MyColors.dustGreen,
+            ),
+          );
+          Future.delayed(const Duration(seconds: 1), () {
+            Navigator.pop(context);
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('An error has occurred, please try again later'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+        }
+      },
     );
   }
 

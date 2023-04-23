@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 class Appointment {
   String id = '';
 
@@ -54,9 +56,9 @@ class Appointment {
     dateUntil = json['dateUntil'];
     location = json['location'];
     duration = json['duration'];
-    price = json['price'];
-    status = json['status'];
-    type = json['type'];
+    price = json['price'] ?? 0.0;
+    status = appointmentStatus[json['status']];
+    type = appointmentType[json['type']];
     notes = json['notes'];
   }
 
@@ -84,18 +86,12 @@ class Appointment {
   }
 }
 
-enum AppointmentStatus {
-  pending,
-  assigned,
-  rejected,
-  canceled,
-  completed,
-}
+var appointmentStatus = [
+  'Pending',
+  'Assigned',
+  'Completed',
+  'Canceled',
+  'Rejected'
+];
 
-enum AppointmentType {
-  walk,
-  salon,
-  sitting,
-  vet,
-  shopping,
-}
+var appointmentType = ['Walk', 'Salon', 'Sitting', 'Vet', 'Shopping'];

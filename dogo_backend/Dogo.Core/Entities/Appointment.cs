@@ -22,7 +22,7 @@ namespace Dogo.Core.Entities
         Pending = 0,
         Assigned = 1,
         Completed = 2,
-        Cancelled = 3,
+        Canceled = 3,
         Rejected = 4
     }
 

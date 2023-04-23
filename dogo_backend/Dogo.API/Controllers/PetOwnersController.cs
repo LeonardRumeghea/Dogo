@@ -23,7 +23,7 @@ namespace Dogo.API.Controllers
         // Done - GetAll, GetByID, Create, Delete, Update
         // Work in progress - 
         [HttpPost]
-        public async Task<IActionResult> CreatePetOwner([FromBody] CreatePetOwnerCommand command)
+        public IActionResult CreatePetOwner([FromBody] CreatePetOwnerCommand command)
         {
             var result = _mediator.Send(command).Result;
 

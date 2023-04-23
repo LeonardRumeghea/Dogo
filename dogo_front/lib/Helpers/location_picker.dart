@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -204,10 +205,13 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
         '${address.thoroughfare} ${address.subThoroughfare}, ${address.postalCode}';
 
     var addressEntity = Address(
-        street: '$address.thoroughfare! ${int.parse(address.subThoroughfare!)}',
+        street:
+            '${address.thoroughfare!} ${int.parse(address.subThoroughfare!)}',
         city: address.locality!,
         state: address.administrativeArea!,
         zipCode: address.postalCode!);
+
+    developer.log('LocationPicker: Address: $addressEntity');
 
     setState(() {
       _selectedAddressStr = addressStr;

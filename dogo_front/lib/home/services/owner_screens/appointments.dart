@@ -1,5 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:dogo_front/entities/appointment.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../../Helpers/fetches.dart';
 import '../../../entities/person.dart';
 import './schedules/schedule.dart';
 import '../../../../Helpers/constants.dart' as constants;
@@ -19,6 +25,7 @@ class _Page extends State<AppointmentsPage>
   late AnimationController _animationController;
 
   Person get _user => widget.user;
+  var _appointments = <Appointment>[];
 
   bool _isCollapsed = true;
 
@@ -28,14 +35,16 @@ class _Page extends State<AppointmentsPage>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 200),
     );
 
     final curvedAnimation = CurvedAnimation(
-      curve: Curves.easeInOut,
+      curve: Curves.easeInToLinear,
       parent: _animationController,
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
+
+    _getAppointments();
   }
 
   @override
@@ -65,42 +74,42 @@ class _Page extends State<AppointmentsPage>
       items: <Bubble>[
         Bubble(
           title: "Walk",
-          iconColor: Colors.white,
+          iconColor: constants.lightGrey,
           bubbleColor: constants.walkColor,
           icon: Icons.directions_walk,
-          titleStyle: const TextStyle(fontSize: 18, color: Colors.white),
+          titleStyle: const TextStyle(fontSize: 18, color: constants.lightGrey),
           onPress: () => bubblePress(context, constants.walk),
         ),
         Bubble(
           title: "Salon",
-          iconColor: Colors.white,
+          iconColor: constants.lightGrey,
           bubbleColor: constants.salonColor,
           icon: Icons.cut,
-          titleStyle: const TextStyle(fontSize: 18, color: Colors.white),
+          titleStyle: const TextStyle(fontSize: 18, color: constants.lightGrey),
           onPress: () => bubblePress(context, constants.salon),
         ),
         Bubble(
           title: "Sitting",
-          iconColor: Colors.white,
+          iconColor: constants.lightGrey,
           bubbleColor: constants.sittingColor,
           icon: Icons.home,
-          titleStyle: const TextStyle(fontSize: 18, color: Colors.white),
+          titleStyle: const TextStyle(fontSize: 18, color: constants.lightGrey),
           onPress: () => bubblePress(context, constants.sitting),
         ),
         Bubble(
           title: "Vet",
-          iconColor: Colors.white,
+          iconColor: constants.lightGrey,
           bubbleColor: constants.vetColor,
           icon: Icons.local_hospital,
-          titleStyle: const TextStyle(fontSize: 18, color: Colors.white),
+          titleStyle: const TextStyle(fontSize: 18, color: constants.lightGrey),
           onPress: () => bubblePress(context, constants.vet),
         ),
         Bubble(
           title: "Shopping",
-          iconColor: Colors.white,
+          iconColor: constants.lightGrey,
           bubbleColor: constants.shoppingColor,
           icon: Icons.shopping_cart,
-          titleStyle: const TextStyle(fontSize: 18, color: Colors.white),
+          titleStyle: const TextStyle(fontSize: 18, color: constants.lightGrey),
           onPress: () => bubblePress(context, constants.shopping),
         ),
         // Floating action menu item
@@ -170,44 +179,103 @@ class _Page extends State<AppointmentsPage>
     );
   }
 
+  _getAppointments() {
+    try {
+      fetchAppoitments(_user.id).then((value) {
+        var appointments = json
+            .decode(value)
+            .map<Appointment>((e) => Appointment.fromJSON(e))
+            .toList();
+
+        setState(() => _appointments = appointments);
+      });
+    } catch (e) {
+      log('Appointments Error: $e');
+    }
+  }
+
+  _getIconByType(String type) {
+    switch (type) {
+      case 'Walk':
+        return const Icon(Icons.directions_walk, color: constants.lightGrey);
+      case 'Salon':
+        return const Icon(Icons.cut, color: constants.lightGrey);
+      case 'Sitting':
+        return const Icon(Icons.home, color: Colors.white);
+      case 'Vet':
+        return const Icon(Icons.local_hospital, color: constants.lightGrey);
+      case 'Shopping':
+        return const Icon(Icons.shopping_cart, color: constants.lightGrey);
+      default:
+        return const Icon(Icons.error, color: constants.lightGrey);
+    }
+  }
+
+  _getColorOfType(String type) {
+    switch (type) {
+      case 'Walk':
+        return constants.walkColor;
+      case 'Salon':
+        return constants.salonColor;
+      case 'Sitting':
+        return constants.sittingColor;
+      case 'Vet':
+        return constants.vetColor;
+      case 'Shopping':
+        return constants.shoppingColor;
+      default:
+        return constants.MyColors.dustRed;
+    }
+  }
+
+  _getColorOfStatus(String status) {
+    switch (status) {
+      case 'Pending':
+        return constants.MyColors.dustBlue;
+      case 'Assigned':
+        return Colors.green;
+      case 'Completed':
+        return constants.MyColors.dustGreen;
+      case 'Rejected':
+        return constants.MyColors.dustRed;
+      case 'Canceled':
+        return constants.MyColors.dustRed;
+      default:
+        return constants.MyColors.dustBlue;
+    }
+  }
+
   Widget cardsColumn(Size size) {
+    if (_appointments.isEmpty) {
+      return petCard(
+        size,
+        constants.MyColors.dustRed,
+        const Icon(Icons.error_outline_rounded, color: constants.darkGrey),
+        'No pets registered yet',
+        'Please add a pet to your account',
+        '',
+        context,
+      );
+    }
+
     var cards = <Widget>[];
+    for (var appointment in _appointments) {
+      var dateStr = DateFormat('d MMM HH:mm')
+          .format(DateTime.parse(appointment.dateWhen));
 
-    cards.add(petCard(
-      size,
-      Colors.blue,
-      const Icon(Icons.directions_walk, color: Colors.white),
-      'Doggo',
-      '20/04/2023 12:30 PM',
-      context,
-    ));
-
-    cards.add(petCard(
-      size,
-      Colors.purple,
-      const Icon(Icons.cut, color: Colors.white),
-      'Doggo',
-      '20/04/2023 12:30 PM',
-      context,
-    ));
-
-    cards.add(petCard(
-      size,
-      Colors.blue,
-      const Icon(Icons.directions_walk, color: Colors.white),
-      'Doggo',
-      '20/04/2023 12:30 PM',
-      context,
-    ));
-
-    cards.add(petCard(
-      size,
-      Colors.green,
-      const Icon(Icons.home, color: Colors.white),
-      'Doggo',
-      '20/04/2023 12:30 PM',
-      context,
-    ));
+      cards.add(
+        petCard(
+            size,
+            _getColorOfType(appointment.type),
+            _getIconByType(appointment.type),
+            _user.pets
+                .singleWhere((element) => element.id == appointment.petId)
+                .name,
+            dateStr,
+            appointment.status,
+            context),
+      );
+    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -215,8 +283,8 @@ class _Page extends State<AppointmentsPage>
     );
   }
 
-  petCard(Size size, Color color, Icon icon, String title, String subtitle,
-      BuildContext context) {
+  petCard(Size size, Color color, Icon icon, String title, String date,
+      String status, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * .0025),
       child: Card(
@@ -240,12 +308,24 @@ class _Page extends State<AppointmentsPage>
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
-              subtitle: Text(
-                subtitle,
-                style: const TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    date,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                  Text(
+                    status,
+                    style: TextStyle(
+                        color: _getColorOfStatus(status),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                ],
               ),
             ),
           ),
@@ -265,19 +345,19 @@ class _Page extends State<AppointmentsPage>
                 user: _user,
               );
             case constants.salon:
-              return const ScheduleSalonPage();
+              return ScheduleSalonPage(user: _user);
             case constants.sitting:
-              return const ScheduleSittingPage();
+              return ScheduleSittingPage(user: _user);
             case constants.shopping:
-              return const ScheduleShoppingPage();
+              return ScheduleShoppingPage(user: _user);
             case constants.vet:
-              return const ScheduleVetPage();
+              return ScheduleVetPage(user: _user);
             default:
               return AppointmentsPage(user: _user);
           }
         },
       ),
-    );
+    ).then((_) => _getAppointments());
   }
 
   bubblePress(BuildContext context, String serviceName) {
