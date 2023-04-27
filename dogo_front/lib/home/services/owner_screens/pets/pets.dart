@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
-import 'update_or_create_pet.dart';
+import 'create_pet.dart';
+import 'update_pet.dart';
 
 String petName = "Rex";
 String petType = "Dog";
@@ -129,13 +130,22 @@ class _Page extends State<ManageYourPetsPage> {
 
     var cards = <Widget>[];
     for (Pet pet in _userPets) {
-      cards.add(petCard(
-        size,
-        constants.petColor,
-        const Icon(Icons.pets, color: constants.lightGrey),
-        pet.name,
-        '${pet.specie}, ${pet.breed}',
-        context,
+      // cards.add(petCard(
+      //   size,
+      //   constants.petColor,
+      //   const Icon(Icons.pets, color: constants.lightGrey),
+      //   pet.name,
+      //   '${pet.specie}, ${pet.breed}',
+      //   context,
+      // ));
+      cards.add(PetCard(
+        pet: pet,
+        user: _user,
+        size: size,
+        color: constants.petColor,
+        icon: const Icon(Icons.pets, color: constants.lightGrey),
+        title: pet.name,
+        subtitle: '${pet.specie}, ${pet.breed}',
       ));
     }
 
@@ -236,6 +246,76 @@ class _Page extends State<ManageYourPetsPage> {
               spreadRadius: 10,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class PetCard extends StatelessWidget {
+  const PetCard({
+    super.key,
+    required this.pet,
+    required this.user,
+    required this.size,
+    required this.color,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final Pet pet;
+  final Person user;
+  final Size size;
+  final Color color;
+  final Icon icon;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .0025),
+      child: Card(
+        color: const Color.fromARGB(255, 47, 47, 47),
+        child: SizedBox(
+          height: size.height * .1,
+          width: size.width * .8,
+          child: Center(
+            child: ListTile(
+              onTap: () {
+                // choseServicePage(context, title);
+                // log(pet.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpdatePetPage(
+                      user: user,
+                      pet: pet,
+                    ),
+                  ),
+                );
+              },
+              leading: CircleAvatar(
+                backgroundColor: color,
+                child: icon,
+              ),
+              title: Text(
+                title,
+                style: const TextStyle(
+                    color: constants.MyColors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
+              subtitle: Text(
+                subtitle,
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13),
+              ),
+            ),
+          ),
         ),
       ),
     );

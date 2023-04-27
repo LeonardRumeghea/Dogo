@@ -6,6 +6,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
 import '../entities/person.dart';
+import '../entities/pet.dart';
 import '../home/services.dart';
 import 'package:http/http.dart' as http;
 
@@ -142,6 +143,35 @@ class _Page extends State<PageLogin> {
   }
 
   Future<void> checkAccount(BuildContext context) async {
+    if (_mailController.text == 'admin@gmail.com' &&
+        _passController.text == 'admin') {
+      displaySuccess(context, 'Login successful');
+
+      var adminPerson = Person(
+        id: '123',
+        firstName: 'Admin',
+        lastName: 'Admin',
+        email: 'admin@gmail.com',
+        phoneNumber: '+40123456789',
+        password: 'admin',
+      );
+      adminPerson.pets.add(Pet(
+        id: '012',
+        ownerId: '123',
+        name: 'Rex',
+        specie: 'Dog',
+        breed: 'Pitbull',
+        dateOfBirth: '2022-02-21',
+        gender: 'Male',
+      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ServicesPage(user: adminPerson)),
+      );
+      return;
+    }
+
     var url = '${constants.serverUrl}/petOwners/checkLogin';
     var fullUrl =
         '$url?Email=${_mailController.text}&Password=${_passController.text}&api-version=1';

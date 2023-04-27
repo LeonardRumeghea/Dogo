@@ -7,7 +7,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
 // ignore: implementation_imports
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/pots.dart';
+import '../../../../Helpers/pets.dart';
 import '../../../../entities/appointment.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
@@ -295,8 +295,10 @@ class _Page extends State<ScheduleSittingPage> {
     await picker.DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,
-      currentTime: DateTime.now(),
-      minTime: DateTime.now(),
+      currentTime: dateType == 'from' ? _fromDateFull : _toDateFull,
+      minTime: dateType == 'from'
+          ? DateTime.now()
+          : _fromDateFull.add(const Duration(minutes: 10)),
       maxTime: DateTime.now().add(const Duration(days: 90)),
       theme: const DatePickerTheme(
         cancelStyle:
@@ -311,8 +313,18 @@ class _Page extends State<ScheduleSittingPage> {
           controller.text = DateFormat('d MMM').add_Hm().format(date);
           if (dateType == 'from') {
             _fromDateFull = date;
+            if (_toDateFull.compareTo(_fromDateFull) < 0) {
+              _toDateFull = _fromDateFull.add(const Duration(minutes: 10));
+              _toController.text =
+                  DateFormat('d MMM').add_Hm().format(_toDateFull);
+            }
           } else {
             _toDateFull = date;
+            if (_toDateFull.compareTo(_fromDateFull) < 0) {
+              _fromDateFull = _toDateFull.subtract(const Duration(minutes: 10));
+              _fromController.text =
+                  DateFormat('d MMM').add_Hm().format(_fromDateFull);
+            }
           }
         });
       },

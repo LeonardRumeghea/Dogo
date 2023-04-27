@@ -21,7 +21,7 @@ namespace Dogo.Application.Queries.PetOwner.Pets
                 return ResultOfEntity<PetResponse>.Failure(HttpStatusCode.NotFound, "Pet Owner not found");
             }
 
-            var pet = PetMapper.Mapper.Map<Pet>(request.Pet);
+            var pet = PetMapper.Mapper.Map<Core.Entities.Pet>(request.Pet);
 
             if (pet == null)
             {

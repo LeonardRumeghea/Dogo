@@ -48,7 +48,7 @@ namespace Dogo.API.Controllers
         public async Task<List<PetOwnerResponse>> GetPetOwners() => await _mediator.Send(new GetAllPetOwnersQuery());
 
         [HttpGet("checkLogin")]
-        public async Task<IActionResult> CheckLogin([FromQuery] CheckLoginQuery query)
+        public IActionResult CheckLogin([FromQuery] CheckLoginQuery query)
         {
             var result = _mediator.Send(query).Result;
 

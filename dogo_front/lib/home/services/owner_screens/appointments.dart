@@ -32,7 +32,10 @@ class _Page extends State<AppointmentsPage>
   @override
   void initState() {
     super.initState();
+    init();
+  }
 
+  init() {
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
@@ -65,6 +68,16 @@ class _Page extends State<AppointmentsPage>
       iconColor: constants.MyColors.grey,
       iconData: _isCollapsed ? Icons.add : Icons.close,
       onPress: () {
+        if (_user.pets.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('To make an appointment, you must register a pet.'),
+              backgroundColor: constants.MyColors.dustRed,
+            ),
+          );
+          return;
+        }
+
         _animationController.isCompleted
             ? _animationController.reverse()
             : _animationController.forward();
@@ -172,7 +185,7 @@ class _Page extends State<AppointmentsPage>
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: size.height * .725,
+          maxHeight: size.height * .7,
         ),
         child: SingleChildScrollView(child: cardsColumn(size)),
       ),
@@ -186,6 +199,9 @@ class _Page extends State<AppointmentsPage>
             .decode(value)
             .map<Appointment>((e) => Appointment.fromJSON(e))
             .toList();
+
+        appointments.sort(
+            (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
 
         setState(() => _appointments = appointments);
       });

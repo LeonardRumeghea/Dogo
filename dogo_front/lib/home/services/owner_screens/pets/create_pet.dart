@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/pots.dart';
+import '../../../../Helpers/pets.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 

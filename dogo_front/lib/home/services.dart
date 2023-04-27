@@ -13,7 +13,8 @@ import 'services/owner_screens/appointments.dart';
 
 // services page for the walker implementation
 import './services/Walker/agenda.dart';
-import './services/Walker/search.dart';
+// import './services/Walker/search.dart';
+import './services/Walker/available_appointments.dart';
 import './services/Walker/preferences.dart';
 
 String profileName = "Leonard";
@@ -673,10 +674,214 @@ class SericesGridDashboard extends StatelessWidget {
     );
   }
 
+  Widget yourAgendaCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        left: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'Your Agenda'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 10,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.calendar_today,
+                    color: Colors.blue,
+                    size: size.height * .08,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Your Agenda',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'View the appointments you\'ve chosen from the upcoming timeframe.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget searchAppointmentCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        right: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'Search Appointment'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 10,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Search Appointment',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Choose to generate an automated route or look for an appointment in the near future.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.calendar_month,
+                    color: Colors.purple,
+                    size: size.height * .08,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget yourPreferencesCard(BuildContext context, Size size) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: size.height * .0125,
+        bottom: size.height * .0125,
+        left: size.width * .15,
+      ),
+      child: InkWell(
+        onTap: () => choseServicePage(context, 'Your Preferences'),
+        child: Container(
+          height: size.height * .14,
+          width: size.width * .85,
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 66, 66, 66),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(8),
+              bottomLeft: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38,
+                blurRadius: 10,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Center(
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                  child: Icon(
+                    Icons.room_preferences,
+                    color: Colors.green,
+                    size: size.height * .08,
+                  ),
+                ),
+                SizedBox(
+                  width: size.width * .6,
+                  height: size.height * .14,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'Your Preferences',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'For a more personalized experience, set your preferences for the upcoming timeframe.',
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget walkerServices(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: size.width * .05,
+        // horizontal: size.width * .05,
         vertical: size.height * .025,
       ),
       child: Column(
@@ -701,39 +906,9 @@ class SericesGridDashboard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  serviceCard(
-                    size,
-                    Colors.blue,
-                    const Icon(
-                      Icons.calendar_today,
-                      color: Colors.white,
-                    ),
-                    'Your Agenda',
-                    'Your schedule for the day with all the tasks you need to do.',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.purple,
-                    const Icon(
-                      Icons.calendar_month,
-                      color: Colors.white,
-                    ),
-                    'Search for Appointments',
-                    'View the services offered for the upcoming term and select your favorites.',
-                    context,
-                  ),
-                  serviceCard(
-                    size,
-                    Colors.green,
-                    const Icon(
-                      Icons.room_preferences,
-                      color: Colors.white,
-                    ),
-                    'Your Preferences',
-                    'For better compatibility, configure your settings for the following schedules.',
-                    context,
-                  ),
+                  yourAgendaCard(context, size),
+                  searchAppointmentCard(context, size),
+                  yourPreferencesCard(context, size),
                 ],
               ),
             ),
@@ -790,14 +965,12 @@ class SericesGridDashboard extends StatelessWidget {
             return ManageYourPetsPage(user: _user);
           case 'Your Agenda':
             return const AgendaPage();
-          case 'Search for Appointments':
-            return const SearchForAppointmentsPage();
+          case 'Search Appointment':
+            return AvailableAppointmentsPage(user: _user);
           case 'Your Preferences':
             return const PreferencesPage();
           case 'Appointments':
-            return AppointmentsPage(
-              user: _user,
-            );
+            return AppointmentsPage(user: _user);
           default:
             return ServicesPage(user: _user);
         }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 class Appointment {
   String id = '';
 

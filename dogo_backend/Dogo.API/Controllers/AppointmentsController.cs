@@ -54,6 +54,15 @@ namespace Dogo.API.Controllers
                 : StatusCode((int)result.StatusCode, result.Message);
         }
 
+        [HttpGet("available")]
+        public async Task<IActionResult> GetAvailable([FromQuery] GetAvailableAppointmentsQuery query)
+        {
+            var result = await _medator.Send(query);
+            return result.IsSuccess
+                ? Ok(result.Entity)
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
         [HttpPut("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateAppointmentCommand command)
         {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as app_colors;
-import 'login_screen.dart' as sign_in;
+import 'login_screen.dart';
 import 'register_screen.dart' as sign_up;
 
 class MyApp extends StatelessWidget {
@@ -67,7 +67,7 @@ class _Page extends State<Page> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const sign_in.PageLogin()));
+                            builder: (context) => const PageLogin()));
                   },
                   child: const Text('Sign In'),
                 ),

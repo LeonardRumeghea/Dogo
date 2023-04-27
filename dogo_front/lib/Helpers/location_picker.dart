@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -33,10 +34,14 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
   // final result - selected address from map
   Address _selectedAddress = Address();
 
+  String _darkMapStyle = '';
+
   @override
   void initState() {
     super.initState();
     init();
+    _loadMapStyles().then((value) => _googleMapController.future
+        .then((controller) => controller.setMapStyle(_darkMapStyle)));
   }
 
   init() {
@@ -51,6 +56,11 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
 
     // move map to user current location
     moveToUserCurrentLocation();
+  }
+
+  Future _loadMapStyles() async {
+    _darkMapStyle =
+        await rootBundle.loadString('assets/json/dark_mode_map.json');
   }
 
   @override

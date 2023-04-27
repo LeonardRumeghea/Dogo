@@ -4,7 +4,7 @@ import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/pots.dart';
+import '../../../../Helpers/pets.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 

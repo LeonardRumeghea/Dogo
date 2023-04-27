@@ -9,7 +9,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/location_picker.dart';
-import '../../../../Helpers/pots.dart';
+import '../../../../Helpers/pets.dart';
 import '../../../../entities/address.dart';
 import '../../../../entities/appointment.dart';
 import '../../../../entities/person.dart';
@@ -264,7 +264,7 @@ class _Page extends State<ScheduleSalonPage> {
     await picker.DatePicker.showDateTimePicker(
       context,
       showTitleActions: true,
-      currentTime: DateTime.now(),
+      currentTime: _fullDate,
       minTime: DateTime.now(),
       maxTime: DateTime.now().add(const Duration(days: 90)),
       theme: const DatePickerTheme(

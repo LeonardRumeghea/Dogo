@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/pots.dart';
+import '../../../../Helpers/pets.dart';
 import '../../../../entities/appointment.dart';
 import '../../../../entities/person.dart';
 

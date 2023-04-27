@@ -17,6 +17,19 @@ Future<String> fetchPets(String userId) async {
   return response.stream.bytesToString();
 }
 
+Future<String> fetchPet(String petId) async {
+  var url = '${constants.serverUrl}/pets/$petId?api-version=1';
+  var request = http.Request('GET', Uri.parse(url));
+  var response = await request.send();
+
+  if (response.statusCode == HttpStatus.notFound) {
+    log('Invalid pet id');
+    throw Exception('Invalid pet id $petId in fetchPet function!');
+  }
+
+  return response.stream.bytesToString();
+}
+
 Future<String> fetchAppoitments(String userId) async {
   var url = '${constants.serverUrl}/appointments/owner/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
@@ -27,6 +40,24 @@ Future<String> fetchAppoitments(String userId) async {
   if (response.statusCode == HttpStatus.notFound) {
     log('Invalid user id');
     throw Exception('Invalid user id $userId in fetchAppoitments function!');
+  }
+
+  return response.stream.bytesToString();
+}
+
+Future<String> fetchAvailableAppoitments(String userId) async {
+  var url =
+      '${constants.serverUrl}/appointments/available?UserId=$userId&api-version=1';
+  var request = http.Request('GET', Uri.parse(url));
+  var response = await request.send();
+
+  log('Response status code: ${response.statusCode}');
+
+  if (response.statusCode == HttpStatus.notFound) {
+    var responseString = await response.stream.bytesToString();
+    log(responseString);
+    throw Exception(
+        'fetchAvailableAppoitments function failed! -> $responseString');
   }
 
   return response.stream.bytesToString();
