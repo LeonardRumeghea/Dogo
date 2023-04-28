@@ -8,7 +8,11 @@ import '../../../Helpers/fetches.dart';
 import '../../../entities/person.dart';
 import '../../../../Helpers/constants.dart' as constants;
 
-import './appointments_info/appointment_walk.dart';
+import 'appointments_info/assign_walk.dart';
+import 'appointments_info/assign_salon.dart';
+import 'appointments_info/assign_vet.dart';
+import 'appointments_info/assign_sitting.dart';
+import 'appointments_info/assign_shopping.dart';
 
 class AvailableAppointmentsPage extends StatefulWidget {
   const AvailableAppointmentsPage({super.key, required this.user});
@@ -144,8 +148,8 @@ class _Page extends State<AvailableAppointmentsPage>
         size,
         constants.MyColors.dustRed,
         const Icon(Icons.error_outline_rounded, color: constants.darkGrey),
-        'No pets registered yet',
-        'Please add a pet to your account',
+        'No appointments available',
+        'Please try again later.',
         '',
         context,
       );
@@ -386,27 +390,29 @@ class AppointmetCard extends StatelessWidget {
   }
 
   choseAppointmentPage(BuildContext context, Appointment appointment) {
-    switch (appointment.type) {
-      case constants.walk:
-        return Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AcceptWalkPage(
-              user: user,
-              appointment: appointment,
-            ),
-          ),
-        );
-      // case constants.salon:
-      //   return ScheduleSalonPage(user: _user);
-      // case constants.sitting:
-      //   return ScheduleSittingPage(user: _user);
-      // case constants.shopping:
-      //   return ScheduleShoppingPage(user: _user);
-      // case constants.vet:
-      //   return ScheduleVetPage(user: _user);
-      default:
-        return;
-    }
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        switch (appointment.type) {
+          case constants.walk:
+            return AssignWalkAppointmentPage(
+                user: user, appointment: appointment);
+          case constants.salon:
+            return AssignSalonAppointmentPage(
+                user: user, appointment: appointment);
+          case constants.sitting:
+            return AssignSittingAppointmentPage(
+                user: user, appointment: appointment);
+          case constants.shopping:
+            return AssignShoppingAppointmentPage(
+                user: user, appointment: appointment);
+          case constants.vet:
+            return AssignVetAppointmentPage(
+                user: user, appointment: appointment);
+          default:
+            return AvailableAppointmentsPage(user: user);
+        }
+      }),
+    );
   }
 }

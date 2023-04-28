@@ -7,7 +7,7 @@
         public string? Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
 
-        public HttpStatusCode httpStatusCode { get; set; }
+        public HttpStatusCode HttpStatusCode { get; set; }
 
         public static Result Success() => new() { IsSuccess = true };
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 
+#nullable disable
 namespace Dogo.Application.Mappers
 {
     public class PersonMapper

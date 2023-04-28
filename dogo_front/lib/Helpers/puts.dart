@@ -26,3 +26,22 @@ Future<int> putPet(Pet pet, String userId) async {
 
   return response.statusCode;
 }
+
+Future<int> assignAppointment(String appointmentId, String walkerId) async {
+  log('--- Assign Appointment Begin ---');
+  var url = '${constants.serverUrl}/appointments/assign?'
+      'AppointmentId=$appointmentId&'
+      'UserId=$walkerId&'
+      'api-version=1';
+  var request = http.Request('PUT', Uri.parse(url));
+
+  log('Url: $url');
+
+  var response = await request.send();
+
+  log(await response.stream.bytesToString());
+  log(response.statusCode.toString());
+  log('--- Assign Appointment End ---');
+
+  return response.statusCode;
+}

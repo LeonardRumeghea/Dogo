@@ -2,6 +2,7 @@
 using Dogo.Core.Helpers;
 using MediatR;
 
+#nullable disable
 namespace Dogo.Application.Queries.Walker
 {
     public class UpdateWalkerQuery : IRequest<Result>

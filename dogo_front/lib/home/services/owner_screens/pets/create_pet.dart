@@ -113,25 +113,6 @@ class _Page extends State<ManagePetPage> {
     return await response.stream.bytesToString();
   }
 
-  // Future<int> postPet(Pet pet) async {
-  //   var url = '${constants.serverUrl}/petOwners/${_user.id}/pet?api-version=1';
-  //   var request = http.Request('POST', Uri.parse(url));
-
-  //   log('Url: $url');
-
-  //   request.body = json.encode(pet.toJSON());
-  //   request.headers.addAll(
-  //       <String, String>{'Content-Type': 'application/json; charset=UTF-8'});
-
-  //   var response = await request.send();
-
-  //   log('Ok');
-  //   log(await response.stream.bytesToString());
-  //   log(response.statusCode.toString());
-
-  //   return response.statusCode;
-  // }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

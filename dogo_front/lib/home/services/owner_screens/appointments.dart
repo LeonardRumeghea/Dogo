@@ -267,8 +267,8 @@ class _Page extends State<AppointmentsPage>
         size,
         constants.MyColors.dustRed,
         const Icon(Icons.error_outline_rounded, color: constants.darkGrey),
-        'No pets registered yet',
-        'Please add a pet to your account',
+        'No appointments found',
+        'Use the + button to add one',
         '',
         context,
       );

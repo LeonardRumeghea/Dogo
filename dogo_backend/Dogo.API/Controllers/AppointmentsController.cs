@@ -63,6 +63,24 @@ namespace Dogo.API.Controllers
                 : StatusCode((int)result.StatusCode, result.Message);
         }
 
+        [HttpGet("agenda")]
+        public async Task<IActionResult> GetAgenda([FromQuery] GetAgendaOfUserQuery query)
+        {
+            var result = await _medator.Send(query);
+            return result.IsSuccess
+                ? Ok(result.Entity)
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        [HttpPut("assign")]
+        public async Task<IActionResult> Accept([FromQuery] AssignAppointmentQuery command)
+        {
+            var result = await _medator.Send(command);
+            return result.IsSuccess
+                ? NoContent()
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
         [HttpPut("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateAppointmentCommand command)
         {

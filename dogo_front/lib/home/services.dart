@@ -964,7 +964,7 @@ class SericesGridDashboard extends StatelessWidget {
           case 'Manage Your Pets':
             return ManageYourPetsPage(user: _user);
           case 'Your Agenda':
-            return const AgendaPage();
+            return AgendaPage(user: _user);
           case 'Search Appointment':
             return AvailableAppointmentsPage(user: _user);
           case 'Your Preferences':
