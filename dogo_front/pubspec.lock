@@ -160,6 +160,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  geocoder:
+    dependency: "direct main"
+    description:
+      name: geocoder
+      sha256: bd1cc3e349459b75f8baadfb00eb009b6a5c82f5167bca251e2e2b9c1f06dd0a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   geocoding:
     dependency: "direct main"
     description:

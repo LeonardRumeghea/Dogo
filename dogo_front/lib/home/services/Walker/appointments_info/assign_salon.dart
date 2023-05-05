@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/fetches.dart';
+import '../../../../Helpers/view_location.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 

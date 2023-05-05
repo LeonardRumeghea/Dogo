@@ -41,6 +41,7 @@ dependencies:
   geolocator: ^9.0.2
   lottie: ^1.4.2
   geocoding: ^2.1.0
+  geocoder: ^0.2.1
   flutter_datetime_picker: ^1.5.1
   floating_action_bubble: ^1.1.4
   email_validator: ^2.1.17

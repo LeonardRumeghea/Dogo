@@ -12,10 +12,10 @@ import 'services/owner_screens/pets/pets.dart';
 import 'services/owner_screens/appointments.dart';
 
 // services page for the walker implementation
-import './services/Walker/agenda.dart';
+import 'services/walker/agenda.dart';
 // import './services/Walker/search.dart';
-import './services/Walker/available_appointments.dart';
-import './services/Walker/preferences.dart';
+import 'services/walker/available_appointments.dart';
+import 'services/walker/preferences.dart';
 
 String profileName = "Leonard";
 String accountType = "Owner";
