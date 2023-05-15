@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/fetches.dart';
+import '../../../../Helpers/screens/view_location.dart';
+import '../../../../Helpers/screens/pet_profile.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 
@@ -24,6 +26,8 @@ class AssignVetAppointmentPage extends StatefulWidget {
 class _Page extends State<AssignVetAppointmentPage> {
   Pet _pet = Pet();
   Person _petOwner = Person();
+
+  bool _accepted = false;
 
   Person get _user => widget.user;
   Appointment get _appointment => widget.appointment;
@@ -85,7 +89,7 @@ class _Page extends State<AssignVetAppointmentPage> {
           ),
         );
         Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pop(context);
+          Navigator.pop(context, true);
         });
       } else {
         log('Error accepting appointment');
@@ -160,10 +164,9 @@ class _Page extends State<AssignVetAppointmentPage> {
             child: ListView(
               children: [
                 getPetName(size),
-                getPickupLocation(size),
+                getLocation(size),
                 getDate(size),
                 getDuration(size),
-                getDestinationLocation(size),
                 getNote(size),
               ],
             ),
@@ -178,6 +181,8 @@ class _Page extends State<AssignVetAppointmentPage> {
       onTap: () {
         log('Pet tapped');
         log(_pet.toString());
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ViewPetPage(pet: _pet)));
       },
       child: Padding(
         padding: EdgeInsets.only(
@@ -222,12 +227,15 @@ class _Page extends State<AssignVetAppointmentPage> {
     );
   }
 
-  Widget getPickupLocation(Size size) {
+  Widget getLocation(Size size) {
     return GestureDetector(
-      onTap: () {
-        log('Location tapped');
-        log(_petOwner.address.toString());
-      },
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PageLocationViewer(
+                    pickUpAddress: _petOwner.address!,
+                    destinationAddress: _appointment.address,
+                  ))),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: size.width * .1, vertical: size.width * .025),
@@ -248,50 +256,7 @@ class _Page extends State<AssignVetAppointmentPage> {
                 children: const [
                   Icon(Icons.location_pin, size: 26, color: Colors.red),
                   Text(
-                    ' Pickup location',
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: constants.darkGrey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getDestinationLocation(Size size) {
-    return GestureDetector(
-      onTap: () {
-        log('Location tapped');
-        log(_appointment.location);
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: size.width * .1, vertical: size.width * .025),
-        child: SizedBox(
-          width: size.width * .8,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 66, 66, 66),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black38, blurRadius: 10, spreadRadius: 2)
-              ],
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(size.width * .025),
-              child: Row(
-                children: [
-                  Icon(Icons.share_location,
-                      size: 26, color: Colors.amber[900]),
-                  const Text(
-                    ' Destination location',
+                    ' Show location',
                     style: TextStyle(
                       fontSize: 24,
                       color: constants.darkGrey,

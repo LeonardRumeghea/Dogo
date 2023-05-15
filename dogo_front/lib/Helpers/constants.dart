@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 
-const String googleMapsApiKey = 'AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk';
+// Google API Key for Maps and Directions
+const String googleMapApiKey = 'AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk';
+const String googleDirectionApiKey = 'AIzaSyCZlnFIJrROXkODCImblbxZi0SBXtdzzQI';
 
-const double borderRadius = 15;
-
+// Constants for the app
 const String walk = 'Walk';
 const String salon = 'Salon';
 const String sitting = 'Sitting';
 const String vet = 'Vet';
 const String shopping = 'Shopping';
 
-const String serverUrl = 'https://10.0.2.2:7077/api/v1';
+const double borderRadius = 15;
 
+// Server URL for API calls
+const String serverUrl = 'https://10.0.2.2:7077/api/v1';
+//'http://192.168.0.1:7077/api/v1';
+
+// Colors for the app for different services
 const Color walkColor = Color.fromARGB(255, 84, 147, 139);
 const Color salonColor = Color.fromARGB(255, 255, 195, 170);
 const Color sittingColor = Color.fromARGB(255, 121, 182, 149);
@@ -22,6 +28,11 @@ const Color petColor = Color.fromARGB(255, 204, 172, 144);
 
 const Color darkGrey = Color.fromARGB(255, 214, 212, 213);
 const Color lightGrey = Color.fromARGB(255, 245, 245, 245);
+
+const Color userMarkerColor = Color.fromARGB(255, 0, 145, 124);
+const Color pickUpMarkerColor = Color.fromARGB(255, 3, 89, 86);
+const Color destinationMarkerColor = Color.fromARGB(255, 24, 77, 71);
+const Color pathColor = Color.fromARGB(250, 35, 117, 99);
 
 class MyColors {
   static const MaterialColor darkBlue = MaterialColor(

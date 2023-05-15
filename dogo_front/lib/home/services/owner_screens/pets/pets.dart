@@ -284,8 +284,6 @@ class PetCard extends StatelessWidget {
           child: Center(
             child: ListTile(
               onTap: () {
-                // choseServicePage(context, title);
-                // log(pet.toString());
                 Navigator.push(
                   context,
                   MaterialPageRoute(

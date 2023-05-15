@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'authentication/auth_screen.dart';
+import 'authentication/login_screen.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -13,5 +13,5 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
+  runApp(const MyAppLogin());
 }

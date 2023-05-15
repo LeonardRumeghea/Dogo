@@ -1,3 +1,5 @@
+import 'address.dart';
+
 class Appointment {
   String id = '';
 
@@ -14,8 +16,8 @@ class Appointment {
   // Represents the date and time when the pet must be returned. It's used for sitting
   String dateUntil = '';
 
-  // Format: State, Street, ZipCode. (e.g. 'California, 123 Main Street, 12345')
-  String location = '';
+  // The location of the appointment.
+  Address address = Address();
 
   // Duration in minutes of the appointment. (e.g. 60)
   int duration = 0;
@@ -38,7 +40,6 @@ class Appointment {
     this.walkerId = '',
     this.dateWhen = '',
     this.dateUntil = '',
-    this.location = '',
     this.duration = 0,
     this.price = 0.0,
     this.status = '',
@@ -52,7 +53,7 @@ class Appointment {
     walkerId = json['walkerId'];
     dateWhen = json['dateWhen'];
     dateUntil = json['dateUntil'];
-    location = json['location'];
+    address = Address.fromJson(json['address']);
     duration = json['duration'];
     price = json['price'] ?? 0.0;
     status = appointmentStatus[json['status']];
@@ -68,7 +69,7 @@ class Appointment {
     json['walkerId'] = walkerId;
     json['dateWhen'] = dateWhen;
     json['dateUntil'] = dateUntil;
-    json['location'] = location;
+    json['address'] = address.toJson();
     json['duration'] = duration;
     json['price'] = price;
     json['status'] = status;
@@ -80,7 +81,7 @@ class Appointment {
 
   @override
   String toString() {
-    return 'Appointment{id: $id, petId: $petId, walkerId: $walkerId, dateWhen: $dateWhen, dateUntil: $dateUntil, location: $location, duration: $duration, price: $price, status: $status, type: $type, notes: $notes}';
+    return 'Appointment{id: $id, petId: $petId, walkerId: $walkerId, dateWhen: $dateWhen, dateUntil: $dateUntil, address: ${address.toString()}, duration: $duration, price: $price, status: $status, type: $type, notes: $notes}';
   }
 }
 

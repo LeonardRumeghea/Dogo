@@ -96,7 +96,7 @@ class _Page extends State<AvailableAppointmentsPage>
               bottom: size.height * .01,
             ),
             child: const Text(
-              'Appointments',
+              'Available Appointments',
               style: TextStyle(
                 color: Color.fromARGB(255, 228, 228, 228),
                 fontSize: 24,
@@ -413,6 +413,10 @@ class AppointmetCard extends StatelessWidget {
             return AvailableAppointmentsPage(user: user);
         }
       }),
-    );
+    ); //.then((value) {
+    // if (value != null) {
+    // _getAppointments();
+    // }
+    // });
   }
 }

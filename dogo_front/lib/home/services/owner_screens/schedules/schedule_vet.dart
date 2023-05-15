@@ -7,7 +7,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
 // ignore: implementation_imports
 import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/location_picker.dart';
+import '../../../../Helpers/screens/location_picker.dart';
 import '../../../../Helpers/pets.dart';
 import '../../../../entities/address.dart';
 import '../../../../entities/appointment.dart';
@@ -104,8 +104,6 @@ class _Page extends State<ScheduleVetPage> {
       );
       return;
     }
-    var addressStr =
-        '${_selectedAddress.city}, ${_selectedAddress.street}, ${_selectedAddress.zipCode}';
 
     var dateTime = DateTime(_fullDate.year, _fullDate.month, _fullDate.day,
         _fullDate.hour, _fullDate.minute);
@@ -115,10 +113,10 @@ class _Page extends State<ScheduleVetPage> {
       dateWhen: dateTime.toString(),
       dateUntil: dateTime.toString(),
       duration: int.parse(_selectedDuration),
-      location: addressStr,
       notes: _noteController.text,
       type: 'Vet',
     );
+    appointment.address = Address.copyOf(_selectedAddress);
 
     log('Appointment: $appointment');
 
@@ -255,7 +253,7 @@ class _Page extends State<ScheduleVetPage> {
             SizedBox(
               width: _dateController.text == ''
                   ? size.width * .35
-                  : size.width * .31,
+                  : size.width * .32,
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,

@@ -10,7 +10,7 @@ namespace Dogo.Application.Response
         public DateTime DateUntil { get; set; }
         public string Notes { get; set; }
         public Guid PetId { get; set; }
-        public string Location { get; set; }
+        public AddressResponse Address { get; set; }
         public int Duration { get; set; }
         public AppointmentType Type { get; set; }
 

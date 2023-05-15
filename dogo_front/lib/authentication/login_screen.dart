@@ -5,10 +5,28 @@ import 'dart:io';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
+import 'register_screen.dart' as sign_up;
 import '../entities/person.dart';
 import '../entities/pet.dart';
 import '../home/services.dart';
 import 'package:http/http.dart' as http;
+
+class MyAppLogin extends StatelessWidget {
+  const MyAppLogin({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Dogo',
+      theme: ThemeData(
+        primarySwatch: constants.MyColors.darkBlue,
+        brightness: Brightness.dark,
+      ),
+      home: const PageLogin(),
+    );
+  }
+}
 
 class PageLogin extends StatefulWidget {
   const PageLogin({super.key});
@@ -34,109 +52,206 @@ class _Page extends State<PageLogin> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Form(
             key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
+              // mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 50),
-                  child: Image.asset(
-                    'assets/images/dogo_icon.png',
-                    width: 150,
-                    height: 150,
-                  ),
+                SizedBox(
+                  height: size.height,
+                  width: size.width,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Email',
-                      hintText: 'Enter your email',
-                      errorStyle: TextStyle(color: constants.MyColors.dustRed),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    enableSuggestions: true,
-                    autofillHints: const [AutofillHints.email],
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      if (EmailValidator.validate(value) == false) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
-                    controller: _mailController,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: _passController,
-                    obscureText: !showPassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      errorStyle:
-                          const TextStyle(color: constants.MyColors.dustRed),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          showPassword
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: constants.MyColors.darkBlue,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            showPassword = !showPassword;
-                          });
-                        },
-                      ),
-                    ),
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    fixedSize:
-                        MaterialStateProperty.all<Size>(const Size(300, 50)),
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                      const TextStyle(
-                        fontSize: 24,
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      constants.MyColors.darkBlue,
-                    ),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      checkAccount(context);
-                    }
-                  },
-                  child: const Text('Sign In'),
-                ),
+                getlogo(size),
+                emailInput(size),
+                passwordInput(size),
+                signInButton(context, size),
+                registerLabel(context, size),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  getlogo(Size size) {
+    return Positioned(
+      top: size.height * 0.05,
+      left: size.width * 0.1,
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/images/dogo_icon.png',
+            width: size.width * 0.8,
+            height: size.width * 0.7,
+          ),
+          const Text(
+            'Welcome Back',
+            style: TextStyle(
+              fontSize: 32,
+              fontFamily: 'Roboto',
+              // fontWeight: FontWeight.w500,
+              color: constants.MyColors.dustBlue,
+            ),
+          ),
+          const Text(
+            'Login to your account',
+            style: TextStyle(
+              fontSize: 16,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w400,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  emailInput(Size size) {
+    return Positioned(
+      top: size.height * 0.5,
+      left: size.width * 0.1,
+      child: SizedBox(
+        width: size.width * 0.8,
+        child: TextFormField(
+          decoration: const InputDecoration(
+            border: UnderlineInputBorder(),
+            labelText: 'Email',
+            hintText: 'Enter your email',
+            errorStyle: TextStyle(color: constants.MyColors.dustRed),
+          ),
+          keyboardType: TextInputType.emailAddress,
+          enableSuggestions: true,
+          autofillHints: const [AutofillHints.email],
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your email';
+            }
+            if (EmailValidator.validate(value) == false) {
+              return 'Please enter a valid email';
+            }
+            return null;
+          },
+          controller: _mailController,
+        ),
+      ),
+    );
+  }
+
+  passwordInput(Size size) {
+    return Positioned(
+      top: size.height * 0.6,
+      left: size.width * 0.1,
+      child: SizedBox(
+        width: size.width * 0.8,
+        child: TextFormField(
+          keyboardType: TextInputType.text,
+          controller: _passController,
+          obscureText: !showPassword,
+          decoration: InputDecoration(
+            labelText: 'Password',
+            hintText: 'Enter your password',
+            errorStyle: const TextStyle(color: constants.MyColors.dustRed),
+            suffixIcon: IconButton(
+              icon: Icon(
+                showPassword ? Icons.visibility : Icons.visibility_off,
+                color: constants.MyColors.darkBlue,
+              ),
+              onPressed: () {
+                setState(() {
+                  showPassword = !showPassword;
+                });
+              },
+            ),
+          ),
+          enableSuggestions: false,
+          autocorrect: false,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your password';
+            }
+            return null;
+          },
+        ),
+      ),
+    );
+  }
+
+  signInButton(BuildContext context, Size size) {
+    return Positioned(
+      top: size.height * 0.75,
+      left: size.width * 0.2,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          fixedSize: MaterialStateProperty.all<Size>(Size(
+            size.width * 0.6,
+            size.height * 0.06,
+          )),
+          textStyle: MaterialStateProperty.all<TextStyle>(
+            const TextStyle(
+              fontSize: 24,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          backgroundColor: MaterialStateProperty.all<Color>(
+            constants.MyColors.darkBlue,
+          ),
+        ),
+        onPressed: () {
+          if (_formKey.currentState!.validate()) {
+            checkAccount(context);
+          }
+        },
+        child: const Text('Sign In'),
+      ),
+    );
+  }
+
+  registerLabel(BuildContext context, Size size) {
+    return Positioned(
+      top: size.height * 0.8,
+      left: size.width * 0.22,
+      child: SizedBox(
+        width: size.width * 0.6,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Don\'t have an account?',
+              textAlign: TextAlign.center,
+            ),
+            TextButton(
+              style: ButtonStyle(
+                textStyle: MaterialStateProperty.all<TextStyle>(
+                  const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const sign_up.Page()));
+              },
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  color: constants.MyColors.dustBlue,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -195,6 +310,9 @@ class _Page extends State<PageLogin> {
         displaySuccess(context, 'Login successful');
 
         var responseStr = await response.stream.bytesToString();
+
+        log('Response: $responseStr');
+
         Person person = Person.fromJSON(jsonDecode(responseStr));
 
         // ignore: use_build_context_synchronously

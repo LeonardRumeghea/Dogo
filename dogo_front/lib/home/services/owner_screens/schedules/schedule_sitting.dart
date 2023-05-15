@@ -235,7 +235,7 @@ class _Page extends State<ScheduleSittingPage> {
             SizedBox(
               width: _fromController.text == ''
                   ? size.width * .35
-                  : size.width * .31,
+                  : size.width * .32,
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,
@@ -272,7 +272,7 @@ class _Page extends State<ScheduleSittingPage> {
             SizedBox(
               width: _toController.text == ''
                   ? size.width * .35
-                  : size.width * .31,
+                  : size.width * .32,
               child: TextField(
                 decoration: const InputDecoration(
                   border: InputBorder.none,

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/fetches.dart';
+import '../../../../Helpers/screens/view_location.dart';
+import '../../../../Helpers/screens/pet_profile.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
 
@@ -24,6 +26,8 @@ class AssignWalkAppointmentPage extends StatefulWidget {
 class _Page extends State<AssignWalkAppointmentPage> {
   Pet _pet = Pet();
   Person _petOwner = Person();
+
+  bool _accepted = false;
 
   Person get _user => widget.user;
   Appointment get _appointment => widget.appointment;
@@ -85,7 +89,7 @@ class _Page extends State<AssignWalkAppointmentPage> {
           ),
         );
         Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pop(context);
+          Navigator.pop(context, true);
         });
       } else {
         log('Error accepting appointment');
@@ -170,6 +174,8 @@ class _Page extends State<AssignWalkAppointmentPage> {
       onTap: () {
         log('Pet tapped');
         log(_pet.toString());
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ViewPetPage(pet: _pet)));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -214,8 +220,11 @@ class _Page extends State<AssignWalkAppointmentPage> {
   Widget getLocation(Size size) {
     return GestureDetector(
       onTap: () {
-        log('Location tapped');
-        log(_petOwner.address.toString());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    PageLocationViewer(pickUpAddress: _petOwner.address!)));
       },
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -237,7 +246,7 @@ class _Page extends State<AssignWalkAppointmentPage> {
                 children: const [
                   Icon(Icons.location_pin, size: 26, color: Colors.red),
                   Text(
-                    ' Pickup location',
+                    ' Show location',
                     style: TextStyle(
                       fontSize: 24,
                       color: constants.darkGrey,

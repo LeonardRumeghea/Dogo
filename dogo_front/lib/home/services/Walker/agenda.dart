@@ -35,23 +35,7 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      // floatingActionButton: getFlotingButton(context),
       body: getBody(context, size),
-    );
-  }
-
-  Widget getFlotingButton(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Not implemented yet! Coming soon!'),
-            backgroundColor: constants.MyColors.dustRed,
-          ),
-        )
-      },
-      backgroundColor: constants.MyColors.darkBlue,
-      child: const Icon(Icons.map_outlined),
     );
   }
 
@@ -89,7 +73,7 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
               bottom: size.height * .01,
             ),
             child: const Text(
-              'Appointments',
+              'Agenda',
               style: TextStyle(
                 color: Color.fromARGB(255, 228, 228, 228),
                 fontSize: 24,
@@ -110,7 +94,7 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: size.height * .7,
+          maxHeight: size.height * .75,
         ),
         child: SingleChildScrollView(child: cardsColumn(size)),
       ),
@@ -173,34 +157,25 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
               onTap: () {
                 // choseServicePage(context, title);
               },
-              leading: CircleAvatar(
-                backgroundColor: color,
-                child: icon,
-              ),
-              title: Text(
-                title,
-                style: const TextStyle(
-                    color: constants.MyColors.grey,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-              ),
+              leading: CircleAvatar(backgroundColor: color, child: icon),
+              title: Text(title,
+                  style: const TextStyle(
+                      color: constants.MyColors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16)),
               subtitle: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    date,
-                    style: const TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13),
-                  ),
-                  Text(
-                    status,
-                    style: TextStyle(
-                        color: _getColorOfStatus(status),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 13),
-                  ),
+                  Text(date,
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13)),
+                  Text(status,
+                      style: TextStyle(
+                          color: _getColorOfStatus(status),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13)),
                 ],
               ),
             ),
@@ -215,7 +190,7 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
       top: size.height * .1,
       left: size.width * .05,
       child: Container(
-        height: size.height * .785,
+        height: size.height * .85,
         width: size.width * .9,
         decoration: const BoxDecoration(
           borderRadius:

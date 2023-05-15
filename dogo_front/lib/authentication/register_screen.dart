@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../Helpers/constants.dart' as constants;
+import '../Helpers/screens/location_picker.dart';
 import '../entities/address.dart';
 import './login_screen.dart';
 
@@ -35,6 +36,9 @@ class _Page extends State<Page> {
   bool _passwordVisible = false;
   bool _passwordConfirmationVisible = false;
 
+  bool _isAddressSelected = false;
+  Address _selectedAddress = Address();
+
   final _formKey = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
@@ -58,11 +62,11 @@ class _Page extends State<Page> {
                 physics: const ClampingScrollPhysics(),
                 onStepContinue: () {
                   setState(() {
-                    if (_currentStep == 3 && validateStep(_currentStep)) {
+                    if (_currentStep == 4 && validateStep(_currentStep)) {
                       createUser(context);
                     }
 
-                    if (validateStep(_currentStep) && _currentStep < 3) {
+                    if (validateStep(_currentStep) && _currentStep < 4) {
                       _currentStep = _currentStep + 1;
                     }
                   });
@@ -120,9 +124,79 @@ class _Page extends State<Page> {
                     ),
                   ),
                   Step(
-                    title:
-                        const Text('Address', style: TextStyle(fontSize: 20)),
+                    title: const Text('Pick Address',
+                        style: TextStyle(fontSize: 20)),
                     isActive: _currentStep >= 3,
+                    content: GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .6,
+                          height: MediaQuery.of(context).size.height * .05,
+                          decoration: BoxDecoration(
+                            color: constants.MyColors.darkBlue,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: constants.MyColors.blackBlue
+                                    .withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                !_isAddressSelected
+                                    ? Icons.add_location_alt_rounded
+                                    : Icons.edit_location_rounded,
+                                color: constants.lightGrey,
+                              ),
+                              Text(
+                                  !_isAddressSelected
+                                      ? ' Add Address'
+                                      : ' Edit Address',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: constants.lightGrey,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PageLocationPicker(),
+                          ),
+                        ).then(
+                          (value) => setState(
+                            () {
+                              if (value != null) {
+                                _selectedAddress = value;
+                                _isAddressSelected = true;
+
+                                _stateController.text = _selectedAddress.state;
+                                _cityController.text = _selectedAddress.city;
+                                _streetController.text =
+                                    _selectedAddress.street;
+                                _zipCodeController.text =
+                                    _selectedAddress.zipCode;
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Step(
+                    title: const Text('Validate Address',
+                        style: TextStyle(fontSize: 20)),
+                    isActive: _currentStep >= 4,
                     content: Form(
                       key: _formKey[3],
                       child: Column(
@@ -152,12 +226,7 @@ class _Page extends State<Page> {
       email: _emailController.text,
       password: _passwordController.text,
       phoneNumber: _phoneController.text,
-      address: Address(
-          state: _stateController.text,
-          city: _cityController.text,
-          street: _streetController.text,
-          zipCode: _zipCodeController.text,
-          additionalDetails: _otherDetailsController.text),
+      address: Address.copyOf(_selectedAddress),
     );
 
     postUser(person).then((value) {
@@ -222,6 +291,8 @@ class _Page extends State<Page> {
       case 2:
         return _formKey[2].currentState!.validate();
       case 3:
+        return _isAddressSelected;
+      case 4:
         return _formKey[3].currentState!.validate();
       default:
         return false;

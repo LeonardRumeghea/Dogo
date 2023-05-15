@@ -34,6 +34,12 @@ namespace Dogo.Infrastructure.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
@@ -54,6 +60,9 @@ namespace Dogo.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("DateUntil")
                         .HasColumnType("datetime2");
 
@@ -65,9 +74,6 @@ namespace Dogo.Infrastructure.Migrations
 
                     b.Property<bool>("IsAssigned")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
@@ -85,6 +91,8 @@ namespace Dogo.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("WalkerId");
 
@@ -231,11 +239,17 @@ namespace Dogo.Infrastructure.Migrations
 
             modelBuilder.Entity("Dogo.Core.Entities.Appointment", b =>
                 {
+                    b.HasOne("Dogo.Core.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId");
+
                     b.HasOne("Dogo.Core.Entities.Walker", null)
                         .WithMany("Appointments")
                         .HasForeignKey("WalkerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Dogo.Core.Entities.Pet", b =>
