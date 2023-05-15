@@ -126,16 +126,14 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
           child: Column(
             children: <Widget>[
               IconButton(
-                  icon: const Icon(Icons.add,
-                      color: constants.MyColors.blackBlue),
+                  icon: const Icon(Icons.add, color: Colors.white),
                   onPressed: () async {
                     _zoomLevel += _zoomLevel > _maxZoomLevel ? 0 : 0.5;
                     refreshMap();
                   }),
               const SizedBox(height: 2),
               IconButton(
-                  icon: const Icon(Icons.remove,
-                      color: constants.MyColors.blackBlue),
+                  icon: const Icon(Icons.remove, color: Colors.white),
                   onPressed: () async {
                     _zoomLevel -= _zoomLevel < _minZoomLevel ? 0 : 0.5;
                     refreshMap();
@@ -195,7 +193,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
             child: Text(
               _selectedAddressStr,
               style: const TextStyle(
-                color: constants.MyColors.grey,
+                color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),

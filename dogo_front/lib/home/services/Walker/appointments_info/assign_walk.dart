@@ -27,8 +27,6 @@ class _Page extends State<AssignWalkAppointmentPage> {
   Pet _pet = Pet();
   Person _petOwner = Person();
 
-  bool _accepted = false;
-
   Person get _user => widget.user;
   Appointment get _appointment => widget.appointment;
 

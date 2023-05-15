@@ -65,7 +65,7 @@ class _Page extends State<AppointmentsPage>
       backGroundColor: _isCollapsed
           ? constants.MyColors.darkBlue
           : constants.MyColors.blackBlue,
-      iconColor: constants.MyColors.grey,
+      iconColor: constants.MyColors.lightBlue,
       iconData: _isCollapsed ? Icons.add : Icons.close,
       onPress: () {
         if (_user.pets.isEmpty) {

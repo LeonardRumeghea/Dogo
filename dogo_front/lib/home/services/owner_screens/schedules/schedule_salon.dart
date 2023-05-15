@@ -57,7 +57,7 @@ class _Page extends State<ScheduleSalonPage> {
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.done,
-          color: constants.MyColors.grey,
+          color: constants.MyColors.lightBlue,
         ),
       ),
       body: SingleChildScrollView(

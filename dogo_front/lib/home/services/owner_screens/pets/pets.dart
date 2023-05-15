@@ -51,7 +51,7 @@ class _Page extends State<ManageYourPetsPage> {
         backgroundColor: constants.MyColors.darkBlue,
         child: const Icon(
           Icons.add,
-          color: constants.MyColors.grey,
+          color: constants.MyColors.lightBlue,
         ),
       ),
       body: SingleChildScrollView(
@@ -285,14 +285,10 @@ class PetCard extends StatelessWidget {
             child: ListTile(
               onTap: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UpdatePetPage(
-                      user: user,
-                      pet: pet,
-                    ),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            UpdatePetPage(user: user, pet: pet)));
               },
               leading: CircleAvatar(
                 backgroundColor: color,

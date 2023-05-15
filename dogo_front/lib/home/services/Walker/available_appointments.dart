@@ -58,7 +58,8 @@ class _Page extends State<AvailableAppointmentsPage>
         )
       },
       backgroundColor: constants.MyColors.darkBlue,
-      child: const Icon(Icons.map_outlined),
+      child:
+          const Icon(Icons.map_outlined, color: constants.MyColors.lightBlue),
     );
   }
 

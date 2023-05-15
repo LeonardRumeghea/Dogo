@@ -211,7 +211,7 @@ class _Page extends State<UpdatePetPage> {
       backgroundColor: constants.MyColors.darkBlue,
       child: Icon(
         !_inEditMode ? Icons.edit : Icons.done,
-        color: constants.MyColors.grey,
+        color: constants.MyColors.lightBlue,
       ),
     );
   }

@@ -195,7 +195,7 @@ class _Page extends State<ManagePetPage> {
       backgroundColor: constants.MyColors.darkBlue,
       child: const Icon(
         Icons.done,
-        color: constants.MyColors.grey,
+        color: constants.MyColors.lightBlue,
       ),
     );
   }

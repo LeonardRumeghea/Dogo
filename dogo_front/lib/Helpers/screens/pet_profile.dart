@@ -1,24 +1,7 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
-import '../../../../Helpers/puts.dart';
-import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
-
-String petName = "Rex";
-String petType = "Dog";
-String petBreed = "German Shepherd";
-
-DateTime petBirthDate = DateTime(2018, 10, 10);
-double age = DateTime.now().difference(petBirthDate).inDays / 365;
-
-String result = '';
 
 class ViewPetPage extends StatefulWidget {
   const ViewPetPage({Key? key, required this.pet}) : super(key: key);
@@ -30,89 +13,14 @@ class ViewPetPage extends StatefulWidget {
 }
 
 class _Page extends State<ViewPetPage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  String _speciesSelected = '';
-  String _breedSelected = '';
-  String _genderSelected = 'Male';
-
-  List<String> _species = [];
-  List<String> _breeds = [];
-
   Pet get _pet => widget.pet;
-
-  bool _inEditMode = false;
 
   @override
   void initState() {
     super.initState();
-
-    _species = [];
-    _breeds = [];
-
-    fetchSpecies().then((fetchedData) {
-      setState(() {
-        _species =
-            json.decode(fetchedData).map<String>((e) => e.toString()).toList();
-
-        fetchBreeds(_speciesSelected).then((fetchedData) {
-          setState(() {
-            _breeds = json
-                .decode(fetchedData)
-                .map<String>((e) => e.toString())
-                .toList();
-          });
-        });
-      });
-    });
-
-    init();
-  }
-
-  init() {
-    _nameController.text = _pet.name;
-    _dateController.text =
-        DateFormat('yyyy-MM-dd').format(DateTime.parse(_pet.dateOfBirth));
-    _speciesSelected = _pet.specie;
-    _breedSelected = _pet.breed;
     _descriptionController.text = _pet.description;
-  }
-
-  String addSpaces(String text) {
-    return text
-        .split('')
-        .map((e) => e.toLowerCase() != e ? ' $e' : e)
-        .join()
-        .trim();
-  }
-
-  Future<String> fetchSpecies() async {
-    var request = http.Request('GET',
-        Uri.parse('${constants.serverUrl}/appointments/species?api-version=1'));
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to get species');
-    }
-
-    return await response.stream.bytesToString();
-  }
-
-  Future<String> fetchBreeds(String specie) async {
-    var request = http.Request(
-        'GET',
-        Uri.parse(
-            '${constants.serverUrl}/appointments/breeds?specie=$specie&api-version=1'));
-
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to get breeds');
-    }
-
-    return await response.stream.bytesToString();
   }
 
   @override
@@ -128,16 +36,10 @@ class _Page extends State<ViewPetPage> {
         child: Center(
           child: Stack(
             children: <Widget>[
-              SizedBox(
-                height: size.height,
-                width: size.width,
-              ),
+              SizedBox(height: size.height, width: size.width),
               banner(size),
               panel(size),
-              Positioned(
-                top: size.height * .125,
-                child: panelContent(size),
-              ),
+              Positioned(top: size.height * .125, child: panelContent(size)),
             ],
           ),
         ),
@@ -183,10 +85,7 @@ class _Page extends State<ViewPetPage> {
               Text(' Name', style: TextStyle(fontSize: 20)),
             ],
           ),
-          Text(
-            _pet.name,
-            style: const TextStyle(fontSize: 22),
-          )
+          Text(_pet.name, style: const TextStyle(fontSize: 22))
         ],
       ),
     );

@@ -10,6 +10,7 @@ import '../settings/profile_view.dart' as profile_view;
 // services page for the owner implementation
 import 'services/owner_screens/pets/pets.dart';
 import 'services/owner_screens/appointments.dart';
+import 'services/owner_screens/history.dart';
 
 // services page for the walker implementation
 import 'services/walker/agenda.dart';
@@ -190,7 +191,7 @@ class _ServicesPageState extends State<ServicesPage> {
         context,
         size,
         'Search Appointment',
-        'Choose to generate an automated route or look for an appointment in the near future.',
+        'Look for appointments in the near future.',
         Icon(Icons.calendar_month,
             color: Colors.purple, size: size.height * .08),
         false,
@@ -199,7 +200,7 @@ class _ServicesPageState extends State<ServicesPage> {
         context,
         size,
         'Your Preferences',
-        'For a more personalized experience, set your preferences for the upcoming timeframe.',
+        'Set your preferences for a more customized experience.',
         Icon(Icons.room_preferences,
             color: Colors.green, size: size.height * .08),
         true,
@@ -257,35 +258,37 @@ class _ServicesPageState extends State<ServicesPage> {
             _getServiceIcon(icon, size)
           ];
 
+    var cardPadding = EdgeInsets.only(
+      top: size.height * .0125,
+      bottom: size.height * .0125,
+      left: onRight ? size.width * .15 : 0,
+      right: !onRight ? size.width * .15 : 0,
+    );
+
+    var cardBorderRadius = BorderRadius.only(
+      topLeft: Radius.circular(onRight ? 8 : 0),
+      bottomLeft: Radius.circular(onRight ? 8 : 0),
+      topRight: Radius.circular(!onRight ? 8 : 0),
+      bottomRight: Radius.circular(!onRight ? 8 : 0),
+    );
+
+    var cardDecoration = BoxDecoration(
+      color: const Color.fromARGB(255, 66, 66, 66),
+      borderRadius: cardBorderRadius,
+      boxShadow: const [
+        BoxShadow(color: Colors.black38, blurRadius: 10, spreadRadius: 2),
+      ],
+    );
+
     return Padding(
-      padding: EdgeInsets.only(
-        top: size.height * .0125,
-        bottom: size.height * .0125,
-        left: onRight ? size.width * .15 : 0,
-        right: !onRight ? size.width * .15 : 0,
-      ),
-      child: InkWell(
+      padding: cardPadding,
+      child: GestureDetector(
         onTap: () => _choseServicePage(context, title),
         child: Container(
           height: size.height * .14,
           width: size.width * .85,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 66, 66, 66),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(onRight ? 8 : 0),
-              bottomLeft: Radius.circular(onRight ? 8 : 0),
-              topRight: Radius.circular(!onRight ? 8 : 0),
-              bottomRight: Radius.circular(!onRight ? 8 : 0),
-            ),
-            boxShadow: const [
-              BoxShadow(color: Colors.black38, blurRadius: 10, spreadRadius: 2),
-            ],
-          ),
-          child: Center(
-            child: Row(
-              children: cardInfo,
-            ),
-          ),
+          decoration: cardDecoration,
+          child: Center(child: Row(children: cardInfo)),
         ),
       ),
     );
@@ -304,16 +307,14 @@ class _ServicesPageState extends State<ServicesPage> {
       height: size.height * .14,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          Text(title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )),
           Text(
             details,
             style: const TextStyle(color: Colors.white, fontSize: 16),
@@ -339,6 +340,8 @@ class _ServicesPageState extends State<ServicesPage> {
             return const PreferencesPage();
           case 'Appointments':
             return AppointmentsPage(user: _user);
+          case 'History & Reports':
+            return HistoryPage(user: _user);
           default:
             return ServicesPage(user: _user);
         }
