@@ -16,16 +16,12 @@ namespace Dogo.Infrastructure
         {
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
-            services.AddScoped<IPetOwnerRepository, PetOwnerRepository>();
-            services.AddScoped<IWalkerRepository, WalkerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-            services.AddScoped<IReviewRepository, ReviewRepository>();
-            services.AddDbContext<DatabaseContext>(
-                m => m.UseSqlServer(
-                    configuration.GetConnectionString("DogoDB")
-                ), ServiceLifetime.Singleton);
+            
+            services.AddDbContext<DatabaseContext>(m => m.UseSqlServer(configuration.GetConnectionString("DogoDB")), ServiceLifetime.Singleton);
 
             return services;
         }

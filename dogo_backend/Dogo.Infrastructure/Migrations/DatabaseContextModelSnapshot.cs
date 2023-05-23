@@ -94,8 +94,6 @@ namespace Dogo.Infrastructure.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("WalkerId");
-
                     b.ToTable("Appointments");
                 });
 
@@ -126,48 +124,17 @@ namespace Dogo.Infrastructure.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("PetOwnerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("Specie")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PetOwnerId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Pets");
-                });
-
-            modelBuilder.Entity("Dogo.Core.Entities.PetOwner", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AddressId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.ToTable("PetOwners");
                 });
 
             modelBuilder.Entity("Dogo.Core.Entities.Review", b =>
@@ -188,9 +155,6 @@ namespace Dogo.Infrastructure.Migrations
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("WalkerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("WrittenBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -198,12 +162,10 @@ namespace Dogo.Infrastructure.Migrations
 
                     b.HasIndex("PetId");
 
-                    b.HasIndex("WalkerId");
-
                     b.ToTable("Reviews");
                 });
 
-            modelBuilder.Entity("Dogo.Core.Entities.Walker", b =>
+            modelBuilder.Entity("Dogo.Core.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -227,14 +189,11 @@ namespace Dogo.Infrastructure.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Walkers");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Dogo.Core.Entities.Appointment", b =>
@@ -243,29 +202,14 @@ namespace Dogo.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("AddressId");
 
-                    b.HasOne("Dogo.Core.Entities.Walker", null)
-                        .WithMany("Appointments")
-                        .HasForeignKey("WalkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Dogo.Core.Entities.Pet", b =>
                 {
-                    b.HasOne("Dogo.Core.Entities.PetOwner", null)
+                    b.HasOne("Dogo.Core.Entities.User", null)
                         .WithMany("Pets")
-                        .HasForeignKey("PetOwnerId");
-                });
-
-            modelBuilder.Entity("Dogo.Core.Entities.PetOwner", b =>
-                {
-                    b.HasOne("Dogo.Core.Entities.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Dogo.Core.Entities.Review", b =>
@@ -273,13 +217,9 @@ namespace Dogo.Infrastructure.Migrations
                     b.HasOne("Dogo.Core.Entities.Pet", null)
                         .WithMany("Reviews")
                         .HasForeignKey("PetId");
-
-                    b.HasOne("Dogo.Core.Entities.Walker", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("WalkerId");
                 });
 
-            modelBuilder.Entity("Dogo.Core.Entities.Walker", b =>
+            modelBuilder.Entity("Dogo.Core.Entities.User", b =>
                 {
                     b.HasOne("Dogo.Core.Entities.Address", "Address")
                         .WithMany()
@@ -293,16 +233,9 @@ namespace Dogo.Infrastructure.Migrations
                     b.Navigation("Reviews");
                 });
 
-            modelBuilder.Entity("Dogo.Core.Entities.PetOwner", b =>
+            modelBuilder.Entity("Dogo.Core.Entities.User", b =>
                 {
                     b.Navigation("Pets");
-                });
-
-            modelBuilder.Entity("Dogo.Core.Entities.Walker", b =>
-                {
-                    b.Navigation("Appointments");
-
-                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

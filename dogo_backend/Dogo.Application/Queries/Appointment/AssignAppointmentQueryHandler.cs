@@ -1,5 +1,4 @@
-﻿using Dogo.Application.Response;
-using Dogo.Core.Entities;
+﻿using Dogo.Core.Entities;
 using Dogo.Core.Helpers;
 using MediatR;
 
@@ -19,7 +18,7 @@ namespace Dogo.Application.Queries.Appointment
                 return Result.Failure(HttpStatusCode.NotFound, "Appointment not found");
             }
 
-            var user = await unitOfWork.PetOwnerRepository.GetByIdAsync(request.UserId);
+            var user = await unitOfWork.UsersRepository.GetByIdAsync(request.UserId);
             if (user == null)
             {
                 return Result.Failure(HttpStatusCode.NotFound, "User not found");
@@ -27,6 +26,7 @@ namespace Dogo.Application.Queries.Appointment
 
             appointment.WalkerId = request.UserId;
             appointment.Status = AppointmentStatus.Assigned;
+            appointment.IsAssigned = true;
 
             await unitOfWork.AppointmentRepository.UpdateAsync(appointment);
 

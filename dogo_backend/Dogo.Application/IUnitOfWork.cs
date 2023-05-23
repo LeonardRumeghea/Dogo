@@ -7,11 +7,11 @@ namespace Dogo.Application
     public interface IUnitOfWork
     {
         IRepository<Pet> PetRepository { get; }
-        IPetOwnerRepository PetOwnerRepository { get; }
+
+        IUserRepository UsersRepository { get; }
         IRepository<Appointment> AppointmentRepository { get; }
-        IRepository<Walker> WalkerRepository { get; }
-        IRepository<Review> ReviewRepository { get; }
         IRepository<Address> AddressRepository { get; }
+        IUserPreferencesRepository UserPreferencesRepository { get; }
 
         Task SaveChanges();
     }

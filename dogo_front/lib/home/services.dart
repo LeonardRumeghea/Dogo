@@ -91,11 +91,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   color: constants.MyColors.darkBlue,
                   onPressed: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const profile_view.ProfilePage(),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const profile_view.ProfilePage()));
                   },
                   iconSize: 32,
                 ),
@@ -104,11 +103,7 @@ class _ServicesPageState extends State<ServicesPage> {
                 top: size.height * .25,
                 child: _sericesGridDashboard(size),
               ),
-              Positioned(
-                bottom: 0,
-                width: size.width,
-                child: _profiles(),
-              )
+              Positioned(bottom: 0, width: size.width, child: _profiles())
             ],
           ),
         );
@@ -266,10 +261,10 @@ class _ServicesPageState extends State<ServicesPage> {
     );
 
     var cardBorderRadius = BorderRadius.only(
-      topLeft: Radius.circular(onRight ? 8 : 0),
-      bottomLeft: Radius.circular(onRight ? 8 : 0),
-      topRight: Radius.circular(!onRight ? 8 : 0),
-      bottomRight: Radius.circular(!onRight ? 8 : 0),
+      topLeft: Radius.circular(onRight ? constants.borderRadius : 0),
+      bottomLeft: Radius.circular(onRight ? constants.borderRadius : 0),
+      topRight: Radius.circular(!onRight ? constants.borderRadius : 0),
+      bottomRight: Radius.circular(!onRight ? constants.borderRadius : 0),
     );
 
     var cardDecoration = BoxDecoration(

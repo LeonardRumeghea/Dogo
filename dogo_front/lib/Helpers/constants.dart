@@ -11,7 +11,7 @@ const String sitting = 'Sitting';
 const String vet = 'Vet';
 const String shopping = 'Shopping';
 
-const double borderRadius = 15;
+const double borderRadius = 8;
 
 // Server URL for API calls
 const String serverUrl = 'https://10.0.2.2:7077/api/v1';
@@ -33,6 +33,12 @@ const Color userMarkerColor = Color.fromARGB(255, 0, 145, 124);
 const Color pickUpMarkerColor = Color.fromARGB(255, 3, 89, 86);
 const Color destinationMarkerColor = Color.fromARGB(255, 24, 77, 71);
 const Color pathColor = Color.fromARGB(250, 35, 117, 99);
+
+const Color blackBlue = Color.fromRGBO(41, 50, 65, 1);
+const Color darkBlue = Color.fromARGB(255, 61, 90, 128);
+const Color dustBlue = Color.fromRGBO(152, 193, 217, 1);
+const Color dustRed = Color.fromRGBO(238, 108, 77, 1);
+const Color dustGreen = Color.fromRGBO(118, 169, 115, 1);
 
 class MyColors {
   static const MaterialColor darkBlue = MaterialColor(

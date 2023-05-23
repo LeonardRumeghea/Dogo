@@ -13,7 +13,7 @@ namespace Dogo.Application.Queries.Appointment
 
         public async Task<ResultOfEntity<List<AppointmentResponse>>> Handle(GetAgendaOfUserQuery request, CancellationToken cancellationToken)
         {
-            var user = await unitOfWork.PetOwnerRepository.GetByIdAsync(request.UserId);
+            var user = await unitOfWork.UsersRepository.GetByIdAsync(request.UserId);
             if (user == null)
                 return ResultOfEntity<List<AppointmentResponse>>.Failure(HttpStatusCode.NotFound, "User not found");
 

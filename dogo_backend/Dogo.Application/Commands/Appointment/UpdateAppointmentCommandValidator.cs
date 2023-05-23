@@ -8,7 +8,7 @@ namespace Dogo.Application.Commands.Appointment
         {
             RuleFor(x => x.Date)
                 .NotEmpty()
-                .Must(Validations.BeValidDateAppointment)
+                .Must(Validations.BeValidAppointmentDate)
                 .WithMessage("Date must be a valid date");
 
             RuleFor(x => x.Notes)

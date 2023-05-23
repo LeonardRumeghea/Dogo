@@ -23,12 +23,12 @@ namespace Dogo.Application.Commands.Pet
 
             RuleFor(x => x.Breed)
                 .NotNull()
-                .Must((x, breed) => Validations.BeRightBreed(x.Specie, breed))
+                .Must((x, breed) => Validations.BeValidBreed(x.Specie, breed))
                 .WithMessage("Breed must not be null");
 
             RuleFor(x => x.DateOfBirth)
                 .NotEmpty()
-                .Must(Validations.BeValidDate)
+                .Must(Validations.BeValidDateOfBirth)
                 .WithMessage("DateOfBirth must be a valid date");
 
             RuleFor(x => x.Gender)

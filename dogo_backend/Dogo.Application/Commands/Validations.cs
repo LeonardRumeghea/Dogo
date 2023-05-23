@@ -6,20 +6,16 @@ using System.Text.RegularExpressions;
 
 namespace Dogo.Application.Commands
 {
-    public static class Validations
+    public static partial class Validations
     {
-        public static bool BeValidDate(string value) => DateTime.TryParse(value, out var date) && date < DateTime.Now;
+        public static bool BeValidDateOfBirth(string value) => DateTime.TryParse(value, out var date) && date < DateTime.Now;
 
-        public static bool BeValidDateAppointment(string value) => DateTime.TryParse(value, out var date) && date > DateTime.Now;
+        public static bool BeValidAppointmentDate(string value) => DateTime.TryParse(value, out var date) && date > DateTime.Now;
 
-        public static bool BeValidUntilDateAppointment(string value)
-        {
-            if (value == null || value == "") return true;
+        public static bool BeValidUntilDateAppointment(string value) 
+            => value == null || value == "" || (DateTime.TryParse(value, out DateTime date) && date > DateTime.Now);
 
-            return DateTime.TryParse(value, out var date) && date > DateTime.Now;
-        }
-
-        public static bool BeValidAppointmentDuration(int value) => value == 0 || (value >= 1 && value <= 1440);
+        public static bool BeValidAppointmentDuration(int value) => value >= 0 && value <= 1440;
 
         public static bool BeValidAppointmentType(string value) => Enum.TryParse(value, out AppointmentType _);
 
@@ -27,7 +23,7 @@ namespace Dogo.Application.Commands
 
         public static bool BeInSpeciesEnum(string value) => Enum.TryParse<Specie>(value, out _);
 
-        public static bool BeRightBreed(string specie, string breed)
+        public static bool BeValidBreed(string specie, string breed)
         {
             return specie switch
             {
@@ -43,9 +39,11 @@ namespace Dogo.Application.Commands
             };
         }
 
-        public static bool BeValidGuid(Guid value) {
-            Regex re = new(@"^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$");
-            return re.IsMatch(value.ToString());
-        }
+        public static bool BeValidPreference(string value) => Enum.TryParse(value, out PreferenceDegree _);
+
+        public static bool BeValidGuid(Guid value) => GuidRegex().IsMatch(value.ToString());
+
+        [GeneratedRegex("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")]
+        private static partial Regex GuidRegex();
     }
 }

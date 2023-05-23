@@ -3,7 +3,5 @@ using Dogo.Core.Repositories.Base;
 
 namespace Dogo.Core.Repositories
 {
-    public interface IAppointmentRepository : IRepository<Appointment>
-    { 
-    }
+    public interface IAppointmentRepository : IRepository<Appointment> {  }
 }

@@ -266,14 +266,10 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
 
   void refreshMap() {
     _googleMapController.future.then((controller) {
-      controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            target: _currentLatLng,
-            zoom: _zoomLevel,
-          ),
-        ),
-      );
+      controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+        target: _currentLatLng,
+        zoom: _zoomLevel,
+      )));
     });
   }
 
@@ -300,10 +296,9 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
             child: Text(
               '${_pickUpAddress.city}, ${_pickUpAddress.street}',
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             ),
           ),

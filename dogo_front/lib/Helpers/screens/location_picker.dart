@@ -109,7 +109,7 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
       left: size.width * .025,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(constants.borderRadius),
           color: constants.MyColors.darkBlue,
           boxShadow: [
             BoxShadow(

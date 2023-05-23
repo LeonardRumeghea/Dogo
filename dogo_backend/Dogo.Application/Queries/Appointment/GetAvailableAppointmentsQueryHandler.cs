@@ -14,7 +14,7 @@ namespace Dogo.Application.Queries.Appointment
 
         public async Task<ResultOfEntity<List<AppointmentResponse>>> Handle(GetAvailableAppointmentsQuery request, CancellationToken cancellationToken)
         {
-            var user = unitOfWork.PetOwnerRepository.GetByIdAsync(request.UserId);
+            var user = unitOfWork.UsersRepository.GetByIdAsync(request.UserId);
             if (user == null)
             {
                 return ResultOfEntity<List<AppointmentResponse>>

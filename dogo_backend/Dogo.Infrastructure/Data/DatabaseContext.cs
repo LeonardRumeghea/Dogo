@@ -19,12 +19,11 @@ namespace Dogo.Infrastructure.Data
             Database.EnsureCreated();
         }
 
-        public DbSet<PetOwner> PetOwners => Set<PetOwner>();
-        public DbSet<Walker> Walkers => Set<Walker>();
+        public DbSet<User> User => Set<User>();
         public DbSet<Pet> Pets => Set<Pet>();
         public DbSet<Appointment> Appointments => Set<Appointment>();
         public DbSet<Address> Addresses => Set<Address>();
-        public DbSet<Review> Reviews => Set<Review>();
+        public DbSet<UserPreferences> UserPreferences => Set<UserPreferences>();
 
         public void Save() => SaveChanges();
     }

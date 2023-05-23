@@ -13,7 +13,6 @@ namespace Dogo.Application.Response
         public AddressResponse Address { get; set; }
         public int Duration { get; set; }
         public AppointmentType Type { get; set; }
-
         public Guid WalkerId { get; set; } // will be assigned by the system 
         public bool IsAssigned { get; set; }
         public AppointmentStatus Status { get; set; }
