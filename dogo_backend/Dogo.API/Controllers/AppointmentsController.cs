@@ -36,10 +36,10 @@ namespace Dogo.API.Controllers
                 : StatusCode((int)result.StatusCode, result.Message);
         }
 
-        [HttpGet("owner/{ownerId}")]
-        public async Task<IActionResult> GetByOwner(Guid ownerId)
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetByOwner(Guid userId)
         {
-            var result = await _medator.Send(new GetAppointmentsOfOwnerQuery(){ OwnerId = ownerId});
+            var result = await _medator.Send(new GetAppointmentsOfOwnerQuery(){ UserId = userId });
             return result.IsSuccess
                 ? Ok(result.Entity)
                 : StatusCode((int)result.StatusCode, result.Message);

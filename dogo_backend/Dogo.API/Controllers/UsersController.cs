@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dogo.API.Controllers
 {
-    [Route("api/v{version:apiVersion}/petOwners")]
+    [Route("api/v{version:apiVersion}/users")]
     [ApiController]
     [ApiVersion("1.0")]
     public class UsersController : ControllerBase

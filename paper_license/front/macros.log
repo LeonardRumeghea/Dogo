@@ -1,0 +1,23 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.6.7)  7 JUN 2023 16:58
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./macros.tex
+(macros.tex
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-09-28>)
+! Emergency stop.
+<*> ./macros.tex
+                
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 36 strings out of 475385
+ 607 string characters out of 2775964
+ 340166 words of memory out of 3000000
+ 21517 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 13i,0n,12p,130b,10s stack positions out of 10000i,1000n,20000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

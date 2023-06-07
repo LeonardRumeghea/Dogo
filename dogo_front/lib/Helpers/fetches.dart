@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import './constants.dart' as constants;
 
 Future<String> fetchPets(String userId) async {
-  var url = '${constants.serverUrl}/petOwners/$userId/pets?api-version=1';
+  var url = '${constants.serverUrl}/users/$userId/pets?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -31,7 +31,7 @@ Future<String> fetchPet(String petId) async {
 }
 
 Future<String> fetchUser(String userId) async {
-  var url = '${constants.serverUrl}/petOwners/$userId?api-version=1';
+  var url = '${constants.serverUrl}/users/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -44,7 +44,7 @@ Future<String> fetchUser(String userId) async {
 }
 
 Future<String> fetchAppoitments(String userId) async {
-  var url = '${constants.serverUrl}/appointments/owner/$userId?api-version=1';
+  var url = '${constants.serverUrl}/appointments/user/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 

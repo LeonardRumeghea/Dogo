@@ -14,7 +14,7 @@ namespace Dogo.Application.Queries.Appointment
         public async Task<ResultOfEntity<List<AppointmentResponse>>> Handle(GetAppointmentsOfOwnerQuery request, CancellationToken cancellationToken)
         {
 
-            var owner = await unitOfWork.UsersRepository.GetByIdAsync(request.OwnerId);
+            var owner = await unitOfWork.UsersRepository.GetByIdAsync(request.UserId);
             if (owner == null)
             {
                 return ResultOfEntity<List<AppointmentResponse>>.Failure(HttpStatusCode.NotFound, "Owner not found");
@@ -26,7 +26,7 @@ namespace Dogo.Application.Queries.Appointment
             foreach (var appointment in allAppoitments)
             {
                 var pet = await unitOfWork.PetRepository.GetByIdAsync(appointment.PetId);
-                if (pet.OwnerId == request.OwnerId)
+                if (pet.OwnerId == request.UserId)
                 {
                     userAppointments.Add(appointment);
                 }

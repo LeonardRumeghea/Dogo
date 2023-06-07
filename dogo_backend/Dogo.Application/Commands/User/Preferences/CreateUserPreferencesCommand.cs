@@ -1,5 +1,4 @@
 ﻿#nullable disable
-using Dogo;
 using Dogo.Core.Helpers;
 using MediatR;
 

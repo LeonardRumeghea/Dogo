@@ -1,0 +1,56 @@
+\documentclass[12pt]{report}
+
+% includes
+\usepackage{geometry}           % page size
+\usepackage[utf8]{inputenc}     % encoding
+\usepackage{palatino}           % font
+\usepackage[romanian]{babel}    % language
+\usepackage{graphicx}           % images
+\usepackage{indentfirst}        % indentation
+\usepackage[nottoc]{tocbibind}  % table of contents style
+\usepackage[unicode]{hyperref}  % references from the table of contents
+
+% includes options
+\geometry{  a4paper,            % scientific thesis standard
+            left=3cm,
+            right=2cm,
+            top=2cm,
+            bottom=2cm,
+ }
+\graphicspath{{images/}}        % path where the images are located
+\setlength{\parindent}{1cm}     % paragraph indentation
+
+% other options
+\linespread{1.5}                % space between lines
+\renewcommand*\contentsname{Cuprins}    % table of contents name
+
+% the document content
+\begin{document}
+    % macros (global)
+    \input{front/macros}
+    
+    % front-matter
+    \pagenumbering{gobble}
+    
+    \input{front/cover}
+    \input{front/titlepage}
+    \input{front/declaration1}
+    \input{front/declaration2}
+    
+    % table of contents
+    \tableofcontents
+    
+    % chapters
+    \setcounter{page}{1}
+    \pagenumbering{arabic}
+    
+    \input{chapters/motivation}
+    \input{chapters/introduction}
+    
+    \input{chapters/chapter1}
+    \input{chapters/chapter2}
+    \input{chapters/chapter3}
+    
+    \input{chapters/conclusions}
+    \input{chapters/bibliography}
+\end{document}

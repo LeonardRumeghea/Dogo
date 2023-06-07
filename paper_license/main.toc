@@ -1,0 +1,15 @@
+\babel@toc {romanian}{}\relax 
+\contentsline {chapter}{Motivație}{2}{chapter*.2}%
+\contentsline {chapter}{Introducere}{3}{chapter*.3}%
+\contentsline {chapter}{\numberline {1}Titlul primului capitol}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Titlul secțiunii 1}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Titlul secțiunii 2}{5}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Titlul celui de-al doilea capitol}{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Titlul secțiunii 1}{6}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Titlul secțiunii 2}{7}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Titlul secțiunii 3}{7}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Titlul celui de-al treilea capitol}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Titlul secțiunii 1}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Titlul secțiunii 2}{9}{section.3.2}%
+\contentsline {chapter}{Concluzii}{10}{chapter*.4}%
+\contentsline {chapter}{Bibliografie}{11}{chapter*.5}%

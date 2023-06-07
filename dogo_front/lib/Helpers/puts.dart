@@ -7,8 +7,7 @@ import './constants.dart' as constants;
 
 Future<int> putPet(Pet pet, String userId) async {
   log('--- Put Pet Begin ---');
-  var url =
-      '${constants.serverUrl}/petOwners/$userId/pet/${pet.id}?api-version=1';
+  var url = '${constants.serverUrl}/users/$userId/pet/${pet.id}?api-version=1';
   var request = http.Request('PUT', Uri.parse(url));
 
   log('Url: $url');
