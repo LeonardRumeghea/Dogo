@@ -165,7 +165,6 @@ class _Page extends State<ManagePetPage> {
 
     postPet(pet, _user.id).then((statusCode) {
       if (statusCode == HttpStatus.created) {
-        log('Pet added successfully');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Pet added successfully'),
@@ -173,9 +172,8 @@ class _Page extends State<ManagePetPage> {
           ),
         );
         _user.pets.add(pet);
-        Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pop(context);
-        });
+        Future.delayed(
+            const Duration(seconds: 1), () => Navigator.pop(context));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -193,10 +191,7 @@ class _Page extends State<ManagePetPage> {
     return FloatingActionButton(
       onPressed: () => addPet(context),
       backgroundColor: constants.MyColors.darkBlue,
-      child: const Icon(
-        Icons.done,
-        color: constants.MyColors.lightBlue,
-      ),
+      child: const Icon(Icons.done, color: constants.MyColors.lightBlue),
     );
   }
 
@@ -242,13 +237,10 @@ class _Page extends State<ManagePetPage> {
                 hintText: 'Pet\'s name',
                 hintStyle: TextStyle(fontSize: 18),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: constants.MyColors.grey),
-                ),
+                    borderSide: BorderSide(color: constants.MyColors.grey)),
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 2.0,
-                    color: constants.MyColors.grey,
-                  ),
+                  borderSide:
+                      BorderSide(width: 2.0, color: constants.MyColors.grey),
                 ),
               ),
             ),
@@ -266,26 +258,14 @@ class _Page extends State<ManagePetPage> {
         children: [
           Row(
             children: const [
-              Icon(
-                Icons.pets,
-                size: 20,
-                color: Colors.brown,
-              ),
-              Text(
-                ' Specie',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
-              ),
+              Icon(Icons.pets, size: 20, color: Colors.brown),
+              Text(' Specie', style: TextStyle(fontSize: 20)),
             ],
           ),
           DropdownButton<String>(
             value: _speciesSelected,
             style: const TextStyle(fontSize: 20),
-            underline: Container(
-              height: 2,
-              color: constants.MyColors.grey,
-            ),
+            underline: Container(height: 2, color: constants.MyColors.grey),
             menuMaxHeight: 300,
             onChanged: (String? newValue) {
               fetchBreeds(newValue!).then((fetchedData) {

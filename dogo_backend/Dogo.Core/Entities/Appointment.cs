@@ -21,8 +21,9 @@ namespace Dogo.Core.Entities
         Pending = 0,
         Assigned = 1,
         Completed = 2,
-        Canceled = 3,
-        Rejected = 4
+        InProgress = 3,
+        Canceled = 4,
+        Rejected = 5
     }
 
     public enum AppointmentType

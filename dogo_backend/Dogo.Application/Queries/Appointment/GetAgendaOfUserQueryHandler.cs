@@ -18,9 +18,9 @@ namespace Dogo.Application.Queries.Appointment
                 return ResultOfEntity<List<AppointmentResponse>>.Failure(HttpStatusCode.NotFound, "User not found");
 
             var appointments = await unitOfWork.AppointmentRepository.GetAllAsync();
-            
+
             var agenda = appointments
-                .Where(x => x.WalkerId == request.UserId);
+                .Where(x => x.WalkerId == request.UserId && x.Status == Core.Entities.AppointmentStatus.Assigned);
 
             var response = AppointmentMapper.Mapper.Map<List<AppointmentResponse>>(agenda);
 

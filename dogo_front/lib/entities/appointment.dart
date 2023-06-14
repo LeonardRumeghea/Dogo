@@ -89,8 +89,9 @@ var appointmentStatus = [
   'Pending',
   'Assigned',
   'Completed',
+  'InProgress',
   'Canceled',
-  'Rejected'
+  'Rejected',
 ];
 
 var appointmentType = ['Walk', 'Salon', 'Sitting', 'Vet', 'Shopping'];

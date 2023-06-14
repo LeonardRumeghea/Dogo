@@ -23,6 +23,8 @@ class _Page extends State<PreferencesPage> {
 
   final _displayValue = List<String>.filled(13, 'Medium');
 
+  var _pageLoaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +54,8 @@ class _Page extends State<PreferencesPage> {
         _displayValue[10] = _preferences.salonPreference;
         _displayValue[11] = _preferences.sitPreference;
         _displayValue[12] = _preferences.shoppingPreference;
+
+        _pageLoaded = true;
       });
     });
   }
@@ -144,7 +148,12 @@ class _Page extends State<PreferencesPage> {
         banner(size),
         panel(size),
         title(size),
-        preferencesList(size),
+        _pageLoaded
+            ? preferencesList(size)
+            : const Center(
+                heightFactor: 12.5,
+                child: CircularProgressIndicator(),
+              ),
       ],
     );
   }

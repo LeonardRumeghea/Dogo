@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:dio/dio.dart';
 import 'package:lottie/lottie.dart' as lt;
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
@@ -43,8 +43,13 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
   final double _maxZoomLevel = 20;
   final double _minZoomLevel = 3;
 
-  String _darkMapStyle = '';
   bool _isMapReady = false;
+
+  var _distanceToPickUp = '';
+  var _distanceToDestination = '';
+
+  var _durationToPickUp = '';
+  var _durationToDestination = '';
 
   @override
   void initState() {
@@ -54,49 +59,96 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
   }
 
   init() {
-    // load dark map style from assets
-    _loadMapStyles().then((value) => _googleMapController.future
-        .then((controller) => controller.setMapStyle(_darkMapStyle)));
-
     _pickupLatLng = LatLng(_pickUpAddress.latitude, _pickUpAddress.longitude);
+    _pickupMarker = getPickUpMarker();
+    markers[_pickupMarker.markerId] = _pickupMarker;
 
     // sometimes destination address is not provided (for service type pet walking for example)
     if (_destinationAddress != null) {
       _destinationLatLng =
           LatLng(_destinationAddress!.latitude, _destinationAddress!.longitude);
-    }
-
-    // set camera position to Palas Iasi with zoom 17.5
-    _cameraPosition = CameraPosition(
-      target: _pickupLatLng,
-      zoom: _zoomLevel,
-    );
-
-    _pickupMarker = Marker(
-      markerId: const MarkerId('pickup'),
-      position: _pickupLatLng,
-      icon: BitmapDescriptor.defaultMarker,
-      infoWindow: InfoWindow(
-        title: 'Pet location',
-        snippet: _pickUpAddress.street,
-      ),
-    );
-    markers[_pickupMarker.markerId] = _pickupMarker;
-
-    if (_destinationAddress != null) {
-      _destinationMarker = Marker(
-        markerId: const MarkerId('destination'),
-        position: _destinationLatLng,
-        icon: BitmapDescriptor.defaultMarker,
-        infoWindow: InfoWindow(
-          title: 'Destination',
-          snippet: _destinationAddress?.street,
-        ),
-      );
+      _destinationMarker = getDestinationMarker();
       markers[_destinationMarker.markerId] = _destinationMarker;
     }
 
-    getCurrentPostionMarker();
+    // set camera position to Palas Iasi with zoom 17.5
+    _cameraPosition = CameraPosition(target: _pickupLatLng, zoom: _zoomLevel);
+
+    getCurrentPostionMarker()
+        .then((_) => generateRoute().then((_) => calculeteDistances()));
+  }
+
+  getPickUpMarker() {
+    return Marker(
+      markerId: const MarkerId('pickup'),
+      position: _pickupLatLng,
+      infoWindow:
+          InfoWindow(title: 'Pet location', snippet: _pickUpAddress.street),
+      onTap: () => displayDialogBox(' Pet Pickup', _pickUpAddress.street,
+          _distanceToPickUp, _durationToPickUp),
+    );
+  }
+
+  getDestinationMarker() {
+    return Marker(
+      markerId: const MarkerId('destination'),
+      position: _destinationLatLng,
+      infoWindow: InfoWindow(
+          title: 'Destination', snippet: _destinationAddress!.street),
+      onTap: () => displayDialogBox(' Destination', _destinationAddress!.street,
+          _distanceToDestination, _durationToDestination),
+    );
+  }
+
+  displayDialogBox(String title, String address, String distance, String time) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.home, color: Colors.green[900]),
+            Text(
+              title,
+              style: const TextStyle(color: constants.MyColors.dustBlue),
+            ),
+          ],
+        ),
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * .175,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.location_on, color: Colors.red),
+                  Flexible(child: Text(' Address: $address')),
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Icon(Icons.directions_walk, color: Colors.teal),
+                  Text(' Distance: $distance'),
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Icon(Icons.timer, color: Colors.amber),
+                  Text(' Duration: $time'),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
   }
 
   getCurrentPostionMarker() async {
@@ -114,14 +166,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
       ),
     );
 
-    setState(() {
-      markers[_userMarker.markerId] = _userMarker;
-      _currentLatLng = _userLatLng;
-    });
-
-    refreshMap();
-
-    generateRoute();
+    markers[_userMarker.markerId] = _userMarker;
   }
 
   List<LatLng> routePoints = [];
@@ -133,6 +178,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
       constants.googleDirectionApiKey,
       PointLatLng(_userLatLng.latitude, _userLatLng.longitude),
       PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
+      travelMode: TravelMode.walking,
     );
 
     if (result.points.isNotEmpty) {
@@ -146,6 +192,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
         constants.googleDirectionApiKey,
         PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
         PointLatLng(_destinationLatLng.latitude, _destinationLatLng.longitude),
+        travelMode: TravelMode.walking,
       );
 
       if (result.points.isNotEmpty) {
@@ -154,13 +201,42 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
         }
       }
     }
-
-    setState(() => _isMapReady = true);
   }
 
-  Future _loadMapStyles() async {
-    _darkMapStyle =
-        await rootBundle.loadString('assets/json/dark_mode_map.json');
+  calculeteDistances() {
+    setState(() {
+      _pathInfo(_userLatLng, _pickupLatLng).then((value) {
+        _distanceToPickUp = value[0];
+        _durationToPickUp = value[1];
+      });
+
+      if (_destinationAddress != null) {
+        _pathInfo(_pickupLatLng, _destinationLatLng).then((value) {
+          _distanceToDestination = value[0];
+          _durationToDestination = value[1];
+        });
+      }
+
+      _isMapReady = true;
+    });
+  }
+
+  _pathInfo(LatLng from, LatLng to) async {
+    Dio dio = Dio();
+
+    var url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+    url += '?units=metric';
+    url += '&mode=walking';
+    url += '&origins=${from.latitude},${from.longitude}';
+    url += '&destinations=${to.latitude},${to.longitude}';
+    url += '&key=${constants.googleMapApiKey}';
+
+    Response response = await dio.get(url);
+
+    var distance = response.data['rows'][0]['elements'][0]['distance']['text'];
+    var duration = response.data['rows'][0]['elements'][0]['duration']['text'];
+
+    return [distance, duration];
   }
 
   @override
@@ -193,7 +269,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
       children: [
         showMap(),
         showMapZoomControlls(size),
-        showAddress(size),
+        // showAddress(size),
       ],
     );
   }
@@ -204,7 +280,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
       mapType: MapType.normal,
       zoomControlsEnabled: false,
       tiltGesturesEnabled: false,
-      onCameraMove: (position) => _currentLatLng = position.target,
+      onCameraMove: (position) => _userLatLng = position.target,
       onMapCreated: (GoogleMapController controller) {
         if (!_googleMapController.isCompleted) {
           _googleMapController.complete(controller);
@@ -224,8 +300,8 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
 
   Widget showMapZoomControlls(Size size) {
     return Positioned(
-      top: size.height * .15,
-      left: size.width * .025,
+      bottom: size.height * .08,
+      right: size.width * .025,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -267,7 +343,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
   void refreshMap() {
     _googleMapController.future.then((controller) {
       controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-        target: _currentLatLng,
+        target: _userLatLng,
         zoom: _zoomLevel,
       )));
     });

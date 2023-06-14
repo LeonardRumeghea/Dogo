@@ -28,6 +28,8 @@ class _Page extends State<AvailableAppointmentsPage>
   Person get _user => widget.user;
   var _availableAppointments = <Appointment>[];
 
+  var _appointmentsLoaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -103,7 +105,12 @@ class _Page extends State<AvailableAppointmentsPage>
               ),
             ),
           ),
-          displayCards(size),
+          _appointmentsLoaded
+              ? displayCards(size)
+              : const Center(
+                  heightFactor: 12.5,
+                  child: CircularProgressIndicator(),
+                ),
         ],
       ),
     );
@@ -134,7 +141,10 @@ class _Page extends State<AvailableAppointmentsPage>
         appointments.sort(
             (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
 
-        setState(() => _availableAppointments = appointments);
+        setState(() {
+          _availableAppointments = appointments;
+          _appointmentsLoaded = true;
+        });
       });
     } catch (e) {
       log('Appointments Error: $e');

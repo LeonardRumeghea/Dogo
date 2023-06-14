@@ -1,27 +1,31 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart' as lt;
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../Helpers/constants.dart' as constants;
 import '../../entities/address.dart';
-import '../../entities/person.dart';
-import '../../entities/pet.dart';
+import '../../entities/appointment.dart';
 import '../fetches.dart';
+import '../puts.dart';
 
 class PagePathViewer extends StatefulWidget {
-  const PagePathViewer({Key? key, required this.petId, this.destinationAddress})
-      : super(key: key);
+  const PagePathViewer({
+    Key? key,
+    required this.appointment,
+  }) : super(key: key);
 
-  // final Address pickUpAddress;
-  final Address? destinationAddress;
+  // final Address? destinationAddress;
+  // final String petId;
+  // final String appointmentType;
 
-  final String petId;
+  final Appointment appointment;
 
   @override
   State<PagePathViewer> createState() => _PagePathViewerState();
@@ -33,28 +37,41 @@ class _PagePathViewerState extends State<PagePathViewer> {
   CameraPosition? _cameraPosition;
 
   late LatLng _pickupLatLng;
-  late LatLng _userLatLng;
+  late LatLng _startLatLng;
   late LatLng _destinationLatLng;
   late LatLng _currentLatLng;
 
   late Marker _pickupMarker;
-  late Marker _userMarker;
+  late Marker _startMarker;
   late Marker _destinationMarker;
-  late Marker _currentMarker;
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
-  late final MarkerId _currentMarkerId = const MarkerId('current');
+  // Current user position marker
+  late final MarkerId _cupmId = const MarkerId('current');
 
   late Address _pickUpAddress;
-  String get _petId => widget.petId;
-  Address? get _destinationAddress => widget.destinationAddress;
+  late String _petId;
+  late String _walkerId;
+  Address? _destinationAddress;
 
-  double _zoomLevel = 14.5;
+  get _appointment => widget.appointment;
+
+  double _zoomLevel = 16.5;
   final double _maxZoomLevel = 20;
   final double _minZoomLevel = 3;
 
-  String _darkMapStyle = '';
   bool _isMapReady = false;
+
+  final List<LatLng> _routePoints = [];
+
+  var _distanceToPickUp = '';
+  var _distanceToDestination = '';
+
+  var _durationToPickUp = '';
+  var _durationToDestination = '';
+
+  var _pathStage = 0;
+  late String _appointmentType;
 
   final LocationSettings _locationSettings = AndroidSettings(
     accuracy: LocationAccuracy.bestForNavigation,
@@ -74,7 +91,15 @@ class _PagePathViewerState extends State<PagePathViewer> {
   void initState() {
     super.initState();
 
-    _getPet();
+    _walkerId = _appointment.walkerId;
+    _petId = _appointment.petId;
+    _appointmentType = _appointment.type;
+    if (_appointment.type == constants.vet ||
+        _appointment.type == constants.salon) {
+      _destinationAddress = _appointment.address;
+    }
+
+    getPetOwnerAddress();
   }
 
   @override
@@ -84,126 +109,218 @@ class _PagePathViewerState extends State<PagePathViewer> {
   }
 
   init() {
-    // load dark map style from assets
-    // _loadMapStyles().then((value) => _googleMapController.future
-    //     .then((controller) => controller.setMapStyle(_darkMapStyle)));
-
     _pickupLatLng = LatLng(_pickUpAddress.latitude, _pickUpAddress.longitude);
+    _pickupMarker = getPickUpMarker();
+    markers[_pickupMarker.markerId] = _pickupMarker;
 
     // sometimes destination address is not provided (for service type pet walking for example)
     if (_destinationAddress != null) {
       _destinationLatLng =
           LatLng(_destinationAddress!.latitude, _destinationAddress!.longitude);
-    }
-
-    // set camera position to Palas Iasi with zoom 17.5
-    _cameraPosition = CameraPosition(
-      target: _pickupLatLng,
-      zoom: _zoomLevel,
-    );
-
-    _pickupMarker = Marker(
-      markerId: const MarkerId('pickup'),
-      position: _pickupLatLng,
-      icon: BitmapDescriptor.defaultMarker,
-      infoWindow: InfoWindow(
-        title: 'Pet location',
-        snippet: _pickUpAddress.street,
-      ),
-    );
-    markers[_pickupMarker.markerId] = _pickupMarker;
-
-    if (_destinationAddress != null) {
-      _destinationMarker = Marker(
-        markerId: const MarkerId('destination'),
-        position: _destinationLatLng,
-        icon: BitmapDescriptor.defaultMarker,
-        infoWindow: InfoWindow(
-          title: 'Destination',
-          snippet: _destinationAddress?.street,
-        ),
-      );
+      _destinationMarker = getDestinationMarker();
       markers[_destinationMarker.markerId] = _destinationMarker;
     }
 
-    getStartPostionMarker();
+    // set camera position to Palas Iasi with zoom 17.5
+    _cameraPosition = CameraPosition(target: _pickupLatLng, zoom: _zoomLevel);
+
+    // getStartPostionMarker();
+    getStartPostionMarker().then((_) => generateRoute().then((_) {
+          calculeteDistances();
+          startUserTracking();
+        }));
   }
 
-  _getPet() {
-    var pet = Pet();
+  getPetOwnerAddress() {
     fetchPet(_petId).then((value) {
-      pet = Pet.fromJSON(json.decode(value));
-
-      _getPetOwner(pet.ownerId);
+      fetchUser(json.decode(value)['ownerId']).then((value) {
+        _pickUpAddress = Address.fromJson(json.decode(value)['address']);
+        init();
+      });
     });
   }
 
-  _getPetOwner(String petOwnerId) {
-    fetchUser(petOwnerId).then((value) {
-      var petOwner = Person.fromJSON(json.decode(value));
+  completeAppointment(BuildContext context) {
+    log('Accepting appointment');
 
-      setState(() {
-        _pickUpAddress = petOwner.address!;
-      });
-
-      init();
+    complete(_appointment.id, _walkerId).then((value) {
+      if (value == HttpStatus.noContent) {
+        log('Appointment accepted');
+        ScaffoldMessenger.of(context)
+            .showSnackBar(
+              const SnackBar(
+                content: Text('Appointment completed'),
+                backgroundColor: constants.MyColors.dustGreen,
+              ),
+            )
+            .closed
+            .then((_) => Navigator.pop(context));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Something went wrong, try again later'),
+            backgroundColor: constants.MyColors.dustRed,
+          ),
+        );
+      }
     });
+  }
+
+  getPickUpMarker() {
+    return Marker(
+      markerId: const MarkerId('pickup'),
+      position: _pickupLatLng,
+      infoWindow:
+          InfoWindow(title: 'Pet location', snippet: _pickUpAddress.street),
+      onTap: () => displayDialogBox(' Pet Pickup', _pickUpAddress.street,
+          _distanceToPickUp, _durationToPickUp),
+    );
+  }
+
+  getDestinationMarker() {
+    return Marker(
+      markerId: const MarkerId('destination'),
+      position: _destinationLatLng,
+      infoWindow: InfoWindow(
+          title: 'Destination', snippet: _destinationAddress!.street),
+      onTap: () => displayDialogBox(' Destination', _destinationAddress!.street,
+          _distanceToDestination, _durationToDestination),
+    );
+  }
+
+  displayDialogBox(String title, String address, String distance, String time) {
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Row(
+          children: [
+            Icon(Icons.home, color: Colors.green[900]),
+            Text(
+              title,
+              style: const TextStyle(color: constants.MyColors.dustBlue),
+            ),
+          ],
+        ),
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * .175,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.location_on, color: Colors.red),
+                  Flexible(child: Text(' Address: $address')),
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Icon(Icons.directions_walk, color: Colors.teal),
+                  Text(' Distance: $distance'),
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Icon(Icons.timer, color: Colors.amber),
+                  Text(' Duration: $time'),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  calculeteDistances() {
+    setState(() {
+      calculateDistanceToPickUp();
+
+      if (_destinationAddress != null) {
+        _pathInfo(_pickupLatLng, _destinationLatLng).then((value) {
+          _distanceToDestination = value[0];
+          _durationToDestination = value[1];
+        });
+      }
+
+      _isMapReady = true;
+    });
+  }
+
+  calculateDistanceToPickUp() {
+    _pathInfo(_currentLatLng, _pickupLatLng).then((value) {
+      _distanceToPickUp = value[0];
+      _durationToPickUp = value[1];
+    });
+  }
+
+  calculateDistanceToDestination() {
+    _pathInfo(_currentLatLng, _destinationLatLng).then((value) {
+      _distanceToDestination = value[0];
+      _durationToDestination = value[1];
+    });
+  }
+
+  _pathInfo(LatLng from, LatLng to) async {
+    Dio dio = Dio();
+
+    var url = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+    url += '?units=metric';
+    url += '&mode=walking';
+    url += '&origins=${from.latitude},${from.longitude}';
+    url += '&destinations=${to.latitude},${to.longitude}';
+    url += '&key=${constants.googleMapApiKey}';
+
+    Response response = await dio.get(url);
+
+    var distance = response.data['rows'][0]['elements'][0]['distance']['text'];
+    var duration = response.data['rows'][0]['elements'][0]['duration']['text'];
+
+    return [distance, duration];
+  }
+
+  createCurrentUserPositionMarker(LatLng position) {
+    return Marker(
+      markerId: _cupmId,
+      position: position,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+      infoWindow: const InfoWindow(title: 'You are here'),
+    );
   }
 
   getStartPostionMarker() async {
     Position position = await getCurrentLocation();
 
-    _userLatLng = LatLng(position.latitude, position.longitude);
-    _currentLatLng = LatLng(position.latitude, position.longitude);
+    _startLatLng =
+        _currentLatLng = LatLng(position.latitude, position.longitude);
 
-    _userMarker = Marker(
-      markerId: const MarkerId('user'),
-      position: _userLatLng,
-    );
+    _startMarker =
+        Marker(markerId: const MarkerId('start'), position: _startLatLng);
 
-    setState(() {
-      markers[_userMarker.markerId] = _userMarker;
-    });
-
-    getCurrentPostionMarker();
+    markers[_startMarker.markerId] = _startMarker;
+    markers[_cupmId] = createCurrentUserPositionMarker(_currentLatLng);
   }
-
-  createCurrentMarker(LatLng position) {
-    return Marker(
-      markerId: const MarkerId('current'),
-      position: position,
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
-      infoWindow: const InfoWindow(
-        title: 'Your current location',
-        snippet: 'You are here',
-      ),
-    );
-  }
-
-  getCurrentPostionMarker() {
-    _currentMarker = createCurrentMarker(_currentLatLng);
-    setState(() {
-      markers[_currentMarker.markerId] = _currentMarker;
-    });
-
-    refreshMap();
-    generateRoute();
-  }
-
-  List<LatLng> routePoints = [];
 
   generateRoute() async {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       constants.googleDirectionApiKey,
-      PointLatLng(_userLatLng.latitude, _userLatLng.longitude),
+      PointLatLng(_startLatLng.latitude, _startLatLng.longitude),
       PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
+      travelMode: TravelMode.walking,
     );
 
     if (result.points.isNotEmpty) {
       for (var point in result.points) {
-        routePoints.add(LatLng(point.latitude, point.longitude));
+        _routePoints.add(LatLng(point.latitude, point.longitude));
       }
     }
 
@@ -212,22 +329,15 @@ class _PagePathViewerState extends State<PagePathViewer> {
         constants.googleDirectionApiKey,
         PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
         PointLatLng(_destinationLatLng.latitude, _destinationLatLng.longitude),
+        travelMode: TravelMode.walking,
       );
 
       if (result.points.isNotEmpty) {
         for (var point in result.points) {
-          routePoints.add(LatLng(point.latitude, point.longitude));
+          _routePoints.add(LatLng(point.latitude, point.longitude));
         }
       }
     }
-
-    setState(() => _isMapReady = true);
-    startUserTracking();
-  }
-
-  Future _loadMapStyles() async {
-    _darkMapStyle =
-        await rootBundle.loadString('assets/json/dark_mode_map.json');
   }
 
   @override
@@ -241,14 +351,54 @@ class _PagePathViewerState extends State<PagePathViewer> {
             child: lt.Lottie.asset('assets/icons/loading_map.json'),
           ))
         : Scaffold(
-            floatingActionButton: Padding(
-              padding: EdgeInsets.only(bottom: size.height * .025),
-              child: FloatingActionButton(
-                onPressed: () => Navigator.pop(context),
-                backgroundColor: constants.MyColors.darkBlue,
-                child: const Icon(Icons.arrow_back, color: Colors.white),
-              ),
-            ),
+            floatingActionButton: _pathStage == 3
+                ? null
+                : Padding(
+                    padding: EdgeInsets.only(bottom: size.height * .025),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        if (_pathStage == 0) {
+                          setState(() {
+                            if (_appointmentType == constants.vet ||
+                                _appointmentType == constants.salon) {
+                              _pathStage = 1;
+                            } else {
+                              _pathStage = 2;
+                            }
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Pet picked up'),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: constants.MyColors.dustGreen,
+                            ),
+                          );
+                        } else if (_pathStage == 1) {
+                          setState(() => _pathStage = 2);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Destination reached'),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: constants.MyColors.dustGreen,
+                            ),
+                          );
+                        } else {
+                          setState(() => _pathStage = 3);
+                          completeAppointment(context);
+                        }
+                      },
+                      backgroundColor: constants.MyColors.darkBlue,
+                      child: Icon(
+                          _pathStage == 0
+                              ? Icons.pets
+                              : _pathStage == 1
+                                  ? (_appointmentType == constants.vet
+                                      ? Icons.local_hospital
+                                      : Icons.cut)
+                                  : Icons.home,
+                          color: Colors.white),
+                    ),
+                  ),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.startFloat,
             body: buildBody(size),
@@ -279,19 +429,18 @@ class _PagePathViewerState extends State<PagePathViewer> {
       markers: Set<Marker>.of(markers.values),
       polylines: {
         Polyline(
-          polylineId: const PolylineId('toPickUpLocation'),
-          points: routePoints,
-          color: constants.pathColor,
-          width: 5,
-        ),
+            polylineId: const PolylineId('route'),
+            points: _routePoints,
+            color: constants.pathColor,
+            width: 5),
       },
     );
   }
 
   Widget showMapZoomControlls(Size size) {
     return Positioned(
-      top: size.height * .05,
-      left: size.width * .875,
+      bottom: size.height * .08,
+      right: size.width * .025,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -339,21 +488,6 @@ class _PagePathViewerState extends State<PagePathViewer> {
     });
   }
 
-  Future moveToUserCurrentLocation() async {
-    Position position = await getCurrentLocation();
-    goToPostion(LatLng(position.latitude, position.longitude));
-  }
-
-  Future goToPostion(LatLng position) async {
-    final GoogleMapController controller = await _googleMapController.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        target: position,
-        zoom: _zoomLevel,
-      ),
-    ));
-  }
-
   Future<Position> getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -389,8 +523,16 @@ class _PagePathViewerState extends State<PagePathViewer> {
 
       if (position != null) {
         _currentLatLng = LatLng(position.latitude, position.longitude);
-        setState(() => markers[_currentMarkerId] =
-            markers[_currentMarkerId]!.copyWith(positionParam: _currentLatLng));
+        setState(() {
+          markers[_cupmId] =
+              markers[_cupmId]!.copyWith(positionParam: _currentLatLng);
+
+          if (_pathStage == 1) {
+            calculateDistanceToDestination();
+          } else {
+            calculateDistanceToPickUp();
+          }
+        });
       }
     });
   }

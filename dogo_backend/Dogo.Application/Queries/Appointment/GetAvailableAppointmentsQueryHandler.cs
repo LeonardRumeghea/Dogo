@@ -40,6 +40,9 @@ namespace Dogo.Application.Queries.Appointment
                     .Failure(HttpStatusCode.NotFound, "No available appointments found");
             }
 
+            var userPreferences = await unitOfWork.UserPreferencesRepository.getByUserId(request.UserId);
+            availableAppointments = (new Planner(unitOfWork)).SortByPreferencesAndDateWhen(availableAppointments.ToList(), userPreferences);
+
             var availableAppointmentsResponse = AppointmentMapper.Mapper.Map<List<AppointmentResponse>>(availableAppointments);
 
             return ResultOfEntity<List<AppointmentResponse>>.Success(HttpStatusCode.OK, availableAppointmentsResponse);

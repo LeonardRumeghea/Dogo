@@ -81,6 +81,24 @@ namespace Dogo.API.Controllers
                 : StatusCode((int)result.StatusCode, result.Message);
         }
 
+        [HttpPut("inProgres")]
+        public async Task<IActionResult> Complete([FromQuery] InProgressAppointmentQuery command)
+        {
+            var result = await _medator.Send(command);
+            return result.IsSuccess
+                ? NoContent()
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        [HttpPut("complete")]
+        public async Task<IActionResult> Complete([FromQuery] CompleteAppointmentQuery command)
+        {
+            var result = await _medator.Send(command);
+            return result.IsSuccess
+                ? NoContent()
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
         [HttpPut("{id:Guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateAppointmentCommand command)
         {

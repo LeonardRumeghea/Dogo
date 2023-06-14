@@ -29,6 +29,8 @@ class _Page extends State<AppointmentsPage>
 
   bool _isCollapsed = true;
 
+  var _appointmentsLoaded = false;
+
   @override
   void initState() {
     super.initState();
@@ -172,7 +174,12 @@ class _Page extends State<AppointmentsPage>
               ),
             ),
           ),
-          displayCards(size),
+          _appointmentsLoaded
+              ? displayCards(size)
+              : const Center(
+                  heightFactor: 12.5,
+                  child: CircularProgressIndicator(),
+                ),
         ],
       ),
     );
@@ -200,10 +207,10 @@ class _Page extends State<AppointmentsPage>
             .map<Appointment>((e) => Appointment.fromJSON(e))
             .toList();
 
-        appointments.sort(
-            (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
-
-        setState(() => _appointments = appointments);
+        setState(() {
+          _appointments = appointments;
+          _appointmentsLoaded = true;
+        });
       });
     } catch (e) {
       log('Appointments Error: $e');

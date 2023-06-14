@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../Helpers/fetches.dart';
+import '../../../Helpers/puts.dart';
 import '../../../Helpers/screens/path_current_location.dart';
 import '../../../entities/person.dart';
 import '../../../../Helpers/constants.dart' as constants;
@@ -21,6 +23,8 @@ class AgendaPage extends StatefulWidget {
 class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
   Person get _user => widget.user;
   var _availableAppointments = <Appointment>[];
+
+  var _appointmentsLoaded = false;
 
   @override
   void initState() {
@@ -82,7 +86,12 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
               ),
             ),
           ),
-          displayCards(size),
+          _appointmentsLoaded
+              ? displayCards(size)
+              : const Center(
+                  heightFactor: 12.5,
+                  child: CircularProgressIndicator(),
+                ),
         ],
       ),
     );
@@ -113,7 +122,10 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
         appointments.sort(
             (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
 
-        setState(() => _availableAppointments = appointments);
+        setState(() {
+          _availableAppointments = appointments;
+          _appointmentsLoaded = true;
+        });
       });
     } catch (e) {
       log('Appointments Error: $e');
@@ -284,6 +296,8 @@ _getColorOfStatus(String status) {
       return constants.MyColors.dustBlue;
     case 'Assigned':
       return Colors.green;
+    case 'InProgress':
+      return Colors.green;
     case 'Completed':
       return constants.MyColors.dustGreen;
     case 'Rejected':
@@ -320,7 +334,7 @@ class AppointmetCard extends StatelessWidget {
           child: Center(
             child: ListTile(
               onTap: () {
-                displayPath(context, appointment);
+                inProgressAppointment(context, appointment);
               },
               leading: CircleAvatar(
                   backgroundColor: _getColorOfType(appointment.type),
@@ -359,37 +373,43 @@ class AppointmetCard extends StatelessWidget {
   }
 
   displayPath(BuildContext context, Appointment appointment) {
-    // ScaffoldMessenger.of(context).showSnackBar(
-    //   const SnackBar(
-    //     content: Text('Coming soon!'),
-    //     backgroundColor: constants.MyColors.dustBlue,
-    //   ),
-    // );
     return Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
         switch (appointment.type) {
           case constants.walk:
-            return PagePathViewer(petId: appointment.petId);
-          // case constants.salon:
-          //   return AssignSalonAppointmentPage(
-          //       user: user, appointment: appointment);
-          // case constants.sitting:
-          //   return AssignSittingAppointmentPage(
-          //       user: user, appointment: appointment);
+            return PagePathViewer(appointment: appointment);
+          case constants.salon:
+            return PagePathViewer(appointment: appointment);
+          case constants.sitting:
+            return PagePathViewer(appointment: appointment);
           // case constants.shopping:
           //   return AssignShoppingAppointmentPage(
           //       user: user, appointment: appointment);
           case constants.vet:
-            return PagePathViewer(
-              petId: appointment.petId,
-              destinationAddress: appointment.address,
-            );
-          // return OrderTrackingPage();
+            return PagePathViewer(appointment: appointment);
           default:
             return AgendaPage(user: user);
         }
       }),
     );
+  }
+
+  inProgressAppointment(BuildContext context, Appointment appointment) {
+    log('Accepting appointment');
+
+    inProgress(appointment.id, user.id).then((value) {
+      if (value == HttpStatus.noContent) {
+        log('Appointment accepted');
+        displayPath(context, appointment);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Something went wrong, try again later'),
+            backgroundColor: constants.MyColors.dustRed,
+          ),
+        );
+      }
+    });
   }
 }

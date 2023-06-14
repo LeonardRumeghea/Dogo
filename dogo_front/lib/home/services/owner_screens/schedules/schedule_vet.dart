@@ -111,7 +111,9 @@ class _Page extends State<ScheduleVetPage> {
     var appointment = Appointment(
       petId: _selectedPet.id,
       dateWhen: dateTime.toString(),
-      dateUntil: dateTime.toString(),
+      dateUntil: dateTime
+          .add(Duration(minutes: int.parse(_selectedDuration)))
+          .toString(),
       duration: int.parse(_selectedDuration),
       notes: _noteController.text,
       type: 'Vet',
