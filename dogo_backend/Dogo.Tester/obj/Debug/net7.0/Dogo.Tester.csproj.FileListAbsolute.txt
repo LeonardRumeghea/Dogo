@@ -1,5 +1,0 @@
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Tester\obj\Debug\net7.0\Dogo.Tester.csproj.AssemblyReference.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Tester\obj\Debug\net7.0\Dogo.Tester.GeneratedMSBuildEditorConfig.editorconfig
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Tester\obj\Debug\net7.0\Dogo.Tester.AssemblyInfoInputs.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Tester\obj\Debug\net7.0\Dogo.Tester.AssemblyInfo.cs
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Tester\obj\Debug\net7.0\Dogo.Tester.csproj.CoreCompileInputs.cache
