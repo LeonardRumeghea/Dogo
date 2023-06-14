@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Dogo.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ICM : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +27,31 @@ namespace Dogo.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Addresses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserPreferences",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DogPreference = table.Column<int>(type: "int", nullable: false),
+                    CatPreference = table.Column<int>(type: "int", nullable: false),
+                    RabbitPreference = table.Column<int>(type: "int", nullable: false),
+                    BirdPreference = table.Column<int>(type: "int", nullable: false),
+                    FishPreference = table.Column<int>(type: "int", nullable: false),
+                    FerretPreference = table.Column<int>(type: "int", nullable: false),
+                    GuineaPigPreference = table.Column<int>(type: "int", nullable: false),
+                    OtherPreference = table.Column<int>(type: "int", nullable: false),
+                    WalkPreference = table.Column<int>(type: "int", nullable: false),
+                    VetPreference = table.Column<int>(type: "int", nullable: false),
+                    SalonPreference = table.Column<int>(type: "int", nullable: false),
+                    SitPreference = table.Column<int>(type: "int", nullable: false),
+                    ShoppingPreference = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPreferences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +110,6 @@ namespace Dogo.Infrastructure.Migrations
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Specie = table.Column<int>(type: "int", nullable: false),
                     Breed = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -101,27 +126,6 @@ namespace Dogo.Infrastructure.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    WrittenBy = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<int>(type: "int", nullable: false),
-                    AppointmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PetId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reviews_Pets_PetId",
-                        column: x => x.PetId,
-                        principalTable: "Pets",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_AddressId",
                 table: "Appointments",
@@ -131,11 +135,6 @@ namespace Dogo.Infrastructure.Migrations
                 name: "IX_Pets_UserId",
                 table: "Pets",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reviews_PetId",
-                table: "Reviews",
-                column: "PetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_AddressId",
@@ -150,10 +149,10 @@ namespace Dogo.Infrastructure.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "Pets");
 
             migrationBuilder.DropTable(
-                name: "Pets");
+                name: "UserPreferences");
 
             migrationBuilder.DropTable(
                 name: "User");

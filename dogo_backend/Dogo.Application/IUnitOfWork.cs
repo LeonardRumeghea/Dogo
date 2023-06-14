@@ -7,7 +7,6 @@ namespace Dogo.Application
     public interface IUnitOfWork
     {
         IRepository<Pet> PetRepository { get; }
-
         IUserRepository UsersRepository { get; }
         IRepository<Appointment> AppointmentRepository { get; }
         IRepository<Address> AddressRepository { get; }

@@ -6,10 +6,6 @@ namespace Dogo.Application.Commands.User.Preferences
     {
         public UpdateUserPreferencesCommandValidator()
         {
-            RuleFor(x => x.Id)
-                .NotNull()
-                .Must(Validations.BeValidGuid)
-                .WithMessage("UserId is not valid");
 
             RuleFor(x => x.UserId)
                 .NotNull()
@@ -50,6 +46,11 @@ namespace Dogo.Application.Commands.User.Preferences
                 .NotNull()
                 .Must(Validations.BeValidPreference)
                 .WithMessage("Guinea pig preference must not be null");
+
+            RuleFor(x => x.OtherPreference)
+                .NotNull()
+                .Must(Validations.BeValidPreference)
+                .WithMessage("Other preference must not be null");
 
             RuleFor(x => x.WalkPreference)
                 .NotNull()

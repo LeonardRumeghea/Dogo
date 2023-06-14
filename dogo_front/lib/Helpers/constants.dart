@@ -15,7 +15,7 @@ const double borderRadius = 8;
 
 // Server URL for API calls
 const String serverUrl = 'https://10.0.2.2:7077/api/v1';
-//'http://192.168.0.1:7077/api/v1';
+// 'http://192.168.0.1:7077/api/v1';
 
 // Colors for the app for different services
 const Color walkColor = Color.fromARGB(255, 84, 147, 139);

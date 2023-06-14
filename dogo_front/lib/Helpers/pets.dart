@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'dart:developer';
 
@@ -9,7 +8,7 @@ import '../entities/pet.dart';
 
 Future<int> postPet(Pet pet, String userId) async {
   log('--- Post Pet Begin ---');
-  var url = '${constants.serverUrl}/petOwners/$userId/pet?api-version=1';
+  var url = '${constants.serverUrl}/users/$userId/pet?api-version=1';
   var request = http.Request('POST', Uri.parse(url));
 
   log('Url: $url');

@@ -13,6 +13,7 @@
         public PreferenceDegree FishPreference { get; set; } = PreferenceDegree.Medium;
         public PreferenceDegree FerretPreference { get; set; } = PreferenceDegree.Medium;
         public PreferenceDegree GuineaPigPreference { get; set; } = PreferenceDegree.Medium;
+        public PreferenceDegree OtherPreference { get; set; } = PreferenceDegree.Medium;
 
         // Activities Preferences
         public PreferenceDegree WalkPreference { get; set; } = PreferenceDegree.Medium;

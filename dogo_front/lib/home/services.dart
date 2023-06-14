@@ -15,7 +15,7 @@ import 'services/owner_screens/history.dart';
 // services page for the walker implementation
 import 'services/walker/agenda.dart';
 import 'services/walker/available_appointments.dart';
-import 'services/walker/preferences.dart';
+import 'services/walker/preferences_screen.dart';
 
 const String ownerType = "Owner";
 const String walkerType = "Walker";
@@ -332,7 +332,7 @@ class _ServicesPageState extends State<ServicesPage> {
           case 'Search Appointment':
             return AvailableAppointmentsPage(user: _user);
           case 'Your Preferences':
-            return const PreferencesPage();
+            return PreferencesPage(user: _user);
           case 'Appointments':
             return AppointmentsPage(user: _user);
           case 'History & Reports':

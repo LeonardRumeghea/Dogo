@@ -17,7 +17,7 @@ namespace Dogo.Application.Handlers.User.Preferences
             if (user == null)
                 return Result.Failure(HttpStatusCode.NotFound, "User not found");
 
-            var userPreferences = await _unitOfWork.UserPreferencesRepository.GetByIdAsync(request.Id);
+            var userPreferences = await _unitOfWork.UserPreferencesRepository.getByUserId(request.UserId);
             if (userPreferences == null)
                 return Result.Failure(HttpStatusCode.NoContent, "User preferences are not set");
 
@@ -28,6 +28,7 @@ namespace Dogo.Application.Handlers.User.Preferences
             userPreferences.FishPreference = Enum.Parse<PreferenceDegree>(request.FishPreference);
             userPreferences.FerretPreference = Enum.Parse<PreferenceDegree>(request.FerretPreference);
             userPreferences.GuineaPigPreference = Enum.Parse<PreferenceDegree>(request.GuineaPigPreference);
+            userPreferences.OtherPreference = Enum.Parse<PreferenceDegree>(request.OtherPreference);
 
             userPreferences.WalkPreference = Enum.Parse<PreferenceDegree>(request.WalkPreference);
             userPreferences.VetPreference = Enum.Parse<PreferenceDegree>(request.VetPreference);

@@ -34,9 +34,7 @@ class _Page extends State<AvailableAppointmentsPage>
     init();
   }
 
-  init() {
-    _getAppointments();
-  }
+  init() => _getAppointments();
 
   @override
   Widget build(BuildContext context) {
@@ -357,9 +355,9 @@ class AppointmetCard extends StatelessWidget {
               leading: CircleAvatar(
                   backgroundColor: _getColorOfType(appointment.type),
                   child: _getIconByType(appointment.type)),
-              title: const Text(
-                'Dogo',
-                style: TextStyle(
+              title: Text(
+                '${appointment.type} Appointment',
+                style: const TextStyle(
                     color: constants.MyColors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),

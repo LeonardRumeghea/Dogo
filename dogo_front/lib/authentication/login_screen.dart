@@ -287,7 +287,7 @@ class _Page extends State<PageLogin> {
       return;
     }
 
-    var url = '${constants.serverUrl}/petOwners/checkLogin';
+    var url = '${constants.serverUrl}/users/checkLogin';
     var fullUrl =
         '$url?Email=${_mailController.text}&Password=${_passController.text}&api-version=1';
 

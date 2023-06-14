@@ -2,6 +2,7 @@
 using Dogo.Application.Mappers;
 using Dogo.Application.Response;
 using Dogo.Core.Helpers;
+using Dogo.Core.Entities;
 using MediatR;
 
 #nullable disable
@@ -31,6 +32,11 @@ namespace Dogo.Application.Handlers.User
             userEntity.Address = await unitOfWork.AddressRepository.AddAsync(userEntity.Address);
 
             var newUser = await unitOfWork.UsersRepository.AddAsync(userEntity);
+
+            var userPreferences = new UserPreferences();
+            userPreferences.UserId = newUser.Id;
+
+            await unitOfWork.UserPreferencesRepository.AddAsync(userPreferences);
 
             return ResultOfEntity<UserResponse>.Success(
                 HttpStatusCode.Created,

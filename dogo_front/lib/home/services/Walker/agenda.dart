@@ -5,6 +5,7 @@ import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../Helpers/fetches.dart';
+import '../../../Helpers/screens/path_current_location.dart';
 import '../../../entities/person.dart';
 import '../../../../Helpers/constants.dart' as constants;
 
@@ -319,7 +320,7 @@ class AppointmetCard extends StatelessWidget {
           child: Center(
             child: ListTile(
               onTap: () {
-                choseAppointmentPage(context, appointment);
+                displayPath(context, appointment);
               },
               leading: CircleAvatar(
                   backgroundColor: _getColorOfType(appointment.type),
@@ -357,36 +358,38 @@ class AppointmetCard extends StatelessWidget {
     );
   }
 
-  choseAppointmentPage(BuildContext context, Appointment appointment) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Coming soon!'),
-        backgroundColor: constants.MyColors.dustBlue,
-      ),
-    );
-    // return Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) {
-    //     switch (appointment.type) {
-    //       case constants.walk:
-    //         return AssignWalkAppointmentPage(
-    //             user: user, appointment: appointment);
-    //       case constants.salon:
-    //         return AssignSalonAppointmentPage(
-    //             user: user, appointment: appointment);
-    //       case constants.sitting:
-    //         return AssignSittingAppointmentPage(
-    //             user: user, appointment: appointment);
-    //       case constants.shopping:
-    //         return AssignShoppingAppointmentPage(
-    //             user: user, appointment: appointment);
-    //       case constants.vet:
-    //         return AssignVetAppointmentPage(
-    //             user: user, appointment: appointment);
-    //       default:
-    //         return AgendaPage(user: user);
-    //     }
-    //   }),
+  displayPath(BuildContext context, Appointment appointment) {
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(
+    //     content: Text('Coming soon!'),
+    //     backgroundColor: constants.MyColors.dustBlue,
+    //   ),
     // );
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        switch (appointment.type) {
+          case constants.walk:
+            return PagePathViewer(petId: appointment.petId);
+          // case constants.salon:
+          //   return AssignSalonAppointmentPage(
+          //       user: user, appointment: appointment);
+          // case constants.sitting:
+          //   return AssignSittingAppointmentPage(
+          //       user: user, appointment: appointment);
+          // case constants.shopping:
+          //   return AssignShoppingAppointmentPage(
+          //       user: user, appointment: appointment);
+          case constants.vet:
+            return PagePathViewer(
+              petId: appointment.petId,
+              destinationAddress: appointment.address,
+            );
+          // return OrderTrackingPage();
+          default:
+            return AgendaPage(user: user);
+        }
+      }),
+    );
   }
 }

@@ -220,6 +220,9 @@ class _Page extends State<Page> {
   }
 
   createUser(BuildContext context) async {
+    _selectedAddress.zipCode = _zipCodeController.text;
+    _selectedAddress.additionalDetails = _otherDetailsController.text;
+
     var person = Person(
       firstName: _firstNameController.text,
       lastName: _lastNameController.text,
@@ -230,6 +233,8 @@ class _Page extends State<Page> {
     );
 
     postUser(person).then((value) {
+      log(value);
+      log(person.toString());
       try {
         if (int.tryParse(value) == HttpStatus.conflict) {
           displayError(context, 'This email is already in use');
@@ -250,7 +255,7 @@ class _Page extends State<Page> {
   }
 
   Future<String> postUser(Person person) async {
-    var url = '${constants.serverUrl}/petOwners?api-version=1';
+    var url = '${constants.serverUrl}/users?api-version=1';
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse(url));
 

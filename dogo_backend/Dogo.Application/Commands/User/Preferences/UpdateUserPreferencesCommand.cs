@@ -6,7 +6,6 @@ namespace Dogo.Application.Commands.User.Preferences
 {
     public class UpdateUserPreferencesCommand : IRequest<Result>
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
 
         public string DogPreference { get; set; }
@@ -16,6 +15,7 @@ namespace Dogo.Application.Commands.User.Preferences
         public string FishPreference { get; set; }
         public string FerretPreference { get; set; }
         public string GuineaPigPreference { get; set; }
+        public string OtherPreference { get; set; }
 
         // Activities Preferences
         public string WalkPreference { get; set; }

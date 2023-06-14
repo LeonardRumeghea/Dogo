@@ -40,8 +40,8 @@ class _PageLocationPickerState extends State<PageLocationPicker> {
   void initState() {
     super.initState();
     init();
-    _loadMapStyles().then((value) => _googleMapController.future
-        .then((controller) => controller.setMapStyle(_darkMapStyle)));
+    // _loadMapStyles().then((value) => _googleMapController.future
+    // .then((controller) => controller.setMapStyle(_darkMapStyle)));
   }
 
   init() {
