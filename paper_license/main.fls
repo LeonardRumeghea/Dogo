@@ -648,6 +648,7 @@ INPUT chapters\introduction.tex
 INPUT .\chapters\introduction.tex
 INPUT .\chapters\introduction.tex
 INPUT chapters\introduction.tex
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
 INPUT .\chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
@@ -655,9 +656,14 @@ INPUT chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
 INPUT .\chapters\chapter1.tex
 INPUT chapters\chapter1.tex
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr8r.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr8r.tfm
 INPUT .\chapters\chapter2.tex
 INPUT .\chapters\chapter2.tex
 INPUT .\chapters\chapter2.tex

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  11 JUN 2023 13:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  15 JUN 2023 18:13
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -295,7 +295,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
-<images//logoFii.png, id=63, 193.47281pt x 188.95593pt>
+<images//logoFii.png, id=71, 193.47281pt x 188.95593pt>
 File: images//logoFii.png Graphic file (type png)
 <use images//logoFii.png>
 Package pdftex.def Info: images//logoFii.png  used on input line 13.
@@ -339,44 +339,47 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <20.74> on input line 1.
 ) (chapters/introduction.tex [2
 
-]) (chapters/chapter1.tex [3
+] [3
 
 ]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 17.
+) (chapters/chapter1.tex [4]
 Capitolul 1.
-[4
+[5
 
-]) (chapters/chapter2.tex [5]
+] [6] [7]) (chapters/chapter2.tex [8]
 Capitolul 2.
-[6
+) (chapters/chapter3.tex [9
 
-]) (chapters/chapter3.tex [7]
+]
 Capitolul 3.
-[8
+) (chapters/conclusions.tex [10
 
-]) (chapters/conclusions.tex [9]) (chapters/bibliography.tex [10
+]) (chapters/bibliography.tex [11
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 5.
  (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-)) [11
+)) [12
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DDBBF2D0231748EBFB71EE3BAC6E1C40;2223.
+(rerunfilecheck)             Checksum: 1F27125C4A2D9E4830EFC7F591569B6B;2740.
  ) 
 Here is how much of TeX's memory you used:
- 10023 strings out of 476331
- 163216 string characters out of 5797575
- 1863660 words of memory out of 5000000
- 30246 multiletter control sequences out of 15000+600000
- 535675 words of font info for 87 fonts, out of 8000000 for 9000
+ 10040 strings out of 476331
+ 163417 string characters out of 5797575
+ 1872660 words of memory out of 5000000
+ 30252 multiletter control sequences out of 15000+600000
+ 537879 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,6n,76p,1211b,465s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,76p,1223b,465s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (15 pages, 97430 bytes).
+Output written on main.pdf (16 pages, 118009 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 29 named destinations out of 1000 (max. 500000)
- 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 198 PDF objects out of 1000 (max. 8388607)
+ 38 named destinations out of 1000 (max. 500000)
+ 142 words of extra memory for PDF output out of 10000 (max. 10000000)
 
