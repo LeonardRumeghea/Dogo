@@ -29,7 +29,6 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
   late LatLng _pickupLatLng;
   late LatLng _userLatLng;
   late LatLng _destinationLatLng;
-  late LatLng _currentLatLng;
 
   late Marker _pickupMarker;
   late Marker _userMarker;

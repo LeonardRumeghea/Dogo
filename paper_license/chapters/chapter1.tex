@@ -42,4 +42,20 @@ După ce anunțul este acceptat, „Walker-ul” poate vedea asta în aplicație
 
 
 \section{Cerințe non-funcționale}
+ 
+Pe lângă cerințele funcționale, aplicațiile trebuie să îndeplinească și multe cerințe nefuncționale. Acestea nu au nicio legătură cu funcționalitatea aplicației, dar sunt importante pentru a asigura o experiență plăcută atât utilizatorilor, cât și programatorilor care vor lucra la această aplicație în viitor. Aceste cerințe includ două lucruri cheie: performanță și scalabilitate. 
+
+\newpage
+
+\subsection{Performanță}
+
+Una dintre caracteristicile notabile ale framework-ul Flutter este reprezentată de performanța crescută a acestuia, atât pe platforma Android cât și pe iOS. Datorită arhitecturii native Flutter și compilării AOT (Ahead-of-Time)\footnote{În programare, compilarea Ahead-of-Time (AOT) reprezintă compilarea unui limbaj de programare de nivel înalt într-un limbaj de nivel inferior înainte de execuția programului, de obicei la momentul compilării, pentru a reduce cantitatea de lucru necesară la momentul execuției.}, aplicațiile create cu aceste framework rulează eficient și fără probleme. Ca limbaj de programare Flutter folosește Dart care compilează cod nativ pe mai multe platforme, inclusiv pe cele mobile profitând de avantajele native ale dispozitivelor pe care rulează. Pentru a obține performanțe maxime, Flutter folosește un motor de randare numit Skia\footnote{https://skia.org/docs/} care este folosit și de Google Chrome. Acesta este un motor de randare 2D care oferă o performanță excelentă și o experiență de utilizare fluidă.
+
+\subsection{Scalabilitate}
+
+Flutter este cunoscut pentru abordarea reactivă și arhitectura bazată pe widget care facilitează dezvoltarea de aplicații scalabile. Structura widgetului permite o separare clară a responsabilităților și o reutilizare sporită a codului. Aceasta înseamnă că dezvoltatorii pot crea și gestiona cu ușurință interfețe complexe și dinamice, indiferent de dimensiune sau complexitate.
+
+.NET, pe de altă parte, are suport nativ pentru scalabilitate și este folosit pentru a dezvolta aplicații de la desktop și web până la servicii cloud și aplicații pentru întreprinderi. Platforma .NET oferă capabilități puternice de gestionare a memoriei, concurență și distribuție care permit dezvoltatorilor să construiască și să ruleze aplicații scalabile, de performanță înaltă. În plus, framework-urile și serviciile suplimentare precum ASP.NET și Azure oferă instrumente avansate pentru scalabilitatea aplicațiilor web și cloud.
+
+Atât Flutter, cât și .NET beneficiază de comunități active de dezvoltatori și de sprijin din partea unor jucători mari precum Google în cazul Flutter și Microsoft pentru .NET. Deci dezvoltatorii au acces la resurse, documentație și actualizări continue pentru a-i ajuta să depășească provocările de scalabilitate și să implementeze soluții eficiente.
 

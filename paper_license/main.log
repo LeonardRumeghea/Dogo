@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  15 JUN 2023 18:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  18 JUN 2023 17:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -202,35 +202,51 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
 )
 \Hy@SectionHShift=\skip50
+) (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/wrapfig\wrapfig.sty
+\wrapoverhang=\dimen156
+\WF@size=\dimen157
+\c@WF@wrappedlines=\count276
+\WF@box=\box51
+\WF@everypar=\toks20
+Package: wrapfig 2003/01/31  v 3.6
+) (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/lipsum\lipsum.sty (C:\Program Files\MiKTeX\tex/latex/l3packages/l3keys2e\l3keys2e.sty (C:\Program Files\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2023-03-30 L3 programming layer (loader) 
+ (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count277
+\l__pdf_internal_box=\box52
+))
+Package: l3keys2e 2023-02-02 LaTeX2e option processing using LaTeX3 keys
 )
-LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 28.
+Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
+\g__lipsum_par_int=\count278
+\l__lipsum_a_int=\count279
+\l__lipsum_b_int=\count280
+ (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/lipsum\lipsum.ltd.tex))
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 30.
  (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/psnfss\ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
-) (C:\Program Files\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2023-03-30 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count276
-\l__pdf_internal_box=\box51
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
-LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -268,24 +284,24 @@ LaTeX Font Info:    ... okay on input line 28.
 
 (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count277
-\scratchdimen=\dimen156
-\scratchbox=\box52
-\nofMPsegments=\count278
-\nofMParguments=\count279
-\everyMPshowfont=\toks20
-\MPscratchCnt=\count280
-\MPscratchDim=\dimen157
-\MPnumerator=\count281
-\makeMPintoPDFobject=\count282
-\everyMPtoPDFconversion=\toks21
+\scratchcounter=\count281
+\scratchdimen=\dimen158
+\scratchbox=\box53
+\nofMPsegments=\count282
+\nofMParguments=\count283
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count284
+\MPscratchDim=\dimen159
+\MPnumerator=\count285
+\makeMPintoPDFobject=\count286
+\everyMPtoPDFconversion=\toks22
 ) (C:\Program Files\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Program Files\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 28.
+Package hyperref Info: Link coloring OFF on input line 30.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
@@ -295,7 +311,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <14.4> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
-<images//logoFii.png, id=71, 193.47281pt x 188.95593pt>
+<images//logoFii.png, id=111, 193.47281pt x 188.95593pt>
 File: images//logoFii.png Graphic file (type png)
 <use images//logoFii.png>
 Package pdftex.def Info: images//logoFii.png  used on input line 13.
@@ -320,19 +336,24 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.37     \input{front/declaration1}
+l.39     \input{front/declaration1}
                                     [1] (front/declaration2.tex)
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.38     \input{front/declaration2}
-                                    [2] (main.toc)
+l.40     \input{front/declaration2}
+                                    [2] (main.toc
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.27 ...sline {chapter}{Concluzii}{19}{chapter*.4}
+                                                  % [3
+
+])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (chapters/motivation.tex [1
-
-]
+ (chapters/motivation.tex [1]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <24.88> on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -348,38 +369,75 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Capitolul 1.
 [5
 
-] [6] [7]) (chapters/chapter2.tex [8]
+] [6] [7] [8]) (chapters/chapter2.tex [9]
 Capitolul 2.
-) (chapters/chapter3.tex [9
+<images/clean_architecture.png, id=215, 638.385pt x 619.56468pt>
+File: images/clean_architecture.png Graphic file (type png)
+<use images/clean_architecture.png>
+Package pdftex.def Info: images/clean_architecture.png  used on input line 12.
+(pdftex.def)             Requested size: 273.14923pt x 265.09354pt.
+[10
 
 ]
-Capitolul 3.
-) (chapters/conclusions.tex [10
-
-]) (chapters/bibliography.tex [11
-
-]
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 5.
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 24.
  (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-)) [12
+) [11 <./images/clean_architecture.png>] [12] [13] [14]
+<images/database.png, id=240, 842.14626pt x 576.1525pt>
+File: images/database.png Graphic file (type png)
+<use images/database.png>
+Package pdftex.def Info: images/database.png  used on input line 99.
+(pdftex.def)             Requested size: 455.24411pt x 311.46057pt.
+) (chapters/chapter3.tex [15 <./images/database.png>]
+Capitolul 3.
+[16
+
+]
+<images/application_map_view.png, id=251, 1084.05pt x 2409.0pt>
+File: images/application_map_view.png Graphic file (type png)
+<use images/application_map_view.png>
+Package pdftex.def Info: images/application_map_view.png  used on input line 16.
+(pdftex.def)             Requested size: 182.09486pt x 404.63573pt.
+ [17 <./images/application_map_view.png>]
+Overfull \hbox (25.14696pt too wide) in paragraph at lines 38--39
+[]\OT1/ppl/m/n/12 Geolocator ofer[]a po-si-bi-li-ta-tea de a de-ter-mina loca[]ia cu-rent[]a a uti-li-za-to-ru-lui folosindu-
+ []
+
+) (chapters/conclusions.tex [18]) (chapters/bibliography.tex [19
+
+]
+Overfull \hbox (28.96114pt too wide) in paragraph at lines 8--9
+[]\OT1/ppl/m/n/12 Google Maps Plat-form Do-cu-men-ta-tion, \OT1/ppl/m/it/12 ht-tps://developers.google.com/maps/documentation 
+ []
+
+
+Overfull \hbox (63.85577pt too wide) in paragraph at lines 9--10
+[]\OT1/ppl/m/n/12 Distance Ma-trix API Do-cu-men-ta-tion, \OT1/ppl/m/it/12 https://developers.google.com/maps/documentation/distance-
+ []
+
+
+Overfull \hbox (23.248pt too wide) in paragraph at lines 10--11
+[]\OT1/ppl/m/n/12 ASP.NET do-cu-men-ta-tion, \OT1/ppl/m/it/12 https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-
+ []
+
+) [20
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1F27125C4A2D9E4830EFC7F591569B6B;2740.
+(rerunfilecheck)             Checksum: 924DB3D8D63A97C2E89851714863FE7F;4332.
  ) 
 Here is how much of TeX's memory you used:
- 10040 strings out of 476331
- 163417 string characters out of 5797575
+ 10623 strings out of 476331
+ 176800 string characters out of 5797575
  1872660 words of memory out of 5000000
- 30252 multiletter control sequences out of 15000+600000
+ 30789 multiletter control sequences out of 15000+600000
  537879 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,76p,1223b,465s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,77p,1223b,530s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (16 pages, 118009 bytes).
+Output written on main.pdf (25 pages, 850703 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 142 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 303 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
+ 237 words of extra memory for PDF output out of 10000 (max. 10000000)
 
