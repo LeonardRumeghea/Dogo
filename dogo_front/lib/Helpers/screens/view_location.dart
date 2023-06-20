@@ -53,7 +53,6 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
   @override
   void initState() {
     super.initState();
-
     init();
   }
 

@@ -1,0 +1,80 @@
+Date : 2023-06-19 11:57:18
+Directory : d:\Documents\GitHub\Dogo\dogo_front\lib
+Total : 39 files,  10467 codes, 90 comments, 926 blanks, all 11483 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Dart     |         39 |     10,467 |         90 |        926 |     11,483 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                 | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                    |         39 |     10,467 |         90 |        926 |     11,483 |
+| . (Files)                                                                                            |          1 |         15 |          0 |          3 |         18 |
+| Helpers                                                                                              |          8 |      1,585 |         31 |        248 |      1,864 |
+| Helpers (Files)                                                                                      |          4 |        297 |          6 |         73 |        376 |
+| Helpers\screens                                                                                      |          4 |      1,288 |         25 |        175 |      1,488 |
+| authentication                                                                                       |          3 |      1,006 |         14 |         74 |      1,094 |
+| entities                                                                                             |          5 |        322 |         13 |         55 |        390 |
+| home                                                                                                 |         21 |      7,323 |         31 |        531 |      7,885 |
+| home (Files)                                                                                         |          1 |        378 |          3 |         29 |        410 |
+| home\services                                                                                        |         20 |      6,945 |         28 |        502 |      7,475 |
+| home\services\owner_screens                                                                          |         11 |      3,815 |         19 |        281 |      4,115 |
+| home\services\owner_screens (Files)                                                                  |          2 |        440 |          2 |         40 |        482 |
+| home\services\owner_screens\pets                                                                     |          3 |      1,274 |         11 |        110 |      1,395 |
+| home\services\owner_screens\schedules                                                                |          6 |      2,101 |          6 |        131 |      2,238 |
+| home\services\walker                                                                                 |          9 |      3,130 |          9 |        221 |      3,360 |
+| home\services\walker (Files)                                                                         |          4 |      1,107 |          9 |        107 |      1,223 |
+| home\services\walker\appointments_info                                                               |          5 |      2,023 |          0 |        114 |      2,137 |
+| settings                                                                                             |          1 |        216 |          1 |         15 |        232 |
++------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                             | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\constants.dart                                       | Dart     |        134 |          6 |         17 |        157 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\fetches.dart                                         | Dart     |         73 |          0 |         22 |         95 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\pets.dart                                            | Dart     |         28 |          0 |         11 |         39 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\puts.dart                                            | Dart     |         62 |          0 |         23 |         85 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\screens\location_picker.dart                         | Dart     |        229 |          6 |         34 |        269 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\screens\path_current_location.dart                   | Dart     |        456 |         15 |         69 |        540 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\screens\pet_profile.dart                             | Dart     |        235 |          0 |         17 |        252 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\Helpers\screens\view_location.dart                           | Dart     |        368 |          4 |         55 |        427 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\authentication\auth_screen.dart                              | Dart     |        106 |          1 |          7 |        114 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\authentication\login_screen.dart                             | Dart     |        311 |          4 |         32 |        347 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\authentication\register_screen.dart                          | Dart     |        589 |          9 |         35 |        633 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\entities\address.dart                                        | Dart     |         57 |          0 |          6 |         63 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\entities\appointment.dart                                    | Dart     |         67 |         11 |         20 |         98 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\entities\person.dart                                         | Dart     |         56 |          0 |         10 |         66 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\entities\pet.dart                                            | Dart     |         56 |          0 |          8 |         64 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\entities\preferences.dart                                    | Dart     |         86 |          2 |         11 |         99 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services.dart                                           | Dart     |        378 |          3 |         29 |        410 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\appointments.dart                | Dart     |        413 |          2 |         34 |        449 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\history.dart                     | Dart     |         27 |          0 |          6 |         33 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\pets\create_pet.dart             | Dart     |        470 |          1 |         43 |        514 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\pets\pets.dart                   | Dart     |        288 |          9 |         21 |        318 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\pets\update_pet.dart             | Dart     |        516 |          1 |         46 |        563 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule.dart          | Dart     |          6 |          0 |          2 |          8 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule_salon.dart    | Dart     |        487 |          2 |         27 |        516 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule_shopping.dart | Dart     |        245 |          0 |         22 |        267 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule_sitting.dart  | Dart     |        465 |          2 |         26 |        493 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule_vet.dart      | Dart     |        499 |          2 |         28 |        529 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\owner_screens\schedules\schedule_walk.dart     | Dart     |        399 |          0 |         26 |        425 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\agenda.dart                             | Dart     |        379 |          4 |         33 |        416 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\appointments_info\assign_salon.dart     | Dart     |        488 |          0 |         25 |        513 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\appointments_info\assign_shopping.dart  | Dart     |        290 |          0 |         21 |        311 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\appointments_info\assign_sitting.dart   | Dart     |        431 |          0 |         23 |        454 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\appointments_info\assign_vet.dart       | Dart     |        431 |          0 |         23 |        454 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\appointments_info\assign_walk.dart      | Dart     |        383 |          0 |         22 |        405 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\available_appointments.dart             | Dart     |        394 |          5 |         33 |        432 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\preferences_screen.dart                 | Dart     |        310 |          0 |         37 |        347 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\home\services\walker\search.dart                             | Dart     |         24 |          0 |          4 |         28 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\main.dart                                                    | Dart     |         15 |          0 |          3 |         18 |
+| d:\Documents\GitHub\Dogo\dogo_front\lib\settings\profile_view.dart                                   | Dart     |        216 |          1 |         15 |        232 |
+| Total                                                                                                |          |     10,467 |         90 |        926 |     11,483 |
++------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

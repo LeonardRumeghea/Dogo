@@ -23,6 +23,7 @@ class MyAppLogin extends StatelessWidget {
         primarySwatch: constants.MyColors.darkBlue,
         brightness: Brightness.dark,
       ),
+      debugShowCheckedModeBanner: false,
       home: const PageLogin(),
     );
   }

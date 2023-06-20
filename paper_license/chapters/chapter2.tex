@@ -10,7 +10,7 @@ O arhitectură „arhitectură curată” se bazează pe principiul inversării 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.6\textwidth] {images/clean_architecture.png}
-    \caption{Clean Architecture}
+    \caption{Clean Architecture{\cite{clean_architecture}}}
     \label{fig:clean_architecture}
 \end{figure}
 
@@ -68,7 +68,28 @@ Stratul de interfață reprezintă este responsabil pentru interacțiunea cu uti
 
 \section{Arhitectura aplicației mobile}
 
+Pentru dezvoltarea aplicației mobile, am ales să folosesc Flutter, un framework cross-platform dezvoltat de Google. Acesta permite dezvoltarea aplicațiilor native pentru Android și iOS folosind un limbaj de programare comun, Dart. In cazul aplicației am folosit o arhitectură Model-View-Presenter (MVP), care separă logica de prezentare de logica de afaceri și de date. Această arhitectură este asemănătoare cu arhitectura Model-View-Controller (MVC), care este una dintre cele mai populare arhitecturi pentru dezvoltarea aplicațiilor web. 
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth] {images/mvc.png}
+    \caption{Model-View-Controller{\cite{mvc}}}
+    \label{fig:mvc}
+\end{figure}
+
+\subsection{Model-View-Presenter (MVP)}
+
+Pentru a înțelege mai bine arhitectura MVP o vom compara cu arhitectura MVC. În arhitectura MVC, modelul reprezintă datele și logica aplicației, iar controller-ul este responsabil de gestionarea interacțiunii dintre model și view. View-ul reprezintă interfața cu utilizatorul, care este responsabilă de afișarea datelor și interacțiunea cu utilizatorul. În arhitectura MVP, modelul și controller-ul sunt unite într-o componentă unitară, numită presenter. Presenter-ul este responsabil pentru gestionarea logicii și a datelor, iar view-ul este responsabil pentru afișarea informațiilor și interacțiunea cu utilizatorul, ceea ce permite o separare mai mare între logica și interfața utilizatorului. Această separare facilitează testarea codului și modularitatea sa, făcându-l mai ușor de întreținut și extins. MVP oferă, de asemenea, o flexibilitate sporită în cazul schimbările de interfață, deoarece presenter-ul controlează modul în care informațiile sunt prezentate utilizatorului. Prin separarea strictă a responsabilităților, MVP asigură o mai bună organizare și înțelegere a codului, ceea ce poate duce la o dezvoltare mai rapidă și mai eficientă a aplicațiilor.
+
+\subsection{Componentele arhitecturii MVP}
+
+Arhitectura MVP este împărțită în trei componente importante: Model, View și Presenter. Acestea sunt independente și comunică între ele folosind interfețe. O astfel de separare permite testarea și refacerea componentelor independent, fără a afecta restul aplicației.
+
+\begin{itemize}
+    \item \textbf{Model} - reprezintă datele și logica aplicației. Acesta se ocupă de manipularea datelor și de efectuarea operațiilor necesare. Tot el este responsabil și pentru comunicarea cu serverul.
+    \item \textbf{View} - reprezintă interfața cu utilizatorul. Acesta se ocupă cu afișarea interfeței si de recepționarea acțiunilor utilizatorului. View-ul este pasiv, fiind lipsit de orice logica. El afișează utilizatorului informațiile primite de la presenter.
+    \item \textbf{Presenter} - reprezintă componenta principala a acestei arhitecturi si acționează ca intermediar între model și view. Presenter-ul primește acțiunile utilizatorului captate de view si executa logica necesara in Model. După care actualizarea atât modelul cat si view-ul cu datele necesare.
+\end{itemize}
 
 \section{Arhitectura bazei de date}
 
@@ -85,12 +106,12 @@ Un aspect cheie al SQL Server este capacitatea sa de a lucra cu date spațiale. 
     \item \textbf{Performanța\footnote{Itzik Ben-Gan, Adam Machanic, Dejan Sarka, Kevin Farlee, Performance Tuning
     and Optimization in SQL Server, Microsoft Press}} - SQL Server este recunoscut pentru capacitatea sa de gestiona cantități mari de date si performanța sa ridicată. Oferă suport pentru indexarea datelor, care permite acces rapidă la date, și optimizarea interogărilor. De asemenea, oferă suport pentru funcții și proceduri stocate, care permit crearea de funcționalități complexe care pot fi apoi reutilizate în cadrul aplicației.
     \item \textbf{Securitatea} - acesta pune la dispozitie o mulțime de funcționalități de securitate robuste pentru protejarea datele stocate în baza de date. Aici sunt incluse autorizarea, criptarea și auditarea, care asigură integritatea și confidențialitate informaților.
-    
-    \newpage
 
     \item \textbf{Integrare cu mediul .NET} - ambele produse fiind dezoltate de Microsoft, SQL Server si .NET sunt compatibile și se integrează perfect. Acest lucru facilitează interacțiunea dintre serverul ASP.NET și baza de date, permițându-ne să accesăm și să manipulăm date într-un mod simplu și eficient.
     \item \textbf{Măsuri de siguranță} - SQL Server oferă o serie de mecanisme utile pentru a asigura integritatea datelor în cazul unor evenimente neprevăzute. Funcții precum tranzacții, jurnale de tranzacții și backup-uri periodice ajută la protejarea datelor și la recuperarea lor în cazul unor erori de sistem sau erori umane.
 \end{itemize}
+
+\newpage
 
 \subsection{Diagrama bazei de date}
 

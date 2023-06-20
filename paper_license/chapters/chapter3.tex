@@ -11,7 +11,7 @@ Pentru dezvoltarea aplicației, au fost folosite diferite servicii externe, in s
 
 \subsection{Google Maps Platform}
 
-\begin{wrapfigure}[22]{r}{0.4\textwidth}
+\begin{wrapfigure}[20]{r}{0.4\textwidth}
     \centering
     \includegraphics[width=0.4\textwidth]{images/application_map_view.png}
     \caption{Vizualizarea hărții în cadrul aplicației}
@@ -29,13 +29,15 @@ Din cadrul serviciului Google Maps, au fost folosite următoarele servicii:
 
 \begin{itemize}
     \item \textbf{Distance Matrix API} - oferă funcționalitatea de a determina distanțele și timpii de parcurgere a drumului dintre două puncte. Acest serviciu este folosit pentru a ajută utilizatorul să estimeze timpul necesar pentru a ajunge la locația unde se află animalul de companie, sau pentru a ajunge la locația unde se află salonul sau cabinetul veterinar pentru o mai bună planificare a timpului.
-\end{itemize}
+\end{itemize} 
 
 \subsection{Geolocator}
 
 Am utilizat acest servici pentru a determina locația curentă a utilizatorului și ne permite să urmărim locația acestuia pe hartă în momentul deplasării. 
 
-Geolocator oferă posibilitatea de a determina locația curentă a utilizatorului folosindu-se de GPS, rețele mobile și conexiuni WiFi. Acesta poate urmării locația utilizatorului în timp real, oferind informații despre locația curentă, viteza de deplasare, altitudine, etc. Acest serviciu este util atât „Walker” pentru vizualizarea în timp real a drumului pe care îl mai are de parcurs până la destinația curentă cât și „Owner” pentru a spori gradul de siguranță al animalului de companie.
+Geolocator oferă posibilitatea de a determina locația curentă a utilizatorului \newline folosindu-se de GPS, rețele mobile și conexiuni WiFi. Acesta poate urmării locația utilizatorului în timp real, oferind informații despre locația curentă, viteza de deplasare, altitudine, etc. Acest serviciu este util atât „Walker” pentru vizualizarea în timp real a drumului pe care îl mai are de parcurs până la destinația curentă cât și „Owner” pentru a spori gradul de siguranță al animalului de companie.
 
-\section{Implementarea serverului}
+\section{Genererea unei agende}
+
+Pentru a ușura muncă „Walker-ului” și a elimina timpul necesar de alegere a unor anunțuri pe placul său, am implementat un algoritm care generează o agendă personalizată pentru „Walker” în funcție de preferințele acestuia. Algoritmul este implementat în cadrul serverului și este apelat de către aplicația mobilă în momentul în care „Walker-ul” dorește să genereze o astfel de agenda. Algoritmul are că input o listă de anunțuri și o lista de preferințe ale „Walker-ului” iar că output o lista de anunțuri care respectă preferințele acestuia și care sunt disponibile în ziua respectivă, această fiind furnizată la rândul ei în momentul în care va începe generarea. Astfel el poate să-și gestioneze timpul pentru mai multe zile. Pe lângă preferințele sale, și constrângerile impuse de timpii serviciilor, generarea mai ține cont și de distanțele pe care acesta trebuie să le parcurgă. Astfel dacă un serviciu este finalizat la o ora 14:00, algoritmul nu va lua în considerare un anunț care începe la 14:20 dar care se află la o distanță de 30 de minute de locația unde s-a finalizat serviciul anterior. Pentru generarea fiecărei agende „Walker-ul” va fi nevoit să specifice modul în care se va deplasa între programări, cu mașina sau pe jos, și ziua pentru care se dorește generarea. Acest lucru este util deoarece timpii necesari sunt foarte diferiți și astfel se poate evita situația în care „Walker-ul” nu poate ajunge la timp la o programare sau are timp liber nedorit între două programări.
 
