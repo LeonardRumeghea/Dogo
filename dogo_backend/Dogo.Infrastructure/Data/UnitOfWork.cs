@@ -16,6 +16,7 @@ namespace Dogo.Infrastructure.Data
         private IRepository<Appointment> appointmentRepository;
         private IRepository<Address> addressRepository;
         private IUserPreferencesRepository userPreferencesRepository;
+        private IPositionRepository positionRepository;
 
         public UnitOfWork(DatabaseContext context) => _context = context;
 
@@ -61,6 +62,15 @@ namespace Dogo.Infrastructure.Data
             {
                 userPreferencesRepository ??= new UserPreferencesRepository(_context);
                 return userPreferencesRepository;
+            }
+        }
+
+        public IPositionRepository PositionsRepository
+        {
+            get
+            {
+                positionRepository ??= new PositionRepository(_context);
+                return positionRepository;
             }
         }
 

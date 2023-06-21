@@ -9,6 +9,8 @@ namespace Dogo.Application
         public DbSet<Pet> Pets { get; }
         public DbSet<Appointment> Appointments { get; }
         public DbSet<Address> Addresses { get; }
+        public DbSet<UserPreferences> UserPreferences { get; }
+        public DbSet<Position> Positions { get; }
 
         public void Save();
     }

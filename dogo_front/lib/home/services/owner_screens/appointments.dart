@@ -6,6 +6,7 @@ import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../Helpers/fetches.dart';
+import '../../../Helpers/screens/view_walker_location.dart';
 import '../../../entities/person.dart';
 import './schedules/schedule.dart';
 import '../../../../Helpers/constants.dart' as constants;
@@ -278,6 +279,7 @@ class _Page extends State<AppointmentsPage>
         'Use the + button to add one',
         '',
         context,
+        Appointment(),
       );
     }
 
@@ -296,7 +298,8 @@ class _Page extends State<AppointmentsPage>
                 .name,
             dateStr,
             appointment.status,
-            context),
+            context,
+            appointment),
       );
     }
 
@@ -307,7 +310,7 @@ class _Page extends State<AppointmentsPage>
   }
 
   petCard(Size size, Color color, Icon icon, String title, String date,
-      String status, BuildContext context) {
+      String status, BuildContext context, Appointment appointment) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * .0025),
       child: Card(
@@ -319,11 +322,16 @@ class _Page extends State<AppointmentsPage>
             child: ListTile(
               onTap: () {
                 // choseServicePage(context, title);
+                log('Appointment: ${appointment.toString()}');
+                if (appointment.status == 'InProgress') {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ViewWalkerLocation(appointment: appointment)));
+                }
               },
-              leading: CircleAvatar(
-                backgroundColor: color,
-                child: icon,
-              ),
+              leading: CircleAvatar(backgroundColor: color, child: icon),
               title: Text(
                 title,
                 style: const TextStyle(

@@ -11,7 +11,7 @@ namespace Dogo.Application
         IRepository<Appointment> AppointmentRepository { get; }
         IRepository<Address> AddressRepository { get; }
         IUserPreferencesRepository UserPreferencesRepository { get; }
-
+        IPositionRepository PositionsRepository { get; }
         Task SaveChanges();
     }
 }

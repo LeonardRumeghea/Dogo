@@ -26,6 +26,27 @@ Future<int> putPet(Pet pet, String userId) async {
   return response.statusCode;
 }
 
+Future<void> putPosition(String userId, double lat, double lng) async {
+  var url = '${constants.serverUrl}/positions?api-version=1';
+  var request = http.Request('PUT', Uri.parse(url));
+
+  request.body =
+      json.encode({'userId': userId, 'latitude': lat, 'longitude': lng});
+  request.headers.addAll(
+      <String, String>{'Content-Type': 'application/json; charset=UTF-8'});
+
+  var response = await request.send();
+  if (response.statusCode != 200) {
+    log('Error');
+    log(await response.stream.bytesToString());
+    log(response.statusCode.toString());
+    return;
+  }
+
+  log('Ok. Position $lat, $lng updated for user $userId');
+  log(response.statusCode.toString());
+}
+
 Future<int> assignAppointment(String appointmentId, String walkerId) async {
   log('--- Assign Appointment Begin ---');
   var url = '${constants.serverUrl}/appointments/assign?'

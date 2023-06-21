@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import './constants.dart' as constants;
 
@@ -90,5 +92,23 @@ Future<String> fetchAgenda(String userId) {
     }
 
     return response.stream.bytesToString();
+  });
+}
+
+Future<LatLng?> fetchPosition(String userId) {
+  var url = '${constants.serverUrl}/positions/$userId?api-version=1';
+  var request = http.Request('GET', Uri.parse(url));
+  return request.send().then((response) async {
+    log('Response status code: ${response.statusCode}');
+
+    if (response.statusCode == HttpStatus.notFound) {
+      var responseString = await response.stream.bytesToString();
+      log(responseString);
+      return null;
+    }
+
+    var responseString = await response.stream.bytesToString();
+    var json = jsonDecode(responseString);
+    return LatLng(json['latitude'], json['longitude']);
   });
 }

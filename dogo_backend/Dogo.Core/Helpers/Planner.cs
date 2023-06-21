@@ -1,6 +1,4 @@
-﻿using Dogo.Core.Entities;
-
-namespace Dogo
+﻿namespace Dogo
 {
     public class Planner
     {

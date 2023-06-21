@@ -4,7 +4,7 @@ Conform cerințelor non-funcționale, aplicația constă din două componente pr
 
 \section{Arhitectura serverului}
 
-Pentru realizarea acestui server a folosind o arhitectură "Clean Architecture", fiind un sistem software modular, bine structurat, care promovează separarea clară a responsabilităților și încurajează dezvoltarea de cod ușor de întreținut și testat.
+Pentru realizarea acestui server a folosind o arhitectură „Clean Architecture”, fiind un sistem software modular, bine structurat, care promovează separarea clară a responsabilităților și încurajează dezvoltarea de cod ușor de întreținut și testat.
 O arhitectură „arhitectură curată” se bazează pe principiul inversării dependenței (Dependency Inversion Principle), împărțind o aplicație în niveluri concentrice, fiecare cu un rol bine definit. Straturi principale ale arhitecturii sunt: Stratul de bază (Core Layer), Stratul de aplicație (Application Layer) și Stratul de infrastructură (Infrastructure Layer) alături de Stratul de interfață (Interface Layer).
 
 \begin{figure}[ht]
@@ -29,13 +29,13 @@ Stratul de bază, sau central, reprezintă nucleul aplicației și conține regu
 
 \subsection{Stratul de aplicație}
 
-Stratul de aplicație în arhitectura "Clean Architecture" reprezintă puntea între interfața utilizatorului și logica de afaceri din Stratul de paza. Gestionează fluxului de date și de interacțiunea între componentele UI (User Interface) și componentele din Core. 
+Stratul de aplicație în arhitectura „Clean Architecture” reprezintă puntea între interfața utilizatorului și logica de afaceri din Stratul de paza. Gestionează fluxului de date și de interacțiunea între componentele UI (User Interface) și componentele din Core. 
 
 Nivelul de aplicație conține următoarele componente: 
 
 \begin{itemize}
     \item \textbf{Commands} - Comenzile sunrt reprezentate de cereri sau acțiuni specifice pe care un utilizator le poate efectua in intermediul aplicației. Aceastea includ acțiuni precum crearea obiectelor, actualizarea datelor sau ștergerea acestora. Comenzile sunt de obicei reprezentate de structuri de date care conțin informațiile necesare pentru a efectua acțiunea dorită.
-    \item \textbf{Handlers} Handler-ii, sau gestionatorii, sunt componente responsabile pentru acceptarea și gestionarea comenzilor primite, ocupându-se de execuția logicii asociate cu acea comandă. Handler-ul primește comanda, extrage datele necesare și apelează funcțiile corespunzătoare din stratul de bază pentru a efectua operația necesară. Ele pot interacționa cu alte servicii din stratul curent, cum ar fi mappers sau responses, pentru a efectua acțiunile dorite și a returna rezultatele corespunzătoare.
+    \item \textbf{Handlers} - Handler-ii, sau gestionatorii, sunt componente responsabile pentru acceptarea și gestionarea comenzilor primite, ocupându-se de execuția logicii asociate cu acea comandă. Handler-ul primește comanda, extrage datele necesare și apelează funcțiile corespunzătoare din stratul de bază pentru a efectua operația necesară. Ele pot interacționa cu alte servicii din stratul curent, cum ar fi mappers sau responses, pentru a efectua acțiunile dorite și a returna rezultatele corespunzătoare.
     \item \textbf{Queries} - interogările reprezintă in general cereri de informații din partea utilizatorului. Acestea implica de obicei extragerea datelor din baza de date, prelucrarea lor intr-un anumit mod și returnarea acestora către utilizator. Spre deosebire de comenzi care modifică starea sistemului, interogările au doar rolul de a returna informații într-o formă cerută.
     \item \textbf{Mappers} - mapperele sunt componente care se ocupă de transformarea datelor in formatul necesar. Acestea sunt folosite pentru a transforma obiectele primite de la utilizator in obiecte din stratul de bază, sau pentru a transforma obiectele din stratul de bază în obiecte care pot fi trimise către utilizator, în funcție de caz.
     
@@ -100,11 +100,10 @@ SQL Server acceptă o varietate de tipuri de date, cum ar fi șiruri, numere, da
 
 Un aspect cheie al SQL Server este capacitatea sa de a lucra cu date spațiale. Aceasta înseamnă că puteți stoca și manipula informații geospațiale, cum ar fi coordonatele geografice și poligoane. Această caracteristică este utilă în aplicații precum cea prezentată care necesită manipularea datelor spațiale pentru a oferi funcționalități precum navigarea sau afișarea unei locații pe hartă.
 
-\subsection{Avantajele aduse de Sql Server}
+\subsection{Avantajele aduse de SQL Server}
 
 \begin{itemize}
-    \item \textbf{Performanța\footnote{Itzik Ben-Gan, Adam Machanic, Dejan Sarka, Kevin Farlee, Performance Tuning
-    and Optimization in SQL Server, Microsoft Press}} - SQL Server este recunoscut pentru capacitatea sa de gestiona cantități mari de date si performanța sa ridicată. Oferă suport pentru indexarea datelor, care permite acces rapidă la date, și optimizarea interogărilor. De asemenea, oferă suport pentru funcții și proceduri stocate, care permit crearea de funcționalități complexe care pot fi apoi reutilizate în cadrul aplicației.
+    \item \textbf{Performanța \cite{sqlServer_performance}} - SQL Server este recunoscut pentru capacitatea sa de gestiona cantități mari de date si performanța sa ridicată. Oferă suport pentru indexarea datelor, care permite acces rapidă la date, și optimizarea interogărilor. De asemenea, oferă suport pentru funcții și proceduri stocate, care permit crearea de funcționalități complexe care pot fi apoi reutilizate în cadrul aplicației.
     \item \textbf{Securitatea} - acesta pune la dispozitie o mulțime de funcționalități de securitate robuste pentru protejarea datele stocate în baza de date. Aici sunt incluse autorizarea, criptarea și auditarea, care asigură integritatea și confidențialitate informaților.
 
     \item \textbf{Integrare cu mediul .NET} - ambele produse fiind dezoltate de Microsoft, SQL Server si .NET sunt compatibile și se integrează perfect. Acest lucru facilitează interacțiunea dintre serverul ASP.NET și baza de date, permițându-ne să accesăm și să manipulăm date într-un mod simplu și eficient.

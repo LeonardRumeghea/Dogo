@@ -14,8 +14,8 @@ const String shopping = 'Shopping';
 const double borderRadius = 8;
 
 // Server URL for API calls
-const String serverUrl = 'http://10.0.2.2:5097/api/v1';
-//'https://10.0.2.2:7077/api/v1';
+const String serverUrl = //'http://10.0.2.2:5097/api/v1';
+    'https://10.0.2.2:7077/api/v1';
 // 'http://192.168.0.1:7077/api/v1';
 
 // Colors for the app for different services

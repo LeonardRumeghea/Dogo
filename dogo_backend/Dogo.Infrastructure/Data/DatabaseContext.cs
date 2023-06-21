@@ -24,6 +24,7 @@ namespace Dogo.Infrastructure.Data
         public DbSet<Appointment> Appointments => Set<Appointment>();
         public DbSet<Address> Addresses => Set<Address>();
         public DbSet<UserPreferences> UserPreferences => Set<UserPreferences>();
+        public DbSet<Position> Positions => Set<Position>();
 
         public void Save() => SaveChanges();
     }

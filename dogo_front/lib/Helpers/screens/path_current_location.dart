@@ -73,6 +73,8 @@ class _PagePathViewerState extends State<PagePathViewer> {
   var _pathStage = 0;
   late String _appointmentType;
 
+  late Timer _timer;
+
   final LocationSettings _locationSettings = AndroidSettings(
     accuracy: LocationAccuracy.bestForNavigation,
     distanceFilter: 0,
@@ -100,12 +102,26 @@ class _PagePathViewerState extends State<PagePathViewer> {
     }
 
     getPetOwnerAddress();
+    // scheduleTimer();
+  }
+
+  scheduleTimer([int milliseconds = 1000]) async {
+    _timer = Timer.periodic(Duration(milliseconds: milliseconds), (timer) {
+      if (_isMapReady) {
+        putPosition(
+          _appointment.walkerId,
+          _currentLatLng.latitude,
+          _currentLatLng.longitude,
+        );
+      }
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _streamSubscription.cancel();
+    //_timer.cancel();
   }
 
   init() {
@@ -533,6 +549,11 @@ class _PagePathViewerState extends State<PagePathViewer> {
             calculateDistanceToPickUp();
           }
         });
+        putPosition(
+          _appointment.walkerId,
+          _currentLatLng.latitude,
+          _currentLatLng.longitude,
+        );
       }
     });
   }
