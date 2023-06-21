@@ -7,9 +7,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart' as lt;
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../Helpers/constants.dart' as constants;
+import '../../../Helpers/config.dart' as config;
 import '../../entities/address.dart';
 import '../../entities/appointment.dart';
 import '../fetches.dart';
@@ -66,9 +66,6 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
   var _durationToPickUp = '';
   var _durationToDestination = '';
 
-  var _pathStage = 0;
-  late String _appointmentType;
-
   late Timer _timer;
 
   @override
@@ -77,7 +74,6 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
 
     _walkerId = _appointment.walkerId;
     _petId = _appointment.petId;
-    _appointmentType = _appointment.type;
     if (_appointment.type == constants.vet ||
         _appointment.type == constants.salon) {
       _destinationAddress = _appointment.address;
@@ -280,7 +276,7 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
     url += '&mode=walking';
     url += '&origins=${from.latitude},${from.longitude}';
     url += '&destinations=${to.latitude},${to.longitude}';
-    url += '&key=${constants.googleMapApiKey}';
+    url += '&key=${config.googleMapApiKey}';
 
     Response response = await dio.get(url);
 
@@ -316,7 +312,7 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      constants.googleDirectionApiKey,
+      config.googleDirectionApiKey,
       PointLatLng(_startLatLng.latitude, _startLatLng.longitude),
       PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
       travelMode: TravelMode.walking,
@@ -330,7 +326,7 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
 
     if (_destinationAddress != null) {
       result = await polylinePoints.getRouteBetweenCoordinates(
-        constants.googleDirectionApiKey,
+        config.googleDirectionApiKey,
         PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
         PointLatLng(_destinationLatLng.latitude, _destinationLatLng.longitude),
         travelMode: TravelMode.walking,
@@ -354,59 +350,7 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
             width: size.width * .8,
             child: lt.Lottie.asset('assets/icons/loading_map.json'),
           ))
-        : Scaffold(
-            floatingActionButton: _pathStage == 3
-                ? null
-                : Padding(
-                    padding: EdgeInsets.only(bottom: size.height * .025),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        if (_pathStage == 0) {
-                          setState(() {
-                            if (_appointmentType == constants.vet ||
-                                _appointmentType == constants.salon) {
-                              _pathStage = 1;
-                            } else {
-                              _pathStage = 2;
-                            }
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Pet picked up'),
-                              duration: Duration(seconds: 2),
-                              backgroundColor: constants.MyColors.dustGreen,
-                            ),
-                          );
-                        } else if (_pathStage == 1) {
-                          setState(() => _pathStage = 2);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Destination reached'),
-                              duration: Duration(seconds: 2),
-                              backgroundColor: constants.MyColors.dustGreen,
-                            ),
-                          );
-                        } else {
-                          setState(() => _pathStage = 3);
-                          completeAppointment(context);
-                        }
-                      },
-                      backgroundColor: constants.MyColors.darkBlue,
-                      child: Icon(
-                          _pathStage == 0
-                              ? Icons.pets
-                              : _pathStage == 1
-                                  ? (_appointmentType == constants.vet
-                                      ? Icons.local_hospital
-                                      : Icons.cut)
-                                  : Icons.home,
-                          color: Colors.white),
-                    ),
-                  ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.startFloat,
-            body: buildBody(size),
-          );
+        : Scaffold(body: buildBody(size));
   }
 
   Widget buildBody(Size size) {

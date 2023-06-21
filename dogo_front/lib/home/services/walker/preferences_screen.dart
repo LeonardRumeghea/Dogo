@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../../../Helpers/config.dart';
 import '../../../Helpers/constants.dart' as constants;
 import '../../../entities/person.dart';
 import '../../../entities/preferences.dart';
@@ -61,8 +62,8 @@ class _Page extends State<PreferencesPage> {
   }
 
   Future<String> fetchSpecies() async {
-    var request = http.Request('GET',
-        Uri.parse('${constants.serverUrl}/appointments/species?api-version=1'));
+    var request = http.Request(
+        'GET', Uri.parse('$serverUrl/appointments/species?api-version=1'));
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode != 200) {
@@ -74,9 +75,7 @@ class _Page extends State<PreferencesPage> {
 
   Future<String> fetchPreferences() async {
     var request = http.Request(
-        'GET',
-        Uri.parse(
-            '${constants.serverUrl}/preferences/${_user.id}?api-version=1'));
+        'GET', Uri.parse('$serverUrl/preferences/${_user.id}?api-version=1'));
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode != 200) {
@@ -89,8 +88,8 @@ class _Page extends State<PreferencesPage> {
   updatePreferences() async {
     _preferences = Preferences.fromList(_user.id, _displayValue);
 
-    var request = http.Request('PUT',
-        Uri.parse('${constants.serverUrl}/preferences/update?api-version=1'));
+    var request = http.Request(
+        'PUT', Uri.parse('$serverUrl/preferences/update?api-version=1'));
 
     request.body = json.encode(_preferences.toJSON());
     request.headers.addAll(<String, String>{

@@ -3,11 +3,11 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import '../entities/pet.dart';
-import './constants.dart' as constants;
+import 'config.dart';
 
 Future<int> putPet(Pet pet, String userId) async {
   log('--- Put Pet Begin ---');
-  var url = '${constants.serverUrl}/users/$userId/pet/${pet.id}?api-version=1';
+  var url = '$serverUrl/users/$userId/pet/${pet.id}?api-version=1';
   var request = http.Request('PUT', Uri.parse(url));
 
   log('Url: $url');
@@ -27,7 +27,7 @@ Future<int> putPet(Pet pet, String userId) async {
 }
 
 Future<void> putPosition(String userId, double lat, double lng) async {
-  var url = '${constants.serverUrl}/positions?api-version=1';
+  var url = '$serverUrl/positions?api-version=1';
   var request = http.Request('PUT', Uri.parse(url));
 
   request.body =
@@ -49,7 +49,7 @@ Future<void> putPosition(String userId, double lat, double lng) async {
 
 Future<int> assignAppointment(String appointmentId, String walkerId) async {
   log('--- Assign Appointment Begin ---');
-  var url = '${constants.serverUrl}/appointments/assign?'
+  var url = '$serverUrl/appointments/assign?'
       'AppointmentId=$appointmentId&'
       'UserId=$walkerId&'
       'api-version=1';
@@ -68,7 +68,7 @@ Future<int> assignAppointment(String appointmentId, String walkerId) async {
 
 Future<int> inProgress(String appointmentId, String walkerId) async {
   log('--- In Progress Appointment Begin ---');
-  var url = '${constants.serverUrl}/appointments/inProgres?'
+  var url = '$serverUrl/appointments/inProgres?'
       'AppointmentId=$appointmentId&'
       'UserId=$walkerId&'
       'api-version=1';
@@ -87,7 +87,7 @@ Future<int> inProgress(String appointmentId, String walkerId) async {
 
 Future<int> complete(String appointmentId, String walkerId) async {
   log('--- Assign Appointment Begin ---');
-  var url = '${constants.serverUrl}/appointments/complete?'
+  var url = '$serverUrl/appointments/complete?'
       'AppointmentId=$appointmentId&'
       'UserId=$walkerId&'
       'api-version=1';

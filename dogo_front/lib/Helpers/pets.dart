@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import '../entities/appointment.dart';
-import './constants.dart' as constants;
 import '../entities/pet.dart';
+import 'config.dart';
 
 Future<int> postPet(Pet pet, String userId) async {
-  var url = '${constants.serverUrl}/users/$userId/pet?api-version=1';
+  var url = '$serverUrl/users/$userId/pet?api-version=1';
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode(pet.toJSON());
@@ -25,7 +25,7 @@ Future<int> postPet(Pet pet, String userId) async {
 }
 
 Future<int> postAppoitment(Appointment appointment) async {
-  var url = '${constants.serverUrl}/appointments?api-version=1';
+  var url = '$serverUrl/appointments?api-version=1';
   var request = http.Request('POST', Uri.parse(url));
 
   request.body = json.encode(appointment.toJSON());

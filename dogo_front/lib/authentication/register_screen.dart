@@ -7,6 +7,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import '../Helpers/config.dart';
 import '../Helpers/constants.dart' as constants;
 import '../Helpers/screens/location_picker.dart';
 import '../entities/address.dart';
@@ -255,7 +256,7 @@ class _Page extends State<Page> {
   }
 
   Future<String> postUser(Person person) async {
-    var url = '${constants.serverUrl}/users?api-version=1';
+    var url = '$serverUrl/users?api-version=1';
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST', Uri.parse(url));
 

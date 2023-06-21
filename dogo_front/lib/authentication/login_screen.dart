@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import '../Helpers/constants.dart' as constants;
+import '../Helpers/config.dart' as config;
 import 'register_screen.dart' as sign_up;
 import '../entities/person.dart';
 import '../entities/pet.dart';
@@ -288,7 +289,7 @@ class _Page extends State<PageLogin> {
       return;
     }
 
-    var url = '${constants.serverUrl}/users/checkLogin';
+    var url = '${config.serverUrl}/users/checkLogin';
     var fullUrl =
         '$url?Email=${_mailController.text}&Password=${_passController.text}&api-version=1';
 

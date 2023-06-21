@@ -8,6 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../Helpers/constants.dart' as constants;
 import '../../entities/address.dart';
+import '../config.dart';
 
 class PageLocationViewer extends StatefulWidget {
   const PageLocationViewer(
@@ -173,7 +174,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      constants.googleDirectionApiKey,
+      googleDirectionApiKey,
       PointLatLng(_userLatLng.latitude, _userLatLng.longitude),
       PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
       travelMode: TravelMode.walking,
@@ -187,7 +188,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
 
     if (_destinationAddress != null) {
       result = await polylinePoints.getRouteBetweenCoordinates(
-        constants.googleDirectionApiKey,
+        googleDirectionApiKey,
         PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
         PointLatLng(_destinationLatLng.latitude, _destinationLatLng.longitude),
         travelMode: TravelMode.walking,
@@ -227,7 +228,7 @@ class _PageLocationViewerState extends State<PageLocationViewer> {
     url += '&mode=walking';
     url += '&origins=${from.latitude},${from.longitude}';
     url += '&destinations=${to.latitude},${to.longitude}';
-    url += '&key=${constants.googleMapApiKey}';
+    url += '&key=$googleMapApiKey';
 
     Response response = await dio.get(url);
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import '../../../../Helpers/config.dart';
 import '../../../../Helpers/constants.dart' as constants;
 import '../../../../Helpers/puts.dart';
 import '../../../../entities/person.dart';
@@ -91,8 +92,8 @@ class _Page extends State<UpdatePetPage> {
   }
 
   Future<String> fetchSpecies() async {
-    var request = http.Request('GET',
-        Uri.parse('${constants.serverUrl}/appointments/species?api-version=1'));
+    var request = http.Request(
+        'GET', Uri.parse('$serverUrl/appointments/species?api-version=1'));
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode != 200) {
@@ -106,7 +107,7 @@ class _Page extends State<UpdatePetPage> {
     var request = http.Request(
         'GET',
         Uri.parse(
-            '${constants.serverUrl}/appointments/breeds?specie=$specie&api-version=1'));
+            '$serverUrl/appointments/breeds?specie=$specie&api-version=1'));
 
     http.StreamedResponse response = await request.send();
 

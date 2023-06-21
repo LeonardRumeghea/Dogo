@@ -10,6 +10,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../Helpers/constants.dart' as constants;
+import '../../../Helpers/config.dart' as config;
 import '../../entities/address.dart';
 import '../../entities/appointment.dart';
 import '../fetches.dart';
@@ -20,10 +21,6 @@ class PagePathViewer extends StatefulWidget {
     Key? key,
     required this.appointment,
   }) : super(key: key);
-
-  // final Address? destinationAddress;
-  // final String petId;
-  // final String appointmentType;
 
   final Appointment appointment;
 
@@ -73,8 +70,6 @@ class _PagePathViewerState extends State<PagePathViewer> {
   var _pathStage = 0;
   late String _appointmentType;
 
-  late Timer _timer;
-
   final LocationSettings _locationSettings = AndroidSettings(
     accuracy: LocationAccuracy.bestForNavigation,
     distanceFilter: 0,
@@ -102,26 +97,12 @@ class _PagePathViewerState extends State<PagePathViewer> {
     }
 
     getPetOwnerAddress();
-    // scheduleTimer();
-  }
-
-  scheduleTimer([int milliseconds = 1000]) async {
-    _timer = Timer.periodic(Duration(milliseconds: milliseconds), (timer) {
-      if (_isMapReady) {
-        putPosition(
-          _appointment.walkerId,
-          _currentLatLng.latitude,
-          _currentLatLng.longitude,
-        );
-      }
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _streamSubscription.cancel();
-    //_timer.cancel();
   }
 
   init() {
@@ -292,7 +273,7 @@ class _PagePathViewerState extends State<PagePathViewer> {
     url += '&mode=walking';
     url += '&origins=${from.latitude},${from.longitude}';
     url += '&destinations=${to.latitude},${to.longitude}';
-    url += '&key=${constants.googleMapApiKey}';
+    url += '&key=${config.googleMapApiKey}';
 
     Response response = await dio.get(url);
 
@@ -328,7 +309,7 @@ class _PagePathViewerState extends State<PagePathViewer> {
     PolylinePoints polylinePoints = PolylinePoints();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      constants.googleDirectionApiKey,
+      config.googleDirectionApiKey,
       PointLatLng(_startLatLng.latitude, _startLatLng.longitude),
       PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
       travelMode: TravelMode.walking,
@@ -342,7 +323,7 @@ class _PagePathViewerState extends State<PagePathViewer> {
 
     if (_destinationAddress != null) {
       result = await polylinePoints.getRouteBetweenCoordinates(
-        constants.googleDirectionApiKey,
+        config.googleDirectionApiKey,
         PointLatLng(_pickupLatLng.latitude, _pickupLatLng.longitude),
         PointLatLng(_destinationLatLng.latitude, _destinationLatLng.longitude),
         travelMode: TravelMode.walking,

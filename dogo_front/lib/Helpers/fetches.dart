@@ -4,10 +4,10 @@ import 'dart:io';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-import './constants.dart' as constants;
+import 'config.dart';
 
 Future<String> fetchPets(String userId) async {
-  var url = '${constants.serverUrl}/users/$userId/pets?api-version=1';
+  var url = '$serverUrl/users/$userId/pets?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -20,7 +20,7 @@ Future<String> fetchPets(String userId) async {
 }
 
 Future<String> fetchPet(String petId) async {
-  var url = '${constants.serverUrl}/pets/$petId?api-version=1';
+  var url = '$serverUrl/pets/$petId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -33,7 +33,7 @@ Future<String> fetchPet(String petId) async {
 }
 
 Future<String> fetchUser(String userId) async {
-  var url = '${constants.serverUrl}/users/$userId?api-version=1';
+  var url = '$serverUrl/users/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -46,7 +46,7 @@ Future<String> fetchUser(String userId) async {
 }
 
 Future<String> fetchAppoitments(String userId) async {
-  var url = '${constants.serverUrl}/appointments/user/$userId?api-version=1';
+  var url = '$serverUrl/appointments/user/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -61,8 +61,7 @@ Future<String> fetchAppoitments(String userId) async {
 }
 
 Future<String> fetchAvailableAppoitments(String userId) async {
-  var url =
-      '${constants.serverUrl}/appointments/available?UserId=$userId&api-version=1';
+  var url = '$serverUrl/appointments/available?UserId=$userId&api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   var response = await request.send();
 
@@ -79,8 +78,7 @@ Future<String> fetchAvailableAppoitments(String userId) async {
 }
 
 Future<String> fetchAgenda(String userId) {
-  var url =
-      '${constants.serverUrl}/appointments/agenda?UserId=$userId&api-version=1';
+  var url = '$serverUrl/appointments/agenda?UserId=$userId&api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   return request.send().then((response) async {
     log('Response status code: ${response.statusCode}');
@@ -96,7 +94,7 @@ Future<String> fetchAgenda(String userId) {
 }
 
 Future<LatLng?> fetchPosition(String userId) {
-  var url = '${constants.serverUrl}/positions/$userId?api-version=1';
+  var url = '$serverUrl/positions/$userId?api-version=1';
   var request = http.Request('GET', Uri.parse(url));
   return request.send().then((response) async {
     log('Response status code: ${response.statusCode}');
