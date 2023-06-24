@@ -4,6 +4,9 @@ import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../../Helpers/constants.dart' as constants;
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart' as picker;
+// ignore: implementation_imports
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
 import '../../../../Helpers/pets.dart';
 import '../../../../entities/person.dart';
 import '../../../../entities/pet.dart';
@@ -23,7 +26,11 @@ class _Page extends State<ScheduleWalkPage> {
   final TextEditingController _noteController = TextEditingController();
   Pet _selectedPet = Pet();
 
+  DateTime _fullDate = DateTime.now();
+  String _selectedDuration = '';
+
   Person get _user => widget.user;
+  final _durations = ['10', '20', '30', '40', '50', '60', '90', '120'];
   List<Pet> _pets = <Pet>[];
 
   @override
@@ -37,6 +44,8 @@ class _Page extends State<ScheduleWalkPage> {
       _pets = _user.pets;
       _selectedPet = _pets[0];
     });
+
+    _selectedDuration = _durations.first;
 
     log('User: $_user');
     log('Pets: $_pets');
@@ -83,9 +92,7 @@ class _Page extends State<ScheduleWalkPage> {
     log('time: ${_timeController.text}');
     log('note: ${_noteController.text}');
 
-    if (_selectedPet.name == '' ||
-        _dateController.text == '' ||
-        _timeController.text == '') {
+    if (_selectedPet.name == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Please fill all require fields'),
@@ -95,18 +102,18 @@ class _Page extends State<ScheduleWalkPage> {
       return;
     }
 
-    var date = DateFormat('dd-MM-yyyy').parse(_dateController.text);
-    var time = DateFormat('HH:mm').parse(_timeController.text);
-    var dateTime =
-        DateTime(date.year, date.month, date.day, time.hour, time.minute);
-
+    var dateTime = DateTime(_fullDate.year, _fullDate.month, _fullDate.day,
+        _fullDate.hour, _fullDate.minute);
     var appointment = Appointment(
       petId: _selectedPet.id,
       dateWhen: dateTime.toString(),
-      dateUntil: dateTime.toString(),
+      dateUntil: dateTime
+          .add(Duration(minutes: int.parse(_selectedDuration)))
+          .toString(),
       notes: _noteController.text,
       type: 'Walk',
     );
+    // appointment.address = _user.address!;
 
     log('Appointment: $appointment');
 
@@ -156,8 +163,8 @@ class _Page extends State<ScheduleWalkPage> {
             ),
           ),
           selectPet(size),
-          selectDate(size),
-          selectHour(size),
+          selectDateTime(size),
+          setDuration(size),
           writeNote(size),
         ],
       ),
@@ -313,6 +320,120 @@ class _Page extends State<ScheduleWalkPage> {
                 },
               ),
             )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget selectDateTime(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      child: SizedBox(
+        width: size.width * .8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(Icons.calendar_today, size: 20, color: Colors.blue),
+                Text(' Date', style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            SizedBox(
+              width: _dateController.text == ''
+                  ? size.width * .35
+                  : size.width * .32,
+              child: TextField(
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'tap to select...',
+                ),
+                style: const TextStyle(fontSize: 20),
+                readOnly: true,
+                controller: _dateController,
+                onTap: () => showDateTimePicker(_dateController),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> showDateTimePicker(TextEditingController controller) async {
+    await picker.DatePicker.showDateTimePicker(
+      context,
+      showTitleActions: true,
+      currentTime: _fullDate,
+      minTime: DateTime.now(),
+      maxTime: DateTime.now().add(const Duration(days: 90)),
+      theme: const DatePickerTheme(
+        cancelStyle:
+            TextStyle(color: constants.MyColors.darkBlue, fontSize: 16),
+        doneStyle: TextStyle(color: constants.MyColors.dustBlue, fontSize: 16),
+        itemStyle:
+            TextStyle(color: Color.fromARGB(255, 228, 228, 228), fontSize: 18),
+        backgroundColor: Color.fromARGB(255, 46, 46, 46),
+      ),
+      onConfirm: (date) {
+        setState(() {
+          controller.text = DateFormat('d MMM').add_Hm().format(date);
+          _fullDate = date;
+        });
+      },
+    );
+  }
+
+  Widget setDuration(Size size) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: size.width * .1),
+      child: SizedBox(
+        width: size.width * .8,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.timer,
+                  size: 20,
+                  color: Colors.green,
+                ),
+                Text(
+                  ' Duration',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                Text(
+                  ' (min)',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 163, 163, 163),
+                  ),
+                )
+              ],
+            ),
+            DropdownButton<String>(
+              value: _selectedDuration,
+              style: const TextStyle(fontSize: 18),
+              underline: Container(
+                height: 2,
+                color: constants.MyColors.grey,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _selectedDuration = newValue!;
+                });
+              },
+              items: _durations.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
           ],
         ),
       ),

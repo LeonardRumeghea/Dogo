@@ -110,3 +110,32 @@ Future<LatLng?> fetchPosition(String userId) {
     return LatLng(json['latitude'], json['longitude']);
   });
 }
+
+Future<String?> fetchGeneratedAgenda(String userId, DateTime startDate,
+    DateTime endDate, String travelMode, int numberOfAppointments) {
+  var url =
+      '$serverUrl/appointments/plan?UserId=$userId&StartDate=$startDate&EndDate=$endDate&TravelMode=$travelMode&NumberOfAppointments=$numberOfAppointments&api-version=1';
+
+  log(url);
+
+  var request = http.Request('GET', Uri.parse(url));
+  return request.send().then((response) async {
+    log('Response status code: ${response.statusCode}');
+
+    return response.statusCode == HttpStatus.ok
+        ? response.stream.bytesToString()
+        : null;
+  });
+}
+
+Future<String?> fetchCompletedAppointments(String userId) {
+  var url = '$serverUrl/appointments/completed?UserId=$userId&api-version=1';
+  var request = http.Request('GET', Uri.parse(url));
+  return request.send().then((response) async {
+    log('Response status code: ${response.statusCode}');
+
+    return response.statusCode == HttpStatus.ok
+        ? response.stream.bytesToString()
+        : null;
+  });
+}

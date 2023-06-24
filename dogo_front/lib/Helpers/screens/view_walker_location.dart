@@ -120,14 +120,13 @@ class _ViewWalkerLocationState extends State<ViewWalkerLocation> {
       markers[_destinationMarker.markerId] = _destinationMarker;
     }
 
-    // set camera position to Palas Iasi with zoom 17.5
-    _cameraPosition = CameraPosition(target: _pickupLatLng, zoom: _zoomLevel);
-
     // getStartPostionMarker();
     getWalkerPosition().then((value) =>
         getStartPostionMarker(value).then((_) => generateRoute().then((_) {
               calculeteDistances();
               updateWalkerPosition();
+              _cameraPosition =
+                  CameraPosition(target: _currentLatLng, zoom: _zoomLevel);
             })));
   }
 

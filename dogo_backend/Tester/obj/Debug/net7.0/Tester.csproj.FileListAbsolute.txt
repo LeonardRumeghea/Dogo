@@ -1,0 +1,17 @@
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Tester.exe
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Tester.deps.json
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Tester.runtimeconfig.json
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Tester.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Tester.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.csproj.CopyComplete
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\refint\Tester.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\Tester.genruntimeconfig.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Tester\obj\Debug\net7.0\ref\Tester.dll

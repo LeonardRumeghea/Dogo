@@ -63,8 +63,26 @@ namespace Dogo.API.Controllers
                 : StatusCode((int)result.StatusCode, result.Message);
         }
 
+        [HttpGet("completed")]
+        public async Task<IActionResult> GetCompleted([FromQuery] GetCompletedAppoitmentOfOwner query)
+        {
+            var result = await _medator.Send(query);
+            return result.IsSuccess
+                ? Ok(result.Entity)
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
         [HttpGet("agenda")]
         public async Task<IActionResult> GetAgenda([FromQuery] GetAgendaOfUserQuery query)
+        {
+            var result = await _medator.Send(query);
+            return result.IsSuccess
+                ? Ok(result.Entity)
+                : StatusCode((int)result.StatusCode, result.Message);
+        }
+
+        [HttpGet("plan")]
+        public async Task<IActionResult> GetPlan([FromQuery] GetPlanForUserQuery query)
         {
             var result = await _medator.Send(query);
             return result.IsSuccess

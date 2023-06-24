@@ -1,6 +1,9 @@
 ﻿using Dogo.Core.Entities;
+using Dogo.Core.Helpers;
 using Dogo.Core.Enums.Species;
+using Newtonsoft.Json.Linq;
 
+#nullable disable
 namespace Dogo.Application
 {
     public class Planner
@@ -9,40 +12,94 @@ namespace Dogo.Application
 
         public Planner(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        public List<Appointment> Plan(List<Appointment> appointments, UserPreferences userPreferences, DateTime startDate, DateTime endDate)
+        public List<Appointment> Plan(List<Appointment> appointments, UserPreferences userPreferences, DateTime startDate, DateTime endDate, String travelMode = "walking")
         {
             appointments = appointments.Where(a => a.DateWhen >= startDate && a.DateUntil <= endDate).ToList();
 
-            appointments = appointments.OrderBy(a => PointsOfAppointment(a, userPreferences)).ThenBy(a => a.DateWhen).ToList();
+            //appointments = appointments.OrderBy(a => PointsOfAppointment(a, userPreferences)).ThenBy(a => a.DateWhen).ToList();
+            appointments = SortByPreferencesAndDateWhen(appointments, userPreferences);
 
-            var result = new List<Appointment>();
-            var lastAppointment = appointments[0];
-
-            for (int i = 1; i < appointments.Count; i++)
+            for (int idx = 0; idx < appointments.Count; idx++)
             {
-                var currentAppointment = appointments[i];
+                var appointment = appointments[idx];
+                if (appointment.Type == AppointmentType.Salon || appointment.Type == AppointmentType.Vet)
+                {
+                    var appointmentEndDate = appointment.DateUntil;
+                    var pet = _unitOfWork.PetRepository.GetByIdAsync(appointment.PetId).Result;
+                    var owner = _unitOfWork.UsersRepository.GetByIdAsync(pet.OwnerId).Result;
 
-                if (currentAppointment.DateWhen < lastAppointment.DateUntil)
-                {
-                    if (currentAppointment.DateUntil > lastAppointment.DateUntil)
-                    {
-                        lastAppointment.DateUntil = currentAppointment.DateUntil;
-                    }
-                }
-                else
-                {
-                    result.Add(lastAppointment);
-                    lastAppointment = currentAppointment;
+                    var travelTime = GetTravelTime(appointment.Address.Latitude, appointment.Address.Longitude, owner.Address.Latitude, owner.Address.Longitude, travelMode);
+                    appointments[idx].DateUntil.AddSeconds(travelTime.Result);
                 }
             }
 
-            result.Add(lastAppointment);
-            
-            return result;
+            var selectedAppointments = new List<Appointment> { appointments[0] };
+            for (int idx = 1; idx < appointments.Count; idx++) 
+            {
+                if (appointments[idx].DateUntil <= selectedAppointments[0].DateUntil)
+                {
+                    if (CanTravel(appointments[idx], selectedAppointments[0], travelMode))
+                    {
+                        selectedAppointments.Insert(0, appointments[idx]);
+                        continue;
+                    }
+                }
+
+                if (appointments[idx].DateWhen >= selectedAppointments[^1].DateUntil)
+                {
+                    if (CanTravel(selectedAppointments[^1], appointments[idx], travelMode))
+                    {
+                        selectedAppointments.Add(appointments[idx]);
+                        continue;
+                    }
+                }
+
+                for (int sIdx = 1; sIdx < selectedAppointments.Count - 1; sIdx++)
+                {
+                    if (appointments[idx].DateWhen >= selectedAppointments[sIdx].DateUntil && appointments[idx].DateUntil <= selectedAppointments[sIdx + 1].DateWhen)
+                    {
+                        if (CanTravel(selectedAppointments[sIdx], appointments[idx], travelMode) && CanTravel(appointments[idx], selectedAppointments[sIdx + 1], travelMode))
+                        {
+                            selectedAppointments.Insert(sIdx + 1, appointments[idx]);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return selectedAppointments;
+
+        }
+
+        bool CanTravel(Appointment fromAppointment, Appointment toAppointment, string travelMode)
+        {
+            var petFrom = _unitOfWork.PetRepository.GetByIdAsync(fromAppointment.PetId).Result;
+            var ownerFrom = _unitOfWork.UsersRepository.GetByIdAsync(petFrom.OwnerId).Result;
+
+            var petTo = _unitOfWork.PetRepository.GetByIdAsync(toAppointment.PetId).Result;
+            var ownerTo = _unitOfWork.UsersRepository.GetByIdAsync(petTo.OwnerId).Result;
+
+            var travelTime = GetTravelTime(ownerFrom.Address.Latitude, ownerFrom.Address.Longitude, ownerTo.Address.Latitude, ownerTo.Address.Longitude, travelMode);
+
+            return fromAppointment.DateUntil.AddSeconds(travelTime.Result) <= toAppointment.DateWhen;
+        }
+
+        static async Task<int> GetTravelTime(double fromLat, double fromLong, double toLat, double toLong, string travelMode)
+        {
+            HttpClient client = new();
+
+            string base_Url = "https://maps.googleapis.com/maps/api/distancematrix/json?";
+            string mode = "mode=" + travelMode;
+            string units = "units=metric";
+            string apiKey = $"key={Config.GOOGLE_APY_KEY}";
+
+            var URL = $"{base_Url}origins={fromLat},{fromLong}&destinations={toLat},{toLong}&{mode}&{units}&{apiKey}";
+            var responseContent = await (await client.GetAsync(URL)).Content.ReadAsStringAsync();
+            return (int)JObject.Parse(responseContent)["rows"][0]["elements"][0]["duration"]["value"];
         }
 
         public List<Appointment> SortByPreferencesAndDateWhen(List<Appointment> appointments, UserPreferences preferences)
-            => appointments.OrderBy(a => PointsOfAppointment(a, preferences)).ThenBy(a => a.DateWhen).ToList();
+            => appointments.OrderByDescending(a => PointsOfAppointment(a, preferences)).ThenBy(a => a.DateWhen).ToList();
 
         private int PointsOfAppointment(Appointment appointment, UserPreferences apppointmentPreferences) 
             => PointsOfActivity(appointment.Type, apppointmentPreferences) + PointsOfPet(appointment.PetId, apppointmentPreferences);
@@ -77,5 +134,7 @@ namespace Dogo.Application
                 _ => 0
             };
         }
+
+        
     }
 }

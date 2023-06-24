@@ -649,46 +649,26 @@ INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
-INPUT .\front\declaration1.tex
-INPUT .\front\declaration1.tex
-INPUT .\front\declaration1.tex
-INPUT front\declaration1.tex
-INPUT .\front\declaration1.tex
-INPUT .\front\declaration1.tex
-INPUT front\declaration1.tex
+INPUT .\main.toc
+INPUT main.toc
+INPUT main.toc
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmmi8.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr8r.tfm
-INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
-INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
-INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
-INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
-INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
-INPUT .\front\declaration2.tex
-INPUT .\front\declaration2.tex
-INPUT .\front\declaration2.tex
-INPUT front\declaration2.tex
-INPUT .\front\declaration2.tex
-INPUT .\front\declaration2.tex
-INPUT front\declaration2.tex
-INPUT .\main.toc
-INPUT main.toc
-INPUT main.toc
 OUTPUT main.toc
 INPUT .\chapters\motivation.tex
 INPUT .\chapters\motivation.tex
@@ -720,8 +700,14 @@ INPUT chapters\chapter1.tex
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb7t.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplr8r.tfm
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
+INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
+INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplb7t.vf
 INPUT C:\Program Files\MiKTeX\fonts\tfm\adobe\palatino\pplb8r.tfm
 INPUT C:\Program Files\MiKTeX\fonts\vf\adobe\palatino\pplr7t.vf

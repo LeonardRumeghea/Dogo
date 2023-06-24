@@ -27,6 +27,8 @@ class _Page extends State<AssignShoppingAppointmentPage> {
   Person get _user => widget.user;
   Appointment get _appointment => widget.appointment;
 
+  bool _accepted = false;
+
   @override
   void initState() {
     super.initState();
@@ -83,8 +85,9 @@ class _Page extends State<AssignShoppingAppointmentPage> {
             backgroundColor: constants.MyColors.dustGreen,
           ),
         );
+        _accepted = true;
         Future.delayed(const Duration(seconds: 1), () {
-          Navigator.pop(context, true);
+          Navigator.pop(context, _accepted);
         });
       } else {
         log('Error accepting appointment');

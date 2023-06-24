@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../Helpers/constants.dart';
 import '../../../Helpers/fetches.dart';
 import '../../../Helpers/puts.dart';
 import '../../../Helpers/screens/path_current_location.dart';
@@ -22,7 +23,7 @@ class AgendaPage extends StatefulWidget {
 
 class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
   Person get _user => widget.user;
-  var _availableAppointments = <Appointment>[];
+  var _assignAppointments = <Appointment>[];
 
   var _appointmentsLoaded = false;
 
@@ -123,7 +124,7 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
             (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
 
         setState(() {
-          _availableAppointments = appointments;
+          _assignAppointments = appointments;
           _appointmentsLoaded = true;
         });
       });
@@ -133,12 +134,12 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
   }
 
   Widget cardsColumn(Size size) {
-    if (_availableAppointments.isEmpty) {
-      return appointmentCard(
+    if (_assignAppointments.isEmpty) {
+      return noAppointmentaCard(
         size,
         constants.MyColors.dustRed,
         const Icon(Icons.error_outline_rounded, color: constants.darkGrey),
-        'No appointments found',
+        'No appointments assigned',
         'Add a new one from search page',
         '',
         context,
@@ -146,8 +147,9 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
     }
 
     var cards = <Widget>[];
-    for (var appointment in _availableAppointments) {
-      cards.add(AppointmetCard(appointment: appointment, user: _user));
+    for (var appointment in _assignAppointments) {
+      // cards.add(AppointmetCard(appointment: appointment, user: _user));
+      cards.add(appointmentCard(context, appointment));
     }
 
     return Column(
@@ -156,8 +158,8 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
     );
   }
 
-  appointmentCard(Size size, Color color, Icon icon, String title, String date,
-      String status, BuildContext context) {
+  noAppointmentaCard(Size size, Color color, Icon icon, String title,
+      String date, String status, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * .0025),
       child: Card(
@@ -170,25 +172,34 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
               onTap: () {
                 // choseServicePage(context, title);
               },
-              leading: CircleAvatar(backgroundColor: color, child: icon),
-              title: Text(title,
-                  style: const TextStyle(
-                      color: constants.MyColors.grey,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
+              leading: CircleAvatar(
+                backgroundColor: color,
+                child: icon,
+              ),
+              title: Text(
+                title,
+                style: const TextStyle(
+                    color: MyColors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
               subtitle: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(date,
-                      style: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13)),
-                  Text(status,
-                      style: TextStyle(
-                          color: _getColorOfStatus(status),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13)),
+                  Text(
+                    date,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                  Text(
+                    status,
+                    style: TextStyle(
+                        color: _getColorOfStatus(status),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
                 ],
               ),
             ),
@@ -196,6 +207,106 @@ class _Page extends State<AgendaPage> with SingleTickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Widget appointmentCard(BuildContext context, Appointment appointment) {
+    Size size = MediaQuery.of(context).size;
+
+    var dateStr =
+        DateFormat('d MMM HH:mm').format(DateTime.parse(appointment.dateWhen));
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .0025),
+      child: Card(
+        color: const Color.fromARGB(255, 47, 47, 47),
+        child: SizedBox(
+          height: size.height * .1,
+          width: size.width * .8,
+          child: Center(
+            child: ListTile(
+              onTap: () {
+                // choseAppointmentPage(context, appointment);
+                log('Appointment tapped: ${appointment.toJSON().toString()}');
+                inProgressAppointment(context, appointment);
+              },
+              leading: CircleAvatar(
+                  backgroundColor: _getColorOfType(appointment.type),
+                  child: _getIconByType(appointment.type)),
+              title: Text(
+                '${appointment.type} Appointment',
+                style: const TextStyle(
+                    color: MyColors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    dateStr,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                  Text(
+                    appointment.status,
+                    style: TextStyle(
+                        color: _getColorOfStatus(appointment.status),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  displayPath(BuildContext context, Appointment appointment) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        switch (appointment.type) {
+          case constants.walk:
+            return PagePathViewer(appointment: appointment);
+          case constants.salon:
+            return PagePathViewer(appointment: appointment);
+          case constants.sitting:
+            return PagePathViewer(appointment: appointment);
+          // case constants.shopping:
+          //   return AssignShoppingAppointmentPage(
+          //       user: user, appointment: appointment);
+          case constants.vet:
+            return PagePathViewer(appointment: appointment);
+          default:
+            return AgendaPage(user: _user);
+        }
+      }),
+    ).then((_) {
+      _assignAppointments.remove(appointment);
+      setState(() {});
+    });
+  }
+
+  inProgressAppointment(BuildContext context, Appointment appointment) {
+    log('Accepting appointment');
+
+    inProgress(appointment.id, _user.id).then((value) {
+      if (value == HttpStatus.noContent) {
+        log('Appointment accepted');
+        displayPath(context, appointment);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Something went wrong, try again later'),
+            backgroundColor: constants.MyColors.dustRed,
+          ),
+        );
+      }
+    });
   }
 
   Widget panel(Size size) {

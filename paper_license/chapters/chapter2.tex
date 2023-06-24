@@ -1,11 +1,10 @@
 \chapter{Arhitectura aplicației}
 
-Conform cerințelor non-funcționale, aplicația constă din două componente principale: server și aplicație mobilă. Pentru server, am ales .NET care oferă o bază solidă pentru gestionarea datelor și logicii aplicației. .NET este un framework scalabil și robust, oferind suport pentru baze de date și servicii web, asigurând totodată securitate și performanță. Aplicația mobilă este dezvoltată în Flutter, un framework cross-platform, care permite dezvoltarea aplicațiilor pentru Android și iOS native folosind un limbaj de programare comun, Dart.
+Conform cerințelor non-funcționale, aplicația constă din două componente principale: server și aplicație mobilă. Pentru server, am ales ASP.NET care oferă o bază solidă pentru gestionarea datelor și logicii aplicației. ASP.NET este un framework scalabil și robust, oferind suport pentru baze de date și servicii web, asigurând totodată securitate și performanță. Aplicația mobilă este dezvoltată în Flutter, un framework cross-platform, care permite dezvoltarea aplicațiilor pentru Android și iOS native folosind un limbaj de programare comun, Dart.
 
 \section{Arhitectura serverului}
 
-Pentru realizarea acestui server a folosind o arhitectură „Clean Architecture”, fiind un sistem software modular, bine structurat, care promovează separarea clară a responsabilităților și încurajează dezvoltarea de cod ușor de întreținut și testat.
-O arhitectură „arhitectură curată” se bazează pe principiul inversării dependenței (Dependency Inversion Principle), împărțind o aplicație în niveluri concentrice, fiecare cu un rol bine definit. Straturi principale ale arhitecturii sunt: Stratul de bază (Core Layer), Stratul de aplicație (Application Layer) și Stratul de infrastructură (Infrastructure Layer) alături de Stratul de interfață (Interface Layer).
+Pentru realizarea acestui server am folosit o arhitectură „Clean Architecture”, fiind un sistem software modular, bine structurat, care promovează separarea clară a responsabilităților și încurajează dezvoltarea de cod ușor de întreținut și testat. O arhitectură „Clean Architecture” se bazează pe principiul inversării dependenței (Dependency Inversion Principle), împărțind o aplicație în niveluri concentrice, fiecare cu un rol bine definit. Straturi principale ale arhitecturii sunt: Stratul de bază (Core Layer), Stratul de aplicație (Application Layer) și Stratul de infrastructură (Infrastructure Layer) alături de Stratul de interfață (Interface Layer).
 
 \begin{figure}[ht]
     \centering
@@ -18,7 +17,7 @@ O arhitectură „arhitectură curată” se bazează pe principiul inversării 
 
 \subsection{Stratul de bază}
 
-Stratul de bază, sau central, reprezintă nucleul aplicației și conține regulile de business și logică aplicației. Acesta este independent față de restul straturilor, neavând dependințe către niciun dintre ele. Acestă independența permite testarea și refacerea acestuia independent de restul aplicației. Acesta este împărțit în trei părți importante: Entities, Use Cases și Interfaces.
+Stratul de bază, sau central, reprezintă nucleul aplicației și conține regulile de business și logică aplicației. Acesta este independent față de restul straturilor, neavând dependințe către niciunul dintre ele. Acestă independența permite testarea și refacerea acestuia independent de restul aplicației. Acesta este împărțit în trei părți importante: Entities, Use Cases și Interfaces.
 
 \begin{itemize}
     \item \textbf{Entities} - reprezintă obiectele de bază ale aplicației, care conțin regulile de business și logică aplicației. În acest caz, printre entități se numără: User, Pet, Appointment, etc. și conțin doar datele și metodele necesare pentru a le manipula, fără a avea niciun fel de dependință către alte componente ale aplicației.
@@ -29,25 +28,24 @@ Stratul de bază, sau central, reprezintă nucleul aplicației și conține regu
 
 \subsection{Stratul de aplicație}
 
-Stratul de aplicație în arhitectura „Clean Architecture” reprezintă puntea între interfața utilizatorului și logica de afaceri din Stratul de paza. Gestionează fluxului de date și de interacțiunea între componentele UI (User Interface) și componentele din Core. 
+Stratul de aplicație în arhitectura „Clean Architecture” reprezintă puntea între interfața utilizatorului și logica de afaceri din Stratul de bază. Gestionează fluxului de date și interacțiunea dintre componentele UI (User Interface) și componentele din Core. 
 
 Nivelul de aplicație conține următoarele componente: 
 
 \begin{itemize}
-    \item \textbf{Commands} - Comenzile sunrt reprezentate de cereri sau acțiuni specifice pe care un utilizator le poate efectua in intermediul aplicației. Aceastea includ acțiuni precum crearea obiectelor, actualizarea datelor sau ștergerea acestora. Comenzile sunt de obicei reprezentate de structuri de date care conțin informațiile necesare pentru a efectua acțiunea dorită.
-    \item \textbf{Handlers} - Handler-ii, sau gestionatorii, sunt componente responsabile pentru acceptarea și gestionarea comenzilor primite, ocupându-se de execuția logicii asociate cu acea comandă. Handler-ul primește comanda, extrage datele necesare și apelează funcțiile corespunzătoare din stratul de bază pentru a efectua operația necesară. Ele pot interacționa cu alte servicii din stratul curent, cum ar fi mappers sau responses, pentru a efectua acțiunile dorite și a returna rezultatele corespunzătoare.
-    \item \textbf{Queries} - interogările reprezintă in general cereri de informații din partea utilizatorului. Acestea implica de obicei extragerea datelor din baza de date, prelucrarea lor intr-un anumit mod și returnarea acestora către utilizator. Spre deosebire de comenzi care modifică starea sistemului, interogările au doar rolul de a returna informații într-o formă cerută.
-    \item \textbf{Mappers} - mapperele sunt componente care se ocupă de transformarea datelor in formatul necesar. Acestea sunt folosite pentru a transforma obiectele primite de la utilizator in obiecte din stratul de bază, sau pentru a transforma obiectele din stratul de bază în obiecte care pot fi trimise către utilizator, în funcție de caz.
+    \item \textbf{Commands} - Comenzile sunt reprezentate de cereri sau acțiuni specifice pe care un utilizator le poate efectua în intermediul aplicației. Aceastea includ acțiuni precum crearea obiectelor, actualizarea datelor sau ștergerea acestora. Comenzile sunt de obicei reprezentate de structuri de date care conțin informațiile necesare pentru a efectua acțiunea dorită.
+    \item \textbf{Handlers} - Handler-ii, sau gestionatorii, sunt componentelr responsabile pentru acceptarea și gestionarea comenzilor primite, ocupându-se de execuția logicii asociate cu acea comandă. Handler-ul primește comanda, extrage datele necesare și apelează funcțiile corespunzătoare din stratul de bază pentru a efectua operația dorită. Ei pot interacționa cu alte servicii din stratul curent, cum ar fi mappers sau responses, pentru a efectua acțiunile dorite și a returna rezultatele corespunzătoare.
+    \item \textbf{Queries} - interogările reprezintă în general cereri de informații din partea utilizatorului. Acestea implica de obicei extragerea datelor din baza de date, prelucrarea lor intr-un anumit mod și returnarea acestora către utilizator. Spre deosebire de comenzi care modifică starea sistemului, interogările au doar rolul de a returna informații într-o formă cerută.
+    \item \textbf{Mappers} - mapperele sunt componente care se ocupă de transformarea datelor în formatul necesar. Acestea sunt folosite pentru a transforma obiectele primite de la utilizator în obiecte din stratul de bază, sau pentru a transforma obiectele din stratul de bază în obiecte care pot fi trimise către utilizator, în funcție de caz.
     
     \newpage
 
-    \item \textbf{Responses} - răspunsurile sunt entități asemănătoare celor din stratul de bază, fiind formate însă doar variabile. Rolul acestora este de a returna datele cerute de utilizator, după ce au fost prelucrate de către handler, dar într-un format sigur. Returnarea unui obiect din stratul de bază ar putea expune către exterior date sensibile, cum ar fi parolele, id-uri, sau ar putea expune detalii despre implementarea internă a aplicației.
+    \item \textbf{Responses} - răspunsurile sunt entități asemănătoare celor din stratul de bază, fiind formate însă doar variabile. Rolul acestora este de a returna datele cerute de utilizator, după ce au fost prelucrate de către handler, dar într-un format sigur. Returnarea unui obiect din stratul de bază ar putea expune către exterior date sensibile, cum ar fi parolele și id-uri, sau ar putea expune detalii despre implementarea internă a aplicației.
 \end{itemize}
 
 \subsection{Stratul de infrastructură}
 
 Stratul de infrastructură oferă implementarea concretă a interfețelor definite ulterior în stratul de bază. Aici sunt incluse componentele care îndeplinesc accesul la baza de date, serviciile de comunicare externă, sistemul de fișiere și alte resurse externe. Stratul conține următoarele componente:
-
 
 \begin{itemize}
     \item \textbf{Repositories} - reprezintă implementarea detaliată a interfețelor din stratul de bază și sunt responsabile pentru accesul la baza de date. Ele sunt folosite de handleri pentru a introduce, extrage, modifica sau șterge informațiile din baza de date.
@@ -57,10 +55,10 @@ Stratul de infrastructură oferă implementarea concretă a interfețelor defini
 
 \subsection{Stratul de interfață}
 
-Stratul de interfață reprezintă este responsabil pentru interacțiunea cu utilizatorul. Aici se gasesc componentele pentru interfața cu utilizatorul (interfață web, API, etc.). Acest strat are rolul de a prelua datele de la utilizator, de a le trimite mai departe către handleri si de a returna datele cerute. Principala componentă a acestui strat este API-ul, care este folosit de aplicația mobilă pentru a comunica cu serverul.
+Stratul de interfață este responsabil de interacțiunea cu utilizatorul. Aici se gasesc componentele pentru interfața cu utilizatorul (interfață web, API, etc.). Acest strat are rolul de a prelua datele de la utilizator, de a le trimite mai departe către handleri si de a returna datele cerute. Principala componentă a acestui strat este API-ul, care este folosit de către aplicația mobilă pentru a comunica cu serverul.
 
 \begin{itemize}
-    \item \textbf{Controllers} - Controller-ii din API-uri acționează ca intermediari între partea de prezentare, interfața utilizatorului, și restul aplicației. Aceștea primesc cereri HTTP de la clienți pe care le trimit către handlerii din stratul de applicatie. Aici cererea este îndeplinită și ulterior handlerii returnează datele către controller care, la rândul sau, le trimite mai departe către client.
+    \item \textbf{Controllers} - Controller-ii din API-uri acționează ca intermediari între partea de prezentare, interfața utilizatorului, și restul aplicației. Aceștea primesc cereri HTTP de la clienți pe care le trimit către handlerii din stratul de aplica. Aici cererea este îndeplinită și ulterior handlerii returnează datele către controller care, la rândul sau, le trimite mai departe către client.
 \end{itemize}
 
 \newpage
@@ -68,7 +66,7 @@ Stratul de interfață reprezintă este responsabil pentru interacțiunea cu uti
 
 \section{Arhitectura aplicației mobile}
 
-Pentru dezvoltarea aplicației mobile, am ales să folosesc Flutter, un framework cross-platform dezvoltat de Google. Acesta permite dezvoltarea aplicațiilor native pentru Android și iOS folosind un limbaj de programare comun, Dart. In cazul aplicației am folosit o arhitectură Model-View-Presenter (MVP), care separă logica de prezentare de logica de afaceri și de date. Această arhitectură este asemănătoare cu arhitectura Model-View-Controller (MVC), care este una dintre cele mai populare arhitecturi pentru dezvoltarea aplicațiilor web. 
+Pentru dezvoltarea aplicației mobile, am ales să folosesc Flutter, un framework cross-platform dezvoltat de Google. Acesta permite dezvoltarea aplicațiilor native pentru Android și iOS folosind un limbaj de programare comun, Dart. în cazul aplicației am folosit o arhitectură Model-View-Presenter (MVP), care separă logica de prezentare de logica de afaceri și de date. Această arhitectură este asemănătoare cu arhitectura Model-View-Controller (MVC), care este una dintre cele mai populare arhitecturi pentru dezvoltarea aplicațiilor web. 
 
 \begin{figure}[ht]
     \centering
@@ -87,12 +85,11 @@ Arhitectura MVP este împărțită în trei componente importante: Model, View �
 
 \begin{itemize}
     \item \textbf{Model} - reprezintă datele și logica aplicației. Acesta se ocupă de manipularea datelor și de efectuarea operațiilor necesare. Tot el este responsabil și pentru comunicarea cu serverul.
-    \item \textbf{View} - reprezintă interfața cu utilizatorul. Acesta se ocupă cu afișarea interfeței si de recepționarea acțiunilor utilizatorului. View-ul este pasiv, fiind lipsit de orice logica. El afișează utilizatorului informațiile primite de la presenter.
-    \item \textbf{Presenter} - reprezintă componenta principala a acestei arhitecturi si acționează ca intermediar între model și view. Presenter-ul primește acțiunile utilizatorului captate de view si executa logica necesara in Model. După care actualizarea atât modelul cat si view-ul cu datele necesare.
+    \item \textbf{View} - reprezintă interfața cu utilizatorul. Acesta se ocupă de afișarea interfeței si de recepționarea acțiunilor utilizatorului. View-ul este pasiv, fiind lipsit de orice logica. El afișează utilizatorului informațiile primite de la presenter.
+    \item \textbf{Presenter} - reprezintă componenta principala a acestei arhitecturi si acționează ca intermediar între model și view. Presenter-ul primește acțiunile utilizatorului captate de view si executa logica necesara în Model. După care actualizarea atât modelul cat si view-ul cu datele necesare.
 \end{itemize}
 
 \section{Arhitectura bazei de date}
-
 
 Pentru baza de date, am ales să folosesc SQL Server, un sistem de management al bazelor de date relaționale. Dezvoltat de Microsoft, SQL Server oferă o bază solidă pentru stocarea datelor într-un mod structurat și eficient. Fiind un sistem relațional, acesta permite definirea și gestionarea tabelelor și relațiilor dintre ele, facilitând organizarea datelor într-un format coerent.
 

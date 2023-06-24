@@ -26,7 +26,7 @@ namespace Dogo.Application.Queries.Appointment
             foreach (var appointment in allAppoitments)
             {
                 var pet = await unitOfWork.PetRepository.GetByIdAsync(appointment.PetId);
-                if (pet.OwnerId == request.UserId)
+                if (pet.OwnerId == request.UserId && appointment.Status != Core.Entities.AppointmentStatus.Completed)
                 {
                     userAppointments.Add(appointment);
                 }

@@ -395,12 +395,13 @@ class _Page extends State<ScheduleVetPage> {
                       builder: (context) => const PageLocationPicker(),
                     ),
                   ).then(
-                    (value) => {
-                      if (value != null)
-                        {
-                          _selectedAddress = value,
-                          _locationController.text = 'Selected!'
-                        }
+                    (value) {
+                      if (value != null) {
+                        setState(() {
+                          _selectedAddress = value;
+                          _locationController.text = 'Selected!';
+                        });
+                      }
                     },
                   );
                 },

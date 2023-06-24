@@ -52,6 +52,7 @@ dependencies:
   location: ^4.4.0
   dio: ^5.2.1+1
   info_popup: ^3.0.0
+  numberpicker: ^2.1.2
   
   # intl_phone_field: ^3.0.0
 

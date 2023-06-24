@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:dogo_front/entities/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../../../Helpers/constants.dart';
 import '../../../Helpers/fetches.dart';
 import '../../../entities/person.dart';
 import '../../../../Helpers/constants.dart' as constants;
@@ -13,6 +14,7 @@ import 'appointments_info/assign_salon.dart';
 import 'appointments_info/assign_vet.dart';
 import 'appointments_info/assign_sitting.dart';
 import 'appointments_info/assign_shopping.dart';
+import 'generate_agenda/agenda_preferences.dart';
 
 class AvailableAppointmentsPage extends StatefulWidget {
   const AvailableAppointmentsPage({super.key, required this.user});
@@ -50,12 +52,15 @@ class _Page extends State<AvailableAppointmentsPage>
   Widget getFlotingButton(BuildContext context) {
     return FloatingActionButton(
       onPressed: () => {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Not implemented yet! Coming soon!'),
-            backgroundColor: constants.MyColors.dustRed,
-          ),
-        )
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return GenerateAgendaPreferences(user: _user);
+        }))
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   const SnackBar(
+        //     content: Text('Not implemented yet! Coming soon!'),
+        //     backgroundColor: constants.MyColors.dustRed,
+        //   ),
+        // )
       },
       backgroundColor: constants.MyColors.darkBlue,
       child:
@@ -133,13 +138,12 @@ class _Page extends State<AvailableAppointmentsPage>
   _getAppointments() {
     try {
       fetchAvailableAppoitments(_user.id).then((value) {
+        log('Appointments: $value');
+
         var appointments = json
             .decode(value)
             .map<Appointment>((e) => Appointment.fromJSON(e))
             .toList();
-
-        appointments.sort(
-            (Appointment a, Appointment b) => a.dateWhen.compareTo(b.dateWhen));
 
         setState(() {
           _availableAppointments = appointments;
@@ -153,7 +157,7 @@ class _Page extends State<AvailableAppointmentsPage>
 
   Widget cardsColumn(Size size) {
     if (_availableAppointments.isEmpty) {
-      return appointmentCard(
+      return noAppointmentaCard(
         size,
         constants.MyColors.dustRed,
         const Icon(Icons.error_outline_rounded, color: constants.darkGrey),
@@ -166,7 +170,8 @@ class _Page extends State<AvailableAppointmentsPage>
 
     var cards = <Widget>[];
     for (var appointment in _availableAppointments) {
-      cards.add(AppointmetCard(appointment: appointment, user: _user));
+      // cards.add(AppointmetCard(appointment: appointment, user: _user));
+      cards.add(appointmentCard(context, appointment));
     }
 
     return Column(
@@ -175,8 +180,8 @@ class _Page extends State<AvailableAppointmentsPage>
     );
   }
 
-  appointmentCard(Size size, Color color, Icon icon, String title, String date,
-      String status, BuildContext context) {
+  noAppointmentaCard(Size size, Color color, Icon icon, String title,
+      String date, String status, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: size.height * .0025),
       child: Card(
@@ -196,7 +201,7 @@ class _Page extends State<AvailableAppointmentsPage>
               title: Text(
                 title,
                 style: const TextStyle(
-                    color: constants.MyColors.grey,
+                    color: MyColors.grey,
                     fontWeight: FontWeight.bold,
                     fontSize: 16),
               ),
@@ -224,6 +229,96 @@ class _Page extends State<AvailableAppointmentsPage>
         ),
       ),
     );
+  }
+
+  Widget appointmentCard(BuildContext context, Appointment appointment) {
+    Size size = MediaQuery.of(context).size;
+
+    var dateStr =
+        DateFormat('d MMM HH:mm').format(DateTime.parse(appointment.dateWhen));
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: size.height * .0025),
+      child: Card(
+        color: const Color.fromARGB(255, 47, 47, 47),
+        child: SizedBox(
+          height: size.height * .1,
+          width: size.width * .8,
+          child: Center(
+            child: ListTile(
+              onTap: () {
+                // choseAppointmentPage(context, appointment);
+                log('Appointment tapped: ${appointment.toJSON().toString()}');
+                choseAppointmentPage(context, appointment);
+              },
+              leading: CircleAvatar(
+                  backgroundColor: _getColorOfType(appointment.type),
+                  child: _getIconByType(appointment.type)),
+              title: Text(
+                '${appointment.type} Appointment',
+                style: const TextStyle(
+                    color: MyColors.grey,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16),
+              ),
+              subtitle: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    dateStr,
+                    style: const TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                  Text(
+                    appointment.status,
+                    style: TextStyle(
+                        color: _getColorOfStatus(appointment.status),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  choseAppointmentPage(BuildContext context, Appointment appointment) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        switch (appointment.type) {
+          case walk:
+            return AssignWalkAppointmentPage(
+                user: _user, appointment: appointment);
+          case salon:
+            return AssignSalonAppointmentPage(
+                user: _user, appointment: appointment);
+          case sitting:
+            return AssignSittingAppointmentPage(
+                user: _user, appointment: appointment);
+          case shopping:
+            return AssignShoppingAppointmentPage(
+                user: _user, appointment: appointment);
+          case vet:
+            return AssignVetAppointmentPage(
+                user: _user, appointment: appointment);
+          default:
+            return AvailableAppointmentsPage(user: _user);
+        }
+      }),
+    ).then((value) {
+      if (value != null) {
+        if (value) {
+          _availableAppointments.remove(appointment);
+          setState(() {});
+        }
+      }
+    });
   }
 
   Widget panel(Size size) {

@@ -36,25 +36,6 @@ D:\Documents\GitHub\Dogo\Dogo.Infrastructure\obj\Debug\net7.0\refint\Dogo.Infras
 D:\Documents\GitHub\Dogo\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.pdb
 D:\Documents\GitHub\Dogo\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.genruntimeconfig.cache
 D:\Documents\GitHub\Dogo\Dogo.Infrastructure\obj\Debug\net7.0\ref\Dogo.Infrastructure.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.deps.json
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.runtimeconfig.json
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.pdb
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Application.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Core.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Application.pdb
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Core.pdb
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.AssemblyReference.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.AssemblyInfoInputs.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.AssemblyInfo.cs
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.CoreCompileInputs.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.CopyComplete
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\refint\Dogo.Infrastructure.dll
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.pdb
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.genruntimeconfig.cache
-D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\ref\Dogo.Infrastructure.dll
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.deps.json
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.runtimeconfig.json
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.dll
@@ -74,3 +55,22 @@ D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\refint\Do
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.pdb
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.genruntimeconfig.cache
 D:\Dogo - 12.04.2023\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\ref\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.AssemblyReference.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.AssemblyInfoInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.AssemblyInfo.cs
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.deps.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.runtimeconfig.json
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Infrastructure.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Application.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Core.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Application.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\bin\Debug\net7.0\Dogo.Core.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.csproj.CopyComplete
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\refint\Dogo.Infrastructure.dll
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.pdb
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\Dogo.Infrastructure.genruntimeconfig.cache
+D:\Documents\GitHub\Dogo\dogo_backend\Dogo.Infrastructure\obj\Debug\net7.0\ref\Dogo.Infrastructure.dll

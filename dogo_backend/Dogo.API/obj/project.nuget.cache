@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "4C9iHxMdONtyUKmBBeY6y1ciSfY2xRcBwLy1B9LERuiMw+9BxvsbTn5Y3yifB6M/Q6h3DtKbdCmtFCOS1a301w==",
+  "dgSpecHash": "N7bynYCrgDXMbDTqJnlrRmyRAbUQC9XlxXPn24FLpfdzboHEU1AJmiZhYvPh8P4ArQsQinXm+QnFsagVsKAYtg==",
   "success": true,
   "projectFilePath": "D:\\Documents\\GitHub\\Dogo\\dogo_backend\\Dogo.API\\Dogo.API.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "C:\\Users\\Leonard\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Leonard\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\Leonard\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

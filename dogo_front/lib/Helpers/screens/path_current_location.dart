@@ -118,13 +118,12 @@ class _PagePathViewerState extends State<PagePathViewer> {
       markers[_destinationMarker.markerId] = _destinationMarker;
     }
 
-    // set camera position to Palas Iasi with zoom 17.5
-    _cameraPosition = CameraPosition(target: _pickupLatLng, zoom: _zoomLevel);
-
     // getStartPostionMarker();
     getStartPostionMarker().then((_) => generateRoute().then((_) {
           calculeteDistances();
           startUserTracking();
+          _cameraPosition =
+              CameraPosition(target: _currentLatLng, zoom: _zoomLevel);
         }));
   }
 
@@ -142,7 +141,6 @@ class _PagePathViewerState extends State<PagePathViewer> {
 
     complete(_appointment.id, _walkerId).then((value) {
       if (value == HttpStatus.noContent) {
-        log('Appointment accepted');
         ScaffoldMessenger.of(context)
             .showSnackBar(
               const SnackBar(
@@ -151,7 +149,7 @@ class _PagePathViewerState extends State<PagePathViewer> {
               ),
             )
             .closed
-            .then((_) => Navigator.pop(context));
+            .then((_) => Navigator.pop(context, true));
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
