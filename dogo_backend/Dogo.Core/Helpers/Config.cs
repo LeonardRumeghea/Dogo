@@ -2,6 +2,8 @@
 {
     public class Config
     {
-        public static string GOOGLE_APY_KEY = "AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk";
+        private const string KEY = "AIzaSyDlvGPPAHeaSX9zsC3FiMHCi3Ix-YFvHVk";
+        public static string GOOGLE_APY_KEY { get => KEY; }
+
     }
 }
