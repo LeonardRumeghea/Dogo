@@ -105,7 +105,7 @@ class _Page extends State<GeneratedAgenda> with SingleTickerProviderStateMixin {
           child: FloatingActionButton(
             onPressed: () {
               var count = 0;
-              Navigator.popUntil(context, (route) => count++ == 2);
+              Navigator.popUntil(context, (route) => count++ == 3);
             },
             heroTag: 'check',
             backgroundColor: darkBlue,
@@ -128,21 +128,7 @@ class _Page extends State<GeneratedAgenda> with SingleTickerProviderStateMixin {
                   return;
                 }
 
-                for (var appointment in _appointments) {
-                  if (acceptAppointment(context, appointment)) {
-                    log('Appointment accepted');
-                  }
-                }
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Appointments assigned successfully'),
-                    backgroundColor: MyColors.dustGreen,
-                  ),
-                );
-                Future.delayed(const Duration(seconds: 1), () {
-                  var count = 0;
-                  Navigator.popUntil(context, (route) => count++ == 2);
-                });
+                acceptAppointment(context, 0);
               },
               heroTag: 'acceptAll',
               backgroundColor: dustBlue,
@@ -154,13 +140,27 @@ class _Page extends State<GeneratedAgenda> with SingleTickerProviderStateMixin {
     );
   }
 
-  acceptAppointment(BuildContext context, Appointment appointment) {
+  acceptAppointment(BuildContext context, int idx) {
     log('Accepting appointment');
 
-    assignAppointment(appointment.id, _user.id).then((value) {
+    if (idx == _appointments.length) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Appointments assigned successfully'),
+          backgroundColor: MyColors.dustGreen,
+        ),
+      );
+      Future.delayed(const Duration(seconds: 1), () {
+        var count = 0;
+        Navigator.popUntil(context, (route) => count++ == 3);
+      });
+    }
+
+    assignAppointment(_appointments[idx].id, _user.id).then((value) {
       if (value != HttpStatus.noContent) {
         log('Error accepting appointment');
       }
+      acceptAppointment(context, idx + 1);
     });
 
     return true;

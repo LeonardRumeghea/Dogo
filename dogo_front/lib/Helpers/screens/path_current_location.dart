@@ -67,6 +67,9 @@ class _PagePathViewerState extends State<PagePathViewer> {
   var _durationToPickUp = '';
   var _durationToDestination = '';
 
+  double _distaceToPickUpInMeters = 0;
+  double _distaceToDestinationInMeters = 0;
+
   var _pathStage = 0;
   late String _appointmentType;
 
@@ -253,6 +256,9 @@ class _PagePathViewerState extends State<PagePathViewer> {
     _pathInfo(_currentLatLng, _pickupLatLng).then((value) {
       _distanceToPickUp = value[0];
       _durationToPickUp = value[1];
+      _distaceToPickUpInMeters = value[2].toDouble();
+
+      log('Distance to pick up: $_distaceToPickUpInMeters');
     });
   }
 
@@ -260,6 +266,9 @@ class _PagePathViewerState extends State<PagePathViewer> {
     _pathInfo(_currentLatLng, _destinationLatLng).then((value) {
       _distanceToDestination = value[0];
       _durationToDestination = value[1];
+      _distaceToDestinationInMeters = value[2].toDouble();
+
+      log('Distance to destination: $_distaceToDestinationInMeters');
     });
   }
 
@@ -277,8 +286,10 @@ class _PagePathViewerState extends State<PagePathViewer> {
 
     var distance = response.data['rows'][0]['elements'][0]['distance']['text'];
     var duration = response.data['rows'][0]['elements'][0]['duration']['text'];
+    var distanceInMeters =
+        response.data['rows'][0]['elements'][0]['distance']['value'];
 
-    return [distance, duration];
+    return [distance, duration, distanceInMeters];
   }
 
   createCurrentUserPositionMarker(LatLng position) {
@@ -353,6 +364,17 @@ class _PagePathViewerState extends State<PagePathViewer> {
                     child: FloatingActionButton(
                       onPressed: () {
                         if (_pathStage == 0) {
+                          if (_distaceToPickUpInMeters > 100) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('You are not there yet'),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: constants.MyColors.dustRed,
+                              ),
+                            );
+                            return;
+                          }
+
                           setState(() {
                             if (_appointmentType == constants.vet ||
                                 _appointmentType == constants.salon) {
@@ -369,6 +391,17 @@ class _PagePathViewerState extends State<PagePathViewer> {
                             ),
                           );
                         } else if (_pathStage == 1) {
+                          if (_distaceToDestinationInMeters > 100) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('You are not there yet'),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: constants.MyColors.dustRed,
+                              ),
+                            );
+                            return;
+                          }
+
                           setState(() => _pathStage = 2);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -378,6 +411,17 @@ class _PagePathViewerState extends State<PagePathViewer> {
                             ),
                           );
                         } else {
+                          if (_distaceToPickUpInMeters > 100) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('You are not there yet'),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: constants.MyColors.dustRed,
+                              ),
+                            );
+                            return;
+                          }
+
                           setState(() => _pathStage = 3);
                           completeAppointment(context);
                         }

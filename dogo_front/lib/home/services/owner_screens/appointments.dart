@@ -325,10 +325,11 @@ class _Page extends State<AppointmentsPage>
                 log('Appointment: ${appointment.toString()}');
                 if (appointment.status == 'InProgress') {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ViewWalkerLocation(appointment: appointment)));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ViewWalkerLocation(appointment: appointment)))
+                      .then((_) => _getAppointments());
                 }
               },
               leading: CircleAvatar(backgroundColor: color, child: icon),

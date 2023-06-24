@@ -15,6 +15,12 @@ namespace Dogo.Application.Queries.Appointment
         {
             var appointments = await unitOfWork.AppointmentRepository.GetAllAsync();
 
+            //foreach (var appointment in appointments)
+            //{
+            //    appointment.Status = Core.Entities.AppointmentStatus.Completed;
+            //    await unitOfWork.AppointmentRepository.UpdateAsync(appointment);
+            //}
+
             return ResultOfEntity<List<AppointmentResponse>>.Success(
                 HttpStatusCode.OK,
                 AppointmentMapper.Mapper.Map<List<AppointmentResponse>>(appointments)

@@ -87,7 +87,7 @@ class _Page extends State<HistoryPage> {
         ),
         child: ConstrainedBox(
           constraints: BoxConstraints(
-            maxHeight: size.height * .75,
+            maxHeight: size.height * .7,
           ),
           child: SingleChildScrollView(child: cardsColumn(size)),
         ),
@@ -301,7 +301,7 @@ class _Page extends State<HistoryPage> {
       top: size.height * .1,
       left: size.width * .05,
       child: Container(
-        height: size.height * .785,
+        height: size.height * .85,
         width: size.width * .9,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(borderRadius)),

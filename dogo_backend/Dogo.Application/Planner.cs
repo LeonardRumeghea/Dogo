@@ -21,15 +21,14 @@ namespace Dogo.Application
 
             for (int idx = 0; idx < appointments.Count; idx++)
             {
-                var appointment = appointments[idx];
-                if (appointment.Type == AppointmentType.Salon || appointment.Type == AppointmentType.Vet)
+                if (appointments[idx].Type == AppointmentType.Salon || appointments[idx].Type == AppointmentType.Vet)
                 {
-                    var appointmentEndDate = appointment.DateUntil;
-                    var pet = _unitOfWork.PetRepository.GetByIdAsync(appointment.PetId).Result;
+                    var appointmentEndDate = appointments[idx].DateUntil;
+                    var pet = _unitOfWork.PetRepository.GetByIdAsync(appointments[idx].PetId).Result;
                     var owner = _unitOfWork.UsersRepository.GetByIdAsync(pet.OwnerId).Result;
 
-                    var travelTime = GetTravelTime(appointment.Address.Latitude, appointment.Address.Longitude, owner.Address.Latitude, owner.Address.Longitude, travelMode);
-                    appointments[idx].DateUntil.AddSeconds(travelTime.Result);
+                    var travelTime = GetTravelTime(appointments[idx].Address.Latitude, appointments[idx].Address.Longitude, owner.Address.Latitude, owner.Address.Longitude, travelMode);
+                    appointments[idx].DateUntil = appointments[idx].DateUntil.AddSeconds(travelTime.Result);
                 }
             }
 
@@ -54,7 +53,7 @@ namespace Dogo.Application
                     }
                 }
 
-                for (int sIdx = 1; sIdx < selectedAppointments.Count - 1; sIdx++)
+                for (int sIdx = 0; sIdx < selectedAppointments.Count - 1; sIdx++)
                 {
                     if (appointments[idx].DateWhen >= selectedAppointments[sIdx].DateUntil && appointments[idx].DateUntil <= selectedAppointments[sIdx + 1].DateWhen)
                     {

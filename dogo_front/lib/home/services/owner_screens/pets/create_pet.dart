@@ -407,7 +407,7 @@ class _Page extends State<ManagePetPage> {
                 if (pickedDate != null) {
                   setState(() {
                     _dateController.text =
-                        DateFormat('dd-MM-yyyy').format(pickedDate);
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
                   });
                 }
               },

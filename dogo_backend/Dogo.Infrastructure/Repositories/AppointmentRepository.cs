@@ -14,6 +14,7 @@ namespace Dogo.Infrastructure.Repositories
         public override async Task<Appointment> GetByIdAsync(Guid id)
         {
             return await context.Set<Appointment>()
+                .AsNoTracking()
                 .Include(x => x.Address)
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
@@ -21,6 +22,7 @@ namespace Dogo.Infrastructure.Repositories
         public override async Task<IReadOnlyList<Appointment>> GetAllAsync()
         {
             return await context.Set<Appointment>()
+                .AsNoTracking()
                 .Include(x => x.Address)
                 .ToListAsync();
         }
