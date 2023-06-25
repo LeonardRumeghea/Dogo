@@ -12,7 +12,7 @@ namespace Dogo.Application
 
         public Planner(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        public List<Appointment> Plan(List<Appointment> appointments, UserPreferences userPreferences, DateTime startDate, DateTime endDate, String travelMode = "walking")
+        public List<Appointment> Plan(List<Appointment> appointments, List<Appointment> walkerAppointments, UserPreferences userPreferences, DateTime startDate, DateTime endDate, String travelMode = "walking")
         {
             appointments = appointments.Where(a => a.DateWhen >= startDate && a.DateUntil <= endDate).ToList();
 
@@ -31,8 +31,13 @@ namespace Dogo.Application
                     appointments[idx].DateUntil = appointments[idx].DateUntil.AddSeconds(travelTime.Result);
                 }
             }
+            
+            var selectedAppointments = new List<Appointment>(walkerAppointments);
+            if (walkerAppointments.Count == 0)
+            {
+                selectedAppointments.Add(appointments[0]);
+            }
 
-            var selectedAppointments = new List<Appointment> { appointments[0] };
             for (int idx = 1; idx < appointments.Count; idx++) 
             {
                 if (appointments[idx].DateUntil <= selectedAppointments[0].DateUntil)
@@ -66,7 +71,7 @@ namespace Dogo.Application
                 }
             }
 
-            return selectedAppointments;
+            return selectedAppointments.Where(a => !walkerAppointments.Contains(a)).ToList();
 
         }
 

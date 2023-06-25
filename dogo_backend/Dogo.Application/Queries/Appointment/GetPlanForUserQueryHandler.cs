@@ -31,6 +31,12 @@ namespace Dogo.Application.Queries.Appointment
                 .Where(x => !userPetsId.Contains(x.PetId))
                 .Where(x => x.Status == Core.Entities.AppointmentStatus.Pending);
 
+            var walkerAppoitments = appointments
+                .Where(x => x.Status == Core.Entities.AppointmentStatus.Assigned)
+                .Where(x => x.WalkerId == request.UserId)
+                .Where(x => request.StartDate <= x.DateWhen && x.DateUntil <= request.EndDate).ToList();
+
+
             if (availableAppointments == null)
             {
                 return ResultOfEntity<List<AppointmentResponse>>
@@ -40,7 +46,7 @@ namespace Dogo.Application.Queries.Appointment
             var availableAppoitmentsCopy = new List<Core.Entities.Appointment>(availableAppointments);
 
             var userPreferences = await _unitOfWork.UserPreferencesRepository.getByUserId(request.UserId);
-            availableAppointments = (new Planner(_unitOfWork)).Plan(availableAppoitmentsCopy, userPreferences, request.StartDate, request.EndDate, request.TravelMode);
+            availableAppointments = (new Planner(_unitOfWork)).Plan(availableAppoitmentsCopy, walkerAppoitments, userPreferences, request.StartDate, request.EndDate, request.TravelMode);
             availableAppointments = availableAppointments.Take(request.NumberOfAppointments);
 
             var availableAppointmentsResponse = AppointmentMapper.Mapper.Map<List<AppointmentResponse>>(availableAppointments);
