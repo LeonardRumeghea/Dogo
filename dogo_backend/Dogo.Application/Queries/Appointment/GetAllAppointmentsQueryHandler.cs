@@ -20,11 +20,11 @@ namespace Dogo.Application.Queries.Appointment
                 //appointment.Status = Core.Entities.AppointmentStatus.Completed;
                 //await unitOfWork.AppointmentRepository.UpdateAsync(appointment);
 
-                //if (appointment.DateWhen.Day == 27)
-                //{
-                //    appointment.Status = Core.Entities.AppointmentStatus.Pending;
-                //    await unitOfWork.AppointmentRepository.UpdateAsync(appointment);
-                //}
+                if (appointment.DateWhen.Day == 27)
+                {
+                    appointment.Status = Core.Entities.AppointmentStatus.Pending;
+                    await unitOfWork.AppointmentRepository.UpdateAsync(appointment);
+                }
             }
 
             return ResultOfEntity<List<AppointmentResponse>>.Success(

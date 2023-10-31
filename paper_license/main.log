@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  22 JUN 2023 11:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2023.6.9)  25 JUN 2023 19:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -374,74 +374,79 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.27 ...e {3.1.2}Geolocator}{20}{subsection.3.1.2}
+l.27 ...e {3.1.2}Geolocator}{19}{subsection.3.1.2}
                                                   % [1
 
 ])
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (chapters/motivation.tex [1]
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.48     \newpage
+                  [2] (chapters/motivation.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <24.88> on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <20.74> on input line 1.
-) (chapters/introduction.tex [2
+) (chapters/introduction.tex [1
 
-] [3
+] [2
 
-]) (chapters/chapter1.tex [4]
+]) (chapters/chapter1.tex [3]
 Capitolul 1.
 
 Overfull \hbox (4.51868pt too wide) in paragraph at lines 9--10
 \OT1/ppl/m/n/12 aplica[]ii []^^Pntr-una sin-gur[]a, ci s[]a ofere o solu[]ie co-mod[]a []^^Pn com-ple-ta-rea aplica[]iilor dezvol-
  []
 
-[5
+[4
 
 ]
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 11.
- [6] [7] [8]) (chapters/chapter2.tex [9]
+ [5] [6] [7]) (chapters/chapter2.tex [8]
 Capitolul 2.
-<images/clean_architecture.png, id=265, 638.385pt x 619.56468pt>
+<images/clean_architecture.png, id=264, 638.385pt x 619.56468pt>
 File: images/clean_architecture.png Graphic file (type png)
 <use images/clean_architecture.png>
 Package pdftex.def Info: images/clean_architecture.png  used on input line 11.
 (pdftex.def)             Requested size: 273.14923pt x 265.09354pt.
-[10
+[9
 
 ]
 LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 23.
  (C:\Users\Leonard\AppData\Roaming\MiKTeX\tex/latex/psnfss\ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-) [11 <./images/clean_architecture.png>] [12] [13]
+) [10 <./images/clean_architecture.png>] [11] [12]
 Overfull \hbox (4.49463pt too wide) in paragraph at lines 69--70
 \OT1/ppl/m/n/12 pen-tru An-droid []i iOS fo-lo-sind un lim-baj de pro-gra-mare co-mun, Dart. []^^Pn ca-zul aplica[]iei
  []
 
-<images/mvc.png, id=287, 553.06625pt x 211.79124pt>
+<images/mvc.png, id=286, 553.06625pt x 211.79124pt>
 File: images/mvc.png Graphic file (type png)
 <use images/mvc.png>
 Package pdftex.def Info: images/mvc.png  used on input line 73.
 (pdftex.def)             Requested size: 364.19667pt x 139.46594pt.
-[14 <./images/mvc.png>] [15] [16]
-<images/database.png, id=308, 842.14626pt x 576.1525pt>
+[13 <./images/mvc.png>] [14] [15]
+<images/database.png, id=307, 842.14626pt x 576.1525pt>
 File: images/database.png Graphic file (type png)
 <use images/database.png>
 Package pdftex.def Info: images/database.png  used on input line 116.
 (pdftex.def)             Requested size: 455.24411pt x 311.46057pt.
-) (chapters/chapter3.tex [17 <./images/database.png>]
+) (chapters/chapter3.tex [16 <./images/database.png>]
 Capitolul 3.
-[18
+[17
 
 ]
-<images/application_map_view.png, id=319, 813.0375pt x 1564.34438pt>
+<images/application_map_view.png, id=318, 813.0375pt x 1564.34438pt>
 File: images/application_map_view.png Graphic file (type png)
 <use images/application_map_view.png>
 Package pdftex.def Info: images/application_map_view.png  used on input line 16.
 (pdftex.def)             Requested size: 182.09486pt x 350.363pt.
- [19 <./images/application_map_view.png>]) (chapters/chapter4.tex [20]
+ [18 <./images/application_map_view.png>]) (chapters/chapter4.tex [19]
 Capitolul 4.
 
 Overfull \hbox (14.96974pt too wide) in paragraph at lines 3--4
@@ -453,35 +458,35 @@ Overfull \hbox (1.13425pt too wide) in paragraph at lines 3--4
 []\OT1/ppl/m/n/12 i s[]a se au-ten-ti-fice []^^Pn ca-drul aplica[]iei. Dup[]a au-ten-ti-fi-care, uti-li-za-to-rul va fi redirec[]ionat
  []
 
-<images/screenshots/register.png, id=329, 1084.05pt x 2409.0pt>
+<images/screenshots/register.png, id=328, 1084.05pt x 2409.0pt>
 File: images/screenshots/register.png Graphic file (type png)
 <use images/screenshots/register.png>
 Package pdftex.def Info: images/screenshots/register.png  used on input line 7.
 (pdftex.def)             Requested size: 136.57462pt x 303.47679pt.
-<images/screenshots/login.png, id=330, 1084.05pt x 2409.0pt>
+<images/screenshots/login.png, id=329, 1084.05pt x 2409.0pt>
 File: images/screenshots/login.png Graphic file (type png)
 <use images/screenshots/login.png>
 Package pdftex.def Info: images/screenshots/login.png  used on input line 11.
 (pdftex.def)             Requested size: 136.57462pt x 303.47679pt.
-<images/screenshots/main_screen.png, id=331, 1084.05pt x 2409.0pt>
+<images/screenshots/main_screen.png, id=330, 1084.05pt x 2409.0pt>
 File: images/screenshots/main_screen.png Graphic file (type png)
 <use images/screenshots/main_screen.png>
 Package pdftex.def Info: images/screenshots/main_screen.png  used on input line 15.
 (pdftex.def)             Requested size: 136.57462pt x 303.47679pt.
-[21
+[20
 
  <./images/screenshots/register.png> <./images/screenshots/login.png> <./images/screenshots/main_screen.png>]
-<images/screenshots/create_pet.png, id=340, 1084.05pt x 2409.0pt>
+<images/screenshots/create_pet.png, id=339, 1084.05pt x 2409.0pt>
 File: images/screenshots/create_pet.png Graphic file (type png)
 <use images/screenshots/create_pet.png>
 Package pdftex.def Info: images/screenshots/create_pet.png  used on input line 32.
 (pdftex.def)             Requested size: 182.09486pt x 404.63573pt.
-<images/screenshots/your_pets.png, id=341, 1084.05pt x 2409.0pt>
+<images/screenshots/your_pets.png, id=340, 1084.05pt x 2409.0pt>
 File: images/screenshots/your_pets.png Graphic file (type png)
 <use images/screenshots/your_pets.png>
 Package pdftex.def Info: images/screenshots/your_pets.png  used on input line 33.
 (pdftex.def)             Requested size: 182.09486pt x 404.63573pt.
- [22 <./images/screenshots/create_pet.png> <./images/screenshots/your_pets.png>]
+ [21 <./images/screenshots/create_pet.png> <./images/screenshots/your_pets.png>]
 Overfull \hbox (0.40298pt too wide) in paragraph at lines 46--47
 []\OT1/ppl/b/n/12 Pending \OT1/ppl/m/n/12 - pro-gra-ma-rea a fost pos-tat[]a cu suc-ces de uti-li-za-tor []i se afla []^^Pn a[]teptarea
  []
@@ -491,32 +496,32 @@ Overfull \hbox (4.81894pt too wide) in paragraph at lines 51--52
 []\OT1/ppl/m/n/12 Tot []^^Pn in-te-ri-o-rul aces-tui me-niul uti-li-za-to-rul are po-si-bi-li-ta-tea da a posta noi anun[]uri
  []
 
-<images/screenshots/new_appointment.png, id=350, 1084.05pt x 2409.0pt>
+<images/screenshots/new_appointment.png, id=349, 1084.05pt x 2409.0pt>
 File: images/screenshots/new_appointment.png Graphic file (type png)
 <use images/screenshots/new_appointment.png>
 Package pdftex.def Info: images/screenshots/new_appointment.png  used on input line 55.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/create_appointment.png, id=351, 1084.05pt x 2409.0pt>
+<images/screenshots/create_appointment.png, id=350, 1084.05pt x 2409.0pt>
 File: images/screenshots/create_appointment.png Graphic file (type png)
 <use images/screenshots/create_appointment.png>
 Package pdftex.def Info: images/screenshots/create_appointment.png  used on input line 56.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/location_picker.png, id=352, 1084.05pt x 2409.0pt>
+<images/screenshots/location_picker.png, id=351, 1084.05pt x 2409.0pt>
 File: images/screenshots/location_picker.png Graphic file (type png)
 <use images/screenshots/location_picker.png>
 Package pdftex.def Info: images/screenshots/location_picker.png  used on input line 57.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/appointments.png, id=353, 1084.05pt x 2409.0pt>
+<images/screenshots/appointments.png, id=352, 1084.05pt x 2409.0pt>
 File: images/screenshots/appointments.png Graphic file (type png)
 <use images/screenshots/appointments.png>
 Package pdftex.def Info: images/screenshots/appointments.png  used on input line 58.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-[23 <./images/screenshots/new_appointment.png> <./images/screenshots/create_appointment.png> <./images/screenshots/location_picker.png> <./images/screenshots/appointments.png>]
+[22 <./images/screenshots/new_appointment.png> <./images/screenshots/create_appointment.png> <./images/screenshots/location_picker.png> <./images/screenshots/appointments.png>]
 Overfull \hbox (5.65887pt too wide) in paragraph at lines 68--69
 []\OT1/ppl/m/n/12 Acest me-niu ofer[]a uti-li-za-to-ru-lui po-si-bi-li-ta-tea de a vi-zu-a-liza is-to-ri-cul pro-gram[]arilor
  []
 
-<images/screenshots/main_menu_walker.png, id=364, 1084.05pt x 2409.0pt>
+<images/screenshots/main_menu_walker.png, id=363, 1084.05pt x 2409.0pt>
 File: images/screenshots/main_menu_walker.png Graphic file (type png)
 <use images/screenshots/main_menu_walker.png>
 Package pdftex.def Info: images/screenshots/main_menu_walker.png  used on input line 74.
@@ -531,29 +536,29 @@ Overfull \hbox (3.17676pt too wide) in paragraph at lines 79--80
 [][]\OT1/ppl/m/n/12 Utilizatorul poate acesa meniu-urile []Walker-
  []
 
-[24 <./images/screenshots/main_menu_walker.png>]
-<images/screenshots/available_appointments.png, id=371, 1084.05pt x 2409.0pt>
+[23 <./images/screenshots/main_menu_walker.png>]
+<images/screenshots/available_appointments.png, id=370, 1084.05pt x 2409.0pt>
 File: images/screenshots/available_appointments.png Graphic file (type png)
 <use images/screenshots/available_appointments.png>
 Package pdftex.def Info: images/screenshots/available_appointments.png  used on input line 92.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/appointment_info.png, id=372, 1084.05pt x 2409.0pt>
+<images/screenshots/appointment_info.png, id=371, 1084.05pt x 2409.0pt>
 File: images/screenshots/appointment_info.png Graphic file (type png)
 <use images/screenshots/appointment_info.png>
 Package pdftex.def Info: images/screenshots/appointment_info.png  used on input line 93.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/pet_info.png, id=373, 1084.05pt x 2409.0pt>
+<images/screenshots/pet_info.png, id=372, 1084.05pt x 2409.0pt>
 File: images/screenshots/pet_info.png Graphic file (type png)
 <use images/screenshots/pet_info.png>
 Package pdftex.def Info: images/screenshots/pet_info.png  used on input line 94.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
-<images/screenshots/show_location.png, id=374, 1084.05pt x 2409.0pt>
+<images/screenshots/show_location.png, id=373, 1084.05pt x 2409.0pt>
 File: images/screenshots/show_location.png Graphic file (type png)
 <use images/screenshots/show_location.png>
 Package pdftex.def Info: images/screenshots/show_location.png  used on input line 95.
 (pdftex.def)             Requested size: 104.7042pt x 232.6435pt.
- [25 <./images/screenshots/available_appointments.png> <./images/screenshots/appointment_info.png> <./images/screenshots/pet_info.png> <./images/screenshots/show_location.png>]
-<images/screenshots/preferences.png, id=385, 1084.05pt x 2409.0pt>
+ [24 <./images/screenshots/available_appointments.png> <./images/screenshots/appointment_info.png> <./images/screenshots/pet_info.png> <./images/screenshots/show_location.png>]
+<images/screenshots/preferences.png, id=384, 1084.05pt x 2409.0pt>
 File: images/screenshots/preferences.png Graphic file (type png)
 <use images/screenshots/preferences.png>
 Package pdftex.def Info: images/screenshots/preferences.png  used on input line 106.
@@ -568,42 +573,42 @@ Underfull \hbox (badness 3646) in paragraph at lines 111--112
 \OT1/ppl/m/n/12 ta-tea de a vi-zu-a-liza preferin[]ele []i de a le
  []
 
-[26 <./images/screenshots/preferences.png>] [27]
-<images/screenshots/agenda.png, id=396, 1084.05pt x 2409.0pt>
+[25 <./images/screenshots/preferences.png>] [26]
+<images/screenshots/agenda.png, id=395, 1084.05pt x 2409.0pt>
 File: images/screenshots/agenda.png Graphic file (type png)
 <use images/screenshots/agenda.png>
 Package pdftex.def Info: images/screenshots/agenda.png  used on input line 137.
 (pdftex.def)             Requested size: 141.12456pt x 313.58534pt.
-<images/screenshots/location_tracker.png, id=397, 1084.05pt x 2409.0pt>
+<images/screenshots/location_tracker.png, id=396, 1084.05pt x 2409.0pt>
 File: images/screenshots/location_tracker.png Graphic file (type png)
 <use images/screenshots/location_tracker.png>
 Package pdftex.def Info: images/screenshots/location_tracker.png  used on input line 138.
 (pdftex.def)             Requested size: 141.12456pt x 313.58534pt.
-<images/screenshots/marker_info.png, id=398, 1084.05pt x 2409.0pt>
+<images/screenshots/marker_info.png, id=397, 1084.05pt x 2409.0pt>
 File: images/screenshots/marker_info.png Graphic file (type png)
 <use images/screenshots/marker_info.png>
 Package pdftex.def Info: images/screenshots/marker_info.png  used on input line 139.
 (pdftex.def)             Requested size: 141.12456pt x 313.58534pt.
-) (chapters/conclusions.tex [28 <./images/screenshots/agenda.png> <./images/screenshots/location_tracker.png> <./images/screenshots/marker_info.png>]) (chapters/bibliography.tex [29
+) (chapters/conclusions.tex [27 <./images/screenshots/agenda.png> <./images/screenshots/location_tracker.png> <./images/screenshots/marker_info.png>]) (chapters/bibliography.tex [28
 
-] [30
+] [29
 
-]) [31] (main.aux)
+]) [30] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 8F3AAF07443701B2BF8FA34F750F5AAD;6063.
  ) 
 Here is how much of TeX's memory you used:
- 11940 strings out of 476331
- 202116 string characters out of 5797575
+ 11939 strings out of 476331
+ 202109 string characters out of 5797575
  1872660 words of memory out of 5000000
  32048 multiletter control sequences out of 15000+600000
  537879 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,76p,1693b,592s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on main.pdf (34 pages, 6971022 bytes).
+Output written on main.pdf (34 pages, 6970809 bytes).
 PDF statistics:
- 469 PDF objects out of 1000 (max. 8388607)
- 103 named destinations out of 1000 (max. 500000)
+ 467 PDF objects out of 1000 (max. 8388607)
+ 102 named destinations out of 1000 (max. 500000)
  420 words of extra memory for PDF output out of 10000 (max. 10000000)
 

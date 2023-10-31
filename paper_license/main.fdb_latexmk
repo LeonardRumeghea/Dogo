@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1687423547 "d:/Documents/GitHub/Dogo/paper_license/main.tex" "main.pdf" "main" 1687423558 0
+["pdflatex"] 1687712197 "d:/Documents/GitHub/Dogo/paper_license/main.tex" "main.pdf" "main" 1687712206 0
   "C:/Program Files/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458477487 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/palatino/pplb7t.tfm" 1136768654 1616 371d1ee60c04b008c8fd760060cd34f1 ""
   "C:/Program Files/MiKTeX/fonts/tfm/adobe/palatino/pplb8r.tfm" 1136768654 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -98,7 +98,7 @@
   "chapters/conclusions.tex" 1687250244 2133 4efaede5fba1e7d9ceee8c437477c2e6 ""
   "chapters/introduction.tex" 1687273149 3525 1bd211297eb4b05bb2f323ec66c3d043 ""
   "chapters/motivation.tex" 1687272588 1925 17300f8c918c60d816e0ff9931f76c4c ""
-  "d:/Documents/GitHub/Dogo/paper_license/main.tex" 1687413307 1623 fa549e3cc24a684e70d7d704da3e6104 ""
+  "d:/Documents/GitHub/Dogo/paper_license/main.tex" 1687712186 1662 f9893dccbcfb3013cd53ddab3500d11f ""
   "front/cover.tex" 1687097806 1031 661fba84c56e5d3656300e0cf298421d ""
   "front/macros.tex" 1686311025 1303 c33b9603e76f8b45dce01bbf1add9f59 ""
   "front/titlepage.tex" 1686144218 752 9b999d56f8c42a073332b1e814d4075e ""
@@ -125,10 +125,10 @@
   "images/screenshots/register.png" 1687185518 121330 b917e344922fa2dad3e9f4a3274c2a5c ""
   "images/screenshots/show_location.png" 1687197843 1161891 29674fec3150c2b2beb71fb7012fce91 ""
   "images/screenshots/your_pets.png" 1687191476 182770 1732c8416ee53894d2532e1fd54e6646 ""
-  "main.aux" 1687423558 10021 4ca552f89eef9602f042639fba4598d2 "pdflatex"
-  "main.out" 1687423558 6063 8f3aaf07443701b2bf8fa34f750f5aad "pdflatex"
-  "main.tex" 1687413307 1623 fa549e3cc24a684e70d7d704da3e6104 ""
-  "main.toc" 1687423558 3221 3fac85988b3c373a0d849cccfac3d43c "pdflatex"
+  "main.aux" 1687712205 10019 5c27242b0237c52096a4db465ddbdbde "pdflatex"
+  "main.out" 1687712206 6063 8f3aaf07443701b2bf8fa34f750f5aad "pdflatex"
+  "main.tex" 1687712186 1662 f9893dccbcfb3013cd53ddab3500d11f ""
+  "main.toc" 1687712206 3219 43b393c8cc175cc5d953dcf313e2f81f "pdflatex"
   (generated)
   "main.aux"
   "main.log"

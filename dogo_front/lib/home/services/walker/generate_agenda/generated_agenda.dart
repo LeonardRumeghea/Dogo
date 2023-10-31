@@ -373,7 +373,7 @@ class _Page extends State<GeneratedAgenda> with SingleTickerProviderStateMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Generates Agenda',
+            Text('Generated Agenda',
                 style: TextStyle(
                     color: darkGrey,
                     fontSize: 30,
